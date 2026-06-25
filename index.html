@@ -4,119 +4,367 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <title>Intelligence Reports</title>
+  <title>MRO · Intelligence Reports — LaFinteca</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0f1115;
-      --card: #181b22;
-      --border: #262b35;
-      --text: #e7e9ee;
-      --muted: #8b93a3;
-      --accent: #7c9cff;
+      --dark:      #181818;
+      --ink:       #121212;
+      --surface:   #1c1c1c;
+      --surface-2: #202020;
+      --line:      #2b2b2b;
+      --line-2:    #383838;
+      --white:     #ffffff;
+      --gray:      #b4b7bd;
+      --gray-dim:  #6f7278;
+      --green:     #bffe43;
+      --green-dim: #8fbf30;
+      --purple:    #c3abff;
+      --purple-2:  #a58fdb;
+      --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--white);
       line-height: 1.5;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
-    .wrap { max-width: 820px; margin: 0 auto; padding: 64px 24px 96px; }
-    header { margin-bottom: 40px; }
-    h1 { font-size: 1.9rem; margin: 0 0 6px; letter-spacing: -0.02em; }
-    .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
-    .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-    .item a {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
-      padding: 18px 20px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color .15s ease, transform .15s ease;
+
+    /* ---- atmospheric layers ---- */
+    .bg-grid, .bg-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
     }
-    .item a:hover { border-color: var(--accent); transform: translateY(-1px); }
-    .item .name { font-weight: 600; font-size: 1.02rem; }
-    .item .file { color: var(--muted); font-size: 0.8rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
-    .state { color: var(--muted); padding: 28px 20px; border: 1px dashed var(--border); border-radius: 12px; text-align: center; }
-    footer { margin-top: 48px; color: var(--muted); font-size: 0.82rem; }
-    footer code { background: var(--card); padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border); }
-    a.repo { color: var(--accent); text-decoration: none; }
+    .bg-grid {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, #000 35%, transparent 80%);
+    }
+    .bg-glow::before, .bg-glow::after {
+      content: ""; position: absolute; border-radius: 50%; filter: blur(90px); opacity: .14;
+    }
+    .bg-glow::before {
+      width: 540px; height: 540px; top: -220px; right: -120px;
+      background: radial-gradient(circle, var(--green) 0%, transparent 70%);
+    }
+    .bg-glow::after {
+      width: 480px; height: 480px; bottom: -260px; left: -160px;
+      background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+      opacity: .12;
+    }
+
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 880px; margin: 0 auto;
+      padding: 0 28px 120px;
+    }
+
+    /* ---- masthead ---- */
+    .masthead {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+      padding: 30px 0 26px;
+      border-bottom: 1px solid var(--line);
+      animation: drop .6s cubic-bezier(.2,.7,.2,1) both;
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand svg { height: 21px; width: auto; display: block; }
+    .brand .sep { width: 1px; height: 26px; background: var(--line-2); }
+    .unit {
+      font-family: var(--mono); font-weight: 600; font-size: 11px; letter-spacing: .22em;
+      color: var(--green);
+      border: 1px solid rgba(191,254,67,.32);
+      background: rgba(191,254,67,.06);
+      padding: 5px 9px 4px; border-radius: 5px;
+    }
+    .status {
+      font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+      color: var(--gray-dim); text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 0 0 rgba(191,254,67,.5); animation: pulse 2.4s infinite;
+    }
+    .status b { color: var(--gray); font-weight: 500; }
+    .caret {
+      display: inline-block; width: 7px; height: 13px; background: var(--green);
+      margin-left: 1px; animation: blink 1.1s steps(1) infinite; transform: translateY(2px);
+    }
+
+    /* ---- hero ---- */
+    .hero { padding: 64px 0 40px; animation: rise .7s .08s cubic-bezier(.2,.7,.2,1) both; }
+    .kicker {
+      font-family: var(--mono); font-size: 12px; letter-spacing: .26em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+    }
+    .kicker::before { content: ""; width: 26px; height: 1px; background: var(--purple); opacity: .6; }
+    h1 {
+      font-family: var(--sans); font-weight: 700; font-size: clamp(2.3rem, 6vw, 3.5rem);
+      letter-spacing: -0.035em; line-height: 1.02; color: var(--white);
+    }
+    h1 .accent { color: var(--green); }
+    .lede {
+      margin-top: 18px; max-width: 50ch; color: var(--gray); font-size: 1.02rem;
+    }
+    .meta-row {
+      margin-top: 30px; display: flex; gap: 28px; flex-wrap: wrap;
+      font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; color: var(--gray-dim);
+      text-transform: uppercase;
+    }
+    .meta-row span b { color: var(--white); font-weight: 600; }
+
+    /* ---- report list ---- */
+    .list-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4px 12px; margin-top: 8px;
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gray-dim); border-bottom: 1px solid var(--line);
+    }
+    ul.reports { list-style: none; }
+    .report {
+      opacity: 0; animation: rise .55s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .report a {
+      display: grid;
+      grid-template-columns: 46px 1fr auto;
+      align-items: center; gap: 20px;
+      padding: 22px 20px 22px 16px;
+      text-decoration: none; color: inherit;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      transition: background .2s ease, padding-left .2s ease;
+    }
+    .report a::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--green); transform: scaleY(0); transform-origin: top;
+      transition: transform .22s ease;
+    }
+    .report a:hover { background: linear-gradient(90deg, rgba(191,254,67,.05), transparent 60%); padding-left: 24px; }
+    .report a:hover::before { transform: scaleY(1); }
+    .report a:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; }
+
+    .idx {
+      font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--purple);
+      letter-spacing: .04em; transition: color .2s ease;
+    }
+    .report a:hover .idx { color: var(--green); }
+
+    .body .name {
+      font-family: var(--sans); font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em;
+      color: var(--white); transition: color .2s ease;
+    }
+    .report a:hover .name { color: var(--green); }
+    .body .path {
+      display: block; margin-top: 5px;
+      font-family: var(--mono); font-size: 11.5px; color: var(--gray-dim); letter-spacing: .02em;
+    }
+    .body .path .slash { color: var(--line-2); }
+
+    .aside { display: flex; align-items: center; gap: 18px; }
+    .size {
+      font-family: var(--mono); font-size: 11px; color: var(--gray-dim); letter-spacing: .05em;
+      white-space: nowrap;
+    }
+    .arrow {
+      font-family: var(--mono); color: var(--gray-dim); font-size: 16px;
+      transition: transform .2s ease, color .2s ease;
+    }
+    .report a:hover .arrow { color: var(--green); transform: translateX(4px); }
+
+    .state {
+      font-family: var(--mono); font-size: 13px; color: var(--gray-dim);
+      padding: 40px 20px; text-align: center; border-bottom: 1px solid var(--line);
+    }
+    .state a { color: var(--green); }
+
+    /* ---- footer ---- */
+    footer {
+      margin-top: 56px; padding-top: 26px; border-top: 1px solid var(--line);
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+      font-family: var(--mono); font-size: 11px; color: var(--gray-dim); letter-spacing: .04em; line-height: 1.7;
+    }
+    footer .col-r { text-align: right; }
+    footer code {
+      color: var(--gray); background: var(--surface); border: 1px solid var(--line);
+      padding: 1px 6px; border-radius: 4px; font-size: 10.5px;
+    }
+    footer a { color: var(--purple); text-decoration: none; }
+    footer a:hover { color: var(--green); }
+
+    /* ---- keyframes ---- */
+    @keyframes drop { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(191,254,67,.45); }
+      70% { box-shadow: 0 0 0 7px rgba(191,254,67,0); }
+      100% { box-shadow: 0 0 0 0 rgba(191,254,67,0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .001s !important; animation-delay: 0s !important; }
+      .caret, .dot { animation: none; }
+    }
+    @media (max-width: 560px) {
+      .report a { grid-template-columns: 34px 1fr; }
+      .aside { grid-column: 2; justify-content: flex-start; margin-top: 4px; }
+      .hero { padding-top: 44px; }
+    }
   </style>
 </head>
 <body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
   <div class="wrap">
-    <header>
-      <h1>Intelligence Reports</h1>
-      <p class="sub">Auto-generated index — every report in <code style="font-size:.85em">/reports</code> appears here automatically.</p>
+    <!-- masthead -->
+    <header class="masthead">
+      <div class="brand">
+        <svg viewBox="0 0 545 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LaFinteca">
+          <path d="M0 35.3406V27.9089L35.483 13.241V21.7158L10.5666 31.4292V31.8203L35.483 42.0553V50.5301L0 35.3406Z" fill="#C3ABFF"/>
+          <path d="M545 28.6585L545 36.0902L509.517 50.7582L509.517 42.2834L534.433 32.5699L534.433 32.1788L509.517 21.9438L509.517 13.469L545 28.6585Z" fill="#C3ABFF"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M99.9159 42.1908V55.4107L108.51 64H126.468L133.837 56.9549V64H142.926V23.1124L133.363 13.5544H109.867L100.304 23.1124V30.6785H109.684V26.0672L113.876 21.9607H129.451L133.643 26.0672V33.7023H108.514L99.9159 42.1908ZM124.126 55.5938L133.643 46.4442V42.1086H112.518L109.296 45.2481V52.4542L112.518 55.5938H124.126Z" fill="white"/>
+          <path d="M201.268 0.056688H156.222V64H165.796V33.7782H196.616V24.9845H165.796V8.8504H201.268V0.056688Z" fill="white"/>
+          <path d="M208.246 3.60855V8.78473L211.8 12.3371H216.979L220.533 8.78473V3.60855L216.979 0.0562165H211.8L208.246 3.60855Z" fill="white"/>
+          <path d="M219.13 24.984H209.75V63.9995H219.13V24.984Z" fill="white"/>
+          <path d="M241.588 13.5544H232.402V38.7772V64H241.782V33.5192L253.153 22.1544H262.033L266.226 26.2609V64H275.606V23.1124L266.043 13.5544H250.3L241.588 22.2616V13.5544Z" fill="white"/>
+          <path d="M294.384 22.0575L288.71 54.1024L296.927 64H311.462L312.902 55.4969H301.941L298.621 51.4493L303.799 22.0575H318.828L320.268 13.5544H305.297L308.107 0.0692076H298.874L296.063 13.5544H287.112L285.672 22.0575H294.384Z" fill="white"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M326.245 23.1119V54.4416L335.809 63.9995H361.049L370.613 54.4416V46.9723H361.233V51.293L357.04 55.3996H339.818L335.625 51.293V42.0112H370.709V23.1084L361.046 13.5539H335.809L326.245 23.1119ZM357.137 22.1539L361.329 26.2605V33.605H335.625V26.2604L339.818 22.1539H357.137Z" fill="white"/>
+          <path d="M383.656 23.1119V54.4416L393.219 63.9995H417.394L426.957 54.4416V46.9723H417.577V51.293L413.384 55.3996H397.228L393.036 51.293V26.2604L397.228 22.1539H413.384L417.577 26.2604V30.5812H426.957V23.1119L417.394 13.5539H393.219L383.656 23.1119Z" fill="white"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M439.962 42.1903V55.4102L448.556 63.9995H466.514L473.883 56.9544V63.9995H482.972V23.1119L473.409 13.5539H449.913L440.35 23.1119V30.678H449.73V26.0667L453.922 21.9602H469.497L473.689 26.0667V33.7018H448.56L439.962 42.1903ZM464.172 55.5933L473.689 46.4437V42.1081H452.564L449.342 45.2476V52.4538L452.564 55.5933H464.172Z" fill="white"/>
+          <path d="M71.4869 0H61.9131V63.9433H86.6686V55.2465H71.4869V0Z" fill="white"/>
+        </svg>
+        <span class="sep"></span>
+        <span class="unit">MRO</span>
+      </div>
+      <div class="status">
+        <span class="dot"></span>
+        <span>Intelligence Index</span> · <b id="count">— reports</b><span class="caret"></span>
+      </div>
     </header>
 
-    <ul class="list" id="list" aria-live="polite">
-      <li class="state" id="state">Loading reports…</li>
+    <!-- hero -->
+    <section class="hero">
+      <div class="kicker">Merchant Risk Operations</div>
+      <h1>Intelligence<br>Reports<span class="accent">.</span></h1>
+      <p class="lede">Market, merchant &amp; risk intelligence briefings — compiled by LaFinteca MRO. Each dossier below is a standalone report at its own address.</p>
+      <div class="meta-row">
+        <span>Index <b id="count2">—</b></span>
+        <span>Format <b>HTML</b></span>
+        <span>Updated <b id="updated">—</b></span>
+      </div>
+    </section>
+
+    <!-- list -->
+    <div class="list-head">
+      <span>Dossier</span>
+      <span>Size</span>
+    </div>
+    <ul class="reports" id="list">
+      <li class="state" id="state">Loading index…</li>
     </ul>
 
+    <!-- footer -->
     <footer>
-      Add a report by committing an <code>.html</code> file into the <code>reports/</code> folder.
-      It will appear here on the next page load. &nbsp;·&nbsp;
-      <a class="repo" href="https://github.com/LaFinteca/intel-reports" target="_blank" rel="noopener">repo →</a>
+      <div class="col-l">
+        LaFinteca · Instituição de Pagamento<br>
+        Add a report → commit an <code>.html</code> into <code>reports/</code>
+      </div>
+      <div class="col-r">
+        <a href="https://github.com/LaFinteca/intel-reports" target="_blank" rel="noopener">source repository ↗</a><br>
+        Auto-indexed · served via GitHub Pages
+      </div>
     </footer>
   </div>
 
   <script>
-    // Auto-discover reports via the GitHub contents API (public repo, CORS-enabled).
     const REPO = "LaFinteca/intel-reports";
     const DIR = "reports";
     const API = `https://api.github.com/repos/${REPO}/contents/${DIR}`;
 
     const listEl = document.getElementById("list");
-    const stateEl = document.getElementById("state");
 
-    // "dindix-competitive-q2.html" -> "Dindix Competitive Q2"
-    function prettify(filename) {
-      return filename
+    function prettify(name) {
+      return name
         .replace(/\.html?$/i, "")
         .replace(/[-_]+/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase())
         .trim();
     }
-
-    function setState(msg) {
-      listEl.innerHTML = `<li class="state">${msg}</li>`;
+    function fmtSize(bytes) {
+      if (bytes >= 1048576) return (bytes / 1048576).toFixed(1) + " MB";
+      if (bytes >= 1024) return Math.round(bytes / 1024) + " KB";
+      return bytes + " B";
     }
+    function setCount(n) {
+      const label = n + (n === 1 ? " report" : " reports");
+      document.getElementById("count").textContent = label;
+      document.getElementById("count2").textContent = String(n).padStart(2, "0");
+    }
+    function setState(html) { listEl.innerHTML = `<li class="state">${html}</li>`; }
 
     fetch(API, { headers: { Accept: "application/vnd.github.v3+json" } })
-      .then((res) => {
-        if (!res.ok) throw new Error(res.status === 404 ? "no-folder" : "http-" + res.status);
-        return res.json();
-      })
+      .then((r) => { if (!r.ok) throw new Error(r.status === 404 ? "empty" : "err" + r.status); return r.json(); })
       .then((items) => {
         const reports = items
           .filter((i) => i.type === "file" && /\.html?$/i.test(i.name))
           .sort((a, b) => a.name.localeCompare(b.name));
 
+        setCount(reports.length);
         if (!reports.length) {
-          setState("No reports yet. Drop an .html file into the reports/ folder to get started.");
+          setState("No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.");
           return;
         }
 
         listEl.innerHTML = "";
-        for (const r of reports) {
+        reports.forEach((r, i) => {
           const li = document.createElement("li");
-          li.className = "item";
-          const a = document.createElement("a");
-          a.href = `${DIR}/${r.name}`;
-          a.innerHTML = `<span class="name">${prettify(r.name)}</span><span class="file">${r.name}</span>`;
-          li.appendChild(a);
+          li.className = "report";
+          li.style.animationDelay = (0.12 + i * 0.06) + "s";
+          li.innerHTML = `
+            <a href="${DIR}/${r.name}">
+              <span class="idx">${String(i + 1).padStart(3, "0")}</span>
+              <span class="body">
+                <span class="name">${prettify(r.name)}</span>
+                <span class="path"><span class="slash">${DIR}/</span>${r.name}</span>
+              </span>
+              <span class="aside">
+                <span class="size">${fmtSize(r.size)}</span>
+                <span class="arrow">→</span>
+              </span>
+            </a>`;
           listEl.appendChild(li);
-        }
+        });
+
+        // approximate "updated" from the most recently named build; the API doesn't
+        // give per-file mtime here, so we show today's served date as a freshness cue.
+        try {
+          const d = new Date(document.lastModified);
+          if (!isNaN(d)) {
+            document.getElementById("updated").textContent =
+              d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
+          }
+        } catch (e) {}
       })
       .catch((err) => {
-        if (String(err.message).includes("no-folder")) {
-          setState("No reports yet. Drop an .html file into the reports/ folder to get started.");
+        if (String(err.message).includes("empty")) {
+          setCount(0);
+          setState("No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.");
         } else {
-          setState("Couldn't load the report list. View the <a class='repo' href='https://github.com/" + REPO + "/tree/main/reports'>reports folder on GitHub</a>.");
+          setState(`Couldn't load the index. View the <a href="https://github.com/${REPO}/tree/main/reports">reports folder</a>.`);
         }
       });
   </script>
