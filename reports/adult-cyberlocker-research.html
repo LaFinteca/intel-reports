@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adult Cyberlocker Research · LaFinteca MRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#C3ABFF;--pd:#2A1F4D;--pt:#F4EEFF;--lime:#BFFE43;--ld:#1F2810;--black:#0A0A0A;--ink:#1A1A1A;--g9:#2A2A2A;--g7:#555;--g5:#888;--g3:#D9D9D9;--g2:#E8E8E8;--g1:#F5F5F5;--white:#FFF;--red:#D63C37;--rt:#FFF0F0;--amber:#C97D00;--at:#FFF8EC;--teal:#0F7B6C;--tt:#E8F8F5;--blue:#1A56A0;--bt:#EEF4FF;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--white);color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 48px;}
+a{color:var(--pd);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;}
+
+/* HERO */
+.hero{background:var(--black);color:var(--white);padding:96px 0 112px;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;top:-20%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,var(--purple) 0%,transparent 60%);opacity:.25;filter:blur(50px);}
+.hero::after{content:"";position:absolute;bottom:-30%;left:-10%;width:520px;height:520px;background:radial-gradient(circle,var(--lime) 0%,transparent 60%);opacity:.10;filter:blur(60px);}
+.hero-inner{position:relative;z-index:2;}
+.hero-logo{margin-bottom:36px;}
+.hero-logo svg{height:26px;width:auto;display:block;}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);font-weight:500;margin-bottom:28px;display:inline-flex;align-items:center;gap:12px;}
+.eyebrow::before{content:"";width:32px;height:1px;background:var(--purple);}
+h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:72px;line-height:.94;letter-spacing:-.022em;margin-bottom:32px;}
+h1 .accent{color:var(--lime);font-style:italic;}
+.hero-sub{font-size:18px;line-height:1.55;max-width:700px;color:rgba(255,255,255,.72);font-weight:300;}
+.hero-meta{display:flex;gap:48px;margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,.10);flex-wrap:wrap;}
+.hero-meta div{font-size:13px;color:rgba(255,255,255,.45);}
+.hero-meta div strong{display:block;color:var(--white);font-size:15px;font-weight:500;margin-top:4px;}
+
+/* SECTIONS */
+section{padding:80px 0;}
+section.alt{background:var(--g1);}
+.sh{margin-bottom:48px;max-width:760px;}
+h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:48px;line-height:1.04;letter-spacing:-.018em;margin-bottom:14px;color:var(--black);}
+h2 .i{font-style:italic;color:var(--pd);}
+.ss{font-size:17px;color:var(--g7);line-height:1.6;font-weight:300;}
+h3{font-weight:600;font-size:16px;letter-spacing:-.01em;color:var(--black);margin-bottom:8px;}
+h4{font-weight:600;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--g5);margin-bottom:10px;}
+p{font-size:15px;line-height:1.65;color:var(--g9);}
+p+p{margin-top:10px;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--g2);border:1px solid var(--g2);}
+.stat{background:var(--white);padding:22px 18px;}
+.stat .lb{font-size:10px;letter-spacing:.10em;text-transform:uppercase;color:var(--g5);font-weight:500;margin-bottom:8px;}
+.stat .fg{font-family:'Instrument Serif',serif;font-size:38px;line-height:1;color:var(--black);margin-bottom:5px;}
+.stat .fg .u{font-size:18px;color:var(--pd);font-style:italic;margin-left:2px;}
+.stat .dc{font-size:11px;color:var(--g7);line-height:1.45;}
+.stat.red .fg{color:var(--red);}
+.stat.amb .fg{color:var(--amber);}
+
+/* CHART */
+.chart-wrap{background:var(--white);border:1px solid var(--g2);padding:28px 32px;border-radius:4px;margin-top:24px;}
+.ct{font-weight:600;font-size:14px;margin-bottom:3px;color:var(--ink);}
+.cs{font-size:12px;color:var(--g5);margin-bottom:20px;}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:12px;color:var(--g7);}
+.legend span{display:flex;align-items:center;gap:5px;}
+.ld-dot{width:12px;height:3px;border-radius:2px;display:inline-block;flex-shrink:0;}
+
+/* EVENT STRIP */
+.ev{background:var(--black);border-radius:4px;padding:24px 28px;margin:24px 0;position:relative;overflow:hidden;}
+.ev::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(to right,var(--red),transparent 60%);}
+.ev-l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;}
+.ev-t{font-family:'Instrument Serif',serif;font-size:17px;line-height:1.5;color:rgba(255,255,255,.9);font-style:italic;}
+
+/* GEO GRID */
+.geo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:24px 0;}
+.gc{background:var(--white);border:1px solid var(--g2);border-radius:4px;padding:20px;}
+.gc.hl{border-color:var(--pd);border-width:1.5px;}
+.gc-t{font-weight:600;font-size:14px;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.gbadge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:100px;}
+.gbadge-p{background:var(--pt);color:var(--pd);}
+.gbadge-l{background:var(--lime);color:var(--ld);}
+.gbadge-a{background:var(--at);color:var(--amber);}
+.gr{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--g2);font-size:13px;}
+.gr:last-of-type{border-bottom:none;}
+.gc-country{color:var(--g7);}
+.gc-share{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);font-weight:500;}
+.gc-bar{height:3px;border-radius:2px;margin-top:2px;}
+.gn{font-size:12px;color:var(--g5);margin-top:10px;padding-top:8px;border-top:1px solid var(--g2);line-height:1.55;}
+.gn.flag{color:var(--teal);font-weight:500;}
+.gn.warn{color:var(--red);}
+
+/* OPERATOR CARDS */
+.op-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.op-card{background:var(--white);border:1px solid var(--g2);border-radius:4px;overflow:hidden;}
+.op-card.full{grid-column:1/-1;}
+.op-hd{padding:20px 24px 16px;border-bottom:1px solid var(--g2);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.op-name{font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;color:var(--black);margin-bottom:2px;}
+.op-dom{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--pd);}
+.op-badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
+.b-dom{background:var(--lime);color:var(--ld);}
+.b-st{background:var(--pt);color:var(--pd);}
+.b-co{background:var(--rt);color:var(--red);}
+.b-de{background:var(--at);color:var(--amber);}
+.b-an{background:var(--black);color:var(--lime);}
+.b-cf{background:var(--tt);color:var(--teal);}
+.op-body{padding:16px 24px;}
+.op-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:16px 24px;border-top:1px solid var(--g2);}
+
+/* LISTS */
+.pl,.cl{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.pl li{font-size:13px;color:var(--g7);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.cl li{font-size:13px;color:var(--g7);display:flex;align-items:baseline;gap:7px;}
+.cl li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--g3);flex-shrink:0;margin-top:5px;}
+.cl li.h::before{background:var(--red);}
+.cl li.w::before{background:var(--amber);}
+.cl li.nt{font-size:12px;font-style:italic;color:var(--g5);}
+.cl li.nt::before{display:none;}
+.tg{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 5px;border-radius:2px;flex-shrink:0;margin-top:1px;}
+.t-m{background:var(--lime);color:var(--ld);}
+.t-r{background:var(--at);color:var(--amber);}
+.t-c{background:var(--g1);color:var(--g7);}
+.t-b{background:var(--rt);color:var(--red);}
+.t-d{background:var(--pt);color:var(--pd);}
+.t-f{background:var(--tt);color:var(--teal);}
+.sb{font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 4px;background:var(--g1);border-radius:3px;color:var(--g7);flex-shrink:0;}
+.tip{font-size:12px;padding-top:8px;border-top:1px solid var(--g2);margin-top:8px;line-height:1.55;}
+.tip.g{color:var(--teal);}
+.tip.r{color:var(--red);}
+
+/* CLIENT CARDS */
+.matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0;}
+.cc{background:var(--white);border:1px solid var(--g2);border-radius:4px;padding:14px 16px;}
+.cc.pri{border-color:var(--pd);border-width:1.5px;}
+.ctag{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:3px 7px;border-radius:100px;display:inline-block;margin-bottom:7px;}
+.ct-ad{background:var(--rt);color:var(--red);}
+.ct-an{background:var(--pt);color:var(--pd);}
+.ct-jav{background:var(--at);color:var(--amber);}
+.ct-la{background:var(--lime);color:var(--ld);}
+.ct-fo{background:var(--black);color:var(--purple);}
+.ct-sea{background:var(--tt);color:var(--teal);}
+.cn{font-weight:600;font-size:14px;color:var(--ink);margin-bottom:2px;}
+.cd{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g5);margin-bottom:6px;}
+.cw{font-size:12px;color:var(--g7);line-height:1.55;}
+.ch{font-size:11px;color:var(--pd);font-family:'JetBrains Mono',monospace;margin-top:5px;}
+.c-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.cst{font-size:10px;padding:2px 6px;border-radius:3px;background:var(--g1);color:var(--g7);font-family:'JetBrains Mono',monospace;}
+
+/* CALLOUT */
+.callout{border-left:3px solid var(--pd);padding:20px 24px;margin:24px 0;border-radius:0 4px 4px 0;background:var(--pt);}
+.callout.red{background:var(--rt);border-left-color:var(--red);}
+.callout.lime{background:#edfff0;border-left-color:var(--teal);}
+.callout.blue{background:var(--bt);border-left-color:var(--blue);}
+.callout.amber{background:var(--at);border-left-color:var(--amber);}
+.clbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px;color:var(--pd);}
+.callout.red .clbl{color:var(--red);}
+.callout.lime .clbl{color:var(--teal);}
+.callout.blue .clbl{color:var(--blue);}
+.callout.amber .clbl{color:var(--amber);}
+.callout p{font-family:'Instrument Serif',serif;font-size:17px;line-height:1.5;font-style:italic;color:var(--pd);}
+.callout.red p{color:var(--red);}
+.callout.lime p{color:var(--teal);}
+.callout.blue p{color:var(--blue);}
+.callout.amber p{color:var(--amber);}
+.callout cite{display:block;margin-top:8px;font-family:'Inter Tight';font-style:normal;font-size:13px;color:var(--g7);}
+
+/* TABLE */
+.tw{overflow-x:auto;border:1px solid var(--g2);border-radius:4px;margin:20px 0;}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--white);}
+thead tr{background:var(--g1);}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--g5);font-weight:500;padding:10px 13px;text-align:left;border-bottom:1px solid var(--g2);white-space:nowrap;}
+td{padding:10px 13px;border-bottom:1px solid var(--g2);color:var(--g7);vertical-align:top;line-height:1.5;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:var(--g1);}
+td strong{color:var(--ink);font-weight:600;}
+td .g{color:#2d7a00;font-weight:600;}
+td .r{color:var(--red);font-weight:600;}
+td .a{color:var(--amber);font-weight:600;}
+td .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--pd);}
+
+/* LATAM SECTION */
+.latam-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0;}
+.latam-box{border:1px solid var(--g2);border-radius:4px;padding:22px 24px;background:var(--white);}
+.latam-box.dark{background:var(--black);border-color:rgba(255,255,255,.1);}
+.latam-box h3{margin-bottom:12px;}
+.latam-box.dark h3{color:var(--white);}
+.latam-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--g2);font-size:13px;}
+.latam-row:last-child{border-bottom:none;}
+.latam-row.dark{border-bottom-color:rgba(255,255,255,.08);color:rgba(255,255,255,.7);}
+.latam-where{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.latam-where li{font-size:13px;color:var(--g7);display:flex;gap:10px;line-height:1.55;}
+.latam-where li::before{content:'→';color:var(--pd);flex-shrink:0;font-weight:600;}
+.latam-where.dark-list li{color:rgba(255,255,255,.65);}
+.latam-where.dark-list li::before{color:var(--lime);}
+
+/* NEW SIMILAR SITES SECTION */
+.adult-similar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0;}
+.asm{background:var(--white);border:1px solid var(--g2);border-radius:4px;padding:14px 16px;}
+.asm .domain{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--pd);font-weight:500;margin-bottom:4px;}
+.asm .aff-list{font-size:11px;color:var(--g5);margin-top:4px;}
+.asm .rank-badge{font-size:10px;font-family:'JetBrains Mono',monospace;background:var(--g1);padding:1px 5px;border-radius:3px;color:var(--g7);display:inline-block;margin-bottom:4px;}
+.asm .note{font-size:12px;color:var(--g7);line-height:1.5;margin-top:5px;}
+
+/* RECS */
+.recs{border:1px solid var(--g2);border-radius:4px;overflow:hidden;}
+.rec{display:grid;grid-template-columns:56px 1fr;border-bottom:1px solid var(--g2);}
+.rec:last-child{border-bottom:none;}
+.rnum{font-family:'Instrument Serif',serif;font-style:italic;font-size:28px;color:var(--purple);padding:20px 0 20px 20px;display:flex;align-items:flex-start;padding-top:24px;}
+.rb{padding:20px 22px 20px 0;}
+.rb h3{font-size:15px;margin-bottom:6px;}
+.rb p{font-size:14px;color:var(--g7);}
+
+/* IMPLICATIONS */
+.impl{background:var(--lime);padding:48px 64px;}
+.impl h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;line-height:1.1;letter-spacing:-.015em;color:var(--black);margin-bottom:14px;}
+.impl p{font-size:16px;color:var(--ld);line-height:1.6;max-width:820px;}
+.impl .pl{font-family:'Instrument Serif';font-style:italic;font-size:17px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,.15);color:var(--ld);}
+
+/* CAVEATS */
+.cav{border:1px solid var(--g2);border-radius:4px;padding:28px 32px;background:var(--white);}
+.cav h3{font-size:16px;margin-bottom:14px;}
+.cav ul{list-style:none;}
+.cav li{font-size:13px;color:var(--g7);line-height:1.65;padding:8px 0 8px 14px;border-bottom:1px solid var(--g2);position:relative;}
+.cav li::before{content:'—';position:absolute;left:0;color:var(--g3);}
+.cav li:last-child{border-bottom:none;}
+.cav li strong{color:var(--ink);}
+
+footer{background:var(--black);color:rgba(255,255,255,.38);padding:28px 0;}
+.fs{font-size:13px;line-height:1.6;}
+
+@media(max-width:860px){
+  .wrap{padding:0 20px;}
+  h1{font-size:44px;}h2{font-size:32px;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .op-grid,.latam-grid,.geo-grid{grid-template-columns:1fr;}
+  .op-card.full{grid-column:auto;}
+  .op-row{grid-template-columns:1fr;}
+  .matrix,.adult-similar-grid{grid-template-columns:1fr 1fr;}
+  .impl{padding:32px 20px;}
+  .rec{grid-template-columns:44px 1fr;}
+}
+@media(max-width:540px){
+  h1{font-size:34px;}
+  .stats-row,.matrix,.adult-similar-grid,.geo-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<div class="wrap"><div class="hero-inner">
+  <div class="hero-logo">
+    <?xml version="1.0" encoding="UTF-8"?> <svg xmlns="http://www.w3.org/2000/svg" width="266" height="32" viewBox="0 0 266 32" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 13.6783V17.375L17.326 25.6807V21.5062L4.86105 15.5373L17.326 9.81443V5.64613L0 13.6783Z" fill="#C3ABFF"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M266 18.4561V14.7594L248.674 6.45375V10.628L261.138 16.5971L248.674 22.32V26.4883L266 18.4561Z" fill="#C3ABFF"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M49.6406 21.3702V27.8137L53.818 32H62.547L66.1292 28.5663V32H70.5472V12.0717L65.8987 7.41318H54.4775L49.829 12.0717V15.7592H54.3884V13.5119L56.4264 11.5105H63.9968L66.035 13.5119V17.2331H53.8199L49.6406 21.3702ZM61.4087 27.9027L66.035 23.4434V21.3304H55.7663L54.2001 22.8604V26.3726L55.7663 27.9027H61.4087Z" fill="white"></path><path d="M98.9487 0.834671H77.0527V32H81.7064V17.2702H96.6872V12.9841H81.7064V5.12048H98.9487V0.834671Z" fill="white"></path><path d="M102.574 1.73128V4.25414L104.302 5.98535H106.819L108.547 4.25414V1.73128L106.819 -0.000209808H104.302L102.574 1.73128Z" fill="white"></path><path d="M107.841 12.9841H103.281V32H107.841V12.9841Z" fill="white"></path><path d="M118.776 7.41318H114.311V32H118.87V17.1438L124.397 11.6046H128.714L130.752 13.6063V32H135.311V12.0717L130.663 7.41318H123.01L118.776 11.657V7.41318Z" fill="white"></path><path d="M144.567 11.5575L141.809 27.1758L145.802 32H152.869L153.567 27.8556H148.241L146.625 25.8829L149.142 11.5575H156.449L157.149 7.41318H149.872L151.238 0.840582H146.749L145.383 7.41318H141.032L140.332 11.5575H144.567Z" fill="white"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M160.326 12.0717V27.3415L164.974 32H177.244L181.892 27.3415V23.701H177.333V25.8068L175.296 27.8083H166.924L164.885 25.8068V21.2831H181.94V12.0701L177.242 7.41318H164.974L160.326 12.0717ZM175.342 11.6046L177.381 13.6063V17.186H164.885V13.6063L166.924 11.6046H175.342Z" fill="white"></path><path d="M187.873 12.0717V27.3415L192.523 32H204.273L208.921 27.3415V23.701H204.362V25.8068L202.325 27.8083H194.471L192.432 25.8068V13.6063L194.471 11.6046H202.325L204.362 13.6063V15.7121H208.921V12.0717L204.273 7.41318H192.523L187.873 12.0717Z" fill="white"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M214.938 21.3702V27.8137L219.115 32H227.844L231.426 28.5663V32H235.843V12.0717L231.196 7.41318H219.773L215.125 12.0717V15.7592H219.684V13.5119L221.724 11.5105H229.293L231.332 13.5119V17.2331H219.115L214.938 21.3702ZM226.706 27.9027L231.332 23.4434V21.3304H221.063L219.496 22.8604V26.3726L221.063 27.9027H226.706Z" fill="white"></path><path d="M34.9739 0.806335H30.3203V31.9717H43.1585V27.7329H34.9739V0.806335Z" fill="white"></path></svg>
+  </div>
+  <div class="eyebrow">Marketing &amp; Research Office · Competitive Intelligence</div>
+  <h1>Adult Cyberlocker<br><span class="accent">Research.</span></h1>
+  <p class="hero-sub">A Similarweb traffic dissection of Rapidgator, FileJoker, 1Fichier, Nitroflare, Katfile, Mexashare, Mexa.sh, Bunkr, Filester, and Fikper — operator fingerprints, geography breakdowns, ad network identification, PSP mapping, competitor-derived adult client discovery, and full LATAM assessment.</p>
+  <div class="hero-meta">
+    <div><span>Period</span><strong>Jun 2025 — May 2026</strong></div>
+    <div><span>Data source</span><strong>Similarweb Pro exports</strong></div>
+    <div><span>Produced</span><strong>June 2026</strong></div>
+    <div><span>Context</span><strong>LaFinteca Intelligence Series</strong></div>
+  </div>
+</div></div>
+</section>
+
+<!-- MARKET VOLUME -->
+<section class="alt">
+<div class="wrap">
+  <div class="sh">
+    <h2>The market by <span class="i">volume.</span></h2>
+    <p class="ss">Rapidgator is in a different weight class. Two platforms — Katfile and Mexa.sh — collapsed during the measurement window. The data shows exactly when, how fast, and what that implies about the common infrastructure behind them.</p>
+  </div>
+  <div class="stats-row">
+    <div class="stat">
+      <div class="lb">Rapidgator</div>
+      <div class="fg">309<span class="u">M</span></div>
+      <div class="dc">81.8% desktop · 26.1% bounce · 5:17 avg duration · Japan 44.5%</div>
+    </div>
+    <div class="stat amb">
+      <div class="lb">1Fichier</div>
+      <div class="fg">198<span class="u">M</span></div>
+      <div class="dc">Declining −40% · bank terminated Jan 2025 · 100% branded search — no recovery path</div>
+    </div>
+    <div class="stat">
+      <div class="lb">Nitroflare</div>
+      <div class="fg">56<span class="u">M</span></div>
+      <div class="dc">Stable · Stripe + PayPal direct · most diversified geo · non-adult majority</div>
+    </div>
+    <div class="stat">
+      <div class="lb">FileJoker</div>
+      <div class="fg">44<span class="u">M</span></div>
+      <div class="dc">Stable · 42% traffic from 3 forums · Traffichaus ad network · fshpay + ipremium billing</div>
+    </div>
+    <div class="stat red">
+      <div class="lb">Katfile — collapsed Sep 2025</div>
+      <div class="fg">46<span class="u">M</span></div>
+      <div class="dc">13M/mo → 277K/mo · −94% · 40+ server subdomains abandoned · mirror network activated</div>
+    </div>
+    <div class="stat red">
+      <div class="lb">Mexa.sh — collapsed Nov 2025</div>
+      <div class="fg">35<span class="u">M</span></div>
+      <div class="dc">7M/mo → 186K/mo · −97% · crypto-exchange outgoing anomaly · probable Katfile twin</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="ct">Monthly visits by platform — Jun 2025 to May 2026</div>
+    <div class="cs">Rapidgator at ÷10 scale. Katfile and Mexa.sh collapse events visible Q4 2025.</div>
+    <div style="position:relative;width:100%;height:260px;">
+      <canvas id="mc" role="img" aria-label="Line chart of monthly visits for 6 cyberlocker platforms Jun 2025 to May 2026. Rapidgator dominant 22-28M/month. 1Fichier declines 19.7M to 11.9M. Nitroflare stable 4.5M. FileJoker stable 3.5M. Katfile collapses Sep 2025. Mexa.sh collapses Nov 2025.">Monthly traffic data.</canvas>
+    </div>
+    <div class="legend">
+      <span><span class="ld-dot" style="background:#534AB7;"></span>Rapidgator (÷10)</span>
+      <span><span class="ld-dot" style="background:#1D9E75;"></span>1Fichier</span>
+      <span><span class="ld-dot" style="background:#888780;"></span>Nitroflare</span>
+      <span><span class="ld-dot" style="background:#BA7517;"></span>FileJoker</span>
+      <span><span class="ld-dot" style="background:#E24B4A;"></span>Katfile ↓ collapsed</span>
+      <span><span class="ld-dot" style="background:#D4537E;"></span>Mexa.sh ↓ collapsed</span>
+    </div>
+  </div>
+
+  <div class="ev">
+    <div class="ev-l">Critical signal — simultaneous collapse, shared fingerprint</div>
+    <p class="ev-t">Katfile lost 94% of traffic between August and October 2025. Mexa.sh lost 97% between October and December 2025. Near-identical timing, near-identical referral fingerprints (both dominated by anime-sharing.com and the same hentai/JAV cluster), and Mexa.sh's crypto-exchange-heavy outgoing profile (BTSE 24.2%, Bitmart 10.3%, OrangeX 8.9%) are three independent signals pointing at a shared operator, shared PSP, or coordinated enforcement event behind both collapses.</p>
+  </div>
+</div>
+</section>
+
+<!-- GEOGRAPHY -->
+<section>
+<div class="wrap">
+  <div class="sh">
+    <h2>Where the traffic <span class="i">actually comes from.</span></h2>
+    <p class="ss">Geography fundamentally reframes risk — and reframes the LATAM question. Japan at 44.5% of Rapidgator changes everything about how that platform's operator exposure should be read.</p>
+  </div>
+
+  <div class="geo-grid">
+    <div class="gc hl">
+      <div class="gc-t">Rapidgator <span class="gbadge gbadge-l">Japan-first · 44.5%</span></div>
+      <div class="gr"><span class="gc-country">🇯🇵 Japan</span><div style="text-align:right"><span class="gc-share">44.5%</span><div class="gc-bar" style="width:100%;background:var(--ld);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇺🇸 United States</span><div style="text-align:right"><span class="gc-share">8.9%</span><div class="gc-bar" style="width:20%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇩🇪 Germany</span><div style="text-align:right"><span class="gc-share">7.9%</span><div class="gc-bar" style="width:18%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇫🇷 France</span><div style="text-align:right"><span class="gc-share">2.9%</span><div class="gc-bar" style="width:6%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇨🇳 China + 🇹🇼 Taiwan</span><div style="text-align:right"><span class="gc-share">5.4%</span><div class="gc-bar" style="width:12%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇰🇷 Korea</span><div style="text-align:right"><span class="gc-share">1.9%</span><div class="gc-bar" style="width:4%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇷🇺 Russia</span><div style="text-align:right"><span class="gc-share">0.29%</span><div class="gc-bar" style="width:1%;background:var(--red);"></div></div></div>
+      <p class="gn flag">Japan at 44.5% with avg 6:04 session: Rapidgator is a Japanese content platform with a western minority. MissAV as top referrer is structurally inevitable.</p>
+      <p class="gn warn" style="margin-top:6px;">Ukrainian operator (Ultranex Ltd, +380 phone) — sanctions exposure is operator-level KYB risk, not revenue-level. The revenue base is Japanese and Western European.</p>
+      <p class="gn" style="margin-top:6px;">LATAM: Brazil 0.64% (rank #19,766) · Mexico 0.45% · Argentina 0.51% · Colombia 0.30%. Commercially negligible.</p>
+    </div>
+
+    <div class="gc">
+      <div class="gc-t">Nitroflare <span class="gbadge gbadge-p">Genuinely global</span></div>
+      <div class="gr"><span class="gc-country">🇺🇸 United States</span><div style="text-align:right"><span class="gc-share">11.9%</span><div class="gc-bar" style="width:100%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇩🇪 Germany</span><div style="text-align:right"><span class="gc-share">8.6%</span><div class="gc-bar" style="width:72%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇫🇷 France</span><div style="text-align:right"><span class="gc-share">6.9%</span><div class="gc-bar" style="width:58%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇯🇵 Japan</span><div style="text-align:right"><span class="gc-share">5.6%</span><div class="gc-bar" style="width:47%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇮🇳 India</span><div style="text-align:right"><span class="gc-share">5.1%</span><div class="gc-bar" style="width:43%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇪🇬 Egypt</span><div style="text-align:right"><span class="gc-share">4.1%</span><div class="gc-bar" style="width:34%;background:var(--pd);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇲🇽 Mexico</span><div style="text-align:right"><span class="gc-share">2.1%</span><div class="gc-bar" style="width:18%;background:var(--teal);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇷🇺 Russia</span><div style="text-align:right"><span class="gc-share">1.6%</span><div class="gc-bar" style="width:13%;background:var(--red);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇧🇷 Brazil</span><div style="text-align:right"><span class="gc-share">1.4%</span><div class="gc-bar" style="width:12%;background:var(--teal);"></div></div></div>
+      <p class="gn flag">No country exceeds 12%. Western-European majority profile explains why Stripe and PayPal direct access is still live. Most diversified geo in the set.</p>
+      <p class="gn" style="margin-top:6px;">Russia 1.6% (rank #26,282). Ukraine 0.88%. Present but not dominant. LATAM: Brazil 1.4%, Mexico 2.1% — marginally present but commercially thin.</p>
+    </div>
+
+    <div class="gc">
+      <div class="gc-t">FileJoker.com <span class="gbadge gbadge-a">SEO satellite · 110K visits</span></div>
+      <div class="gr"><span class="gc-country">🇺🇸 United States</span><div style="text-align:right"><span class="gc-share">32.9%</span><div class="gc-bar" style="width:100%;background:var(--amber);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇰🇷 Korea</span><div style="text-align:right"><span class="gc-share">9.8%</span><div class="gc-bar" style="width:30%;background:var(--amber);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇬🇧 United Kingdom</span><div style="text-align:right"><span class="gc-share">9.1%</span><div class="gc-bar" style="width:28%;background:var(--amber);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇮🇳 India</span><div style="text-align:right"><span class="gc-share">9.0%</span><div class="gc-bar" style="width:27%;background:var(--amber);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇯🇵 Japan</span><div style="text-align:right"><span class="gc-share">4.8%</span><div class="gc-bar" style="width:15%;background:var(--amber);"></div></div></div>
+      <div class="gr"><span class="gc-country">🇧🇷 Brazil</span><div style="text-align:right"><span class="gc-share">4.5%</span><div class="gc-bar" style="width:14%;background:var(--teal);"></div></div></div>
+      <p class="gn flag">Brazil at 4.5% (6th country). Organic search terms: "nice nice baby!! filejoker", "various artists filejoker" — confirms a Brazilian J-pop/K-pop audience actively seeking FileJoker premium accounts. First commercially meaningful LATAM signal in the dataset.</p>
+      <p class="gn warn" style="margin-top:6px;">filejoker.com is the SEO/FAQ satellite domain. 100% of its outgoing routes to filejoker.net. The Brazil signal is real but small: 4.5% of 110K visits vs the 43.8M on the main .net property.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- OPERATOR PROFILES -->
+<section class="alt">
+<div class="wrap">
+  <div class="sh">
+    <h2>Operator <span class="i">profiles.</span></h2>
+    <p class="ss">All payment infrastructure intelligence derived from outgoing traffic destination analysis. Adult client identification from referral domain categorisation. Geography and ad network data from full Similarweb export set.</p>
+  </div>
+
+  <div class="op-grid">
+
+    <!-- RAPIDGATOR -->
+    <div class="op-card full">
+      <div class="op-hd">
+        <div><div class="op-name">Rapidgator</div><div class="op-dom">rapidgator.net · rg.to · AS58181 · Ultranex Ltd, Cyprus HE305401</div></div>
+        <span class="op-badge b-dom">Market leader · Japan-first</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Ultranex Ltd (formerly Rapidgator Ltd), Cyprus Registrar HE305401, Narcissos Complex Flat 26–27, 125 Georgiou A, Germasogeia 4048. Google Play developer account: ultranexltd@proton.me, Ukrainian phone +380. WHOIS shielded via Internet Domain Service BS Corp, Bahamas. USTR Notorious Markets: 2019, 2022, 2023, 2024 continuous listing.</p>
+        <p style="margin-top:8px;"><strong>Geography:</strong> Japan 44.5% (rank #495, avg session 6:04) is the defining structural fact. US 8.9%, Germany 7.9%, France 2.9%, China+Taiwan 5.4%, Korea 1.9%. Russia 0.29% (rank #23,255), Ukraine 0.24% (rank #6,579). The Ukrainian operator registration is a KYB-relevant sanctions flag; the revenue base is Japanese and Western European, not Russian.</p>
+        <p style="margin-top:8px;"><strong>Traffic:</strong> 309.7M total · ~25.8M/month · 81.8% desktop (highest in set) · 26.1% bounce (lowest in set) · 5:17 avg duration. Power-user download audience with deliberate intent.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-m">Main</span><div><strong>play.google.com — 27.8%</strong> of outgoing. Google Play in-app subscriptions — the only live mainstream card rail in the entire competitor set. App store reviews confirm users specifically choose this because direct website payments repeatedly fail.</div></li>
+            <li><span class="tg t-m">Auth</span><div>accounts.google.com — 12.2%. Google OAuth login layer stacked on top.</div></li>
+            <li><span class="tg t-r">Reseller</span><div>pay.gatorkey.net — 4.8%. Rapidgator-branded reseller checkout.</div></li>
+            <li><span class="tg t-r">Reseller</span><div>pay.premium2sale.com — 0.97%. Third-party adult billing reseller.</div></li>
+            <li><span class="tg t-r">Reseller</span><div>buypremiumkey.com, premiumkey.co, filesharingshop.com — ~3% combined.</div></li>
+            <li><span class="tg t-c">Payout</span><div>Uploaders: WebMoney, Bitcoin, wire transfer. Affiliate: 40% recurring.</div></li>
+          </ul>
+          <p class="tip g">Google Play billing is the only mainstream card channel in this market. No other operator has it. App store review evidence confirms it's functioning as the primary payment workaround.</p>
+        </div>
+        <div>
+          <h4>Adult clients — confirmed via referral data</h4>
+          <ul class="cl">
+            <li class="h">MissAV cluster: missav.ws (rank #95) / missav.ai (#186) / missav.live (#257) / missav123.com (#539) <span class="sb">~9% combined</span></li>
+            <li class="nt">Japan's largest English-subtitled JAV streaming aggregator. The 44.5% Japan geography and MissAV as top referrer are two sides of the same structural fact.</li>
+            <li class="h">supjav.com (rank #493) <span class="sb">3.3%</span></li>
+            <li class="nt">~50M monthly visits. JAV streaming embedding premium RG download links.</li>
+            <li class="w">njavtv.com (#165), javpop.mov (#37,139) <span class="sb">~2.5%</span></li>
+            <li class="w">javlibrary.com (#4,004), jav.guru (#771), javarchive.com (#11,641), javip.net (#29,286) <span class="sb">~3%</span></li>
+            <li class="w">hentaicore.net (#58,536), hentai-sharing.net (#25,700), hentaiomg.com (#59,137) <span class="sb">~3%</span></li>
+            <li class="w">planetsuzy.org (#8,722), pornbb.org (#14,196), vipergirls.to (#6,316), naughtyblog.org (#10,548) <span class="sb">~2.7%</span></li>
+            <li class="w">xidol.net (#45,895), x-idol.net (#39,119), jpupskirts.club (#35,520), jpvoyeur.cc (#38,322) <span class="sb">~2.5%</span></li>
+            <li class="w">tt1069.com (#9,109), 0xxx.ws (#28,998), sexuria.net (#17,337) <span class="sb">~1%</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILEJOKER -->
+    <div class="op-card">
+      <div class="op-hd">
+        <div><div class="op-name">FileJoker</div><div class="op-dom">filejoker.net · filejoker.com (satellite SEO domain)</div></div>
+        <span class="op-badge b-st">Forum-controlled · Traffichaus</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Operator unknown at registry level. WJunction community testimony consistently ties FileJoker to the PornBB / ForumOphilia operator cluster — the same entities that actively throttled K2S links in 2021–22 to redirect commissions toward FileJoker. 43.8M total on .net; 110K on .com satellite (SEO capture, 100% of outgoing to .net).</p>
+        <p style="margin-top:8px;"><strong>Ad network confirmed:</strong> Traffichaus 2.8%, Paid Referrals 96.9%, Skimlinks 0.4%. Traffichaus appeared concentrated in February 2026 only (70.6% that month), suggesting a test campaign. <strong>TrafficStars hypothesis rejected</strong> — FileJoker and the K2S/Hammy Media/xHamster cluster are commercially separate.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-r">Billing</span><div>fshpay.com — 8.5%. Niche adult-industry PSP.</div></li>
+            <li><span class="tg t-r">Billing</span><div>ipremium.io — 5.9%. Adult subscription billing; 704% YoY growth in outgoing share signals a recent PSP switch.</div></li>
+            <li><span class="tg t-m">App</span><div>play.google.com — 4.8%. Secondary mainstream channel.</div></li>
+            <li><span class="tg t-f">Ad net</span><div>Traffichaus (NOT TrafficStars) — 2.8% of display. Luxembourg-registered independent adult ad network.</div></li>
+            <li><span class="tg t-c">Payout</span><div>WebMoney and Bitcoin only; wire transfer minimum $1,000.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Adult clients — confirmed via referral data</h4>
+          <ul class="cl">
+            <li class="h">planetsuzy.org (#8,722) <span class="sb">19.4%</span></li>
+            <li class="h">pornbb.org (#14,196) <span class="sb">13.0%</span></li>
+            <li class="h">forumophilia.com (#19,213) <span class="sb">9.7%</span></li>
+            <li class="nt"><strong>42% of all traffic from three forums.</strong> Tightest concentration in the dataset. Operator alignment with forum owners is the most likely explanation for the whitelist lock.</li>
+            <li class="w">akiba-online.com (#36,258) <span class="sb">8.6%</span> — Japanese culture/anime forum</li>
+            <li class="w">vipergirls.to (#6,316) <span class="sb">5.6%</span></li>
+            <li class="w">porn-w.org (#54,605) <span class="sb">4.0%</span></li>
+            <li class="w">javlibrary.com (#4,004) <span class="sb">1.8%</span></li>
+            <li class="w">jappydolls.net (#246,218) <span class="sb">1.8%</span> · idolfile.com (#373,340) <span class="sb">1.7%</span></li>
+            <li class="w">incezt.net (#88,758) <span class="sb">1.2%</span> · mytaboo.net (#150,391) <span class="sb">1.0%</span></li>
+            <li class="w">viper.to (#16,455) <span class="sb">1.4%</span> · vintage-erotica-forum.com (#21,672) <span class="sb">0.73%</span></li>
+            <li class="w">porncoven.com (#22,692), nudecelebforum.com (#89,969), eroticity.net (#58,640) <span class="sb">~1%</span></li>
+            <li class="w">simpcity.cr (#131) <span class="sb">0.3%</span> · nudostar.com (#13,431) <span class="sb">0.2%</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- NITROFLARE -->
+    <div class="op-card">
+      <div class="op-hd">
+        <div><div class="op-name">Nitroflare</div><div class="op-dom">nitroflare.com</div></div>
+        <span class="op-badge b-cf">Stripe + PayPal · most underwritable</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Operator unknown. Geography confirms western-European-majority audience — US 11.9%, Germany 8.6%, France 6.9%, Japan 5.6%, India 5.1%. No country exceeds 12%. Russia 1.6% (rank #26,282), Ukraine 0.88%. The geo profile is consistent with the software warez + music + magazine referral base, and explains why mainstream card access (Stripe, PayPal) is still active. 56.0M total, stable throughout the period.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-d">Direct</span><div><strong>checkout.stripe.com — 6.6%.</strong> Live Stripe access — remarkable for this vertical.</div></li>
+            <li><span class="tg t-d">Direct</span><div><strong>paypal.com — 5.3%.</strong> Direct PayPal confirmed.</div></li>
+            <li><span class="tg t-r">Billing</span><div>checkout.dexipay.com — 1.5%. Niche payment processor.</div></li>
+            <li><span class="tg t-r">Billing</span><div>m.gamehub.cam — 10.2%. Platform-specific billing surface.</div></li>
+            <li><span class="tg t-m">Telegram</span><div>t.me — 36.9% of outgoing. Customer support/notification bot, not a payment rail.</div></li>
+            <li><span class="tg t-c">Payout</span><div>PayPal + WebMoney + wire for uploaders. Most accessible payout stack in set.</div></li>
+          </ul>
+          <p class="tip g">Western-European geo majority + Stripe/PayPal = the most coherent risk profile in the set. The geography validates why the card rails are still live.</p>
+        </div>
+        <div>
+          <h4>Adult clients — confirmed via referral data</h4>
+          <ul class="cl">
+            <li class="w">javlibrary.com (#4,004) <span class="sb">7.1%</span></li>
+            <li class="nt">Nitroflare's largest adult referrer by margin. The global JAV database is the primary bridge.</li>
+            <li class="w">roshy.tv (#6,362) <span class="sb">3.2%</span></li>
+            <li class="nt">Adult streaming platform, rank #6,362 globally. Unique to Nitroflare — not in other platforms' top referrers.</li>
+            <li class="w">adultmagazinespdf.com (#139,524) <span class="sb">2.7%</span></li>
+            <li class="nt">Adult magazine PDF aggregator — unique to Nitroflare in the dataset. Signals a magazine/static-content niche.</li>
+            <li class="w">tt1069.com (#9,109) <span class="sb">2.5%</span></li>
+            <li class="w">3xplanet.net (#49,308) <span class="sb">1.5%</span> · seaporn.org (#115,567) <span class="sb">1.4%</span></li>
+            <li class="w">camdownload.net (#95,313) <span class="sb">0.82%</span> · nlegs.com (#197,502) <span class="sb">0.42%</span></li>
+            <li class="w">vipergirls.to (#6,316) <span class="sb">0.19%</span></li>
+            <li class="nt"><strong>Non-adult majority:</strong> peeplink.in (music 13.2%), sanet.st (software warez 11%), rlsbb.ru, softarchive.is — Nitroflare is the only platform here with a genuinely mixed client base.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1FICHIER -->
+    <div class="op-card full">
+      <div class="op-hd">
+        <div><div class="op-name">1Fichier</div><div class="op-dom">1fichier.com · DStorage SAS · SIREN 511962979 · Nessim Y. Tordjman</div></div>
+        <span class="op-badge b-de">Declining −40% · bank terminated</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> DStorage SAS, 58 rue de Monceau, 75008 Paris. President: Nessim Y. Tordjman. The only operator in the set with a named, publicly registered EU UBO. Cour de Cassation confirmed 15 January 2025: French bank rightfully terminated its payment processing for anti-piracy non-compliance. Nintendo v. DStorage (Paris 2021): €935K judgment, reduced to €442K on appeal. USTR Notorious Markets: 2019, 2022, 2023, 2024.</p>
+        <p style="margin-top:8px;"><strong>Keyword intelligence:</strong> 100% of organic search is branded — every visitor already knows the platform before arriving. The top 50 keywords are all variants of the brand name, account/login queries, and specific titles like "lien de telechargement paranormal activity 4", "1fichier new york section criminelle", "jujutsu kaisen", "mods pokemon legends za", "1fichier pathfinder". Non-branded content categories are absent. There is zero organic new-user acquisition. The 40% traffic decline is pure payment-friction-driven churn — existing users who can't pay leave and do not come back. The bank termination is the complete explanation. No recovery path exists through organic acquisition.</p>
+        <p style="margin-top:8px;"><strong>Traffic:</strong> 197.9M total, declining from 19.7M/mo (Aug 2025) to 11.9M/mo (May 2026). 68% desktop. French and francophone audience dominant in non-branded terms.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-b">Terminated</span><div><strong>French bank acquiring — Cour de Cassation Jan 2025.</strong></div></li>
+            <li><span class="tg t-r">Active</span><div>pay.coingate.com — 1.4%. Crypto gateway (Bitcoin, USDT, Litecoin) filling the void.</div></li>
+            <li><span class="tg t-r">Active</span><div>premiuminstant.com — 0.9%. Reseller intermediary.</div></li>
+            <li><span class="tg t-r">Active</span><div>api.dedipass.com — 0.7%. SMS/carrier billing emergency fallback.</div></li>
+            <li><span class="tg t-c">Payout</span><div>Minimal uploader affiliate programme vs peers.</div></li>
+          </ul>
+          <p class="tip r">100% branded search + bank termination = terminal retention collapse. Every payment friction event permanently reduces the user base with no mechanism for replacement. The trajectory is structurally irreversible unless card access is restored.</p>
+        </div>
+        <div>
+          <h4>Client mix — confirmed via referral data</h4>
+          <ul class="cl">
+            <li class="nt"><strong>1Fichier is primarily a games and film piracy host. Adult is incidental.</strong></li>
+            <li class="w">Games/ROM: skidrowreloaded.com (8.7%), dlpsgame.com (5.1%), nswpedia.com (3.1%), romsfun.com (2.9%), steamrip.com (2.9%), repack-games.com (1.1%)</li>
+            <li class="w">Film/TV streaming: darki.zone (2.6%), cinecalidad.ec (1.7%), cinecalidad.rs (1.3%), topcinema.cam (1.3%), cinecalidad.am (0.72%), ahwaktv.net (2.1%)</li>
+            <li class="w">Adult (minor): h-suki.com (#65,145, 0.85%), vintage-erotica-forum.com (#21,672, 0.81%), daftsex.org (0.40%), tickzoo.tv (0.34%)</li>
+            <li class="nt"><strong>LATAM signal:</strong> cinecalidad.ec/.rs/.am + cuevana.is/.biz + gnulahd.nu + animeflv.net — Spanish-language Latin American film and anime aggregators contribute ~5% combined of referrals. mercadolibre.com.mx (0.11%) and mercadolibre.com.ar (0.02%) in outgoing. betano.bet.br (0.01%) in outgoing — an online sportsbook, not a payment rail.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- KATFILE -->
+    <div class="op-card">
+      <div class="op-hd">
+        <div><div class="op-name">Katfile</div><div class="op-dom">katfile.com · mirror network: .io .org .cloud .online .ws .vip · katfiler.com</div></div>
+        <span class="op-badge b-co">Collapsed Sep 2025 · −94%</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Operator unknown. Similarweb subdomain data shows 40+ active s4xxx.katfile.com download servers — significant CDN infrastructure now largely abandoned post-collapse. Mirror network (8 alternate TLDs/domains) are failover assets: katfile.com itself was 97.2% of total traffic before the event. From 13.2M/mo (Aug 2025) to 277K/mo (May 2026). Also notable: Katfile outgoing includes landing.brazzersnetwork.com (2.5%) and landing.bromonetwork.com (0.17%) — affiliate destinations for Mindgeek/Aylo studio network (Brazzers, Bromo). This is distinct from the Mexa.sh crypto model.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-r">Reseller</span><div>apseller.com, premiuminstant.com, preaka.jp — visible in outgoing.</div></li>
+            <li><span class="tg t-r">Ad</span><div>viiyutty.com (Adult, 1.9%), rcdn-web.com (Adult, 1.0%) — adult ad inventory. No mainstream billing rails visible.</div></li>
+            <li><span class="tg t-r">Affiliate</span><div>landing.brazzersnetwork.com (2.5%), landing.bromonetwork.com (0.17%) — Mindgeek/Aylo studio affiliate destinations.</div></li>
+            <li><span class="tg t-b">Collapse</span><div>94% absolute cliff (not gradual) points to a domain-level event or PSP termination severing the uploader payout engine — not a forum whitelist removal.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Adult clients — confirmed via referral data</h4>
+          <ul class="cl">
+            <li class="h">anime-sharing.com (#8,941) <span class="sb">10.1%</span></li>
+            <li class="w">hentaicore.net (#58,536) <span class="sb">3.3%</span></li>
+            <li class="w">xidol.net (#45,895) <span class="sb">2.0%</span> · xchina.co (#8,437) <span class="sb">1.7%</span></li>
+            <li class="w">hentai-sharing.net (#25,700) <span class="sb">1.5%</span> · hentai-share.com (#38,040) <span class="sb">1.4%</span></li>
+            <li class="w">x-idol.net (#39,119) <span class="sb">1.5%</span> · hentai4daily.com (#48,283) <span class="sb">0.93%</span></li>
+            <li class="w">3xplanet.net (#49,308) <span class="sb">0.91%</span> · 3xplanet.com (#39,546) <span class="sb">0.83%</span></li>
+            <li class="w">javip.net (#29,286) <span class="sb">0.86%</span> · javbit.net (#104,439) <span class="sb">0.4%</span></li>
+            <li class="w">vipergirls.to (#6,316) <span class="sb">0.84%</span> · porn-w.org (#54,605) <span class="sb">0.2%</span></li>
+            <li class="nt">Profile: ~50% anime/manga, ~30% JAV/hentai/idol, ~20% western adult. Identical to Mexa.sh audience.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEXA.SH -->
+    <div class="op-card">
+      <div class="op-hd">
+        <div><div class="op-name">Mexa.sh</div><div class="op-dom">mexa.sh · mexashare.com</div></div>
+        <span class="op-badge b-an">Crypto anomaly · probable Katfile twin</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Operator unknown. mexa.sh peaked at 7M/mo (now dead). mexashare.com is a negligible satellite (~8K/mo) entirely dependent on anime-sharing.com (52.6% of all referrals). The outgoing from mexa.sh before collapse is categorically unlike every other file host: dominated by crypto exchanges rather than adult ad networks or billing resellers. Combined with near-identical referral profile to Katfile and near-identical collapse timing, shared operator or shared PSP is the most parsimonious explanation.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-c">Exchange</span><div><strong>btse.com — 24.2%</strong> of outgoing. Major crypto exchange.</div></li>
+            <li><span class="tg t-c">Exchange</span><div>bitmart.com — 10.3% · orangex.com — 8.9% · hotcoin.com — 2.4%.</div></li>
+            <li><span class="tg t-r">Reseller</span><div>preaka.jp — 0.13%. Japanese premium key reseller.</div></li>
+            <li><span class="tg t-b">Anomaly</span><div>stake.com (gambling) — 0.11%. The crypto+gambling outgoing profile is structurally unlike a file host. Possible payment-layer or crypto-conversion vehicle with file-hosting as front-end.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Adult clients — confirmed via referral data</h4>
+          <ul class="cl">
+            <li class="h">anime-sharing.com (#8,941) <span class="sb">18.7%</span></li>
+            <li class="h">hentaicore.net (#58,536) <span class="sb">5.8%</span> · hentai-sharing.net (#25,700) <span class="sb">5.2%</span></li>
+            <li class="w">hentai-share.com (#38,040) <span class="sb">3.4%</span> · xidol.net (#45,895) <span class="sb">3.9%</span></li>
+            <li class="w">x-idol.net (#39,119) <span class="sb">3.1%</span> · jp-voyeur.net (#646,995) <span class="sb">2.7%</span></li>
+            <li class="w">javarchive.com (#11,641) <span class="sb">2.6%</span> · hentai4daily.com (#48,283) <span class="sb">2.5%</span></li>
+            <li class="w">javip.net (#29,286) <span class="sb">1.6%</span> · vivahentai4u.net (#79,314) <span class="sb">1.1%</span></li>
+            <li class="w">javbit.net (#104,439), hijav.net (#72,088), rssjav.com (#150,113) <span class="sb">~1%</span></li>
+            <li class="nt">Katfile and Mexa.sh share an identical referral fingerprint. The probability of coincidence across timing, audience composition, and outgoing structure is low.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  <!-- BUNKR.CR -->
+    <div class="op-card full">
+      <div class="op-hd">
+        <div><div class="op-name">Bunkr</div><div class="op-dom">bunkr.cr · bunkrr.su · bunkr-albums.io · dash.bunkr.cr · CDN: fries/kebab/taquito/soup/wings.bunkr.cr</div></div>
+        <span class="op-badge b-dom">1.074B visits/yr · Adult #46 globally</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Self-describes as "Your trusted free privacy-aware file hosting." Cloudflare CDN + Insights installed. A-ADS (Bitcoin advertising) and Bunny CDN previously installed — both since removed, indicating a deliberate infrastructure cleanup. Food-themed CDN subdomain naming (fries, kebab, taquito, soup, wings, milkshake) is a distinctive operator fingerprint. bunkrr.su is the primary premium redirect domain. bunkr-albums.io is the album aggregator satellite. Multiple country-TLD mirror domains active (bunkr.si, .pk, .fi, .ph, .ru, .ws etc.) suggesting the operator actively manages domain failover.</p>
+        <p style="margin-top:8px;"><strong>Scale:</strong> 1.074B total visits Jun 2025–May 2026. 89.55M monthly average. 10.33M monthly unique visitors. 8.308M deduplicated audience. 9:38 avg duration, 14.51 pages/visit, 22.39% bounce rate — engagement metrics characteristic of gallery/album browsing behavior, not linear video streaming. Peaked at 113.3M/mo (Aug 2025), now 71.2M/mo (May 2026, −37% from peak). Declining but still larger than FileJoker and Nitroflare combined.</p>
+        <p style="margin-top:8px;"><strong>Geography:</strong> Pure western — US 32.96% (rank #220), Germany 8.53%, France 4.30%, UK 4.28%, Spain 3.55%, Canada 2.99%. Brazil 2.79% (rank #905), Argentina 1.35%, Mexico 1.30%, Chile 0.94%, Colombia 0.91% — LATAM combined ~7.5%. Zero Japan presence (rank #2721 — negligible). This is structurally the opposite of Rapidgator.</p>
+        <p style="margin-top:8px;"><strong>Content type confirmed by keywords:</strong> 83% non-branded search. Top non-branded terms: "chocolate models bunkr" (+280% MoM), "yummylex" (specific creator), "bbw bunkr" (+4,200% MoM), URL pattern searches for specific albums. Content is UGC/creator leaks (OnlyFans, Patreon), BBW, amateur, and youth-model categories — entirely different from JAV/hentai ecosystem.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Traffic structure + payment</h4>
+          <ul class="pl">
+            <li><span class="tg t-m">Channel</span><div>Referrals 52.56% (~565M/yr) · Direct 36.47% · Social 9.35% · Search 1.21%</div></li>
+            <li><span class="tg t-m">Social</span><div>YouTube 54.16% of social (compilations/previews leading users to albums) · Reddit 13.12% · X/Twitter 11.58% · Instagram 7.26%</div></li>
+            <li><span class="tg t-f">Ad net</span><div>PlugRush 0.89% (adult ad network) · Paid Referrals 99.11%. Publishers: forums.socialmediagirls.com (22.3%), fileditchfiles.me (12.6%), bunkr-albums.io (10.9%), 8chan.moe (3.7%)</div></li>
+            <li><span class="tg t-r">Ad dest</span><div>Outgoing ads: join4ra.com (38.8% — cam signup), <strong>bet.br (9.65%)</strong> ← Brazilian sports betting (declining −73.7%), xcams.cam (2.18%), chaturbate.com (1.65%)</div></li>
+            <li><span class="tg t-b">No PSP</span><div>No payment processor visible in outgoing or ad traffic. Revenue appears entirely ad-based. Free hosting model with no visible premium subscription layer confirmed.</div></li>
+            <li><span class="tg t-c">Tech</span><div>Cloudflare (CDN + Insights). nginx removed. A-ADS/AnonymousAds removed. No mainstream payment processor.</div></li>
+          </ul>
+          <p class="tip r">bet.br in ad outgoing = Brazilian commercial signal. The −73.7% YoY change suggests this advertiser relationship is being phased out — the Brazil exposure may have been higher in earlier months.</p>
+        </div>
+        <div>
+          <h4>Referral ecosystem — forum sources</h4>
+          <ul class="cl">
+            <li class="h">simpcity.cr (#131) — 45.62% → 258M absolute visits <span class="sb">declining −36%</span></li>
+            <li class="nt">SimpCity is Bunkr's singular dependency. SimpCity declining = Bunkr declining. The −37% traffic drop from peak maps directly onto SimpCity's own traffic loss.</li>
+            <li class="h">bunkr-albums.io (#2852) — 25.70% → 145M absolute visits <span class="sb">declining −45%</span></li>
+            <li class="nt">Bunkr's own album aggregator feeding back into itself — a circular traffic loop between main host and the satellite index.</li>
+            <li class="h">socialmediagirls.com (#1592) — 9.33% → 52.8M absolute visits</li>
+            <li class="h">simpcity.su (#12735) — 9.22% → 52.2M absolute visits <span class="sb">declining −63%</span></li>
+            <li class="w">simptown.su (#4077) — 1.78% → 10M absolute visits (+5%)</li>
+            <li class="w">celebforum.to (#4490) — 1.68% → 9.5M absolute visits (+26%)</li>
+            <li class="w">hispasexy.org (#18583) — 0.69% → 3.9M absolute visits <span class="sb">Spanish-language adult forum</span></li>
+            <li class="w">foroparalelo.com (#17471) — 0.33% → 1.9M absolute visits <span class="sb">Spanish community (Colombia/Mexico)</span></li>
+            <li class="w">nsfwph.org (#4393) — 0.10% → 553K absolute visits <span class="sb">Philippines</span></li>
+            <li class="w">pr0gramm.com (#4081) — 0.08% → 477K absolute visits <span class="sb">German community</span></li>
+            <li class="nt">Referring industries: Adult 97.59% · File Sharing 0.44% · Social Networks 0.39%</li>
+          </ul>
+          <p class="tip g">hispasexy.org + foroparalelo.com = ~5.8M absolute visits from Spanish-language communities. Combined with Brazil 2.79% and LATAM ~7.5% geography, Bunkr is the only platform in this dataset with demonstrated Spanish-language LATAM referral presence. The adult payment flow into Bunkr from LATAM is ad-based, not subscription-based.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILESTER.ME -->
+    <div class="op-card">
+      <div class="op-hd">
+        <div><div class="op-name">Filester</div><div class="op-dom">filester.me · mirrors: filester.sh (#6445) · filester.gg (#6726) · filester.si (#6840)</div></div>
+        <span class="op-badge b-st">SimpCity-controlled · 20.8M/mo</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Filester.me is the dedicated file host for the SimpCity creator-leak ecosystem. SW classifies it as "Software" despite serving adult content — a tagging artefact. Referral data starts from February 2026, suggesting it entered SW's panel in late 2025 and may have launched or significantly scaled in H2 2025. Three active TLD mirrors (.sh, .gg, .si) each rank in the 6,000–7,000 range globally. bunkr.cr appears as a sub-threshold referrer, confirming the two ecosystems are adjacent but not merged.</p>
+        <p style="margin-top:8px;"><strong>Structural parallel:</strong> PlanetSuzy → FileJoker :: SimpCity → Filester.me. Same operator-aligned model: the dominant forum controls (or is closely aligned with) the primary file host. The parallel extends to decline — simpcity.cr is losing 46% of the referrals it was sending to Filester YoY, and the overall −20.3% MoM on Filester tracks SimpCity's own traffic decline.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-b">Unknown</span><div>No outgoing data available. No payment processor visible. SW classification as Software rather than Adult may reflect obfuscation at the domain level.</div></li>
+            <li><span class="tg t-r">Referrers</span><div>rapid-links.com (0.63%) and speedy-links.com (0.46%) in referrals — link-bypass/shortener services that monetise via interstitial ads before passing users to file downloads. Standard adult file-hosting monetisation pattern.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Referral ecosystem</h4>
+          <ul class="cl">
+            <li class="h">simpcity.cr (#131) — 89.49% → 45.8M absolute visits <span class="sb">declining −46%</span></li>
+            <li class="nt">Single-source dependency more extreme than any other file host in this dataset. Filester is structurally more vulnerable than FileJoker (42% from 3 forums) or even Mexa.sh (18.7% from anime-sharing).</li>
+            <li class="w">forums.socialmediagirls.com — 5.43% → 2.78M absolute visits</li>
+            <li class="w">simptown.su (#4077) — 1.73% · simpcity.is — 0.42%</li>
+            <li class="w">hispasexy.org — 0.19% → 97K <span class="sb">Spanish-language adult</span></li>
+            <li class="w">foroparalelo.com — 0.26% → 134K <span class="sb">Spanish community</span></li>
+            <li class="w">nsfwph.org — 0.18% → 93K <span class="sb">Philippines</span></li>
+            <li class="w">semprot.com — sub-threshold <span class="sb">Indonesia</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIKPER.COM -->
+    <div class="op-card">
+      <div class="op-hd">
+        <div><div class="op-name">Fikper</div><div class="op-dom">fikper.com · 350K/mo · Japan #1 · growing +8% MoM</div></div>
+        <span class="op-badge b-an">Katfile successor confirmed · fshpay PSP link</span>
+      </div>
+      <div class="op-body">
+        <p><strong>Structure:</strong> Fikper.com's referral fingerprint is a direct transplant of Katfile's audience: anime-sharing.com, manga-zip.info, hentaicore.net, jpupskirts.club, xidol.net — the same cluster, in roughly the same proportions. The addition of manga-zip.info as the top referrer (14.74% of fikper.com traffic) is new; it didn't appear prominently in Katfile data, suggesting Fikper is absorbing a wider manga-download community as well. New referrers not present in Katfile: dlraw.ac, 13dl.me, raw-zip.com — all manga/scanlation communities migrating from Katfile.</p>
+        <p style="margin-top:8px;"><strong>PSP link:</strong> fshpay.com appears in Fikper outgoing at 0.82% aggregate. Monthly data shows it was 0.047% in June 2025, spiked to 25.7% in July 2025, then normalized. Fikper switched billing to fshpay mid-2025 — the same PSP FileJoker uses. FileJoker switched to ipremium around the same period. A possible explanation: the PSP serving both platforms through 2024 terminated services in summer 2025, forcing simultaneous migration.</p>
+      </div>
+      <div class="op-row">
+        <div>
+          <h4>Payment infrastructure</h4>
+          <ul class="pl">
+            <li><span class="tg t-r">PSP</span><div><strong>fshpay.com</strong> — same PSP as FileJoker. Active from Jul 2025. 0.82% aggregate outgoing.</div></li>
+            <li><span class="tg t-r">Reseller</span><div>apseller.com (1.07%), preaka.jp (0.13%), filesharingshop.com (0.27%)</div></li>
+            <li><span class="tg t-f">Ad</span><div>judiciousspecific.pro + gremuglyji.pro (adult ad networks, random-word domains) · chaturbate.com (5.46%) outgoing · eatcells.com (20.39% — suspicious, likely ad redirect)</div></li>
+            <li><span class="tg t-c">Affiliate</span><div>landing.bangbrosnetwork.com (tiny) — BangBros/Aylo affiliate. Same affiliate relationship as Katfile had with Brazzers. Possible shared operator.</div></li>
+            <li><span class="tg t-d">Crosslink</span><div>rapidgator.net in outgoing (0.89%) — cross-promotion between platforms. katfile.com also referenced (0.017%) post-collapse.</div></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Referral ecosystem — Katfile transplant confirmed</h4>
+          <ul class="cl">
+            <li class="h">manga-zip.info (new #1) — 14.74% → 2.87M absolute visits</li>
+            <li class="h">anime-sharing.com — 12.13% → 2.36M absolute visits</li>
+            <li class="h">hentaicore.net — 8.12% → 1.58M absolute visits</li>
+            <li class="w">jpupskirts.club — 5.76% · dlraw.ac — 5.12%</li>
+            <li class="w">xidol.net — 4.98% · x-idol.net — 3.50%</li>
+            <li class="w">13dl.me — 3.13% · raw-zip.com — 3.09%</li>
+            <li class="w">javip.net — 2.83% · 3xplanet.net — 1.50%</li>
+            <li class="w">hentai-sharing.net — 0.78% · vipergirls.to — 0.68%</li>
+            <li class="w">eyny.com (#3080, Taiwan) — 0.61% → 119K visits</li>
+            <li class="nt">Multiple manga-zip.* TLD variants in referrers (manga-zip.mx, .tv, .org, .us, .ac) = the manga-zip operator has made fikper.com the preferred download host.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ADULT SIMILAR SITES — NEW SECTION -->
+<section>
+<div class="wrap">
+  <div class="sh">
+    <h2>Adult platforms from <span class="i">competitor analysis.</span></h2>
+    <p class="ss">Similarweb surfaces "similar sites" for each operator based on shared audience behaviour. Thirteen adult-adjacent platforms emerged — now with confirmed monthly traffic. Two are significantly larger than any platform in the main competitive set.</p>
+  </div>
+
+  <div class="callout red">
+    <div class="clbl">Headline finding — bunkr.cr at 71.2M visits dwarfs the competition</div>
+    <p>Bunkr.cr is adult-categorised, US-dominant, 71.2M monthly visits — larger than FileJoker and Nitroflare combined. It shares high audience affinity with Rapidgator (0.74) and appears in Terabox's similar sites too. It has received zero investigative coverage in this series so far. This is the largest unresearched adult platform in the ecosystem by a wide margin.</p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th>Domain</th><th>Monthly visits</th><th>MoM</th><th>Top country</th><th>HQ</th><th>Industry tag</th><th>Affinity sources</th><th>Read</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>bunkr.cr</strong></td><td><strong>71,199,067</strong></td><td class="r">−2.8%</td>
+          <td>🇺🇸 United States</td><td>Costa Rica</td><td>Adult</td>
+          <td class="mono">Rapidgator (0.74) · Terabox (0.48)</td>
+          <td><strong class="g">Fully researched — see operator profile above.</strong> 1.074B/yr total · SimpCity 45.6% referral dependency · No PSP (ad-only) · Hispanic referrers present (hispasexy.org 3.9M visits) · bet.br in ad outgoing</td>
+        </tr>
+        <tr>
+          <td><strong>filester.me</strong></td><td><strong>20,799,415</strong></td><td class="r">−20.3%</td>
+          <td>🇺🇸 United States</td><td>—</td><td>Software (not Adult)</td>
+          <td class="mono">Rapidgator (0.73) · 1Fichier (0.52) · Terabox (0.53)</td>
+          <td>Large but SW-tagged as Software — content type unclear</td>
+        </tr>
+        <tr>
+          <td><strong>pixhost.to</strong></td><td>7,013,386</td><td>—</td>
+          <td>🇺🇸 United States</td><td>—</td><td>Adult</td>
+          <td class="mono">FileJoker (0.61)</td>
+          <td>Image hosting layer for adult forums. Complements file hosts.</td>
+        </tr>
+        <tr>
+          <td><strong>frdl.hk</strong></td><td>6,989,023</td><td class="r">−6.5%</td>
+          <td>🇯🇵 Japan</td><td>—</td><td>Network Security</td>
+          <td class="mono">Nitroflare (0.79)</td>
+          <td>Japan top country. Likely JAV/hentai file distribution node.</td>
+        </tr>
+        <tr>
+          <td><strong>viper.to</strong></td><td>1,986,270</td><td class="g">+5.3%</td>
+          <td>🇺🇸 United States</td><td>Tonga</td><td>Adult</td>
+          <td class="mono">FileJoker (0.60)</td>
+          <td>Adult platform. Growing. Tonga registration (offshore pattern). Active referrer to FileJoker (1.4%), Rapidgator (0.26%).</td>
+        </tr>
+        <tr>
+          <td><strong>akiba-online.com</strong></td><td>1,375,660</td><td class="g">+23.5%</td>
+          <td>🇯🇵 Japan</td><td>—</td><td>Adult</td>
+          <td class="mono">Mexashare (0.62)</td>
+          <td>FileJoker's #4 referrer (8.6%). Fastest-growing platform in this set. Strong positive momentum.</td>
+        </tr>
+        <tr>
+          <td><strong>frdl.my</strong></td><td>563,259</td><td class="r">−47.7%</td>
+          <td>🇪🇬 Egypt</td><td>—</td><td>Jobs/Careers (SW mismatch)</td>
+          <td class="mono">Katfile (0.73) · Mexa.sh (0.77) · Rapidgator (0.56)</td>
+          <td>Egypt top country is anomalous for a JAV-adjacent platform. Severe traffic decline. SW industry tag doesn't match behaviour.</td>
+        </tr>
+        <tr>
+          <td><strong>wayshare.cc</strong></td><td>480,267</td><td class="g">+3.3%</td>
+          <td>🇺🇸 United States</td><td>Cocos Islands</td><td>File Sharing</td>
+          <td class="mono">Katfile (0.64)</td>
+          <td>File host in Katfile's audience cluster. Cocos Islands offshore registration.</td>
+        </tr>
+        <tr>
+          <td><strong>fikper.com</strong></td><td>349,753</td><td class="g">+8.0%</td>
+          <td>🇯🇵 Japan</td><td>—</td><td>File Sharing</td>
+          <td class="mono">Katfile (1.0) · Mexashare (0.895) · Mexa.sh (0.815)</td>
+          <td><strong class="g">Researched.</strong> Katfile audience fully transplanted — identical referral cluster. fshpay.com in outgoing (same PSP as FileJoker). BangBros affiliate link (same as Katfile had Brazzers). PSP switch to fshpay occurred July 2025 — simultaneous with FileJoker's switch to ipremium, suggesting a shared billing event. See operator profile above.</td>
+        </tr>
+        <tr>
+          <td><strong>transfaze.com</strong></td><td>255,778</td><td class="r">−15.0%</td>
+          <td>🇮🇳 India</td><td>—</td><td>Adult</td>
+          <td class="mono">Katfile (0.67)</td>
+          <td>India top country is unexpected — suggests trans content serving South Asian audience, not Japanese.</td>
+        </tr>
+        <tr>
+          <td><strong>moondl.com</strong></td><td>245,427</td><td class="g">+39.8%</td>
+          <td>🇮🇳 India</td><td>—</td><td>Adult</td>
+          <td class="mono">Katfile (0.685)</td>
+          <td>India top country and fastest-growing platform in this set (+39.8%). Possibly absorbing Katfile audience via Indian piracy channels.</td>
+        </tr>
+        <tr>
+          <td><strong>rosefile.net</strong></td><td>113,069</td><td class="g">+10.8%</td>
+          <td>🇯🇵 Japan</td><td>—</td><td>Adult</td>
+          <td class="mono">Katfile (0.848) · Mexashare (0.874) · Mexa.sh (0.783)</td>
+          <td>Japan-dominant. Growing. High affinity across the Katfile/Mexa.sh cluster — likely part of the same operator group.</td>
+        </tr>
+        <tr>
+          <td><strong>vivahentai4u.net</strong></td><td class="r">No SW data</td><td>—</td>
+          <td>—</td><td>—</td><td>—</td>
+          <td class="mono">Mexashare (0.558)</td>
+          <td>Active referrer to Mexashare (1.6%), Mexa.sh (1.1%), Katfile (0.34%). Hentai content platform confirmed via referral data.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="clbl">Observation — post-collapse traffic redistribution</div>
+    <p>Of the platforms most closely associated with Katfile/Mexa.sh in the affinity data — fikper.com, moondl.com, rosefile.net, wayshare.cc — all four are either stable or growing as of May 2026. This is consistent with Katfile's stranded audience migrating to adjacent platforms in the same operator cluster. Fikper.com (+8% MoM) and moondl.com (+40% MoM) are the clearest beneficiaries.</p>
+  </div>
+
+  <div class="callout blue">
+    <div class="clbl">What manual SW data would close the key gaps</div>
+    <p>In priority order: (1) bunkr.cr full analysis — referrals, outgoing, geo, similar sites — 71M visits entirely uninvestigated; (2) filester.me referrals and similar sites — 20M visits, Rapidgator audience overlap; (3) fikper.com referrals and outgoing — confirm Katfile succession; (4) missav.ws geography breakdown — top country is Indonesia, not Japan, which reframes the entire SEA vs Japan read; (5) animeflv.net outgoing — 54.7M visits, Mexico #1, likely reveals LATAM adult PSP stack.</p>
+  </div>
+</div>
+</section>
+
+<!-- ADULT CLIENT UNIVERSE -->
+<section class="alt">
+<div class="wrap">
+  <div class="sh">
+    <h2>The adult client <span class="i">universe.</span></h2>
+    <p class="ss">Verified traffic figures from Similarweb Accounts data (May 2026). Monthly visits are panel-modelled estimates. MoM change indicates trend direction. Geography is top-1 country by traffic share — full breakdowns available on request.</p>
+  </div>
+
+  <h4 style="margin-bottom:16px;">Tier 1 — Forum gatekeepers (whitelist authority)</h4>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Platform</th><th>Monthly visits</th><th>MoM</th><th>Top country</th><th>HQ</th><th>File hosts used</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>SimpCity</strong><br><span style="font-size:11px;color:var(--g5);">simpcity.cr</span></td>
+          <td><strong>165,766,855</strong></td><td class="r">−4.6%</td>
+          <td>🇺🇸 United States</td><td>Costa Rica</td>
+          <td class="mono">FileJoker · Rapidgator · Katfile</td>
+          <td>Creator-leak forum (OnlyFans, Patreon). Rank #131 globally. Uses file hosts as download layer for leaked content. Enormous scale — dwarfs every other forum in this dataset.</td>
+        </tr>
+        <tr>
+          <td><strong>PlanetSuzy</strong><br><span style="font-size:11px;color:var(--g5);">planetsuzy.org</span></td>
+          <td>4,465,587</td><td class="g">+16.0%</td>
+          <td>🇺🇸 United States</td><td>—</td>
+          <td class="mono">FileJoker (19.4% of FJ traffic) · Rapidgator · K2S</td>
+          <td>Largest western adult forum. Publishes the "allowed hosts" whitelist. FileJoker's #1 referrer. Growing strongly. Ecosystem gatekeeper.</td>
+        </tr>
+        <tr>
+          <td><strong>PornBB</strong><br><span style="font-size:11px;color:var(--g5);">pornbb.org</span></td>
+          <td>2,975,954</td><td class="g">+5.2%</td>
+          <td>🇺🇸 United States</td><td>—</td>
+          <td class="mono">FileJoker (13.0%) · Rapidgator</td>
+          <td>FileJoker's #2 referrer. Likely shares operator with FileJoker. Growing +5.2% MoM.</td>
+        </tr>
+        <tr>
+          <td><strong>ForumOphilia</strong><br><span style="font-size:11px;color:var(--g5);">forumophilia.com</span></td>
+          <td>2,329,844</td><td class="g">+13.1%</td>
+          <td>🇺🇸 United States</td><td>—</td>
+          <td class="mono">FileJoker (9.7%)</td>
+          <td>FileJoker's #3 referrer. Growing +13.1% MoM. Combined with PlanetSuzy and PornBB: 42% of all FileJoker traffic from these three.</td>
+        </tr>
+        <tr>
+          <td><strong>ViperGirls</strong><br><span style="font-size:11px;color:var(--g5);">vipergirls.to</span></td>
+          <td>5,065,845</td><td class="g">+6.3%</td>
+          <td>🇺🇸 United States</td><td>Tonga</td>
+          <td class="mono">FileJoker (5.6%) · Rapidgator · K2S</td>
+          <td>Major adult forum, own allowed-hosts policy. Tonga offshore reg. Growing +6.3%. Less operator-controlled than the PlanetSuzy cluster.</td>
+        </tr>
+        <tr>
+          <td><strong>NudoStar</strong><br><span style="font-size:11px;color:var(--g5);">nudostar.com</span></td>
+          <td>3,211,544</td><td class="g">+7.7%</td>
+          <td>🇺🇸 United States</td><td>—</td>
+          <td class="mono">FileJoker · Rapidgator · Katfile</td>
+          <td>Creator-leak forum (similar to SimpCity). Growing +7.7%. US-dominant. Sends traffic to multiple file hosts simultaneously.</td>
+        </tr>
+        <tr>
+          <td><strong>Vintage Erotica Forums</strong><br><span style="font-size:11px;color:var(--g5);">vintage-erotica-forum.com</span></td>
+          <td>1,327,828</td><td class="g">+4.2%</td>
+          <td>🇺🇸 United States</td><td>—</td>
+          <td class="mono">1Fichier (0.81%) · FileJoker (0.73%) · Rapidgator · Nitroflare</td>
+          <td>Most cross-platform western adult forum in the dataset — references 4 different file hosts. Growing. Confirms multi-host embedding is standard for established forums.</td>
+        </tr>
+        <tr>
+          <td><strong>Akiba-Online</strong><br><span style="font-size:11px;color:var(--g5);">akiba-online.com</span></td>
+          <td>1,375,660</td><td class="g">+23.5%</td>
+          <td>🇯🇵 Japan</td><td>—</td>
+          <td class="mono">FileJoker (8.6%) · Rapidgator</td>
+          <td>Japanese culture forum — anime, manga, JAV, idol. FileJoker's #4 referrer. Fastest-growing forum in the dataset (+23.5%). Japan gateway to western file hosting.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:28px 0 14px;">Tier 2 — JAV distribution network</h4>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Platform</th><th>Monthly visits</th><th>MoM</th><th>Top country</th><th>HQ</th><th>File hosts</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>MissAV</strong> (cluster)<br><span style="font-size:11px;color:var(--g5);">missav.ws · .ai · .live · missav123.com</span></td>
+          <td><strong>348,103,539</strong><br><span style="font-size:11px;color:var(--g5);">combined across 4 domains</span></td>
+          <td class="g">Mixed (+2–+15%)</td>
+          <td>🇮🇩 Indonesia <span style="font-size:11px;color:var(--red);">⚠</span></td>
+          <td>Samoa</td>
+          <td class="mono">Rapidgator (~9% combined)</td>
+          <td><strong>Indonesia is #1 country for missav.ws (158M visits)</strong> — not Japan. This means Southeast Asia, not Japan, is the primary consumer of JAV content via this distribution chain. Japan is #1 for .ai, .live, and .123 but not for the flagship domain. Samoa registration (offshore). Growing across multiple mirror domains.</td>
+        </tr>
+        <tr>
+          <td><strong>nJAVtv</strong><br><span style="font-size:11px;color:var(--g5);">njavtv.com</span></td>
+          <td>99,542,173</td><td class="r">−0.6%</td>
+          <td>🇯🇵 Japan</td><td>—</td>
+          <td class="mono">Rapidgator (2.5%)</td>
+          <td>99.5M monthly visits — 3rd largest client in the entire dataset. Japan-dominant. Stable. One of the largest JAV streaming platforms globally.</td>
+        </tr>
+        <tr>
+          <td><strong>SupJAV</strong><br><span style="font-size:11px;color:var(--g5);">supjav.com</span></td>
+          <td>40,644,255</td><td class="r">−2.0%</td>
+          <td>🇯🇵 Japan</td><td>—</td>
+          <td class="mono">Rapidgator (3.3%)</td>
+          <td>40.6M visits. Japan-dominant. Slight decline. Classic streaming-to-download funnel.</td>
+        </tr>
+        <tr>
+          <td><strong>JAVLibrary</strong><br><span style="font-size:11px;color:var(--g5);">javlibrary.com</span></td>
+          <td>6,176,890</td><td class="r">−1.5%</td>
+          <td>🇨🇳 China</td><td>Japan</td>
+          <td class="mono">Nitroflare (7.1%) · FileJoker (1.8%) · Rapidgator</td>
+          <td>6.2M visits. Top country = China (not Japan). Revenue $2M–$5M per SW estimate. Most cross-platform JAV index in the set.</td>
+        </tr>
+        <tr>
+          <td><strong>JAVArchive</strong><br><span style="font-size:11px;color:var(--g5);">javarchive.com</span></td>
+          <td>2,813,151</td><td class="g">+7.1%</td>
+          <td>🇯🇵 Japan</td><td>—</td>
+          <td class="mono">Mexa.sh (2.6%) · Rapidgator (1.2%)</td>
+          <td>2.8M visits. Growing +7.1%. Japan-dominant.</td>
+        </tr>
+        <tr>
+          <td><strong>JAVpop</strong><br><span style="font-size:11px;color:var(--g5);">javpop.mov · javpop.com</span></td>
+          <td>2,025,539</td><td class="r">−3.4%</td>
+          <td>🇯🇵 Japan</td><td>Japan</td>
+          <td class="mono">Rapidgator (1.1%)</td>
+          <td>2.0M visits. Japan HQ confirmed. Slight decline.</td>
+        </tr>
+        <tr>
+          <td><strong>JAVIP</strong><br><span style="font-size:11px;color:var(--g5);">javip.net</span></td>
+          <td>1,357,596</td><td class="g">+6.9%</td>
+          <td>🇯🇵 Japan</td><td>—</td>
+          <td class="mono">Mexa.sh (1.6%) · Katfile (0.9%) · Rapidgator · Nitroflare</td>
+          <td>1.4M visits. Growing +6.9%. Multi-host embedder.</td>
+        </tr>
+        <tr>
+          <td><strong>Anime-Sharing</strong><br><span style="font-size:11px;color:var(--g5);">anime-sharing.com</span></td>
+          <td>4,360,412</td><td class="g">+2.9%</td>
+          <td>🇯🇵 Japan</td><td>—</td>
+          <td class="mono">Katfile (10.1%) · Mexa.sh (18.7%) · Mexashare (52.6%)</td>
+          <td>4.4M visits. SW revenue estimate $10M–$15M. Dominant single referrer for the Katfile/Mexa.sh cluster. Growing.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:28px 0 14px;">Tier 3 — Hentai / Idol ecosystem</h4>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Platform</th><th>Monthly visits</th><th>MoM</th><th>Top country</th><th>File hosts</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Hentai-Sharing</strong><br><span style="font-size:11px;color:var(--g5);">hentai-sharing.net</span></td>
+          <td>1,890,527</td><td class="g">+4.9%</td><td>🇯🇵 Japan</td>
+          <td class="mono">Mexa.sh (5.2%) · Mexashare (3.2%) · Katfile (1.5%) · FileJoker (0.5%) · Rapidgator</td>
+          <td>Most cross-platform hentai referrer. Present across 5 file hosts.</td>
+        </tr>
+        <tr>
+          <td><strong>Hentai-Share</strong><br><span style="font-size:11px;color:var(--g5);">hentai-share.com</span></td>
+          <td>1,257,347</td><td class="g">+7.3%</td><td>🇯🇵 Japan</td>
+          <td class="mono">Mexa.sh (3.4%) · Katfile (1.4%) · Mexashare (1.1%) · Rapidgator</td>
+          <td>Growing. Sister platform to hentai-sharing.net.</td>
+        </tr>
+        <tr>
+          <td><strong>HentaiCore</strong><br><span style="font-size:11px;color:var(--g5);">hentaicore.net / .com</span></td>
+          <td>744,753</td><td class="g">+28.9%</td><td>🇯🇵 Japan</td>
+          <td class="mono">Mexa.sh (5.8%) · Katfile (3.3%) · Rapidgator (2.3%)</td>
+          <td>Fastest-growing hentai platform (+28.9%). SW contacts exist (see note). Revenue unknown.</td>
+        </tr>
+        <tr>
+          <td><strong>X-IDOL / XIdol</strong><br><span style="font-size:11px;color:var(--g5);">x-idol.net · xidol.net</span></td>
+          <td>1,192,016 + 877,309</td><td class="g">x-idol +0.9% · xidol +16.4%</td><td>🇯🇵 Japan</td>
+          <td class="mono">Mexa.sh (3.1%+3.9%) · Katfile (1.5%+2.0%) · Rapidgator (1.4%+1.6%)</td>
+          <td>Japanese idol and gravure distribution. xidol.net growing strongly +16.4%.</td>
+        </tr>
+        <tr>
+          <td><strong>JPVoyeur / JP-Voyeur</strong><br><span style="font-size:11px;color:var(--g5);">jpvoyeur.cc · jp-voyeur.net</span></td>
+          <td>1,076,921 + 63,622</td><td>jpvoyeur −8.1% · jp-voyeur <strong class="g">+1177%</strong></td><td>🇯🇵 Japan</td>
+          <td class="mono">Mexashare (3.1%) · Mexa.sh (0.89%) · Rapidgator</td>
+          <td>jp-voyeur.net's +1,177% MoM growth is the dataset's sharpest single movement — likely recovering from a temporary delisting. Voyeur content carries specific legal risk above standard adult.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:28px 0 14px;">Tier 4 — NSFW platforms, SEA adult, and adult magazines</h4>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Platform</th><th>Monthly visits</th><th>MoM</th><th>Top country</th><th>File hosts</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>NSFWPH Forums</strong><br><span style="font-size:11px;color:var(--g5);">nsfwph.org</span></td>
+          <td>4,437,313</td><td class="r">−8.4%</td><td>🇵🇭 Philippines</td>
+          <td class="mono">Terabox (3.47%)</td>
+          <td>4.4M visits. Major Filipino adult community. Philippines #1 is confirmed. Declining slightly. Confirms Terabox has significant SEA adult exposure.</td>
+        </tr>
+        <tr>
+          <td><strong>Semprot</strong><br><span style="font-size:11px;color:var(--g5);">semprot.com</span></td>
+          <td>3,935,354</td><td class="r">−8.2%</td><td>🇮🇩 Indonesia</td>
+          <td class="mono">Terabox (3.83%) · FileJoker (sub-threshold)</td>
+          <td>3.9M visits. Indonesian adult forum. SW revenue $2M–$5M. HQ listed as United States (offshore). Indonesia #1 confirmed. Declining.</td>
+        </tr>
+        <tr>
+          <td><strong>Roshy.tv</strong><br><span style="font-size:11px;color:var(--g5);">roshy.tv</span></td>
+          <td>5,049,618</td><td class="g">+0.9%</td><td>🇮🇳 India</td>
+          <td class="mono">Nitroflare (3.2%)</td>
+          <td>5.0M visits. India #1 is significant — suggests Nitroflare serves an Indian adult streaming audience not captured elsewhere in this dataset. Exclusive to Nitroflare among the platforms researched.</td>
+        </tr>
+        <tr>
+          <td><strong>Adult Magazines PDF</strong><br><span style="font-size:11px;color:var(--g5);">adultmagazinespdf.com</span></td>
+          <td>264,860</td><td class="g">+37.7%</td><td>🇳🇿 New Zealand</td>
+          <td class="mono">Nitroflare (2.7%)</td>
+          <td>264K visits but growing strongly +37.7%. New Zealand #1 is unexpected. Static adult content (PDF magazines) distinguishing Nitroflare's niche. Unique to Nitroflare.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 style="margin:28px 0 14px;">LATAM — Spanish-language film and anime platforms</h4>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Platform</th><th>Monthly visits</th><th>MoM</th><th>Top country</th><th>Content</th><th>File hosts</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>AnimeFLV</strong><br><span style="font-size:11px;color:var(--g5);">animeflv.net</span></td>
+          <td>54,744,085</td><td class="r">−6.2%</td>
+          <td>🇲🇽 Mexico</td>
+          <td>ES anime streaming</td>
+          <td class="mono">1Fichier (sub-threshold)</td>
+          <td>54.7M visits. Mexico #1. SW revenue $10M–$15M, 50–200 employees. The dominant Spanish-language anime platform for all of LATAM. Sub-threshold 1Fichier referral suggests this audience uses file hosts but AnimeFLV itself doesn't embed them directly — likely uses direct downloads or Mega/MediaFire. The LATAM anime audience that flows into file-host economics is routed through this platform.</td>
+        </tr>
+        <tr>
+          <td><strong>CineCalidad.am</strong><br><span style="font-size:11px;color:var(--g5);">cinecalidad.am</span></td>
+          <td>14,661,427</td><td class="g">+1.6%</td>
+          <td>🇨🇴 Colombia</td>
+          <td>ES film piracy</td>
+          <td class="mono">1Fichier (1.7% of refs)</td>
+          <td>14.7M visits. Colombia #1. Growing. The cinecalidad.am domain is ranked #3,084 globally — larger than the .ec and .rs variants. Key 1Fichier client from LATAM.</td>
+        </tr>
+        <tr>
+          <td><strong>CineCalidad.rs</strong><br><span style="font-size:11px;color:var(--g5);">cinecalidad.rs</span></td>
+          <td>1,980,029</td><td class="r">−31.1%</td>
+          <td>🇲🇽 Mexico</td>
+          <td>ES film piracy</td>
+          <td class="mono">1Fichier (1.3%)</td>
+          <td>2.0M visits but declining fast −31.1%. Mexico #1. Serbia HQ registration. Part of the same cinecalidad operator cluster.</td>
+        </tr>
+        <tr>
+          <td><strong>CineCalidad.ec</strong><br><span style="font-size:11px;color:var(--g5);">cinecalidad.ec</span></td>
+          <td>383,947</td><td class="r">−34.1%</td>
+          <td>🇨🇱 Chile</td>
+          <td>ES film piracy</td>
+          <td class="mono">1Fichier (1.7%)</td>
+          <td>384K visits. Chile #1. Declining −34.1%. Ecuador HQ. The cinecalidad operator appears to be migrating traffic between domain variants.</td>
+        </tr>
+        <tr>
+          <td><strong>Cuevana network</strong><br><span style="font-size:11px;color:var(--g5);">cuevana.biz · cuevana.is</span></td>
+          <td>243,855 + 140,558</td><td class="r">−30–50%</td>
+          <td>🇨🇴 Colombia / 🇲🇽 Mexico</td>
+          <td>ES streaming</td>
+          <td class="mono">1Fichier (~0.35%)</td>
+          <td>Both declining sharply. Colombia and Mexico audiences. Iceland and unknown HQ registrations. Minor 1Fichier referrers but confirm LATAM Spanish-speaking user base on 1Fichier.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout amber">
+    <div class="clbl">On contacts data quality</div>
+    <p>The Similarweb contacts pull returned 5 records for HentaiCore only — three plausibly legitimate (Daniel Kühn, Operations Manager; Chiara Iannone, Content Creator; Genie Hrovat, Graphic Design) and two clearly fabricated ("Muhammdd Voldemort, Drug Dealer" and "Alif Sparta, Oppai"). This is entirely expected: adult industry operators systematically game LinkedIn and contact enrichment scrapers with fake personas. Running contacts pulls on PlanetSuzy, PornBB, MissAV or SimpCity would return similar quality. For outreach purposes, the domain-level data is more actionable than contact-level data in this sector.</p>
+  </div>
+</div>
+</section>
+
+<!-- LATAM ASSESSMENT -->
+<section>
+<div class="wrap">
+  <div class="sh">
+    <h2>LATAM: what the data found, and <span class="i">where to look next.</span></h2>
+    <p class="ss">The adult cyberlocker ecosystem is concentrated in Japan, Western Europe and the US. LATAM is present but peripheral in this data. Here is the complete picture of what was found — and a concrete strategy for where the LATAM adult payment flow actually lives.</p>
+  </div>
+
+  <div class="callout amber">
+    <div class="clbl">What was found in the data — updated with all new sources</div>
+    <p>Four LATAM signals emerged across the full dataset. Bunkr.cr has Brazil at 2.79% (rank #905 nationally) and LATAM ~7.5% combined — the only platform in this set with meaningful Spanish-language referrers: hispasexy.org (~3.9M absolute visits) and foroparalelo.com (~1.9M), both Spanish-language communities. Bet.br appears in Bunkr's ad outgoing at 9.65% (Brazilian sports betting, though declining −73.7%). 1Fichier has LATAM via CineCalidad/Cuevana/AnimeFLV (~5% of referrals). AnimeFLV outgoing confirms mercadopago.com.ar appeared in June 2025 (single month), and no subscription PSP layer exists — AnimeFLV is ad-only. Nitroflare has Brazil 1.4%, Mexico 2.1% as audience; Rapidgator Brazil 0.64%.</p>
+  </div>
+
+  <div class="latam-grid">
+    <div class="latam-box">
+      <h3>Confirmed LATAM signals — from this dataset</h3>
+      <div class="latam-row"><span>cinecalidad.ec/.rs/.am → 1Fichier</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">~3.7% of refs</span></div>
+      <div class="latam-row"><span>topcinema.cam → 1Fichier</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">1.3%</span></div>
+      <div class="latam-row"><span>cuevana network → 1Fichier</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">~0.35%</span></div>
+      <div class="latam-row"><span>animeflv.net → 1Fichier</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">sub-threshold</span></div>
+      <div class="latam-row"><span>Brazil on filejoker.com satellite</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">4.5% (110K visits)</span></div>
+      <div class="latam-row"><span>RG: Brazil 0.64%, Mexico 0.45%</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">audience only</span></div>
+      <div class="latam-row"><span>NF: Brazil 1.4%, Mexico 2.1%</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);">audience only</span></div>
+      <p style="font-size:13px;color:var(--g7);margin-top:12px;line-height:1.6;"><strong>Assessment:</strong> LATAM users consume content distributed through this ecosystem — Japanese anime, manga, and adult content — but no LATAM-based adult operator is embedded in the file-hosting distribution layer. The payment flow from LATAM goes to Japan and Europe, not the reverse.</p>
+    </div>
+
+    <div class="latam-box" style="background:var(--g1);">
+      <h3>Where to look next — specific data strategies</h3>
+      <ul class="latam-where">
+        <li><strong>Brazilian adult content studios and cam platforms directly.</strong> Privacy.com.br, ModelHub BR, OnlyFans Brazil, Camera Quente, Webcam Brasil — these are the actual LATAM adult payment processors. Research their PSP stacks via Similarweb outgoing data, not file-host referrals. The B2C adult payment flow in Brazil is through cam networks and local studios, not file hosting.</li>
+        <li><strong>AnimeFLV outgoing confirmed: ad-only, no PSP.</strong> AnimeFLV.net outgoing data is now available. No payment processor visible — revenue is display advertising (rcdn-web.com at 2.95%, rank #359 globally) and ad redirects. MercadoPago.com.ar appeared once (June 2025 monthly data only — a single advertiser click, not a payment integration). AnimeFLV users are a free audience that converts to paid content at destination platforms (xvideos.com 1.15%, es.pornhub.com 0.50%, hentaila.tv 0.17%). The LATAM anime payment layer is not here — it is at the destination platforms.</li>
+        <li><strong>Telegram LATAM adult channels.</strong> The LATAM adult file-sharing ecosystem has largely migrated to Telegram. Brazilian Telegram groups for adult content (BR adult, conteúdo adulto, etc.) link to file hosts and direct download mirrors. This traffic doesn't show up as web referrals. Telegram-dependent operators will appear as t.me in outgoing data — Nitroflare already shows this at 36.9%. Search for LATAM-specific Telegram bot ecosystems.</li>
+        <li><strong>Brazzers/Aylo affiliate network.</strong> Katfile's outgoing includes landing.brazzersnetwork.com (2.5%). Brazzers/Aylo (formerly Mindgeek) is a major US producer with significant Brazilian audience. Their affiliate network links publishers — including LATAM publishers — to content. Tracing Brazzers affiliate publishers in Brazil would surface who is currently serving adult content to the Brazilian market and what PSPs they use.</li>
+        <li><strong>xVideos and xHamster Brazil traffic.</strong> Both platforms have enormous Brazilian audiences (Brazil is typically top-3 country for both). Their outgoing data — specifically which payment processors appear — would reveal what billing infrastructure the Brazilian adult audience actually uses when they convert to paid content. xVideos is rank ~#4 globally.</li>
+        <li><strong>Local Brazilian file hosts.</strong> BRFiles, BRUpload, PandaFiles, and similar domestic Brazilian hosting platforms exist but are not in Similarweb's panel at meaningful scale. Direct outreach or Similarweb pulls on these would reveal whether a domestic Brazilian file-hosting ecosystem parallel to the one documented here exists for Portuguese-language content.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout lime">
+    <div class="clbl">Strategic read — why LATAM doesn't appear here</div>
+    <p>The cyberlocker ecosystem documented in this report is a Japanese content distribution infrastructure that was built around JAV, hentai and manga. Its economics flow from Japan to Western Europe and the US. Brazil and LATAM consume Japanese content through this infrastructure — AnimeFLV, anime-sharing.com — but have not built parallel adult file-hosting platforms at scale. The LATAM adult payment opportunity is therefore not in file hosting. It is in cam platforms, direct-to-consumer adult studios, and Telegram-based content monetisation — none of which generate the referral traffic that file-host Similarweb data captures.</p>
+    <cite>The absence of LATAM from this dataset is itself a signal: LATAM adult content monetisation is decentralised and platform-native, not file-host-dependent.</cite>
+  </div>
+</div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="alt">
+<div class="wrap">
+  <div class="sh">
+    <h2>Side-by-side — what <span class="i">the data actually says.</span></h2>
+  </div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th>Platform</th><th>Traffic</th><th>Trend</th><th>Top geography</th><th>Card rail</th><th>Ad network</th><th>Forum concentration</th><th>Primary clients</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Rapidgator</strong></td><td>309.7M</td><td class="g">Stable</td><td>🇯🇵 Japan 44.5%</td><td class="g">Google Play + resellers</td><td>Direct affiliate only</td><td>Distributed</td><td>MissAV · JAV · anime · hentai</td></tr>
+        <tr><td><strong>1Fichier</strong></td><td>197.9M</td><td class="a">Declining −40%</td><td>🇫🇷 France (major)</td><td class="r">French bank terminated Jan 2025</td><td>None visible</td><td>Low — games/film agg.</td><td>Games piracy · film · minor adult · LATAM film</td></tr>
+        <tr><td><strong>Nitroflare</strong></td><td>56.0M</td><td class="g">Stable</td><td>🇺🇸 US 11.9% / 🇩🇪 DE 8.6%</td><td class="g">Stripe + PayPal direct</td><td>None visible</td><td>Low — sanet.st warez</td><td>Software warez · music · JAV (roshy.tv, javlibrary)</td></tr>
+        <tr><td><strong>FileJoker</strong></td><td>43.8M</td><td class="g">Stable</td><td>Forum-distributed</td><td class="a">fshpay + ipremium</td><td class="a">Traffichaus 2.8%</td><td class="r"><strong>42% — 3 forums</strong></td><td>Western adult · JAV · anime · idol</td></tr>
+        <tr><td><strong>Katfile</strong></td><td>45.7M</td><td class="r">Collapsed −94%</td><td>🇯🇵 Japan via anime-sharing</td><td class="r">No mainstream rails</td><td>Adult ad inventory</td><td>anime-sharing 10%</td><td>Anime/hentai · JAV · Brazzers affiliate</td></tr>
+        <tr><td><strong>Mexa.sh</strong></td><td>35.2M</td><td class="r">Collapsed −97%</td><td>🇯🇵 Japan via anime-sharing</td><td class="r">Crypto exchanges only</td><td>None visible</td><td>anime-sharing 18.7%</td><td>Anime/hentai · JAV · idol · probable Katfile twin</td></tr>
+        <tr><td><strong>Bunkr.cr</strong></td><td>89.6M avg</td><td class="r">Declining −37% from peak</td><td>🇺🇸 US 32.96% · No Japan</td><td class="r">None — ad-only revenue</td><td class="g">PlugRush 0.89%</td><td class="r">SimpCity 45.6%</td><td>UGC leaks · BBW · creator content · Hispasexy (Spanish LATAM referrer)</td></tr>
+        <tr><td><strong>Filester.me</strong></td><td>20.8M</td><td class="r">−20.3% MoM</td><td>🇺🇸 US dominant</td><td class="r">Unknown — no outgoing data</td><td>Unknown</td><td class="r">SimpCity 89.5%</td><td>UGC creator leaks — SimpCity ecosystem exclusively</td></tr>
+        <tr><td><strong>Fikper.com</strong></td><td>350K</td><td class="g">+8.0% MoM</td><td>🇯🇵 Japan</td><td class="a">fshpay.com (same as FileJoker)</td><td>Adult ad nets</td><td>manga-zip 14.7% · anime-sharing 12.1%</td><td>Anime/manga/hentai/JAV — Katfile audience fully transplanted</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout red" style="margin-top:8px;">
+    <div class="clbl">Fikper.com — the unresolved loose end</div>
+    <p>Affinity 1.0 with Katfile, 0.895 with Mexashare, 0.815 with Mexa.sh. Active as a sub-threshold referrer to both Katfile and Mexa.sh before their collapses. Rank #164,209 globally. The most likely candidate for either a sister platform under the same operator or the successor absorbing the Katfile/Mexa.sh stranded audience. No Similarweb deep-pull has been done on it yet.</p>
+  </div>
+</div>
+</section>
+
+<!-- IMPLICATIONS -->
+<div class="impl">
+<div class="wrap">
+  <h3>Japan at 44.5% changes the Rapidgator risk read. Traffichaus instead of TrafficStars changes FileJoker's story. 1Fichier's keywords confirm the collapse is terminal. And LATAM's absence from this data is itself the finding.</h3>
+  <p>The payment rail divergence across this set is the most actionable commercial intelligence. Nitroflare's direct Stripe and PayPal access — combined with a western-European-majority geo and non-adult-majority client base — makes it the only platform here with a coherent underwriting narrative. FileJoker's 42% traffic concentration in three forums controlled by what may be the same operator is a single-point-of-failure that defines its risk profile. 1Fichier has no recovery path: 100% branded search means every customer the bank termination has lost is gone permanently.</p>
+  <p class="pl">The LATAM adult payment opportunity is not in file hosting. It is in cam platforms, direct-to-consumer studios, and Telegram-based monetisation — the infrastructure that the Brazilian and LATAM adult market has actually built, which this dataset does not capture.</p>
+</div>
+</div>
+
+<!-- CAVEATS -->
+<section class="alt">
+<div class="wrap">
+  <div class="cav">
+    <h3>What to flag when this gets cited</h3>
+    <ul>
+      <li><strong>Traffic figures:</strong> Similarweb panel-modelled estimates, ±15% at domain level. Collapse events, forum concentration, payment-destination fingerprints, geography, and ad network data are directionally robust. Individual percentages are indicative.</li>
+      <li><strong>Operator identities:</strong> Only DStorage SAS (1Fichier) and Ultranex Ltd (Rapidgator) confirmed at registry level. FileJoker/Nitroflare/Katfile/Mexa.sh operator attributions are community-sourced or inferred. The Katfile/Mexa.sh shared-operator hypothesis remains circumstantial — though fikper.com's affinity scores add weight to it.</li>
+      <li><strong>FileJoker ad network:</strong> Traffichaus appeared at 2.8% aggregate but was concentrated in February 2026 (70.6% that month) before reverting. May indicate a test campaign rather than a core relationship. TrafficStars hypothesis is rejected by the data.</li>
+      <li><strong>Adult similar sites:</strong> Similarweb "industry" categorisation assigns Adult to domains based on audience behaviour signals. bunkr.cr (rank #287) and filester.me (rank #2,058) carry the Adult tag — their actual content policies and traffic compositions should be independently verified before citing as adult-specific platforms.</li>
+      <li><strong>1Fichier keyword data:</strong> Volume figures are Similarweb estimates, not Search Console data. The 100% branded ratio and absence of content-category non-branded keywords are confirmed signals; exact click volumes are indicative.</li>
+      <li><strong>Client identification:</strong> Referral data identifies traffic relationships, not contracts. "Client" means content-embedding partner whose link-posting generates premium conversions — a traffic relationship, not a B2B agreement.</li>
+      <li><strong>Nitroflare Stripe/PayPal:</strong> Outgoing destinations confirm routing to Stripe and PayPal checkout pages. Does not confirm a merchant account in current good standing with either processor.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<footer><div class="wrap"><div class="fs">LaFinteca · Marketing &amp; Research Office<br>Adult Cyberlocker Competitive Intelligence · Jun 2026 · Part of the MoneyPlatform Intelligence Series</div></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const labels=['Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
+new Chart(document.getElementById('mc'),{type:'line',data:{labels,datasets:[
+  {label:'Rapidgator (÷10)',data:[2493,2670,2843,2562,2663,2628,2822,2816,2357,2495,2278,2348],borderColor:'#534AB7',backgroundColor:'transparent',borderWidth:2.5,pointRadius:2,tension:.3},
+  {label:'1Fichier',data:[176,188,197,170,179,165,195,181,150,138,123,119],borderColor:'#1D9E75',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3},
+  {label:'Nitroflare',data:[45,49,47,44,46,45,48,50,43,49,47,47],borderColor:'#888780',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3},
+  {label:'FileJoker',data:[35,36,38,35,36,39,45,39,32,34,34,36],borderColor:'#BA7517',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3},
+  {label:'Katfile ↓',data:[132,117,127,38,7,6,8,6,6,4,3,3],borderColor:'#E24B4A',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3,borderDash:[5,3]},
+  {label:'Mexa.sh ↓',data:[68,72,71,61,56,8,4,3,2,2,2,2],borderColor:'#D4537E',backgroundColor:'transparent',borderWidth:2,pointRadius:2,tension:.3,borderDash:[5,3]}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}×100K visits`}}},scales:{y:{ticks:{callback:v=>v>100?v/10+'M':v+'×100K',font:{size:10}},grid:{color:'rgba(128,128,128,0.08)'}},x:{ticks:{font:{size:10},maxRotation:0},grid:{display:false}}}}});
+</script>
+</body>
+</html>
