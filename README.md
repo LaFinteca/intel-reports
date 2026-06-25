@@ -2,7 +2,7 @@
 
 Static HTML intelligence reports, each served at its own unique URL via GitHub Pages.
 
-**Live index:** https://sickdancemoves.github.io/intel-reports/
+**Live index:** https://lafinteca.github.io/intel-reports/
 
 ## How it works
 
@@ -24,7 +24,7 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
    ```
 3. Wait ~1 minute for GitHub Pages to rebuild. The report is then live at:
    ```
-   https://sickdancemoves.github.io/intel-reports/reports/dindix-competitive-q2.html
+   https://lafinteca.github.io/intel-reports/reports/dindix-competitive-q2.html
    ```
    and appears automatically on the index.
 
