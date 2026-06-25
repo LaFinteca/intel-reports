@@ -297,11 +297,19 @@
 
     const listEl = document.getElementById("list");
 
+    // Tokens that should keep specific casing instead of plain Title Case.
+    const CASE_OVERRIDES = {
+      mx: "MX", us: "US", uk: "UK", br: "BR", eu: "EU", latam: "LATAM",
+      igaming: "iGaming", okto: "OKTO", kyc: "KYC", aml: "AML", psp: "PSP",
+      ai: "AI", api: "API", mro: "MRO", q1: "Q1", q2: "Q2", q3: "Q3", q4: "Q4",
+    };
     function prettify(name) {
       return name
         .replace(/\.html?$/i, "")
-        .replace(/[-_]+/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase())
+        .split(/[-_\s]+/)
+        .filter(Boolean)
+        .map((w) => CASE_OVERRIDES[w.toLowerCase()] || (w.charAt(0).toUpperCase() + w.slice(1)))
+        .join(" ")
         .trim();
     }
     function fmtSize(bytes) {

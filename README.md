@@ -8,7 +8,8 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
 
 - [Adult Cyberlocker Research](https://lafinteca.github.io/intel-reports/reports/adult-cyberlocker-research.html)
 - [Entertainment Investment Firms](https://lafinteca.github.io/intel-reports/reports/entertainment-investment-firms.html)
-- [Okto Brazil Intel Brief](https://lafinteca.github.io/intel-reports/reports/okto-brazil-intel-brief.html)
+- [MX iGaming Prospect Brief](https://lafinteca.github.io/intel-reports/reports/mx-igaming-prospect-brief.html)
+- [OKTO Brazil Intel Brief](https://lafinteca.github.io/intel-reports/reports/okto-brazil-intel-brief.html)
 - [Polymarket Analysis](https://lafinteca.github.io/intel-reports/reports/polymarket-analysis.html)
 
 > This list is a manual mirror — the [live index](https://lafinteca.github.io/intel-reports/) auto-updates, so re-add a line here whenever you add a report (or skip it and rely on the live page).
