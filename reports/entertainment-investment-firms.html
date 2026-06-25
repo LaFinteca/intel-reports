@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entertainment Capital — Investment Firm Intelligence Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #000000;
+    --bg-elevated: #0A0A0A;
+    --bg-card: #131313;
+    --bg-card-hover: #1A1A1A;
+    --border: #1F1F1F;
+    --border-strong: #2A2A2A;
+    --text: #F2F2F2;
+    --text-secondary: #C9C9C9;
+    --text-muted: #8A8A8A;
+    --text-dim: #555555;
+    --purple: #C3ABFF;
+    --purple-dim: #6F5BAA;
+    --lime: #BFFE43;
+    --warn: #FF6B6B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 6rem;
+  }
+
+  /* LOGO */
+  .logo-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
+  .lf-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .lf-logo-img {
+    height: 22px;
+    width: auto;
+    display: block;
+  }
+  .lf-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--border-strong);
+  }
+  .lf-division {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .doc-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+  .doc-meta div + div { margin-top: 0.3rem; }
+
+  /* HEADER */
+  .header {
+    margin-bottom: 4rem;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--lime);
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 3.4rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--purple);
+  }
+  .deck {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 760px;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .meta-bar {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2.5rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    flex-wrap: wrap;
+  }
+  .meta-bar span strong {
+    display: block;
+    color: var(--text);
+    font-weight: 500;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    margin-bottom: 5rem;
+  }
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--purple);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    margin-bottom: 1.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 1.6rem 0 0.7rem;
+    letter-spacing: -0.005em;
+  }
+  p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+  p strong { color: #FFFFFF; font-weight: 500; }
+  em.lime { color: var(--lime); font-style: normal; font-weight: 500; }
+  em.purple { color: var(--purple); font-style: normal; font-weight: 500; }
+
+  /* TL;DR BLOCK */
+  .tldr {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--lime);
+    border-radius: 4px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 2rem;
+  }
+  .tldr p { margin-bottom: 0.8rem; }
+  .tldr p:last-child { margin-bottom: 0; }
+
+  /* HEADLINE STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem 1.2rem;
+  }
+  .stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--lime);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+  }
+
+  /* KEY FINDINGS NUMBERED */
+  .findings { display: flex; flex-direction: column; gap: 0.8rem; }
+  .finding {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 1.4rem 1.6rem;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1.2rem;
+    align-items: start;
+  }
+  .finding-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.2rem;
+    color: var(--purple);
+    line-height: 1;
+    font-style: italic;
+  }
+  .finding-body { color: var(--text-secondary); font-size: 0.94rem; line-height: 1.6; font-weight: 300; }
+  .finding-body strong { color: #FFF; font-weight: 500; }
+
+  /* FIRM CARDS — Tier 1 */
+  .firm-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.4rem;
+    position: relative;
+  }
+  .firm-card.warmest {
+    border-left: 2px solid var(--lime);
+    background: linear-gradient(180deg, rgba(191,254,67,0.03) 0%, var(--bg-card) 100%);
+  }
+  .firm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .firm-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--purple);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.3rem;
+  }
+  .firm-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .firm-name .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    background: var(--lime);
+    color: #000;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .firm-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .tag.purple { color: var(--purple); border-color: var(--purple-dim); }
+  .tag.lime { color: var(--lime); border-color: rgba(191,254,67,0.3); }
+
+  .firm-block {
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .firm-block:first-of-type {
+    border-top: none;
+    padding-top: 0.6rem;
+  }
+  .block-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .firm-block p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.6rem;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* PEOPLE BLOCKS */
+  .person {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .person-name {
+    color: #FFF;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+  .person-title {
+    color: var(--purple);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .person-context {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .person-context em.quote {
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ANGLE PILL */
+  .angle {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    background: rgba(195, 171, 255, 0.04);
+    border-left: 2px solid var(--purple);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+  .angle strong { color: var(--purple); font-weight: 500; }
+
+  /* TIER 2/3 COMPACT */
+  .tier-compact {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 0.7rem;
+  }
+  .tier-compact .firm-header {
+    margin-bottom: 0.4rem;
+  }
+  .tier-compact .firm-name {
+    font-size: 1.15rem;
+  }
+  .tier-compact p {
+    font-size: 0.87rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .tier-compact .compact-people {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--purple);
+    letter-spacing: 0.04em;
+    margin-top: 0.5rem;
+  }
+  .tier-compact .compact-angle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .tier-compact .compact-angle strong { color: var(--lime); font-weight: 500; }
+
+  /* OUTREACH SEQUENCE */
+  .outreach-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .outreach-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 1.4rem;
+    align-items: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.3rem 1.5rem;
+  }
+  .outreach-step:first-child {
+    border-left: 2px solid var(--lime);
+  }
+  .step-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.6rem;
+    color: var(--purple);
+    line-height: 1;
+    font-style: italic;
+  }
+  .step-content .step-firm {
+    font-weight: 600;
+    color: #FFF;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+  .step-content .step-body {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .step-content .step-body strong { color: #FFF; font-weight: 500; }
+
+  /* THRESHOLD LIST */
+  .thresholds {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1.8rem;
+    margin-top: 1.5rem;
+  }
+  .thresholds h3 {
+    margin-top: 0;
+    color: var(--purple);
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .threshold-item {
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0.8rem;
+    align-items: start;
+  }
+  .threshold-item:last-child { border-bottom: none; }
+  .threshold-item .arrow {
+    color: var(--lime);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+  .threshold-item strong { color: #FFF; font-weight: 500; }
+
+  /* CAVEATS */
+  .caveat-list {
+    list-style: none;
+    padding: 0;
+  }
+  .caveat-list li {
+    padding: 0.8rem 0 0.8rem 1.6rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    position: relative;
+    font-weight: 300;
+  }
+  .caveat-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--purple);
+  }
+  .caveat-list li:last-child { border-bottom: none; }
+  .caveat-list li strong { color: #FFF; font-weight: 500; }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer .right { text-align: right; }
+  .footer strong { color: var(--purple); }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .container { padding: 2rem 1.2rem 4rem; }
+    h1 { font-size: 2.2rem; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .firm-card { padding: 1.3rem 1.2rem; }
+    .outreach-step, .finding { grid-template-columns: 1fr; gap: 0.6rem; }
+    .meta-bar { gap: 1.5rem; }
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .firm-card, .stat, .finding, .tier-compact, .outreach-step, .thresholds, .tldr { background: #fafafa; border-color: #ddd; }
+    .firm-card.warmest { background: #f4fff0; }
+    .stat-value, h1 em { color: #5B3FBF; }
+    h1, h2, .firm-name, .step-content .step-firm, .person-name, .stat-label, .section-tag { color: #000; }
+    p, .firm-block p, .step-body, .caveat-list li, .person-context, .finding-body, .tier-compact p { color: #333; }
+    .lf-logo .bracket, .person-title, .compact-people, .lf-division { color: #5B3FBF; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LOGO BAR -->
+  <div class="logo-bar">
+    <div class="lf-logo-group">
+      <img class="lf-logo-img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjYiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAyNjYgMzIiIGZpbGw9Im5vbmUiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMCAxMy42NzgzVjE3LjM3NUwxNy4zMjYgMjUuNjgwN1YyMS41MDYyTDQuODYxMDUgMTUuNTM3M0wxNy4zMjYgOS44MTQ0M1Y1LjY0NjEzTDAgMTMuNjc4M1oiIGZpbGw9IiNDM0FCRkYiPjwvcGF0aD48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTI2NiAxOC40NTYxVjE0Ljc1OTRMMjQ4LjY3NCA2LjQ1Mzc1VjEwLjYyOEwyNjEuMTM4IDE2LjU5NzFMMjQ4LjY3NCAyMi4zMlYyNi40ODgzTDI2NiAxOC40NTYxWiIgZmlsbD0iI0MzQUJGRiI+PC9wYXRoPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNDkuNjQwNiAyMS4zNzAyVjI3LjgxMzdMNTMuODE4IDMySDYyLjU0N0w2Ni4xMjkyIDI4LjU2NjNWMzJINzAuNTQ3MlYxMi4wNzE3TDY1Ljg5ODcgNy40MTMxOEg1NC40Nzc1TDQ5LjgyOSAxMi4wNzE3VjE1Ljc1OTJINTQuMzg4NFYxMy41MTE5TDU2LjQyNjQgMTEuNTEwNUg2My45OTY4TDY2LjAzNSAxMy41MTE5VjE3LjIzMzFINTMuODE5OUw0OS42NDA2IDIxLjM3MDJaTTYxLjQwODcgMjcuOTAyN0w2Ni4wMzUgMjMuNDQzNFYyMS4zMzA0SDU1Ljc2NjNMNTQuMjAwMSAyMi44NjA0VjI2LjM3MjZMNTUuNzY2MyAyNy45MDI3SDYxLjQwODdaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPjxwYXRoIGQ9Ik05OC45NDg3IDAuODM0NjcxSDc3LjA1MjdWMzJIODEuNzA2NFYxNy4yNzAySDk2LjY4NzJWMTIuOTg0MUg4MS43MDY0VjUuMTIwNDhIOTguOTQ4N1YwLjgzNDY3MVoiIGZpbGw9IndoaXRlIj48L3BhdGg+PHBhdGggZD0iTTEwMi41NzQgMS43MzEyOFY0LjI1NDE0TDEwNC4zMDIgNS45ODUzNUgxMDYuODE5TDEwOC41NDcgNC4yNTQxNFYxLjczMTI4TDEwNi44MTkgLTAuMDAwMjA5ODA4SDEwNC4zMDJMMTAyLjU3NCAxLjczMTI4WiIgZmlsbD0id2hpdGUiPjwvcGF0aD48cGF0aCBkPSJNMTA3Ljg0MSAxMi45ODQxSDEwMy4yODFWMzJIMTA3Ljg0MVYxMi45ODQxWiIgZmlsbD0id2hpdGUiPjwvcGF0aD48cGF0aCBkPSJNMTE4Ljc3NiA3LjQxMzE4SDExNC4zMTFWMzJIMTE4Ljg3VjE3LjE0MzhMMTI0LjM5NyAxMS42MDQ2SDEyOC43MTRMMTMwLjc1MiAxMy42MDYzVjMySDEzNS4zMTFWMTIuMDcxN0wxMzAuNjYzIDcuNDEzMThIMTIzLjAxTDExOC43NzYgMTEuNjU3VjcuNDEzMThaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPjxwYXRoIGQ9Ik0xNDQuNTY3IDExLjU1NzVMMTQxLjgwOSAyNy4xNzU4TDE0NS44MDIgMzJIMTUyLjg2OUwxNTMuNTY3IDI3Ljg1NTZIMTQ4LjI0MUwxNDYuNjI1IDI1Ljg4MjlMMTQ5LjE0MiAxMS41NTc1SDE1Ni40NDlMMTU3LjE0OSA3LjQxMzE4SDE0OS44NzJMMTUxLjIzOCAwLjg0MDU4MkgxNDYuNzQ5TDE0NS4zODMgNy40MTMxOEgxNDEuMDMyTDE0MC4zMzIgMTEuNTU3NUgxNDQuNTY3WiIgZmlsbD0id2hpdGUiPjwvcGF0aD48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE2MC4zMjYgMTIuMDcxN1YyNy4zNDE1TDE2NC45NzQgMzJIMTc3LjI0NEwxODEuODkyIDI3LjM0MTVWMjMuNzAxSDE3Ny4zMzNWMjUuODA2OEwxNzUuMjk2IDI3LjgwODNIMTY2LjkyNEwxNjQuODg1IDI1LjgwNjhWMjEuMjgzMUgxODEuOTRWMTIuMDcwMUwxNzcuMjQyIDcuNDEzMThIMTY0Ljk3NEwxNjAuMzI2IDEyLjA3MTdaTTE3NS4zNDIgMTEuNjA0NkwxNzcuMzgxIDEzLjYwNjNWMTcuMTg2SDE2NC44ODVWMTMuNjA2M0wxNjYuOTI0IDExLjYwNDZIMTc1LjM0MloiIGZpbGw9IndoaXRlIj48L3BhdGg+PHBhdGggZD0iTTE4Ny44NzMgMTIuMDcxN1YyNy4zNDE1TDE5Mi41MjMgMzJIMjA0LjI3M0wyMDguOTIxIDI3LjM0MTVWMjMuNzAxSDIwNC4zNjJWMjUuODA2OEwyMDIuMzI1IDI3LjgwODNIMTk0LjQ3MUwxOTIuNDMyIDI1LjgwNjhWMTMuNjA2M0wxOTQuNDcxIDExLjYwNDZIMjAyLjMyNUwyMDQuMzYyIDEzLjYwNjNWMTUuNzEyMUgyMDguOTIxVjEyLjA3MTdMMjA0LjI3MyA3LjQxMzE4SDE5Mi41MjNMMTg3Ljg3MyAxMi4wNzE3WiIgZmlsbD0id2hpdGUiPjwvcGF0aD48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTIxNC45MzggMjEuMzcwMlYyNy44MTM3TDIxOS4xMTUgMzJIMjI3Ljg0NEwyMzEuNDI2IDI4LjU2NjNWMzJIMjM1Ljg0M1YxMi4wNzE3TDIzMS4xOTYgNy40MTMxOEgyMTkuNzczTDIxNS4xMjUgMTIuMDcxN1YxNS43NTkySDIxOS42ODRWMTMuNTExOUwyMjEuNzI0IDExLjUxMDVIMjI5LjI5M0wyMzEuMzMyIDEzLjUxMTlWMTcuMjMzMUgyMTkuMTE1TDIxNC45MzggMjEuMzcwMlpNMjI2LjcwNiAyNy45MDI3TDIzMS4zMzIgMjMuNDQzNFYyMS4zMzA0SDIyMS4wNjNMMjE5LjQ5NiAyMi44NjA0VjI2LjM3MjZMMjIxLjA2MyAyNy45MDI3SDIyNi43MDZaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPjxwYXRoIGQ9Ik0zNC45NzM5IDAuODA2MzM1SDMwLjMyMDNWMzEuOTcxN0g0My4xNTg1VjI3LjczMjlIMzQuOTczOVYwLjgwNjMzNVoiIGZpbGw9IndoaXRlIj48L3BhdGg+PC9zdmc+IA==" alt="LaFinteca" />
+      <div class="lf-divider"></div>
+      <span class="lf-division">Marketing &amp; Research Office</span>
+    </div>
+    <div class="doc-meta">
+      <div>v1.0 · JUNE 2026</div>
+      <div>PREPARED FOR D. RUKIN</div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="eyebrow">Investment Firm Intelligence Report</div>
+    <h1>Who's funding <em>B2C digital entertainment</em>, and how to reach them.</h1>
+    <p class="deck">A structured map of the ~30 investment firms most active in pure-play B2C digital entertainment between January 2018 and June 2026, with 1–2 named partner-level contacts per firm and an outreach sequence calibrated for LaFinteca's dual goal: capital raise plus LATAM/MENA partnership intelligence.</p>
+    <div class="meta-bar">
+      <span>UNIT OF ANALYSIS<strong>The investment firm</strong></span>
+      <span>WINDOW<strong>Jan 2018 – Jun 2026</strong></span>
+      <span>FIRMS PROFILED<strong>30 across 3 tiers</strong></span>
+      <span>NAMED CONTACTS<strong>45+ partner-level</strong></span>
+    </div>
+  </header>
+
+  <!-- TL;DR -->
+  <section>
+    <div class="section-tag">01 · TL;DR</div>
+    <h2>The short version</h2>
+    <div class="tldr">
+      <p>Capital into B2C digital entertainment 2018–2026 was dominated by two cohorts. <strong>Sovereign wealth</strong> — led by Saudi PIF, with SAR142B ($37.8B) committed to gaming over a decade announced Sept 29, 2022 — and <strong>tech-crossover growth funds</strong> (Coatue, Tiger Global, General Atlantic). PE buyout shops (Silver Lake, KKR, Apollo, RedBird) concentrated on large media/IP take-privates.</p>
+      <p>For LaFinteca's dual goal, the warmest, highest-fit targets are <em class="lime">General Atlantic</em> (Martín Escobari / Luiz Ribeiro — São Paulo office, dLocal/Clip/XP payments adjacency), <em class="lime">Coatue</em> (Nubank/Brex/Bitso fintech track record), and <em class="lime">PIF's MENA vehicles</em> (DAZN MENA, Shahid — operators scaling in payments-underserved markets).</p>
+      <p><strong>Start with General Atlantic.</strong> It is the only top-tier entertainment investor with a dedicated LATAM leadership team, a São Paulo office, and direct payments-sector portfolio adjacency.</p>
+    </div>
+  </section>
+
+  <!-- HEADLINE STATS -->
+  <section>
+    <div class="section-tag">02 · Headline metrics</div>
+    <h2>What's in the dataset</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-value">30</div>
+        <div class="stat-label">Firms profiled across 3 tiers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">$55B</div>
+        <div class="stat-label">Largest single deal — EA take-private (PIF/Silver Lake/Affinity)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">$37.8B</div>
+        <div class="stat-label">Saudi PIF's stated 10-year gaming commitment</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">7</div>
+        <div class="stat-label">Recommended outreach steps for Dima</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section>
+    <div class="section-tag">03 · Key findings</div>
+    <h2>Five things the data makes obvious</h2>
+    <div class="findings">
+      <div class="finding">
+        <div class="finding-num">01</div>
+        <div class="finding-body"><strong>Concentration is extreme.</strong> The top 10 firms account for the overwhelming majority of disclosed entertainment capital, driven by a handful of mega-deals: the $55B EA take-private (PIF / Silver Lake / Affinity, Sept 2025) — "the largest all-cash sponsor take-private investment in history"; Silver Lake's $13B-equity / $25B-EV Endeavor take-private (closed March 2025) — "the largest ever in the media and entertainment sector"; and the $8.4B Skydance–Paramount merger (closed Aug 2025) carrying RedBird's $2B equity.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">02</div>
+        <div class="finding-body"><strong>Firm types split cleanly.</strong> Sovereign wealth (PIF, Mubadala, GIC, Temasek, QIA) and PE buyout (Silver Lake, KKR, Apollo, RedBird, Providence) dominate by dollars; VCs (a16z, Lightspeed, Makers Fund) dominate by deal count in gaming and creator economy.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">03</div>
+        <div class="finding-body"><strong>Most aggressive players:</strong> PIF / Savvy Games Group, Tiger Global, Coatue, Silver Lake. These four account for an outsized share of entertainment dollars deployed in the period.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">04</div>
+        <div class="finding-body"><strong>LATAM/MENA/India adjacency exists but is concentrated.</strong> General Atlantic (Brazil), Tiger Global (Nubank/Bitso), Coatue (Nubank/Bitso), SoftBank LATAM, PIF/Mubadala (MENA + Mubadala's Rio de Janeiro PE office), Reliance/ByteDance/Naver/Kakao (India/Asia). Most other firms are US/EU-only.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-num">05</div>
+        <div class="finding-body"><strong>Fintech/payments adjacency is the warmest path.</strong> General Atlantic (dLocal, Clip), Coatue (Brex, Nubank, Bitso), Tiger Global (Bitso, Nubank), Access Industries (Chime), SoftBank LATAM (Clip, Ualá, Nubank). These firms have already validated the LATAM payments thesis through portfolio bets.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIER 1 -->
+  <section>
+    <div class="section-tag">04 · Tier 1 — deepest treatment</div>
+    <h2>The ten firms that matter most</h2>
+    <p>Highest deployment in B2C digital entertainment, strongest thesis, and most receptive to LaFinteca's combination of fintech infrastructure and LATAM/MENA positioning. These get full profiles with named contacts and outreach angle.</p>
+
+    <!-- FIRM 1: PIF -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 01 · TIER 1</div>
+          <div class="firm-name">Saudi Public Investment Fund <span style="color:var(--text-muted); font-size:1rem;">(PIF / Savvy Games / SURJ)</span></div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Sovereign wealth</span>
+          <span class="tag">Riyadh</span>
+          <span class="tag">~$940B–$1.15T AUM</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>Chaired by Yasir Al-Rumayyan, reporting to Crown Prince Mohammed bin Salman. Gaming runs through <strong>Savvy Games Group</strong> (CEO Brian Ward), backed by <strong>SAR142B ($37.8B) committed over the following decade</strong> (Saudi Press Agency, Sept 29, 2022): ~$13.3B to acquire/develop a leading games publisher, $18.7B for minority stakes, $5.3B for mature partners, $533M for industry disruptors — the largest single sovereign commitment to gaming in history. Sports/entertainment runs through <strong>SURJ Sports Investment</strong> (CEO Danny Townsend).</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Savvy acquired Scopely ($4.9B, 2023) and ESL FACEIT Group; agreed via Scopely to acquire Niantic's games business (~$3.5B, 2025); $1B into Embracer (2022, partly unwound). Holds Nintendo, Take-Two and EA stakes (being consolidated into Savvy). The <strong>$55B EA take-private</strong> by PIF / Silver Lake / Affinity Partners (Jared Kushner's firm) was announced Sept 29, 2025 at $210/share (25% premium), funded by ~$36B equity + $20B JPMorgan debt; shareholders approved Dec 22, 2025. <strong>SURJ took a ~$1B stake in DAZN</strong> (Feb 17, 2025; reported ~10%, with FT noting under 5% with roughly half directed to the JV), establishing <strong>DAZN MENA</strong>. PIF separately acquired 54% of MBC Group (~$2B), owner of streaming platform Shahid.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Yasir Al-Rumayyan</div>
+          <div class="person-title">GOVERNOR · PIF</div>
+          <div class="person-context">Entry point only at mega-scale; do not lead with him.</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Danny Townsend</div>
+          <div class="person-title">CEO · SURJ SPORTS INVESTMENT</div>
+          <div class="person-context">Australian, ex-Aston Villa / A-Leagues. The realistic operational entry point. On the DAZN deal he said: <em class="quote">"SURJ supports the leadership of DAZN, and our partnership will accelerate the growth of DAZN."</em> SURJ's mandate explicitly covers broadcasting, digital platforms, and fan engagement across MENA.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> BOTH — but primarily partnership intelligence. DAZN MENA and Shahid are entertainment operators scaling in a payments-underserved region. Receptivity signal: any DAZN MENA / Shahid push into Latin America or cross-border subscription monetization.</div>
+    </div>
+
+    <!-- FIRM 2: GA WARMEST -->
+    <div class="firm-card warmest">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 02 · TIER 1</div>
+          <div class="firm-name">General Atlantic <span class="badge">★ WARMEST FIT</span></div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag lime">Growth equity</span>
+          <span class="tag">NYC · São Paulo</span>
+          <span class="tag">~$114B AUM</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>São Paulo office opened in 2000. AUM ~$114B (June 30, 2025). Generalist growth investor with strong consumer/media and fintech exposure. The only top-tier entertainment investor with a dedicated LATAM leadership team.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p><strong>Led a strategic minority investment in Brazil's LiveMode</strong> (announced April 23, 2024, with XP Private Equity) — a sports-media rights manager (CazéTV/Casimiro). On the deal, GA's Luiz Ribeiro said: <em class="quote">"The Brazilian sports industry is reaching a critical inflection point. LiveMode is well-positioned at the crux of innovation and impact to build a leading multi-asset sports rights manager."</em> Fintech/payments portfolio: dLocal, Clip (participated in Clip's $100M round, June 2024), XP, Gympass, Hotmart, QuintoAndar.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Martín Escobari</div>
+          <div class="person-title">CO-PRESIDENT · HEAD OF GLOBAL GROWTH EQUITY</div>
+          <div class="person-context">Chairman of the Global Growth Equity Investment Committee. Bolivia-born, Brazil-raised; splits time NY/São Paulo. Board member of dLocal, XP and Arco. The single best-fit point of contact in this entire report.</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Luiz Ribeiro</div>
+          <div class="person-title">MANAGING DIRECTOR · CO-HEAD OF BRAZIL</div>
+          <div class="person-context">Named voice on the LiveMode deal. Operational point of contact for São Paulo-led conversations.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> BOTH — strongest combined capital-raise + partnership target. Escobari is a payments insider (dLocal board seat). Receptivity signal: a GA portfolio company (LiveMode, Hotmart) needing LATAM B2B payment rails. <strong>Best path:</strong> warm intro via the dLocal or XP network.</div>
+    </div>
+
+    <!-- FIRM 3: COATUE -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 03 · TIER 1</div>
+          <div class="firm-name">Coatue Management</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Crossover hedge fund</span>
+          <span class="tag">NYC</span>
+          <span class="tag">~$92.7B AUM</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>Tech-focused crossover platform with offices in Menlo Park, London, Shanghai, Hong Kong. Founded 1999 by Philippe Laffont (a "Tiger Cub"). Regulatory AUM ~$92.7B (Form ADV, May 2026). Thomas Laffont leads private equity.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Entertainment/consumer crossover — Spotify (public holding), Epic Games — plus deep fintech adjacency: Nubank, Brex, and <strong>co-led Bitso's $250M Series C at a $2.2B valuation</strong> (announced May 5, 2021, alongside Tiger Global). Coatue GP Michael Gilroy said at the time: <em class="quote">"Bitso…is the first fully scaled compliance solution that enables consumers across Latin America to access the crypto economy."</em></p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Michael Gilroy</div>
+          <div class="person-title">GENERAL PARTNER · FINTECH</div>
+          <div class="person-context">Led Bitso; natural fintech entry point. Best opener for a LATAM payments thesis.</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Dan Rose</div>
+          <div class="person-title">ENTERTAINMENT &amp; SPORTS · CONSUMER</div>
+          <div class="person-context">Ex-Amazon (Kindle), ex-Facebook (led Spotify/Netflix partnerships). The entertainment bridge if positioning LaFinteca as creator/streaming infrastructure.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> BOTH — strong capital-raise fit given the fintech track record. Receptivity signal: a Coatue consumer/entertainment portfolio company entering LATAM.</div>
+    </div>
+
+    <!-- FIRM 4: SILVER LAKE -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 04 · TIER 1</div>
+          <div class="firm-name">Silver Lake</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Tech-focused PE</span>
+          <span class="tag">Menlo Park · NYC</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>One of the largest tech buyout platforms globally. Co-CEO Egon Durban is the lead dealmaker on media/entertainment.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p><strong>Took Endeavor private</strong> at $13B equity / $25B consolidated enterprise value ($27.50/share, 55% premium), completed March 24, 2025 — per Silver Lake, <em class="quote">"the largest private equity sponsor public-to-private investment transaction in over a decade, and the largest ever in the media and entertainment sector"</em> (co-investors Mubadala, DFO, CPP Investments). Holds TKO (UFC/WWE), Madison Square Garden, City Football Group, New Zealand Rugby. Partnered with PIF on the $55B EA take-private; backed Patrick Whitesell's new sports/media platform.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Egon Durban</div>
+          <div class="person-title">CO-CEO · MANAGING PARTNER</div>
+          <div class="person-context">The entertainment/media dealmaker. Co-investor relationship with Mubadala provides MENA connectivity.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> Partnership intelligence primarily. Silver Lake writes very large checks; LaFinteca is early for a direct raise. Mubadala overlap = MENA bridge.</div>
+    </div>
+
+    <!-- FIRM 5: REDBIRD -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 05 · TIER 1</div>
+          <div class="firm-name">RedBird Capital Partners</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Private investment</span>
+          <span class="tag">NYC</span>
+          <span class="tag">&gt;$14B AUM</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>NYC-based across sports, media, entertainment and financial services. Founded 2014 by Gerry Cardinale after two decades at Goldman Sachs.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p><strong>$2B into the $8.4B Skydance–Paramount merger</strong> (closed Aug 7, 2025) — the largest PE investment in a Hollywood studio in history; per Fortune/SEC, RedBird holds 22.5% of voting rights while David Ellison holds 50% and Larry Ellison 27.5%. Also AC Milan (€1.2B, 2022); the All3Media–Banijay merger; Fenway Sports Group; Artists Equity (with Affleck/Damon); the United Football League.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Gerry Cardinale</div>
+          <div class="person-title">FOUNDER · MANAGING PARTNER · CIO</div>
+          <div class="person-context">The dealmaker behind every major RedBird entertainment position. Strategic, not transactional, conversations.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> Partnership intelligence. IP-platform thesis plus Paramount control = entertainment operators at scale; financial-services vertical adds fintech adjacency.</div>
+    </div>
+
+    <!-- FIRM 6: A16Z -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 06 · TIER 1</div>
+          <div class="firm-name">Andreessen Horowitz (a16z)</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Venture capital</span>
+          <span class="tag">Menlo Park</span>
+          <span class="tag">&gt;$1.2B in dedicated games funds</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p><strong>Games Fund One</strong> ($600M, May 2022) + <strong>Games Fund Two</strong> ($600M, April 16, 2024) = &gt;$1.2B dedicated games AUM, part of a $7.2B 2024 raise.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Gaming and AI-x-entertainment deals — Snapser, Promise (generative-AI film studio), Series AI; the speedrun accelerator; Substack (media subscriptions).</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Andrew Chen</div>
+          <div class="person-title">GENERAL PARTNER · GAMES / CONSUMER / AR-VR</div>
+          <div class="person-context">Ex-Uber rider growth. LinkedIn: linkedin.com/in/andrewchen</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Jonathan Lai</div>
+          <div class="person-title">GENERAL PARTNER · GAMES LEAD</div>
+          <div class="person-context">Ex-Riot / Tencent. X: @Tocelot</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> Capital raise (if LaFinteca frames itself as creator/entertainment payments infrastructure) and partnership. No LATAM games practice — warmer on thesis than geography.</div>
+    </div>
+
+    <!-- FIRM 7: TIGER GLOBAL -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 07 · TIER 1</div>
+          <div class="firm-name">Tiger Global Management</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Crossover growth / hedge</span>
+          <span class="tag">NYC</span>
+          <span class="tag">~$69.6B AUM</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>Crossover growth / hedge fund. AUM ~$69.6B (March 2025). Latest venture fund PIP 16 = $2.2B (2024, half its $6B target).</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Heavy LATAM fintech (Nubank; co-led Bitso's $250M Series C 2021); entertainment via Roblox and others. <em class="purple">Caveat:</em> PIP 15 (2021 vintage) carried paper losses &gt;15% as of mid-2024 (CalSTRS data).</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Chase Coleman</div>
+          <div class="person-title">FOUNDER · SOLE DECISION-MAKER</div>
+          <div class="person-context">Scott Shleifer stepped down as Head of Private Investing (Jan 1, 2024; Senior Advisor); John Curtius departed in 2022 (founded Cedar Investment Management). PE investment committee includes COO Eric Lane, Evan Feinberg and Griffin Schroeder. <strong>No current dedicated LATAM partner.</strong></div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> Capital raise — strong LATAM fintech DNA but leadership in flux. Receptivity signal: resumed LATAM deployment in a PIP 17 raise.</div>
+    </div>
+
+    <!-- FIRM 8: KKR -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 08 · TIER 1</div>
+          <div class="firm-name">KKR</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Global PE</span>
+          <span class="tag">NYC</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>Global PE with a dedicated content-oriented media investing platform.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Epic Games (part of the $1.25B 2018 round), Skydance Media ($400M, 2022), Simon &amp; Schuster ($1.62B, 2023), BMG, RBmedia, Leonine, Mediawan, Artlist, UFC; Jio Platforms (India).</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Ted Oberwager</div>
+          <div class="person-title">PARTNER · GEMS VERTICAL (AMERICAS PE)</div>
+          <div class="person-context">Leads Gaming, Entertainment, Media &amp; Sports verticals. Joined 2008.</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Richard Sarnoff</div>
+          <div class="person-title">CHAIRMAN · MEDIA, ENTERTAINMENT &amp; EDUCATION (AMERICAS PE)</div>
+          <div class="person-context">Ex-Bertelsmann / Random House. Strategic gravitas.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> Partnership intelligence. Jio Platforms = India adjacency. No direct LATAM in the GEMS vertical.</div>
+    </div>
+
+    <!-- FIRM 9: ACCESS -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 09 · TIER 1</div>
+          <div class="firm-name">Access Industries <span style="color:var(--text-muted); font-size:1rem;">(Len Blavatnik)</span></div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Family office</span>
+          <span class="tag">NYC · London · Mill Valley</span>
+          <span class="tag">&gt;$35B portfolio</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>Founded 1986 by Len Blavatnik. Explicitly invests across the US, Europe, Israel <strong>and Latin America</strong>.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Owns <strong>Warner Music Group</strong>, a majority of <strong>DAZN</strong> (which acquired Foxtel for AU$3.4B, Jan 2025), and <strong>Deezer</strong>; finances A24; backs creator-economy player Spotter (~$800M deployed). Tech: <strong>Chime</strong> (fintech), DigitalOcean.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Len Blavatnik</div>
+          <div class="person-title">FOUNDER · CHAIRMAN</div>
+          <div class="person-context">Strategic-only conversations. Difficult direct access.</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Danny Cohen</div>
+          <div class="person-title">PRESIDENT · ACCESS ENTERTAINMENT</div>
+          <div class="person-context">Ex-BBC. Realistic operational entry for content/media conversations.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> Partnership intelligence. DAZN and WMG are global entertainment operators with an explicit LatAm mandate; fintech adjacency via Chime.</div>
+    </div>
+
+    <!-- FIRM 10: MUBADALA -->
+    <div class="firm-card">
+      <div class="firm-header">
+        <div>
+          <div class="firm-rank">FIRM 10 · TIER 1</div>
+          <div class="firm-name">Mubadala / ADQ</div>
+        </div>
+        <div class="firm-tags">
+          <span class="tag purple">Abu Dhabi sovereign</span>
+          <span class="tag">Abu Dhabi · Rio de Janeiro</span>
+          <span class="tag">~$302B AUM</span>
+        </div>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Profile</div>
+        <p>Abu Dhabi sovereign investor. <strong>Mubadala Capital</strong> (~$30B) is the alternative-asset arm with offices including <strong>Rio de Janeiro</strong> and a dedicated Brazil PE business. First CIO Oscar Fahlgren built that Brazil business.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">Entertainment track record</div>
+        <p>Joined Silver Lake's Endeavor take-private (2024); holds a 9% stake in The Raine Group (media/sports merchant bank); a $10B partnership with TWG Global (LA Dodgers / Lakers / Chelsea exposure); AD Gaming MoU for a UAE esports ecosystem.</p>
+      </div>
+      <div class="firm-block">
+        <div class="block-label">People to approach</div>
+        <div class="person">
+          <div class="person-name">Oscar Fahlgren</div>
+          <div class="person-title">CIO · MUBADALA CAPITAL</div>
+          <div class="person-context">Built the Brazil PE business. Natural Brazil-native entry point and the strongest LATAM-MENA bridge in this report.</div>
+        </div>
+        <div class="person">
+          <div class="person-name">Hani Barhoush</div>
+          <div class="person-title">CEO &amp; MD · MUBADALA CAPITAL</div>
+          <div class="person-context">Strategic-level conversations.</div>
+        </div>
+      </div>
+      <div class="angle"><strong>Angle for Dima:</strong> BOTH — Mubadala Capital has a Brazil/LATAM PE presence AND MENA entertainment exposure. Strong dual-geography fit; the only Tier 1 firm besides GA with a São Paulo-equivalent regional office.</div>
+    </div>
+
+  </section>
+
+  <!-- TIER 2 -->
+  <section>
+    <div class="section-tag">05 · Tier 2 — significant activity, secondary fit</div>
+    <h2>The next ten firms worth tracking</h2>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">11 · Lightspeed Venture Partners</div>
+        <div class="firm-tags"><span class="tag">VC · ~$25B AUM</span></div>
+      </div>
+      <p>Leading gaming/interactive-media VC in 2023–2024 (led aggregated $162M then $252M in rounds). Portfolio: Epic Games, Tripledot, Snap, Discord (early).</p>
+      <div class="compact-people">→ Moritz Baier-Lentz (Head of Gaming, ex-Goldman, ex-Bitkraft) · Alex Taussig &amp; Antoine Moyroud (LATAM interest, South Summit Brazil 2024)</div>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise (gaming/creator infra) + LATAM interest</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">12 · Apollo Global Management</div>
+        <div class="firm-tags"><span class="tag">PE · 31-year media vertical</span></div>
+      </div>
+      <p>$760M into Legendary Entertainment; owns Yahoo (2021) and Cox Media Group; bid $11B for Paramount.</p>
+      <div class="compact-people">→ David Sambur (Co-Head PE) · Lee Solomon (Apollo Sports Capital; boards of Yahoo, Legendary, Cox)</div>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership intelligence</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">13 · The Chernin Group (TCG)</div>
+        <div class="firm-tags"><span class="tag">Growth equity · ~$1.3B fund</span></div>
+      </div>
+      <p>Entertainment-native: Crunchyroll, Barstool, Headspace, MeatEater, Funko, Cameo (board observer), Scopely.</p>
+      <div class="compact-people">→ Peter Chernin (ex-News Corp/Fox) · Jesse Jacobs ("fandom as an asset class") · Mike Kerns</div>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise if framed as fandom/creator commerce; valuable gatekeeper for warm intros</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">14 · Makers Fund</div>
+        <div class="firm-tags"><span class="tag">Gaming-specific · &gt;$1B AUM</span></div>
+      </div>
+      <p>Fund III $500M (2022). Portfolio: Dream Games, VRChat, Medal.tv, AudioMob. Global footprint incl. Singapore.</p>
+      <div class="compact-people">→ Jay Chi (Founding Partner, Tokyo; ex-McKinsey) · Michael Cheung (ex-Tencent) · Ryann Lai</div>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise for gaming/interactive</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">15 · Tencent Holdings</div>
+        <div class="firm-tags"><span class="tag">Strategic corporate · Shenzhen</span></div>
+      </div>
+      <p>~$33B gaming revenue. Stakes in Epic Games (~40%), Riot, Supercell, Ubisoft (25% of new subsidiary, 2025), Discord, Sea; music via Tencent Music and a 10% stake in Thailand's GMM Music (2024).</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership intelligence (Asia distribution)</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">16 · Insight Partners</div>
+        <div class="firm-tags"><span class="tag">VC/PE · &gt;$20B AUM</span></div>
+      </div>
+      <p>Software-heavy with entertainment adjacency via creator/SaaS tooling.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise under a B2B/infra framing</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">17 · Dragoneer Investment Group</div>
+        <div class="firm-tags"><span class="tag">Growth · ~$25B+ AUM</span></div>
+      </div>
+      <p>Backed Netflix, Spotify, Nubank, Uber.</p>
+      <div class="compact-people">→ Marc Stad (Founder)</div>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise — has Nubank/LATAM exposure</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">18 · GIC (Singapore)</div>
+        <div class="firm-tags"><span class="tag">Sovereign · ~$744B–$936B</span></div>
+      </div>
+      <p>~3% LATAM allocation; backed Dapper Labs plus fintech (Klarna, N26, Monzo, Square).</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership / late-stage capital</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">19 · Temasek (Singapore)</div>
+        <div class="firm-tags"><span class="tag">Sovereign · ~$390B+ portfolio</span></div>
+      </div>
+      <p>Animoca Brands, Dapper Labs, gaming/crypto exposure; most active SWF in European deal count 2024.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership intelligence</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header">
+        <div class="firm-name">20 · SoftBank LATAM / Upload Ventures</div>
+        <div class="firm-tags"><span class="tag">LATAM-dedicated · $8B committed</span></div>
+      </div>
+      <p>Fund I 2019 ~$5B; Fund II Sept 2021 +$3B. Heavy fintech: Nubank, Rappi, Clip, Ualá, Creditas, Merama. <em class="purple">Caveat:</em> leadership dispersed post-Marcelo Claure (left Jan 2022); regional team spun into Upload Ventures.</p>
+      <div class="compact-people">→ Rodrigo Baer · Marco Camhaji (Upload Ventures)</div>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise — dedicated LATAM mandate but fragmented apparatus; no notable B2C entertainment deal</div>
+    </div>
+
+  </section>
+
+  <!-- TIER 3 -->
+  <section>
+    <div class="section-tag">06 · Tier 3 — track lighter</div>
+    <h2>Material exposure but lower priority</h2>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">21 · Qatar Investment Authority (QIA)</div><div class="firm-tags"><span class="tag">Sovereign · ~$500B</span></div></div>
+      <p>Media/sports (beIN) and select tech crossover.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership (MENA)</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">22 · Blackstone</div><div class="firm-tags"><span class="tag">PE · ~$1T+ AUM</span></div></div>
+      <p>Candle Media (Hello Sunshine, Moonbug), Bumble.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">23 · Providence Equity Partners</div><div class="firm-tags"><span class="tag">Media-specialist PE</span></div></div>
+      <p>Historically anchored TCG; media/comms buyouts.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">24 · Bain Capital / EQT / BC Partners / CVC / Permira</div><div class="firm-tags"><span class="tag">European/global PE</span></div></div>
+      <p>Periodic gaming/media/sports-rights buyouts.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership intelligence, lower priority</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">25 · Founders Fund / Spark / Greylock / Index / Accel / BOND</div><div class="firm-tags"><span class="tag">Top-tier VC</span></div></div>
+      <p>Generalist VCs with creator-economy/gaming positions (Discord, Patreon, Substack, Roblox).</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise depending on round stage</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">26 · Bessemer / Madrona / Owl Ventures / Anthos Capital</div><div class="firm-tags"><span class="tag">Sector-adjacent VC</span></div></div>
+      <p>Edutainment, VR, consumer; Anthos backed VR (Sandbox VR).</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Thesis-dependent capital raise</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">27 · Sequoia Capital</div><div class="firm-tags"><span class="tag">VC · perpetual fund</span></div></div>
+      <p>Leadership transition: Roelof Botha resigned as Managing Partner (Nov 2025), succeeded by Alfred Lin and Pat Grady. Minimal LATAM; ~$950M new funds late 2025.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Capital raise on thesis fit; weak geography</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">28 · KIRKBI (Lego family)</div><div class="firm-tags"><span class="tag">Family office</span></div></div>
+      <p>Epic Games stakes.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership, niche</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">29 · Reliance / ByteDance / Naver / Kakao</div><div class="firm-tags"><span class="tag">Asian strategic corporates</span></div></div>
+      <p>JioCinema/JioSaavn (India); ByteDance; Naver/Kakao Webtoon/Wattpad/Kakao Entertainment.</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Partnership (India/Asia distribution)</div>
+    </div>
+
+    <div class="tier-compact">
+      <div class="firm-header"><div class="firm-name">30 · D1 Capital / Vista / Thoma Bravo / Fidelity / BlackRock</div><div class="firm-tags"><span class="tag">Crossover / PE</span></div></div>
+      <p>Entertainment public-name exposure (Fidelity into MasterClass; gaming/media software for Vista/Thoma Bravo).</p>
+      <div class="compact-angle"><strong>ANGLE:</strong> Late-stage capital; verify current activity</div>
+    </div>
+  </section>
+
+  <!-- OUTREACH -->
+  <section>
+    <div class="section-tag">07 · Recommended outreach sequence</div>
+    <h2>Where Dima should start</h2>
+
+    <div class="outreach-list">
+
+      <div class="outreach-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-firm">General Atlantic — Martín Escobari / Luiz Ribeiro</div>
+          <div class="step-body"><strong>START HERE.</strong> The only top-tier entertainment investor with dedicated LATAM leadership, a São Paulo office, and direct payments-sector portfolio adjacency (dLocal board seat, Clip). Open via a GA payments/Brazil portfolio company needing B2B rails; best path is a warm intro through the dLocal or XP network. Anchor message: LiveMode / Hotmart monetization and LATAM payment friction.</div>
+        </div>
+      </div>
+
+      <div class="outreach-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-firm">Coatue — Lucas Swisher / Michael Gilroy / Dan Rose</div>
+          <div class="step-body">Strong fintech DNA (Nubank, Brex, Bitso) plus entertainment crossover. Capital-raise conversation anchored on a LATAM payments-meets-entertainment thesis; Gilroy is the natural fintech entry, Rose the entertainment bridge.</div>
+        </div>
+      </div>
+
+      <div class="outreach-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-firm">PIF / SURJ — Danny Townsend</div>
+          <div class="step-body">Partnership angle: DAZN MENA and Shahid are entertainment operators in payments-underserved markets. Open on cross-border subscription monetization and MENA–LATAM corridors.</div>
+        </div>
+      </div>
+
+      <div class="outreach-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-firm">Mubadala Capital — Hani Barhoush / Oscar Fahlgren</div>
+          <div class="step-body">Dual MENA + Brazil PE presence (Rio office). Both capital and partnership; Fahlgren is the Brazil-native entry point and the strongest LATAM-MENA bridge in the report.</div>
+        </div>
+      </div>
+
+      <div class="outreach-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-firm">Tiger Global — via Chase Coleman's team</div>
+          <div class="step-body">LATAM fintech pedigree (Nubank, Bitso). Time outreach to renewed deployment (a PIP 17 raise); no single named LATAM partner currently, so route through the PE investment committee.</div>
+        </div>
+      </div>
+
+      <div class="outreach-step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-firm">Lightspeed — Moritz Baier-Lentz</div>
+          <div class="step-body">If LaFinteca frames as gaming/creator payments infrastructure; the firm has publicly expressed LATAM conviction.</div>
+        </div>
+      </div>
+
+      <div class="outreach-step">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <div class="step-firm">The Chernin Group — Jesse Jacobs</div>
+          <div class="step-body">Entertainment-specialist gatekeeper; most useful for partnership intelligence and warm intros across the creator/fandom ecosystem rather than a direct check.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="thresholds">
+      <h3>Thresholds that would reorder this sequence</h3>
+      <div class="threshold-item">
+        <span class="arrow">→</span>
+        <div>If a <strong>PIF/Access entertainment operator</strong> (DAZN, Shahid, Warner Music) announces LATAM expansion, move that firm to #1 (immediate, concrete payments need).</div>
+      </div>
+      <div class="threshold-item">
+        <span class="arrow">→</span>
+        <div>If <strong>LaFinteca's round is &lt;$30M</strong> (Series A/B), prioritize VCs (Lightspeed, Makers, Insight, Dragoneer) over sovereigns and PE buyout shops, whose minimum check sizes far exceed an early raise.</div>
+      </div>
+      <div class="threshold-item">
+        <span class="arrow">→</span>
+        <div>If <strong>SoftBank LATAM / Upload Ventures shows renewed deployment</strong>, elevate it, given the dedicated regional mandate, despite current fragmentation.</div>
+      </div>
+      <div class="threshold-item">
+        <span class="arrow">→</span>
+        <div>If the goal tilts toward <strong>partnership BD over capital</strong>, elevate strategic corporates (Tencent, Reliance, Naver/Kakao) for distribution into Asia/India.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAVEATS -->
+  <section>
+    <div class="section-tag">08 · Caveats</div>
+    <h2>What to verify before reaching out</h2>
+    <ul class="caveat-list">
+      <li><strong>AUM figures fluctuate</strong> and are most-recent disclosed; sovereign-wealth AUM (PIF $940B–$1.15T; GIC $744B–$936B) is third-party estimated and disputed across sources.</li>
+      <li><strong>Time-sensitive leadership facts should be re-verified immediately before outreach:</strong> Sequoia's Botha exit (Nov 2025); Tiger Global's Shleifer (advisor) and Curtius (departed, founded Cedar); SoftBank LATAM's post-Claure fragmentation. Tiger Global currently has no named dedicated LATAM partner.</li>
+      <li>The aggregate capital figure could not be independently reconstructed from the 149-deal database in this research pass; concentration estimates are directional, not audited.</li>
+      <li><strong>RedBird partner first names</strong> (referenced internally as "Tyler," "David") appear in the firm's public team page without full surnames in the captured source — confirm full names via redbirdcap.com/people before any approach.</li>
+      <li>Some firms (QIA, Bain, EQT, BC Partners, Permira, CVC, D1, Vista, Thoma Bravo) had thinner verifiable entertainment-specific 2018–2026 deal evidence and are flagged for further verification.</li>
+      <li>The EA take-private ($55B) and several 2025–2026 deals were still subject to closing conditions/regulatory approval; treat as announced/pending, not all fully completed.</li>
+      <li>This is intelligence for outreach planning, <strong>not investment advice</strong>.</li>
+    </ul>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>LAFINTECA · MARKETING &amp; RESEARCH OFFICE</div>
+    <div class="right">v1.0 · JUNE 2026 · PREPARED FOR <strong>D. RUKIN</strong></div>
+  </div>
+
+</div>
+
+</body>
+</html>
