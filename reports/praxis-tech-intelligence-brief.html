@@ -3679,6 +3679,73 @@
   };
   window.ckCancelPass = function(){ hidePassInput(); };
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') hidePassInput(); });
+
+  /* ---- Save to live: commit checklist state back to the repo (LaFinteca) ---- */
+  (function(){
+    var REPO = 'LaFinteca/intel-reports';
+    var STATE_PATH = 'reports/praxis-state.json';   /* committed alongside this report */
+    var STATE_URL  = 'praxis-state.json';           /* fetched relative to this page    */
+    var TOKEN_KEY  = 'praxis_gh_token';
+    var API = 'https://api.github.com/repos/' + REPO + '/contents/' + STATE_PATH;
+
+    var style = document.createElement('style');
+    style.textContent = '.ck-savelive{display:none}body.ck-editing .ck-savelive{display:inline-flex}#ckSaveMsg{margin-left:10px;font-size:12px;align-self:center}';
+    document.head.appendChild(style);
+
+    var lock = document.getElementById('ckLock');
+    var btn = document.createElement('button');
+    btn.id = 'ckSaveLive'; btn.type = 'button';
+    btn.className = 'ck-lock ck-savelive';
+    btn.textContent = 'Save to live';
+    var msg = document.createElement('span'); msg.id = 'ckSaveMsg';
+    if (lock && lock.parentNode){
+      lock.parentNode.insertBefore(btn, lock.nextSibling);
+      lock.parentNode.insertBefore(msg, btn.nextSibling);
+    }
+    function setMsg(t,c){ msg.textContent = t||''; msg.style.color = c||'#555'; }
+    function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
+
+    function getToken(){
+      var t = '';
+      try { t = localStorage.getItem(TOKEN_KEY) || ''; } catch(e){}
+      if (!t){
+        t = window.prompt('Paste your GitHub fine-grained token\n(Contents: Read and write on ' + REPO + ').\nStored only in this browser.') || '';
+        t = t.trim();
+        if (t){ try { localStorage.setItem(TOKEN_KEY, t); } catch(e){} }
+      }
+      return t;
+    }
+
+    window.ckSaveLive = function(){
+      if (!editing) return;
+      var token = getToken();
+      if (!token){ setMsg('Save cancelled.', '#c0392b'); return; }
+      setMsg('Saving…', '#555'); btn.disabled = true;
+      var headers = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
+      fetch(API + '?ref=main&v=' + Date.now(), { headers: headers })
+        .then(function(r){ return r.status === 200 ? r.json() : null; })
+        .then(function(meta){
+          var body = { message: 'Update Praxis checklist state', content: b64(JSON.stringify(state, null, 2) + '\n'), branch: 'main' };
+          if (meta && meta.sha) body.sha = meta.sha;
+          return fetch(API, { method: 'PUT', headers: headers, body: JSON.stringify(body) });
+        })
+        .then(function(r){
+          if (r.ok) setMsg('Saved ✓ · live in ~1 min.', '#2e7d32');
+          else if (r.status === 401 || r.status === 403){ try{localStorage.removeItem(TOKEN_KEY);}catch(e){} setMsg('Token rejected — click Save to re-enter.', '#c0392b'); }
+          else setMsg('Save failed (' + r.status + ').', '#c0392b');
+        })
+        .catch(function(){ setMsg('Save failed — network error.', '#c0392b'); })
+        .then(function(){ btn.disabled = false; });
+    };
+    btn.addEventListener('click', window.ckSaveLive);
+
+    /* On load, pull the canonical state the owner last published so the live URL shows it. */
+    fetch(STATE_URL + '?v=' + Date.now())
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(remote){ if (remote && typeof remote === 'object'){ state = remote; persist(); refresh(); } })
+      .catch(function(){});
+  })();
+
   refresh(); updateLockBtn();
   document.addEventListener('DOMContentLoaded', function(){ refresh(); updateLockBtn(); });
 })();

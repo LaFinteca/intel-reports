@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'reports/**'
+      - 'reports/*.html'      # only report pages — not state files like praxis-state.json
   workflow_dispatch:
 
 permissions:
