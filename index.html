@@ -163,20 +163,32 @@
     }
     .report a:hover .idx { color: var(--green); }
 
+    .title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .body .name {
       font-family: var(--sans); font-weight: 600; font-size: 1.12rem; letter-spacing: -0.01em;
       color: var(--white); transition: color .2s ease;
     }
     .report a:hover .name { color: var(--green); }
+    .tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--mono); font-size: 9.5px; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--purple);
+      border: 1px solid rgba(195,171,255,.28); background: rgba(195,171,255,.07);
+      padding: 3px 7px 2px; border-radius: 4px; line-height: 1; white-space: nowrap;
+    }
     .body .path {
-      display: block; margin-top: 5px;
+      display: block; margin-top: 7px;
       font-family: var(--mono); font-size: 11.5px; color: var(--gray-dim); letter-spacing: .02em;
     }
     .body .path .slash { color: var(--line-2); }
 
-    .aside { display: flex; align-items: center; gap: 18px; }
+    .aside { display: flex; align-items: center; gap: 16px; }
+    .aside-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .date {
+      font-family: var(--mono); font-size: 10.5px; color: var(--gray); letter-spacing: .05em; white-space: nowrap;
+    }
     .size {
-      font-family: var(--mono); font-size: 11px; color: var(--gray-dim); letter-spacing: .05em;
+      font-family: var(--mono); font-size: 10.5px; color: var(--gray-dim); letter-spacing: .05em;
       white-space: nowrap;
     }
     .arrow {
@@ -324,48 +336,85 @@
     }
     function setState(html) { listEl.innerHTML = `<li class="state">${html}</li>`; }
 
+    // Editorial category tags per report (key = filename without extension).
+    // Add a line when you add a report; values are arrays, so a report can carry several.
+    const REPORT_TAGS = {
+      "betsson-intel-brief":            ["iGaming"],
+      "mx-igaming-prospect-brief":      ["iGaming"],
+      "entertainment-investment-firms": ["Investors"],
+      "okto-brazil-intel-brief":        ["Competitor"],
+      "polymarket-analysis":            ["Prediction Markets"],
+      "adult-cyberlocker-research":     ["Adult"],
+    };
+    function tagsFor(name) { return REPORT_TAGS[name.replace(/\.html?$/i, "")] || []; }
+
+    function fmtDate(iso) {
+      const d = new Date(iso);
+      return isNaN(d) ? "" : d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
+    }
+    // Creation date = the OLDEST commit that touched the file (one request per report).
+    function fetchCreated(name) {
+      const url = `https://api.github.com/repos/${REPO}/commits?path=${DIR}/${encodeURIComponent(name)}&per_page=100`;
+      return fetch(url, { headers: { Accept: "application/vnd.github.v3+json" } })
+        .then((r) => (r.ok ? r.json() : []))
+        .then((c) => (c.length ? c[c.length - 1].commit.committer.date : null))
+        .catch(() => null);
+    }
+
+    function render(reports) {
+      listEl.innerHTML = "";
+      reports.forEach((r, i) => {
+        const li = document.createElement("li");
+        li.className = "report";
+        li.style.animationDelay = (0.12 + i * 0.06) + "s";
+        const tags = tagsFor(r.name).map((t) => `<span class="tag">${t}</span>`).join("");
+        const date = r.created ? fmtDate(r.created) : "—";
+        li.innerHTML = `
+          <a href="${DIR}/${r.name}">
+            <span class="idx">${String(i + 1).padStart(3, "0")}</span>
+            <span class="body">
+              <span class="title-row">
+                <span class="name">${prettify(r.name)}</span>
+                ${tags ? `<span class="tags">${tags}</span>` : ""}
+              </span>
+              <span class="path"><span class="slash">${DIR}/</span>${r.name}</span>
+            </span>
+            <span class="aside">
+              <span class="aside-meta">
+                <span class="date">${date}</span>
+                <span class="size">${fmtSize(r.size)}</span>
+              </span>
+              <span class="arrow">→</span>
+            </span>
+          </a>`;
+        listEl.appendChild(li);
+      });
+      // "Updated" reflects the newest report (top of the list).
+      const newest = reports.find((r) => r.created);
+      if (newest) document.getElementById("updated").textContent = fmtDate(newest.created);
+    }
+
     fetch(API, { headers: { Accept: "application/vnd.github.v3+json" } })
       .then((r) => { if (!r.ok) throw new Error(r.status === 404 ? "empty" : "err" + r.status); return r.json(); })
       .then((items) => {
-        const reports = items
-          .filter((i) => i.type === "file" && /\.html?$/i.test(i.name))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
+        const reports = items.filter((i) => i.type === "file" && /\.html?$/i.test(i.name));
         setCount(reports.length);
         if (!reports.length) {
           setState("No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.");
           return;
         }
-
-        listEl.innerHTML = "";
-        reports.forEach((r, i) => {
-          const li = document.createElement("li");
-          li.className = "report";
-          li.style.animationDelay = (0.12 + i * 0.06) + "s";
-          li.innerHTML = `
-            <a href="${DIR}/${r.name}">
-              <span class="idx">${String(i + 1).padStart(3, "0")}</span>
-              <span class="body">
-                <span class="name">${prettify(r.name)}</span>
-                <span class="path"><span class="slash">${DIR}/</span>${r.name}</span>
-              </span>
-              <span class="aside">
-                <span class="size">${fmtSize(r.size)}</span>
-                <span class="arrow">→</span>
-              </span>
-            </a>`;
-          listEl.appendChild(li);
+        // Resolve each report's creation date, then sort newest-first (001 = most recent).
+        return Promise.all(
+          reports.map((r) => fetchCreated(r.name).then((created) => Object.assign({}, r, { created })))
+        ).then((withDates) => {
+          withDates.sort((a, b) => {
+            const tb = b.created ? Date.parse(b.created) : 0;
+            const ta = a.created ? Date.parse(a.created) : 0;
+            if (tb !== ta) return tb - ta;          // newest first
+            return a.name.localeCompare(b.name);    // stable tie-break for same-commit batches
+          });
+          render(withDates);
         });
-
-        // approximate "updated" from the most recently named build; the API doesn't
-        // give per-file mtime here, so we show today's served date as a freshness cue.
-        try {
-          const d = new Date(document.lastModified);
-          if (!isNaN(d)) {
-            document.getElementById("updated").textContent =
-              d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
-          }
-        } catch (e) {}
       })
       .catch((err) => {
         if (String(err.message).includes("empty")) {
