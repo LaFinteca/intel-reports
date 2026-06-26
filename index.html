@@ -155,8 +155,10 @@
     .tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
     .tag {
       font-family: var(--mono); font-size: 9.5px; font-weight: 500; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--purple);
-      border: 1px solid rgba(195,171,255,.28); background: rgba(195,171,255,.07);
+      text-transform: uppercase;
+      color: var(--c, var(--purple));
+      border: 1px solid color-mix(in srgb, var(--c, var(--purple)) 34%, transparent);
+      background: color-mix(in srgb, var(--c, var(--purple)) 9%, transparent);
       padding: 3px 7px 2px; border-radius: 4px; line-height: 1; white-space: nowrap;
     }
     .body .path {
@@ -320,6 +322,18 @@
     };
     function tagsFor(name) { return REPORT_TAGS[name.replace(/\.html?$/i, "")] || []; }
 
+    // Accent color per category (chip border + tint derive from this via color-mix).
+    // Add a line when you introduce a new category; unknown tags fall back to lilac.
+    const TAG_COLORS = {
+      "iGaming":            "#5CE1A6",  // mint
+      "Adult":              "#FF6B8A",  // rose
+      "Competitor":         "#FFB454",  // amber
+      "Investors":          "#5BB8FF",  // sky
+      "Prediction Markets": "#C3ABFF",  // lilac
+      "Forex":              "#4ED9D9",  // cyan
+    };
+    function tagColor(t) { return TAG_COLORS[t] || "var(--purple)"; }
+
     function fmtDate(iso) {
       const d = new Date(iso);
       return isNaN(d) ? "" : d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
@@ -339,7 +353,9 @@
         const li = document.createElement("li");
         li.className = "report";
         li.style.animationDelay = (0.12 + i * 0.06) + "s";
-        const tags = tagsFor(r.name).map((t) => `<span class="tag">${t}</span>`).join("");
+        const tags = tagsFor(r.name)
+          .map((t) => `<span class="tag" style="--c:${tagColor(t)}">${t}</span>`)
+          .join("");
         const date = r.created ? fmtDate(r.created) : "—";
         li.innerHTML = `
           <a href="${DIR}/${r.name}">
