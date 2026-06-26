@@ -12,6 +12,7 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
 - [MX iGaming Prospect Brief](https://lafinteca.github.io/intel-reports/reports/mx-igaming-prospect-brief.html)
 - [OKTO Brazil Intel Brief](https://lafinteca.github.io/intel-reports/reports/okto-brazil-intel-brief.html)
 - [Polymarket Analysis](https://lafinteca.github.io/intel-reports/reports/polymarket-analysis.html)
+- [Praxis Tech Intelligence Brief](https://lafinteca.github.io/intel-reports/reports/praxis-tech-intelligence-brief.html)
 
 > This list is a manual mirror — the [live index](https://lafinteca.github.io/intel-reports/) auto-updates, so re-add a line here whenever you add a report (or skip it and rely on the live page).
 
