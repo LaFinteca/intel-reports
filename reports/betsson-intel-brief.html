@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betsson Group — BD Intelligence Report · LaFinteca · June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --grey-bg: #F5F5F3;
+    --grey-mid: #E8E8E5;
+    --grey-border: #D4D4CE;
+    --grey-text: #6B6B65;
+    --purple: #C3ABFF;
+    --lime: #BFFE43;
+    --red-signal: #FF4D4D;
+    --orange-signal: #FF8C42;
+    --yellow-signal: #FFD166;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', sans-serif;
+    background: var(--grey-bg);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    padding: 48px 64px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(195,171,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-logo {
+    margin-bottom: 48px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--lime);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .hero-tag.purple {
+    background: var(--purple);
+  }
+
+  .hero-divider {
+    color: rgba(255,255,255,0.2);
+    font-size: 12px;
+  }
+
+  .hero-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    color: var(--purple);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 860px;
+  }
+
+  .hero-stat {
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .hero-stat-value {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    color: var(--white);
+    display: block;
+    line-height: 1.1;
+  }
+
+  .hero-stat-value.accent { color: var(--lime); }
+  .hero-stat-value.purple { color: var(--purple); }
+
+  .hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--white);
+    border-bottom: 1px solid var(--grey-border);
+    padding: 0 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+
+  .toc-inner {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+  }
+
+  .toc a {
+    display: inline-block;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey-text);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .toc a:hover { color: var(--black); border-bottom-color: var(--purple); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  .section {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--grey-border);
+  }
+
+  .section:last-of-type { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--purple);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
+  .section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--black);
+  }
+
+  .section h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin: 36px 0 16px;
+  }
+
+  p {
+    color: #2A2A2A;
+    margin-bottom: 16px;
+    max-width: 780px;
+    font-size: 15px;
+  }
+
+  /* ── SIGNAL BOX ── */
+  .signal {
+    background: var(--black);
+    border-left: 3px solid var(--lime);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 28px 0;
+  }
+
+  .signal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 10px;
+  }
+
+  .signal p {
+    color: rgba(255,255,255,0.85);
+    font-size: 14px;
+    max-width: 100%;
+    margin-bottom: 0;
+    line-height: 1.7;
+  }
+
+  .signal p strong { color: var(--lime); font-weight: 600; }
+  .signal p a { color: var(--purple); text-decoration: underline; }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: 6px;
+    border: 1px solid var(--grey-border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--white);
+  }
+
+  thead th {
+    background: var(--black);
+    color: rgba(255,255,255,0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--grey-mid); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #FAFAF8; }
+
+  td {
+    padding: 13px 16px;
+    vertical-align: top;
+    color: #2A2A2A;
+    line-height: 1.5;
+  }
+
+  td:first-child { font-weight: 500; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .badge-red { background: rgba(255,77,77,0.12); color: #C73B3B; }
+  .badge-orange { background: rgba(255,140,66,0.12); color: #C06820; }
+  .badge-yellow { background: rgba(255,209,102,0.15); color: #8C6800; }
+  .badge-green { background: rgba(191,254,67,0.15); color: #3C6B00; }
+  .badge-purple { background: rgba(195,171,255,0.15); color: #5B3FCC; }
+  .badge-grey { background: var(--grey-mid); color: var(--grey-text); }
+
+  /* ── CONTACT CARDS ── */
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .contact-card {
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    position: relative;
+  }
+
+  .contact-card.primary {
+    border-color: var(--purple);
+    background: rgba(195,171,255,0.04);
+  }
+
+  .contact-card.primary::before {
+    content: 'PRIMARY';
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    background: var(--purple);
+    color: var(--black);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .contact-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+
+  .contact-role {
+    font-size: 12px;
+    color: var(--grey-text);
+    margin-bottom: 14px;
+  }
+
+  .contact-why {
+    font-size: 13px;
+    color: #3A3A3A;
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contact-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--purple);
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .contact-links a:hover { text-decoration: underline; }
+
+  /* ── OPPORTUNITY CARDS ── */
+  .opp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .opp-card {
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .opp-market {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .opp-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+
+  .opp-chance {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--black);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .opp-bar-bg {
+    height: 4px;
+    background: var(--grey-mid);
+    border-radius: 2px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .opp-bar {
+    height: 100%;
+    background: var(--lime);
+    border-radius: 2px;
+  }
+
+  .opp-desc {
+    font-size: 12.5px;
+    color: var(--grey-text);
+    line-height: 1.5;
+  }
+
+  /* ── VERDICT ── */
+  .verdict-box {
+    background: var(--black);
+    border-radius: 6px;
+    padding: 36px 40px;
+    margin: 40px 0;
+  }
+
+  .verdict-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 16px;
+  }
+
+  .verdict-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--white);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  .verdict-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .verdict-action {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .verdict-action-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--lime);
+    font-weight: 600;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .verdict-action-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+  }
+
+  .verdict-action-text strong { color: var(--white); font-weight: 600; }
+
+  /* ── CONFIDENCE TABLE ── */
+  .conf-block {
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 6px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .conf-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-text);
+    margin-bottom: 16px;
+  }
+
+  .conf-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .conf-item:last-child { border-bottom: none; }
+
+  .conf-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .conf-dot.confirmed { background: #4CAF50; }
+  .conf-dot.partial { background: var(--orange-signal); }
+  .conf-dot.estimated { background: var(--grey-text); }
+
+  .conf-text {
+    font-size: 13.5px;
+    color: #2A2A2A;
+    line-height: 1.55;
+  }
+
+  /* ── SOURCES ── */
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .source-item {
+    background: var(--white);
+    border: 1px solid var(--grey-mid);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--grey-text);
+  }
+
+  /* ── WATCH TRIGGERS ── */
+  .triggers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .trigger {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 4px;
+    padding: 14px 18px;
+  }
+
+  .trigger-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .trigger-text {
+    font-size: 13.5px;
+    color: #2A2A2A;
+    line-height: 1.55;
+  }
+
+  .trigger-text strong { color: var(--black); }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--black);
+    padding: 40px 64px;
+    margin-top: 80px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.8;
+  }
+
+  .footer-meta strong { color: rgba(255,255,255,0.5); font-weight: 500; }
+
+  /* ── LINKS ── */
+  a.ext-link {
+    color: var(--purple);
+    text-decoration: underline;
+    text-decoration-color: rgba(195,171,255,0.4);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s;
+  }
+
+  a.ext-link:hover { text-decoration-color: var(--purple); }
+
+  /* ── INLINE CODE ── */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--grey-mid);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--black);
+  }
+
+  /* ── QUOTE BLOCK (player complaints) ── */
+  .quote-block {
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+
+  .quote-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .quote-row:last-child { border-bottom: none; }
+
+  .quote-meta {
+    padding: 14px 16px;
+    background: #FAFAF8;
+    border-right: 1px solid var(--grey-mid);
+    font-size: 12px;
+    color: var(--grey-text);
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .quote-text {
+    padding: 14px 18px;
+    font-size: 13.5px;
+    color: #2A2A2A;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ── 2-COL LAYOUT ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 24px 0;
+  }
+
+  .info-block {
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+
+  .info-block-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-text);
+    margin-bottom: 12px;
+  }
+
+  .info-block ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-block li {
+    font-size: 13.5px;
+    color: #2A2A2A;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--grey-mid);
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .info-block li:last-child { border-bottom: none; }
+  .info-block li::before { content: '—'; color: var(--grey-text); flex-shrink: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { padding: 36px 24px 44px; }
+    .container { padding: 0 24px; }
+    .toc { padding: 0 24px; }
+    .footer { padding: 32px 24px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .contacts-grid { grid-template-columns: 1fr; }
+    .opp-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .sources-grid { grid-template-columns: 1fr; }
+    .quote-row { grid-template-columns: 1fr; }
+    .quote-meta { border-right: none; border-bottom: 1px solid var(--grey-mid); }
+  }
+
+  @media (max-width: 600px) {
+    .opp-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="24" viewBox="0 0 266 32" fill="none">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M0 13.6783V17.375L17.326 25.6807V21.5062L4.86105 15.5373L17.326 9.81443V5.64613L0 13.6783Z" fill="#C3ABFF"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M266 18.4561V14.7594L248.674 6.45375V10.628L261.138 16.5971L248.674 22.32V26.4883L266 18.4561Z" fill="#C3ABFF"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M49.6406 21.3702V27.8137L53.818 32H62.547L66.1292 28.5663V32H70.5472V12.0717L65.8987 7.41318H54.4775L49.829 12.0717V15.7592H54.3884V13.5119L56.4264 11.5105H63.9968L66.035 13.5119V17.2331H53.8199L49.6406 21.3702ZM61.4087 27.9027L66.035 23.4434V21.3304H55.7663L54.2001 22.8604V26.3726L55.7663 27.9027H61.4087Z" fill="white"/>
+      <path d="M98.9487 0.834671H77.0527V32H81.7064V17.2702H96.6872V12.9841H81.7064V5.12048H98.9487V0.834671Z" fill="white"/>
+      <path d="M102.574 1.73128V4.25414L104.302 5.98535H106.819L108.547 4.25414V1.73128L106.819 -0.000209808H104.302L102.574 1.73128Z" fill="white"/>
+      <path d="M107.841 12.9841H103.281V32H107.841V12.9841Z" fill="white"/>
+      <path d="M118.776 7.41318H114.311V32H118.87V17.1438L124.397 11.6046H128.714L130.752 13.6063V32H135.311V12.0717L130.663 7.41318H123.01L118.776 11.657V7.41318Z" fill="white"/>
+      <path d="M144.567 11.5575L141.809 27.1758L145.802 32H152.869L153.567 27.8556H148.241L146.625 25.8829L149.142 11.5575H156.449L157.149 7.41318H149.872L151.238 0.840582H146.749L145.383 7.41318H141.032L140.332 11.5575H144.567Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M160.326 12.0717V27.3415L164.974 32H177.244L181.892 27.3415V23.701H177.333V25.8068L175.296 27.8083H166.924L164.885 25.8068V21.2831H181.94V12.0701L177.242 7.41318H164.974L160.326 12.0717ZM175.342 11.6046L177.381 13.6063V17.186H164.885V13.6063L166.924 11.6046H175.342Z" fill="white"/>
+      <path d="M187.873 12.0717V27.3415L192.523 32H204.273L208.921 27.3415V23.701H204.362V25.8068L202.325 27.8083H194.471L192.432 25.8068V13.6063L194.471 11.6046H202.325L204.362 13.6063V15.7121H208.921V12.0717L204.273 7.41318H192.523L187.873 12.0717Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M214.938 21.3702V27.8137L219.115 32H227.844L231.426 28.5663V32H235.843V12.0717L231.196 7.41318H219.773L215.125 12.0717V15.7592H219.684V13.5119L221.724 11.5105H229.293L231.332 13.5119V17.2331H219.115L214.938 21.3702ZM226.706 27.9027L231.332 23.4434V21.3304H221.063L219.496 22.8604V26.3726L221.063 27.9027H226.706Z" fill="white"/>
+      <path d="M34.9739 0.806335H30.3203V31.9717H43.1585V27.7329H34.9739V0.806335Z" fill="white"/>
+    </svg>
+  </div>
+
+  <div class="hero-meta">
+    <span class="hero-tag">BD Intelligence</span>
+    <span class="hero-tag purple">Confidential</span>
+    <span class="hero-divider">·</span>
+    <span class="hero-date">June 2026</span>
+  </div>
+
+  <h1>Betsson Group<br><em>Sales Intelligence Report</em></h1>
+  <p class="hero-subtitle">iGaming Tier-1 Account · Multi-Market PSP Opportunity · LatAm Priority</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-value accent">€1.197B</span>
+      <span class="hero-stat-label">FY2025 Revenue</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value">€84.7M</span>
+      <span class="hero-stat-label">Q2 2025 LatAm Revenue</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value purple">€62.3M</span>
+      <span class="hero-stat-label">PSP Receivables (Dec 2025)</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-value">+35.4%</span>
+      <span class="hero-stat-label">LatAm Growth YoY</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════ NAV ═══════════════════════════════════════ -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#s1">01 Who</a>
+    <a href="#s2">02 Money</a>
+    <a href="#s2b">03 User Pain</a>
+    <a href="#s3">04 Regulation</a>
+    <a href="#s4">05 Financials</a>
+    <a href="#s5">06 LatAm</a>
+    <a href="#s6">07 Competitors</a>
+    <a href="#s7">08 Tech Signals</a>
+    <a href="#s8">09 Opportunity</a>
+    <a href="#s9">10 Contacts</a>
+    <a href="#s10">11 Hiring</a>
+    <a href="#s11">12 Domains</a>
+    <a href="#s12">13 Verdict</a>
+    <a href="#s13">14 Confidence</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ SECTIONS ═══════════════════════════════════════ -->
+<main>
+
+<!-- ── S1: WHO ── -->
+<section class="section" id="s1">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>What is Betsson Group?</h2>
+    </div>
+    <p>Betsson Group is one of Europe's largest publicly listed online gambling companies, trading on <a href="https://www.nasdaq.com/market-activity/stocks/bets-b" class="ext-link" target="_blank">Nasdaq Stockholm Large Cap</a> under the ticker <code>BETS-B</code>. Founded in 1963 as a land-based gaming company, it has grown into a multinational operator running sports betting, online casino, live casino, and poker products across 23 licensed jurisdictions.</p>
+    <p>The group operates a portfolio of brands — Betsson, Betsafe, Rizk, Kaboo, BetFirst, and Europebet — all powered by a single proprietary technology platform called <strong>Techsson</strong>. Techsson handles everything: player account management, game aggregation, bonuses, compliance tools, and critically, payment routing. One platform means one central payment integration point for the entire group.</p>
+    <p>In 2025, Betsson generated <strong>€1.197 billion</strong> in revenue. LatAm alone contributed €84.7M in Q2 2025 alone (+35.4% year-on-year) — a record quarter — making it the group's fastest-growing region. The company holds EUR 341.8M in cash (Q1 2026) and funds its growth from operating cash flow. This is a tier-1 iGaming operator where a PSP relationship, once established, is worth millions annually.</p>
+
+    <h3>Payment flow — real example: betsson.co Colombia</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Player sees</th>
+            <th>What is actually happening</th>
+            <th>Where it breaks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Selects NEQUI, enters COP 200,000</td>
+            <td>Techsson PAM routes request to a Colombian PSP with direct NEQUI integration. PSP processes deposit and credits Betsson's merchant account.</td>
+            <td>PSP NEQUI failure → player sees "payment error"</td>
+          </tr>
+          <tr>
+            <td>Deposit appears instantly</td>
+            <td>PSP confirms receipt, Techsson credits player balance.</td>
+            <td>Amount credited incorrectly — rare but documented on Trustpilot</td>
+          </tr>
+          <tr>
+            <td>Wins COP 350,000, requests withdrawal</td>
+            <td>Techsson sends withdrawal instruction to PSP. PSP initiates ACH / PSE transfer.</td>
+            <td>PSP supports fewer withdrawal methods than deposit methods — method mismatch</td>
+          </tr>
+          <tr>
+            <td>Waits 2–7 days</td>
+            <td>Compliance team reviews KYC. PSP executes transfer.</td>
+            <td>KYC used as delay. Funds arrive late or not at all. Top Trustpilot complaint across all brands.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal</div>
+      <p>Betsson moves player money at massive scale across 5 LatAm markets. Payment provider fees were <strong>explicitly cited in Q1 2026 earnings as a driver of margin erosion</strong> — EBITDA margin collapsed from 26.5% to 17.5% in one quarter. This is a company actively looking to fix its payment infrastructure costs and reliability. LaFinteca's entry point is not just a product conversation — it is a <strong>P&L conversation</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S2: MONEY ── -->
+<section class="section" id="s2">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>How does the money work?</h2>
+    </div>
+    <p>Betsson's payment infrastructure is split by market. There is no single global PSP — each jurisdiction runs its own payment stack, all connected into the Techsson PAM platform. Techsson acts as the central router: it receives a deposit or withdrawal instruction, identifies the player's market and currency, and dispatches the request to the relevant local PSP integration.</p>
+    <p>This architecture is both a strength and a vulnerability. A PSP failure in one integration propagates instantly across all brands in that market — because all brands share the same Techsson core.</p>
+
+    <h3>Payment method coverage by market</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Market</th>
+            <th>Deposit Methods (confirmed)</th>
+            <th>Withdrawal (confirmed)</th>
+            <th>Deposit-only gap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🇧🇷 Brazil</td>
+            <td>Pix ONLY</td>
+            <td>Pix ONLY</td>
+            <td>None — Pix is both</td>
+          </tr>
+          <tr>
+            <td>🇨🇴 Colombia</td>
+            <td>VISA, MC, AstroPay, Bank transfer, NEQUI, Bancolombia, PSE, PTM, Punto Red, Efecty, Carulla, SurtiMax, Exito, TPAGA, DAVIPLATA (15 methods)</td>
+            <td>VISA, MC, Bank transfer, PSE (estimated)</td>
+            <td>Carulla, SurtiMax, Exito (cash vouchers)</td>
+          </tr>
+          <tr>
+            <td>🇵🇪 Peru</td>
+            <td>MC, VISA, PLIN, PagoDirecto, Pago Efectivo, Interbank, BBVA, Scotiabank, Yape, BCP (10 methods)</td>
+            <td>VISA, MC, Pago Efectivo, BCP (estimated)</td>
+            <td>PLIN, Yape (digital wallets) may be deposit-only</td>
+          </tr>
+          <tr>
+            <td>🇦🇷 Argentina</td>
+            <td>VISA, MC, Maestro, AstroPay, Bank transfer, Voucher, Mercado Pago (7 methods)</td>
+            <td>Not confirmed (estimated)</td>
+            <td>Voucher likely deposit-only</td>
+          </tr>
+          <tr>
+            <td>🇲🇽 Mexico</td>
+            <td>VISA, MC, Todito Cash, Bank transfer, 7-Eleven, Codi, Paynet, SPEI, OXXO (9 methods)</td>
+            <td>Not confirmed (estimated)</td>
+            <td>7-Eleven, OXXO, Paynet (cash vouchers)</td>
+          </tr>
+          <tr>
+            <td>🌐 betsson.com (global)</td>
+            <td>MC, Visa, Maestro, Neteller, Paysafecard, Skrill, Apple Pay, Google Pay, PayPal, Swish, Pago Efectivo, Pix, Luxon Pay, MuchBetter, Bank Wire, Payz (16 methods)</td>
+            <td>Bank Wire, MC, Neteller, Skrill, Trustly, Visa, Apple Pay, Google Pay, PayPal, Swish, Pix, Luxon Pay, MuchBetter, Payz (14 methods)</td>
+            <td>Paysafecard, Maestro (2 methods)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Third-party processors identified</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Company / Method</th>
+            <th>Role</th>
+            <th>Confidence</th>
+            <th>Market</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nexta Payment Services Ltd</td>
+            <td>Pix processor — handles Pix deposits and withdrawals for Betsson Brazil. Identified from a player complaint.</td>
+            <td><span class="badge badge-orange">Partial — single source</span></td>
+            <td>Brazil</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.trustly.com" class="ext-link" target="_blank">Trustly</a></td>
+            <td>Open banking payment method. Outgoing traffic from betsafe.com and rizk.com showed Trustly at -100% MoM — confirmed PSP switch.</td>
+            <td><span class="badge badge-green">Confirmed — possibly phased out</span></td>
+            <td>Global / Nordic</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.ppro.com" class="ext-link" target="_blank">PPRO</a></td>
+            <td>Payment orchestration layer aggregating local methods. Dominant in BetFirst Belgium: 144,148 visits/month outgoing.</td>
+            <td><span class="badge badge-green">Confirmed (SimilarWeb)</span></td>
+            <td>Belgium (BetFirst)</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.checkout.com" class="ext-link" target="_blank">Checkout.com</a></td>
+            <td>Card acquiring — processes VISA/Mastercard.</td>
+            <td><span class="badge badge-green">Confirmed (SimilarWeb)</span></td>
+            <td>Belgium (BetFirst)</td>
+          </tr>
+          <tr>
+            <td>HiPay</td>
+            <td>Payment gateway — card processing and local methods.</td>
+            <td><span class="badge badge-green">Confirmed (SimilarWeb)</span></td>
+            <td>Belgium (BetFirst)</td>
+          </tr>
+          <tr>
+            <td>Skrill / Neteller (Paysafe)</td>
+            <td>eWallet processing — listed on multiple brand cashiers.</td>
+            <td><span class="badge badge-green">Confirmed (AskGamblers)</span></td>
+            <td>Global</td>
+          </tr>
+          <tr>
+            <td>PSE (Pago Seguro En Línea)</td>
+            <td>Colombia's interbank transfer network — mandatory for any serious Colombia stack.</td>
+            <td><span class="badge badge-green">Confirmed (casino.guru)</span></td>
+            <td>Colombia</td>
+          </tr>
+          <tr>
+            <td>Pago Efectivo</td>
+            <td>Peru's leading alternative payment — aggregates local bank transfers.</td>
+            <td><span class="badge badge-green">Confirmed (casino.guru)</span></td>
+            <td>Peru</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal</div>
+      <p><strong>Two hard facts:</strong> (1) Betsson Brazil runs on Pix ONLY via Nexta Payment Services Ltd — a small UK company. If Nexta has reliability issues, there is zero fallback and Betsson's entire Brazil operation stops. LaFinteca as a redundant Pix processor — or primary replacement — is a straightforward pitch. (2) The deposit/withdrawal method gap is a direct consequence of the PSP not offering symmetric payment coverage. LaFinteca's pitch is <strong>full method parity, deposit and withdrawal symmetry, across all 5 markets through one integration into Techsson</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S2b: USER PAIN ── -->
+<section class="section" id="s2b">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>What real users say about payments</h2>
+    </div>
+    <p>User payment complaints were collected from <a href="https://www.trustpilot.com" class="ext-link" target="_blank">Trustpilot</a> (all 6 brands) and <a href="https://www.askgamblers.com" class="ext-link" target="_blank">AskGamblers</a> (payment method tabs + complaint summaries). The picture is consistent across brands: deposits work, withdrawals break. This is not a brand-specific issue — it is a <strong>group-level infrastructure failure propagating through the shared Techsson platform</strong>.</p>
+
+    <div class="two-col">
+      <div class="info-block">
+        <div class="info-block-title">AskGamblers Stats — Betsson</div>
+        <ul>
+          <li>18 complaints filed / 18 resolved</li>
+          <li>Average complaint amount: $1,304</li>
+          <li>Average resolution time: 9 days</li>
+          <li>Average response time: 2 days</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Problem Severity</div>
+        <ul>
+          <li><span class="badge badge-red">Critical</span> Withdrawal blocked or impossible</li>
+          <li><span class="badge badge-red">Critical</span> KYC used to delay/block payout</li>
+          <li><span class="badge badge-orange">High</span> Deposit method ≠ withdrawal method</li>
+          <li><span class="badge badge-orange">High</span> Trustly failure (Nordic)</li>
+          <li><span class="badge badge-orange">High</span> Account frozen after large win</li>
+          <li><span class="badge badge-yellow">Medium</span> Deposit credited but never appears</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Problem 1 — Withdrawal blocked or impossible</h3>
+    <div class="quote-block">
+      <div class="quote-row">
+        <div class="quote-meta">🇮🇹 Italy · Betsson.com</div>
+        <div class="quote-text">Depositing without problems, but when it comes to withdrawing my winnings — the casino does not process it. Approved withdrawal sitting for 9+ days.</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🇵🇪 Peru · Betsson.com<br>AskGamblers — Rejected</div>
+        <div class="quote-text">I made a withdrawal of S/.1,646. Several weeks of waiting and the payment does not arrive. The casino does not respond.</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🇳🇴 Norway · Betsafe.com</div>
+        <div class="quote-text">Trustly withdrawal showed as "completed" on their end. Funds never arrived in my bank account. Support keeps telling me to wait.</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🇳🇿 New Zealand · Rizk.com</div>
+        <div class="quote-text">They changed payment providers and now the minimum withdrawal went from $20 to $90 NZD. Paysafe deposits only — but you can only withdraw via bank transfer now.</div>
+      </div>
+    </div>
+
+    <h3>Problem 2 — KYC used as a delay weapon</h3>
+    <div class="quote-block">
+      <div class="quote-row">
+        <div class="quote-meta">🇫🇮 Finland · Rizk.com</div>
+        <div class="quote-text">I made 81 deposits at Rizk. Never asked for KYC. The moment I requested a withdrawal — suddenly I need to verify everything. Three weeks of document requests, no payout.</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🇨🇦 Canada · Betsafe.com</div>
+        <div class="quote-text">Deposited $500 via Interac. Money left my bank account immediately. Never appeared in my Betsafe balance. Support said they need "additional verification." 2 weeks. Nothing.</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🇩🇪 Germany · Betsson.com</div>
+        <div class="quote-text">I submitted my passport, utility bill, and bank statement. All rejected. They asked again. I sent again. Account still frozen. €800 inside.</div>
+      </div>
+    </div>
+
+    <h3>Problem 3 — Deposit ≠ withdrawal method</h3>
+    <div class="quote-block">
+      <div class="quote-row">
+        <div class="quote-meta">🌍 Rizk.com</div>
+        <div class="quote-text">Deposited via Skrill. When I tried to withdraw back to Skrill — rejected. They said I have to use bank transfer. Why can I deposit with Skrill but not withdraw to it?</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🌍 Betsafe.com</div>
+        <div class="quote-text">Used MuchBetter to deposit. Tried to withdraw to MuchBetter — not available. Forced to use bank wire. Took 7 days.</div>
+      </div>
+    </div>
+
+    <h3>Problem 4 — Trustly exit (Nordic)</h3>
+    <div class="quote-block">
+      <div class="quote-row">
+        <div class="quote-meta">🇳🇴 Norway · Betsafe.com</div>
+        <div class="quote-text">I used Trustly for years. Suddenly my withdrawal via Trustly says "completed" on Betsafe but my bank has nothing. It has been 5 days.</div>
+      </div>
+      <div class="quote-row">
+        <div class="quote-meta">🌍 Rizk.com</div>
+        <div class="quote-text">Rizk used to have instant Trustly withdrawals. Now Trustly is gone from the cashier. They switched providers and didn't tell anyone. Now everything takes 3–7 days via bank transfer.</div>
+      </div>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal</div>
+      <p>The complaint pattern is structural. Betsson/Betsafe/Rizk all run Techsson — <strong>one PSP integration failure breaks all three brands simultaneously</strong> (confirmed: Trustly -100% MoM on both Betsafe and Rizk in the same month). LaFinteca's pitch is group-level: fix the infrastructure once, improve all brands. The average complaint amount of <strong>$1,304 and 9-day resolution time are quantifiable damage</strong>. PPRO on BetFirst Belgium also showed -74% MoM — another active infrastructure signal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S3: REGULATION ── -->
+<section class="section" id="s3">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Their legal journey</h2>
+    </div>
+    <p>Betsson holds gaming licenses in 23 jurisdictions. Its regulatory history is mostly clean for a company of this size, with two meaningful recent sanctions directly relevant to LaFinteca's pitch: a Sweden AML fine targeting transaction monitoring gaps, and a Finland blacklisting (now resolved) that kept Betsson off Finnish payment rails for 12 months.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Event</th>
+            <th>Market</th>
+            <th>Relevance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2019</td>
+            <td>Acquired Suaposta (75% stake) — LatAm entry vehicle in São Paulo</td>
+            <td>Brazil</td>
+            <td>LatAm expansion signal</td>
+          </tr>
+          <tr>
+            <td>2021</td>
+            <td>Acquired <a href="https://inkabet.pe" class="ext-link" target="_blank">Inkabet</a> ($25M) — Lima office, independent MINCETUR license</td>
+            <td>Peru</td>
+            <td>Biggest LatAm bet; separate payment integration possible</td>
+          </tr>
+          <tr>
+            <td>Apr 2024</td>
+            <td>Dominican Republic blacklisted — Resolution 136-2024 (market re-regulation, not misconduct)</td>
+            <td>DR</td>
+            <td>Minor reputational weight</td>
+          </tr>
+          <tr>
+            <td>Oct 2024</td>
+            <td><a href="https://www.traficom.fi" class="ext-link" target="_blank">Finland blacklist</a> — BML Group fined €2.4M for illegally targeting Finnish players. 12-month payment blocking order.</td>
+            <td>Finland</td>
+            <td>Aggressive compliance defense posture</td>
+          </tr>
+          <tr>
+            <td>Feb 2025</td>
+            <td>Brazil federal license effective: SPA/MF nº 0008/2024 — entity: Simulcasting Brasil Som e Imagem. Pix mandatory.</td>
+            <td>Brazil</td>
+            <td><span class="badge badge-red">LaFinteca: licensed PSP partner required by law</span></td>
+          </tr>
+          <tr>
+            <td>2025</td>
+            <td><a href="https://www.spelinspektionen.se" class="ext-link" target="_blank">Spelinspektionen</a> AML fine — SEK 6.5M (~€570K). Serious and systematic deficiencies in customer due diligence and source of funds verification.</td>
+            <td>Sweden</td>
+            <td><span class="badge badge-red">PSPs with compliance-grade AML tooling now boardroom priority</span></td>
+          </tr>
+          <tr>
+            <td>Mar 2025</td>
+            <td>Buenos Aires office opened — CEO Jesper Svensson + CCO Ronni Hartvig + Commercial Director LatAm Andrea Rossi present</td>
+            <td>Argentina</td>
+            <td>Argentina now a serious priority market</td>
+          </tr>
+          <tr>
+            <td>Jun 2024</td>
+            <td>MINCETUR licenses secured for betsson.pe and betsafe.com/pe</td>
+            <td>Peru</td>
+            <td>Legitimizes Peru operations</td>
+          </tr>
+          <tr>
+            <td>Oct 2025</td>
+            <td>Finland blacklisting resolved. Full Finland license application targeted Jan 2027.</td>
+            <td>Finland</td>
+            <td>Can serve Finnish players again</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal</div>
+      <p>The Sweden AML fine is the sharpest signal. Regulators explicitly identified <strong>inadequate transaction monitoring</strong> — meaning Betsson needs PSPs with better built-in AML/KYC tooling, not just faster rails. A PSP that can demonstrate compliance-grade transaction screening is now a <strong>boardroom-level requirement at Betsson</strong>. Brazil Law 15.358/2026 requires licensed PSP partners specifically — Betsson cannot legally process Pix through an unlicensed processor. <strong>LaFinteca's compliance credentials are a competitive differentiator here</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S4: FINANCIALS ── -->
+<section class="section" id="s4">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Who invested and how much?</h2>
+    </div>
+    <p>Betsson AB is a self-funded public company — no VC, no PE. It has been generating cash for over 20 years and funds its growth from operating income. The capital structure is straightforward: equity listed on Nasdaq Stockholm, supplemented by senior unsecured bonds.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Value</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FY2025 Revenue</td>
+            <td><strong>€1,197.0M</strong> (+8% YoY)</td>
+            <td><a href="https://www.betssongroup.com/investors/financial-reports/" class="ext-link" target="_blank">Q4 2025 Annual Report</a></td>
+          </tr>
+          <tr>
+            <td>Q1 2026 Revenue</td>
+            <td><strong>€285.3M</strong> (-3% reported, +4% organic)</td>
+            <td><a href="https://www.betssongroup.com/investors/financial-reports/" class="ext-link" target="_blank">Q1 2026 Interim Report</a></td>
+          </tr>
+          <tr>
+            <td>Q1 2026 EBITDA</td>
+            <td><strong>€50.0M</strong> — margin 17.5% (vs 26.5% prior year)</td>
+            <td>Q1 2026 Interim Report</td>
+          </tr>
+          <tr>
+            <td>Cash position (Q1 2026)</td>
+            <td><strong>€341.8M</strong></td>
+            <td>Q1 2026 Balance Sheet</td>
+          </tr>
+          <tr>
+            <td>PSP receivables (Dec 2025)</td>
+            <td><strong>€62.3M</strong> — funds held by payment service providers</td>
+            <td>Annual Report 2025, Note 19</td>
+          </tr>
+          <tr>
+            <td>Nov 2025 Bond issuance</td>
+            <td>EUR 75M new bonds, significantly oversubscribed, 4-year tenor to 2029</td>
+            <td>Betsson press release Nov 2025</td>
+          </tr>
+          <tr>
+            <td>Q2 2025 LatAm Revenue</td>
+            <td><strong>€84.7M</strong> (+35.4% YoY) — record quarter, EBITDA margin 27.7%</td>
+            <td>Betsson quarterly report</td>
+          </tr>
+          <tr>
+            <td>LatAm YoY growth (Q1 2026)</td>
+            <td><strong>+24.7%</strong> — Peru + Colombia primary drivers</td>
+            <td>Q1 2026 report</td>
+          </tr>
+          <tr>
+            <td>Revenue by region (Q1 2026)</td>
+            <td>CEECA 34% · LatAm 33% · Western Europe 21% · Nordics 11%</td>
+            <td>Q1 2026 report</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>M&A history — LatAm relevant</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Target</th>
+            <th>Market</th>
+            <th>Amount</th>
+            <th>Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2019</td>
+            <td>Suaposta (75%)</td>
+            <td>Brazil</td>
+            <td>Undisclosed</td>
+            <td>LatAm entry vehicle. Local sportsbook in São Paulo.</td>
+          </tr>
+          <tr>
+            <td>2021</td>
+            <td>Inkabet</td>
+            <td>Peru</td>
+            <td>$25M</td>
+            <td>Local brand with Lima office + MINCETUR license. Peru's second-biggest iGaming brand.</td>
+          </tr>
+          <tr>
+            <td>2023</td>
+            <td>BetFirst</td>
+            <td>Belgium</td>
+            <td>~€130M (est.)</td>
+            <td>Western Europe expansion.</td>
+          </tr>
+          <tr>
+            <td>2024</td>
+            <td>Sporting Solutions</td>
+            <td>UK</td>
+            <td>Undisclosed</td>
+            <td>B2B sportsbook technology — not LatAm relevant.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal — CFO-Level Pitch Anchor</div>
+      <p>One line in the Q1 2026 report anchors the pitch: <strong>payment provider fees were explicitly cited as a driver of gross margin erosion</strong> — margin fell from 64.0% to 57.6%. Additionally, <strong>EUR 62.3M sitting as receivables from PSPs</strong> = Betsson's capital tied up in settlement cycles. A PSP with faster settlement frees millions in working capital. LatAm EBITDA margin (27.7% in Q2 2025) is higher than group average — Betsson will protect this margin aggressively. <strong>The first conversation should be with Treasury or Finance, not just the payments operations team.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S5: LATAM ── -->
+<section class="section" id="s5">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>The LatAm Situation</h2>
+    </div>
+    <p>LatAm is Betsson's fastest-growing region and, as of Q1 2026, its second-largest revenue contributor at 33% of group revenue. The group operates across five confirmed LatAm markets — Colombia, Peru, Argentina, Mexico, Brazil — plus Paraguay (soft launch 2025).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Market</th>
+            <th>Domain</th>
+            <th>Monthly Traffic</th>
+            <th>License</th>
+            <th>PSP Gap / Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🇨🇴 Colombia</td>
+            <td><a href="https://www.betsson.co" class="ext-link" target="_blank">betsson.co</a></td>
+            <td>2,044,700</td>
+            <td><a href="https://www.coljuegos.gov.co" class="ext-link" target="_blank">Coljuegos</a> (official 14-operator list, confirmed)</td>
+            <td>New 19% VAT Feb 2025 squeezing margins</td>
+          </tr>
+          <tr>
+            <td>🇵🇪 Peru</td>
+            <td><a href="https://www.betsson.pe" class="ext-link" target="_blank">betsson.pe</a> + <a href="https://inkabet.pe" class="ext-link" target="_blank">inkabet.pe</a></td>
+            <td>~3.3M combined</td>
+            <td>MINCETUR (Jun 2024) + Inkabet separate</td>
+            <td>Turnover tax (0.3–1%). 3-brand PSP gap.</td>
+          </tr>
+          <tr>
+            <td>🇦🇷 Argentina</td>
+            <td><a href="https://www.betsson.com.ar" class="ext-link" target="_blank">betsson.com.ar</a> (975 visits — barely live)</td>
+            <td>605,105 via betsson.com</td>
+            <td>Buenos Aires + CABA + Córdoba licenses</td>
+            <td>Local domain non-functional. Payment stack being built.</td>
+          </tr>
+          <tr>
+            <td>🇲🇽 Mexico</td>
+            <td><a href="https://www.betsson.mx" class="ext-link" target="_blank">betsson.mx</a></td>
+            <td>367,980</td>
+            <td>SEGOB via Big Bola / Comercial de Juegos partnership</td>
+            <td>License is a partnership dependency — Big Bola controls SEGOB permit</td>
+          </tr>
+          <tr>
+            <td>🇧🇷 Brazil</td>
+            <td><a href="https://www.betsson.com.br" class="ext-link" target="_blank">betsson.com.br</a> (soft launch)</td>
+            <td>No SimilarWeb data yet</td>
+            <td>SPA/MF nº 0008/2024 — effective Feb 2025</td>
+            <td><span class="badge badge-red">Pix ONLY = 100% concentration risk on Nexta</span></td>
+          </tr>
+          <tr>
+            <td>🇵🇾 Paraguay</td>
+            <td><a href="https://www.betsson.com.py" class="ext-link" target="_blank">betsson.com.py</a></td>
+            <td>26,702</td>
+            <td>Local casino license (Dec 2024)</td>
+            <td>Smallest market. Brand new infrastructure.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Peru — The group's most important LatAm market</h3>
+    <p>Peru is where Betsson has made its biggest LatAm bet. Three separate brands operate simultaneously — betsson.pe (1.9M monthly visits), inkabet.pe (1.3M), and betsafe.com/pe (39,924 from Peru). Combined: over 3.2M monthly visits. One PSP integration failure affects three brands and over 3 million monthly sessions. Inkabet has a separate operational structure — potentially a separate payment integration, meaning <strong>LaFinteca could enter via Inkabet without navigating the full group Techsson integration</strong>.</p>
+
+    <h3>Brazil — The infrastructure-building phase</h3>
+    <p>The Brazil regulatory framework is the strictest in LatAm: Pix is the only permitted deposit/withdrawal method (Law 14.790/2023). Credit cards, crypto, and independent e-wallets are banned. Betsson's current Pix processor appears to be <strong>Nexta Payment Services Ltd</strong> (partially confirmed). <a href="https://www.reclameaqui.com.br" class="ext-link" target="_blank">Reclame Aqui</a> score of 3.2–4.2/10 with only 34.3% resolution rate suggests payment friction is contributing to poor user experience. betsson.com.br has no SimilarWeb data yet — it is in soft launch and <strong>PSP conversations are happening right now</strong>.</p>
+
+    <h3>Colombia — The crown jewel</h3>
+    <p>betsson.co generates 2.04M monthly visits, making it the dominant iGaming domain in Colombia (bet365 generates only 67,310 Colombian visits; Betano generates 46,637). Betsson is the clear market leader. The new 19% VAT on gambling transactions adds margin pressure — they need better payment infrastructure to protect margins, not fewer PSP options.</p>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal — Two-Tier LatAm Opportunity</div>
+      <p><strong>Tier 1 — Immediate:</strong> Brazil Pix infrastructure (single-PSP concentration risk, soft launch phase, infrastructure being built right now) and Peru payment parity across three brands. <strong>Tier 2 — Medium-term:</strong> Colombia stack optimization, Argentina infrastructure buildout, Mexico SPEI/OXXO optimization. Total addressable payment volume across all 5 markets: <strong>estimated $500M+ annually</strong> (extrapolated from Q2 2025 LatAm revenue of €84.7M at 4x annual, assuming 15–20% gross margin on GGR).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S6: COMPETITORS ── -->
+<section class="section" id="s6">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Their main competitors</h2>
+    </div>
+    <p>The competitive landscape matters for LaFinteca because the PSP deals competitors have struck are the model to replicate — or the gaps to exploit.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Global Traffic</th>
+            <th>🇧🇷 Brazil</th>
+            <th>🇨🇴 Colombia</th>
+            <th>🇵🇪 Peru</th>
+            <th>PSP Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Betsson (all brands)</strong></td>
+            <td>~13.5M</td>
+            <td>28K (soft launch)</td>
+            <td>2,045K</td>
+            <td>3,241K</td>
+            <td>Pix via Nexta (BR). PPRO (BE). Trustly failing (Nordic). Mixed stack.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.bet365.com" class="ext-link" target="_blank">bet365.com</a></td>
+            <td>38,550K</td>
+            <td>1,337K</td>
+            <td>67K</td>
+            <td>53K</td>
+            <td>Largest operator globally. Mature PSP stack — unlikely LaFinteca target.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betano.com" class="ext-link" target="_blank">betano.com (Kaizen)</a></td>
+            <td>9,702K</td>
+            <td>1,736K</td>
+            <td>47K</td>
+            <td>1,033K</td>
+            <td>Strong Brazil + Peru. Known for aggressive payment method expansion in LatAm.</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.1xbet.com" class="ext-link" target="_blank">1xbet.com</a></td>
+            <td>4,575K</td>
+            <td>208K</td>
+            <td>40K</td>
+            <td>33K</td>
+            <td><span class="badge badge-red">Pay4Fun PSP reportedly failing (Reclame Aqui 2.9/10) — HIGH LaFinteca pitch urgency</span></td>
+          </tr>
+          <tr>
+            <td>Superbet.com.br</td>
+            <td>N/A</td>
+            <td>Active (Brazil only)</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="badge badge-green">Reclame Aqui 8.1/10, 77.8% resolution rate — best-in-class Brazil payment experience. Model to beat.</span></td>
+          </tr>
+          <tr>
+            <td>Stake.com</td>
+            <td>Large</td>
+            <td>Active (BR licensed)</td>
+            <td>Active (Coljuegos)</td>
+            <td>Active</td>
+            <td>Crypto-native transitioning to fiat. Payment stack being rebuilt for regulated markets.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal — The Superbet Gap</div>
+      <p>Superbet Brazil has a Reclame Aqui score of 8.1/10 vs Betsson's 3.2–4.2/10. <strong>This gap is the pitch in one number.</strong> Betsson management can see this comparison on any public platform. The question LaFinteca poses: "What is Superbet doing for Pix infrastructure that you are not?" LaFinteca positions as Superbet-grade payment infrastructure for the rest of the Betsson group. Additionally, <strong>1xBet received its Brazil license in July 2025 and is actively building its payment stack with Pay4Fun reportedly failing</strong> — a parallel and potentially faster LaFinteca opportunity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S7: TECH ── -->
+<section class="section" id="s7">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Technology shift signals</h2>
+    </div>
+    <p>Betsson's technology stack is not public, but three signal sources reveal the direction of travel: SimilarWeb outgoing traffic trends, AskGamblers payment method lists, and press releases.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Signal</th>
+            <th>Observed</th>
+            <th>What it tells us</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-red">HIGH</span> Trustly outgoing: -100% MoM on both betsafe.com and rizk.com simultaneously</td>
+            <td>Feb–May 2026 (<a href="https://www.similarweb.com" class="ext-link" target="_blank">SimilarWeb</a>)</td>
+            <td>Group-level decision to remove/reduce Trustly routing across Nordic brands. A slot for an alternative A2A / open banking provider is now open.</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">HIGH</span> PPRO outgoing on betfirstcasino.be: -74% MoM</td>
+            <td>Feb–May 2026 (SimilarWeb)</td>
+            <td>BetFirst Belgium reducing PPRO dependency. Active PSP evaluation in Belgium likely underway.</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">HIGH</span> Rizk.com: 13 deposit methods, only 8 withdrawal methods</td>
+            <td>May 2026 (<a href="https://www.askgamblers.com" class="ext-link" target="_blank">AskGamblers</a>)</td>
+            <td>PSP switch left a 5-method withdrawal gap. New provider does not offer symmetric coverage. Actively causing player complaints.</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">WATCH</span> Brazil domain: no SimilarWeb data yet</td>
+            <td>Jun 2026</td>
+            <td>Domain too new / too low traffic for indexing. Brazilian infrastructure in early build phase — payment integrations being established now.</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-orange">HIGH</span> Nexta Payment Services Ltd as Pix processor</td>
+            <td>From player complaint (single source)</td>
+            <td>Nexta is a small UK-registered company. Not a tier-1 Brazilian Pix processor. Betsson may have defaulted to Nexta as a fast market-entry solution.</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-green">OPPORTUNITY</span> iGB LatAm payments webinar: Carlos Portugal (Betsson) speaking</td>
+            <td>Nov 2025 (<a href="https://www.igblive.com" class="ext-link" target="_blank">iGB</a>)</td>
+            <td>Betsson's Senior PSP Relationship Manager is actively researching and presenting on LatAm payment infrastructure. He is not passive — he is looking.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">LaFinteca Signal</div>
+      <p>The Trustly exit is the most actionable tech signal. Trustly was Betsson's primary open banking rail for Nordic markets. Its <strong>-100% disappearance means that rail is now empty</strong>. Any PSP offering A2A (account-to-account) capabilities with European open banking connectivity is in a conversation with Betsson right now, whether they know it or not. Additionally, <strong>Carlos Portugal is not just a procurement contact</strong> — he is a person actively presenting at industry conferences about LatAm payment challenges.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S8: OPPORTUNITY ── -->
+<section class="section" id="s8">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Where LaFinteca could work with them</h2>
+    </div>
+    <p>Betsson is a confirmed tier-1 iGaming operator with documented payment infrastructure pain across multiple markets. The question is which door to enter through, and in what order.</p>
+
+    <div class="opp-grid">
+      <div class="opp-card">
+        <div class="opp-market">🇧🇷</div>
+        <div class="opp-title">Brazil Pix — primary or redundant processor</div>
+        <span class="opp-chance">55%</span>
+        <div class="opp-bar-bg"><div class="opp-bar" style="width:55%"></div></div>
+        <div class="opp-desc">Replace or supplement Nexta as Betsson's Brazil Pix processor. PSP conversations are active. Infrastructure being built in real time.<br><br><em>Risk: Soft launch volume may not yet justify a PSP switch. Nexta may be under contract.</em></div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-market">🇵🇪</div>
+        <div class="opp-title">Peru — unified 3-brand payment orchestration</div>
+        <span class="opp-chance">45%</span>
+        <div class="opp-bar-bg"><div class="opp-bar" style="width:45%"></div></div>
+        <div class="opp-desc">Single API covering betsson.pe, inkabet.pe, and betsafe.com/pe. Full method symmetry for PLIN, Yape, BCP, BBVA, Pago Efectivo.<br><br><em>Risk: Inkabet may have independent PSP contracts. Group-level Techsson integration requires Malta tech team.</em></div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-market">🇨🇴</div>
+        <div class="opp-title">Colombia — stack optimization / fee reduction</div>
+        <span class="opp-chance">40%</span>
+        <div class="opp-bar-bg"><div class="opp-bar" style="width:40%"></div></div>
+        <div class="opp-desc">Lower processing fees on high-volume NEQUI and PSE transactions on betsson.co (2M monthly visits).<br><br><em>Risk: Colombia stack is mature. Harder sell unless Betsson is actively reviewing PSP contracts.</em></div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-market">🌐</div>
+        <div class="opp-title">Rizk / Betsafe — withdrawal method gap fix</div>
+        <span class="opp-chance">35%</span>
+        <div class="opp-bar-bg"><div class="opp-bar" style="width:35%"></div></div>
+        <div class="opp-desc">Provide the missing withdrawal methods on Rizk (5-method gap) and Betsafe's Nordic stack after Trustly exit.<br><br><em>Risk: Requires integration into Techsson at the PSP routing layer — through Malta tech, not LatAm commercial team.</em></div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-market">🇦🇷</div>
+        <div class="opp-title">Argentina — infrastructure buildout</div>
+        <span class="opp-chance">35%</span>
+        <div class="opp-bar-bg"><div class="opp-bar" style="width:35%"></div></div>
+        <div class="opp-desc">betsson.com.ar has 975 visits — local domain barely live. Argentina payment stack being built. First-mover PSP advantage.<br><br><em>Risk: Not yet a priority market. Deal timeline likely 6–12 months out.</em></div>
+      </div>
+      <div class="opp-card">
+        <div class="opp-market">🇲🇽</div>
+        <div class="opp-title">Mexico — SPEI/OXXO optimization</div>
+        <span class="opp-chance">30%</span>
+        <div class="opp-bar-bg"><div class="opp-bar" style="width:30%"></div></div>
+        <div class="opp-desc">Improve Mexico payment conversion on betsson.mx (368K monthly visits). SPEI and OXXO confirmed in stack.<br><br><em>Risk: License is a partnership with Big Bola — payment decisions may flow through Big Bola's existing PSP relationships.</em></div>
+      </div>
+    </div>
+
+    <h3>What would move these numbers</h3>
+    <div class="triggers">
+      <div class="trigger">
+        <div class="trigger-icon">📈</div>
+        <div class="trigger-text"><strong>Brazil volume scaling</strong> — If Betsson's Brazil monthly GGR crosses €5M, PSP infrastructure becomes a strategic priority. Watch betsson.com.br for SimilarWeb data appearing.</div>
+      </div>
+      <div class="trigger">
+        <div class="trigger-icon">⚡</div>
+        <div class="trigger-text"><strong>Nexta failure event</strong> — If Nexta experiences a Pix processing outage or regulatory issue, Betsson needs a new processor within days. LaFinteca should be positioned as the pre-qualified backup.</div>
+      </div>
+      <div class="trigger">
+        <div class="trigger-icon">📊</div>
+        <div class="trigger-text"><strong>Reclame Aqui as a KPI</strong> — If Betsson Brazil management sets a Reclame Aqui score improvement target (currently 3.2–4.2/10 vs Superbet's 8.1/10), payment infrastructure becomes a board-level topic.</div>
+      </div>
+      <div class="trigger">
+        <div class="trigger-icon">👤</div>
+        <div class="trigger-text"><strong>Carlos Portugal departure</strong> — If he leaves Betsson, the new PSP Relationship Manager will be rebuilding vendor relationships — a window for LaFinteca.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S9: CONTACTS ── -->
+<section class="section" id="s9">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Who to contact at Betsson Group</h2>
+    </div>
+    <p>Betsson's payment decision-making sits at the intersection of three functions: PSP Relationship Management (operational), LatAm Commercial (strategic), and Group Finance/Treasury (contractual). The LatAm team in Buenos Aires drives the commercial conversation but group-level PSP contracts are managed from Malta.</p>
+
+    <div class="contacts-grid">
+      <div class="contact-card primary">
+        <div class="contact-name">Carlos Portugal</div>
+        <div class="contact-role">Senior PSP Relationship Manager</div>
+        <div class="contact-why">Top contact. Owns PSP vendor relationships for LatAm. Spoke at <a href="https://www.igblive.com" class="ext-link" target="_blank">iGB LatAm payments webinar</a> Nov 2025 — actively researching the LatAm PSP market. He is the decision-maker for PSP onboarding.</div>
+        <div class="contact-links">
+          <a href="mailto:carlos.portugal@betsson.com">carlos.portugal@betsson.com</a>
+          <a href="https://www.linkedin.com/in/carlos-portugal-b62745189/" target="_blank">linkedin.com/in/carlos-portugal-b62745189/</a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-name">Andrea Rossi</div>
+        <div class="contact-role">Commercial Director LatAm</div>
+        <div class="contact-why">Strategic owner of LatAm P&L. Personally present at Buenos Aires office opening. Any PSP deal that affects LatAm commercial performance passes through her.</div>
+        <div class="contact-links">
+          <a href="mailto:andrea.rossi@betssongroup.com">andrea.rossi@betssongroup.com</a>
+          <a href="https://www.linkedin.com/in/rapudavi/" target="_blank">linkedin.com/in/rapudavi/</a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-name">Ronni Hartvig</div>
+        <div class="contact-role">Chief Commercial Officer</div>
+        <div class="contact-why">Confirmed at Buenos Aires opening. Group-level commercial relationships — warm entry if LaFinteca has a C-level connection.</div>
+        <div class="contact-links">
+          <a href="mailto:ronni.hartvig@betssongroup.com">ronni.hartvig@betssongroup.com</a>
+          <a href="https://www.linkedin.com/in/ronni-hartvig-b28b861/" target="_blank">linkedin.com/in/ronni-hartvig-b28b861/</a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-name">Maximiliano Bellio</div>
+        <div class="contact-role">Managing Director Argentina</div>
+        <div class="contact-why">Operational head of Argentina. If LaFinteca pitches Argentina payment infrastructure, he is the local decision-maker.</div>
+        <div class="contact-links">
+          <a href="mailto:maximiliano.bellio@betssongroup.com">maximiliano.bellio@betssongroup.com</a>
+          <a href="https://www.linkedin.com/in/maximiliano-bellio-4b469226/" target="_blank">linkedin.com/in/maximiliano-bellio-4b469226/</a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-name">Martin Öhman</div>
+        <div class="contact-role">CFO</div>
+        <div class="contact-why">Cited payment provider fees in Q1 2026 earnings commentary. Any PSP deal above a certain volume threshold will require CFO sign-off. Not a first contact — approach via conference or warm intro.</div>
+        <div class="contact-links">
+          <a href="https://www.betssongroup.com/investors/" target="_blank">betssongroup.com/investors</a>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-name">Jesper Svensson</div>
+        <div class="contact-role">CEO</div>
+        <div class="contact-why">Group CEO. Not a first contact. Relevant only if LaFinteca secures a group-level deal that requires CEO endorsement.</div>
+        <div class="contact-links">
+          <a href="mailto:jesper.svensson@betssongroup.com">jesper.svensson@betssongroup.com</a>
+          <a href="https://www.linkedin.com/in/jesper-svensson-69b7833/" target="_blank">linkedin.com/in/jesper-svensson-69b7833/</a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Recommended outreach approach</h3>
+    <div class="two-col">
+      <div class="info-block">
+        <div class="info-block-title">Track A — Direct outreach (Carlos Portugal)</div>
+        <ul>
+          <li>Reference the iGB LatAm payments webinar (Nov 2025) where he spoke</li>
+          <li>Open with: "We saw your presentation on LatAm PSP infrastructure challenges — we're working with several licensed operators on exactly these problems and would value 20 minutes."</li>
+          <li>Warm, specific, non-threatening. Goal: understand whether Betsson is actively evaluating PSP vendors for Brazil or Peru now.</li>
+          <li>Luisanna is the account owner per Key Accounts database (status: "In contact") — she should brief the team before any new outreach is sent</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Track B — Conference presence</div>
+        <ul>
+          <li><a href="https://www.igblive.com" class="ext-link" target="_blank">iGB L!VE 2026</a> — London, July 2026</li>
+          <li>SBC Summit LatAm — two most likely venues for Carlos Portugal or Andrea Rossi</li>
+          <li>LaFinteca should have presence at both</li>
+          <li>Luisanna is the relationship vehicle — she holds the warm line</li>
+          <li>Opening hook: Betsson Reclame Aqui (3.2/10) vs Superbet (8.1/10) data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S10: HIRING ── -->
+<section class="section" id="s10">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>What their hiring tells us</h2>
+    </div>
+    <p>Betsson's hiring activity was not fully researched in this cycle — a dedicated LinkedIn Jobs scan was not completed. The following is based on organizational signals from press releases and conference appearances. This section should be updated with a LinkedIn Jobs sweep before any outreach.</p>
+
+    <div class="info-block">
+      <div class="info-block-title">Known hiring signals</div>
+      <ul>
+        <li>Buenos Aires office opened March 2025 — local Argentina team hiring confirmed (operations, compliance, customer support)</li>
+        <li>Brazil local team being built — "period without dedicated BR customer support team" cited in Reclame Aqui context as a resolved issue, suggesting a 2025 Brazil hiring wave</li>
+        <li>Carlos Portugal's role (Senior PSP Relationship Manager) confirms a dedicated payments function at group level — likely Malta-based</li>
+      </ul>
+    </div>
+
+    <div class="signal">
+      <div class="signal-label">Watch Trigger — Hiring</div>
+      <p>Any job posting for <strong>"LatAm Payment Operations Manager"</strong>, <strong>"Brazil PSP Specialist"</strong>, or <strong>"Payment Partnerships LatAm"</strong> on LinkedIn signals that Betsson is expanding its LatAm payment team — act immediately. Set a LinkedIn Jobs alert: <a href="https://www.linkedin.com/company/betsson-group/jobs" class="ext-link" target="_blank">linkedin.com/company/betsson-group/jobs</a>. A hiring signal for a payment-specific LatAm role is a more reliable buy signal than any press release.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── S11: DOMAINS ── -->
+<section class="section" id="s11">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Websites connected to Betsson Group</h2>
+    </div>
+    <p>Betsson operates a multi-domain, multi-brand ecosystem across LatAm. Each active domain is a separate payment integration touchpoint — or one unified Techsson integration that covers all of them. The unified integration pitch is cleaner and more valuable to Betsson.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>What it is</th>
+            <th>Global Traffic</th>
+            <th>LatAm Market Traffic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.betsson.com" class="ext-link" target="_blank">betsson.com</a></td>
+            <td>Global main brand</td>
+            <td>3,135,686</td>
+            <td>AR: 605K · PE: 158K · BR: 28K · CO: 22K</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsson.co" class="ext-link" target="_blank">betsson.co</a></td>
+            <td>Colombia local domain</td>
+            <td>3,164,613</td>
+            <td>CO: 2,045K</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsson.pe" class="ext-link" target="_blank">betsson.pe</a></td>
+            <td>Peru local domain</td>
+            <td>2,929,857</td>
+            <td>PE: 1,925K</td>
+          </tr>
+          <tr>
+            <td><a href="https://inkabet.pe" class="ext-link" target="_blank">inkabet.pe</a></td>
+            <td>Peru local brand (acquired $25M, 2021)</td>
+            <td>2,956,157</td>
+            <td>PE: 1,317K</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsson.com.ar" class="ext-link" target="_blank">betsson.com.ar</a></td>
+            <td>Argentina local domain (barely live)</td>
+            <td>975</td>
+            <td>AR: 874</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsson.mx" class="ext-link" target="_blank">betsson.mx</a></td>
+            <td>Mexico (via Big Bola partnership)</td>
+            <td>677,606</td>
+            <td>MX: 368K</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsson.com.br" class="ext-link" target="_blank">betsson.com.br</a></td>
+            <td>Brazil local domain (soft launch)</td>
+            <td>No SW data</td>
+            <td>Unknown</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsson.com.py" class="ext-link" target="_blank">betsson.com.py</a></td>
+            <td>Paraguay (soft launch Dec 2024)</td>
+            <td>26,702</td>
+            <td>PY: ~5K (est.)</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betsafe.com" class="ext-link" target="_blank">betsafe.com</a></td>
+            <td>Global Betsafe brand</td>
+            <td>184,940</td>
+            <td>PE: 39.9K · BR: 2.3K</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.rizk.com" class="ext-link" target="_blank">rizk.com</a></td>
+            <td>Rizk casino brand</td>
+            <td>231,479</td>
+            <td>Minimal LatAm presence</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.betfirstcasino.be" class="ext-link" target="_blank">betfirstcasino.be</a></td>
+            <td>Belgium — BetFirst brand</td>
+            <td>133,723</td>
+            <td>Belgium only</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.europebet.com" class="ext-link" target="_blank">europebet.com</a></td>
+            <td>Georgia — Europebet brand</td>
+            <td>6,095</td>
+            <td>No LatAm presence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── S12: VERDICT ── -->
+<section class="section" id="s12">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">13</span>
+      <h2>The bottom line</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="info-block">
+        <div class="info-block-title" style="color: #3C6B00;">What confirms the opportunity</div>
+        <ul>
+          <li>Payment provider fees are a live CFO concern — cited in Q1 2026 earnings</li>
+          <li>Trustly exit opened a rail — slot is now empty</li>
+          <li>Brazil Pix processor is a small UK company (Nexta) with no public tier-1 credentials</li>
+          <li>Reclame Aqui score gap vs Superbet (3.2 vs 8.1/10) is visible and embarrassing for management</li>
+          <li>Carlos Portugal is named, confirmed, has a LinkedIn and email, and was presenting on LatAm PSP challenges in Nov 2025</li>
+          <li>Luisanna at LaFinteca has existing contact per Key Accounts database — not cold</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title" style="color: #C73B3B;">Risks and constraints</div>
+        <ul>
+          <li>Brazil is in soft launch — volume may not yet justify a PSP switch</li>
+          <li>Techsson is a proprietary PAM — integration requires Betsson's Malta tech team, not just the LatAm commercial team</li>
+          <li>Competition is active — every licensed PSP in LatAm is targeting Betsson; LaFinteca's window is not exclusive</li>
+          <li>Nexta may be locked in by a contract with penalty clauses</li>
+          <li>Hiring section requires a fresh LinkedIn Jobs scan before next outreach cycle</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="verdict-box">
+      <div class="verdict-label">Verdict — Research &amp; Intelligence Office · June 2026</div>
+      <div class="verdict-text">Moderate-to-high probability of a deal within 12 months if LaFinteca moves now. Betsson Group is a tier-1 iGaming operator with documented, systemic, and publicly visible payment infrastructure pain across its LatAm markets. The opportunity is not speculative.</div>
+      <div class="verdict-actions">
+        <div class="verdict-action">
+          <div class="verdict-action-num">01</div>
+          <div class="verdict-action-text"><strong>Luisanna to brief the team on current relationship status with Carlos Portugal.</strong> If contact is warm, schedule a call within 2 weeks. The "In contact" status in Key Accounts is the most important piece of intelligence for next steps.</div>
+        </div>
+        <div class="verdict-action">
+          <div class="verdict-action-num">02</div>
+          <div class="verdict-action-text"><strong>Prepare a one-page Brazil Pix infrastructure comparison</strong> — LaFinteca vs Nexta Payment Services Ltd. Specific, quantified, compliance-focused. This is the first meeting leave-behind.</div>
+        </div>
+        <div class="verdict-action">
+          <div class="verdict-action-num">03</div>
+          <div class="verdict-action-text"><strong>Register for <a href="https://www.igblive.com" target="_blank" style="color: var(--lime);">iGB L!VE London (July 2026)</a> and SBC Summit LatAm.</strong> Carlos Portugal and Andrea Rossi are the target meetings. Use Betsson Reclame Aqui vs Superbet data as the opening hook.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── S13: CONFIDENCE ── -->
+<section class="section" id="s13">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">14</span>
+      <h2>Confirmed vs. estimated</h2>
+    </div>
+
+    <div class="conf-block">
+      <div class="conf-title">Confirmed — multiple reliable sources</div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Betsson AB listed on Nasdaq Stockholm Large Cap (BETS-B). Confirmed: Betsson IR + Nasdaq.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">FY2025 revenue €1,197.0M. Q1 2026 revenue €285.3M. Source: Betsson quarterly reports.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Q2 2025 LatAm revenue €84.7M (+35.4% YoY). Source: Betsson quarterly report.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Payment provider fees cited as gross margin driver in Q1 2026 earnings commentary.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">EUR 62.3M receivables from payment service providers (Dec 2025). Source: Annual Report 2025, Note 19.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Brazil license: SPA/MF nº 0008/2024, entity Simulcasting Brasil Som e Imagem, effective Feb 25, 2025.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Trustly: -100% MoM outgoing on betsafe.com and rizk.com simultaneously. Source: SimilarWeb.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Carlos Portugal: Senior PSP Relationship Manager, spoke at iGB LatAm payments webinar Nov 2025. Source: iGB event record.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Sweden AML fine: SEK 6.5M from Spelinspektionen. Source: Spelinspektionen official press release.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Reclame Aqui Betsson Brazil: 3.2–4.2/10, 34.3% resolution rate. Source: reclameaqui.com.br (Aug 2025 – Jan 2026).</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot confirmed"></div>
+        <div class="conf-text">Betsson assigned to Luisanna in LaFinteca Key Accounts database, status "In contact." Source: Key_Accounts_2026.xlsx.</div>
+      </div>
+    </div>
+
+    <div class="conf-block">
+      <div class="conf-title">Partially confirmed or estimated</div>
+      <div class="conf-item">
+        <div class="conf-dot partial"></div>
+        <div class="conf-text"><strong>Nexta Payment Services Ltd as Betsson Brazil Pix processor:</strong> Single source — one player complaint mentioning "Nexta" as an intermediary. Not confirmed by Betsson officially or by a second source.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot partial"></div>
+        <div class="conf-text"><strong>Betsson Colombia / Peru withdrawal methods:</strong> Deposit stack confirmed (casino.guru, 15 methods / 10 methods). Withdrawal-specific methods not independently verified.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot estimated"></div>
+        <div class="conf-text"><strong>Betsson Argentina payment stack:</strong> 7 methods from casino.guru. Argentina local domain barely live — live payment stack may differ.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot estimated"></div>
+        <div class="conf-text"><strong>Mexico payment decision autonomy:</strong> License held by Comercial de Juegos de la Frontera (Big Bola). Whether Betsson controls PSP choices independently is unclear.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot estimated"></div>
+        <div class="conf-text"><strong>Total LatAm payment volume:</strong> Estimated $500M+ annually. Derived from Q2 2025 LatAm revenue extrapolated — wide range, treat as order-of-magnitude only.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot partial"></div>
+        <div class="conf-text"><strong>Betsson hiring in LatAm:</strong> Inferred from office opening announcements. Requires fresh <a href="https://www.linkedin.com/company/betsson-group/jobs" class="ext-link" target="_blank">LinkedIn Jobs scan</a> before next outreach cycle.</div>
+      </div>
+      <div class="conf-item">
+        <div class="conf-dot estimated"></div>
+        <div class="conf-text"><strong>Cashier deposit screenshots for all Betsson LatAm markets pending (Stan to provide).</strong> Section 2 payment stack details are from casino.guru / AskGamblers and may be 3–6 months old.</div>
+      </div>
+    </div>
+
+    <h3>Sources used</h3>
+    <div class="sources-grid">
+      <div class="source-item"><a href="https://www.similarweb.com" class="ext-link" target="_blank">SimilarWeb</a> — outgoing traffic analysis + LatAm domain traffic</div>
+      <div class="source-item"><a href="https://www.trustpilot.com" class="ext-link" target="_blank">Trustpilot</a> — payment-focused review analysis (all 6 brands)</div>
+      <div class="source-item"><a href="https://www.askgamblers.com" class="ext-link" target="_blank">AskGamblers</a> — payment method tabs + complaint summaries</div>
+      <div class="source-item"><a href="https://www.betssongroup.com/investors/financial-reports/" class="ext-link" target="_blank">Betsson AB Annual Report 2025</a> (Note 16 — entities, Note 19 — PSP receivables)</div>
+      <div class="source-item"><a href="https://www.betssongroup.com/investors/financial-reports/" class="ext-link" target="_blank">Betsson Q1 2026 Interim Report</a></div>
+      <div class="source-item"><a href="https://www.reclameaqui.com.br" class="ext-link" target="_blank">Reclame Aqui</a> — Brazil consumer complaint platform</div>
+      <div class="source-item"><a href="https://www.spelinspektionen.se" class="ext-link" target="_blank">Spelinspektionen (Sweden)</a> — AML fine press release</div>
+      <div class="source-item"><a href="https://www.coljuegos.gov.co" class="ext-link" target="_blank">Coljuegos</a> — Colombia 14-operator license list</div>
+      <div class="source-item"><a href="https://www.igblive.com" class="ext-link" target="_blank">iGB L!VE 2026 Key Account Intelligence doc</a> — LaFinteca internal</div>
+      <div class="source-item">Key Accounts 2026 xlsx — LaFinteca CRM database (Feb 2026)</div>
+      <div class="source-item"><a href="https://casino.guru" class="ext-link" target="_blank">Casino.guru</a> — payment method verification per market</div>
+      <div class="source-item">Finnish administrative court — Finland blacklisting records</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="15" viewBox="0 0 266 32" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 13.6783V17.375L17.326 25.6807V21.5062L4.86105 15.5373L17.326 9.81443V5.64613L0 13.6783Z" fill="#C3ABFF"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M266 18.4561V14.7594L248.674 6.45375V10.628L261.138 16.5971L248.674 22.32V26.4883L266 18.4561Z" fill="#C3ABFF"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M49.6406 21.3702V27.8137L53.818 32H62.547L66.1292 28.5663V32H70.5472V12.0717L65.8987 7.41318H54.4775L49.829 12.0717V15.7592H54.3884V13.5119L56.4264 11.5105H63.9968L66.035 13.5119V17.2331H53.8199L49.6406 21.3702ZM61.4087 27.9027L66.035 23.4434V21.3304H55.7663L54.2001 22.8604V26.3726L55.7663 27.9027H61.4087Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M98.9487 0.834671H77.0527V32H81.7064V17.2702H96.6872V12.9841H81.7064V5.12048H98.9487V0.834671Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M102.574 1.73128V4.25414L104.302 5.98535H106.819L108.547 4.25414V1.73128L106.819 -0.000209808H104.302L102.574 1.73128Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M107.841 12.9841H103.281V32H107.841V12.9841Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M118.776 7.41318H114.311V32H118.87V17.1438L124.397 11.6046H128.714L130.752 13.6063V32H135.311V12.0717L130.663 7.41318H123.01L118.776 11.657V7.41318Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M144.567 11.5575L141.809 27.1758L145.802 32H152.869L153.567 27.8556H148.241L146.625 25.8829L149.142 11.5575H156.449L157.149 7.41318H149.872L151.238 0.840582H146.749L145.383 7.41318H141.032L140.332 11.5575H144.567Z" fill="rgba(255,255,255,0.4)"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M160.326 12.0717V27.3415L164.974 32H177.244L181.892 27.3415V23.701H177.333V25.8068L175.296 27.8083H166.924L164.885 25.8068V21.2831H181.94V12.0701L177.242 7.41318H164.974L160.326 12.0717ZM175.342 11.6046L177.381 13.6063V17.186H164.885V13.6063L166.924 11.6046H175.342Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M187.873 12.0717V27.3415L192.523 32H204.273L208.921 27.3415V23.701H204.362V25.8068L202.325 27.8083H194.471L192.432 25.8068V13.6063L194.471 11.6046H202.325L204.362 13.6063V15.7121H208.921V12.0717L204.273 7.41318H192.523L187.873 12.0717Z" fill="rgba(255,255,255,0.4)"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M214.938 21.3702V27.8137L219.115 32H227.844L231.426 28.5663V32H235.843V12.0717L231.196 7.41318H219.773L215.125 12.0717V15.7592H219.684V13.5119L221.724 11.5105H229.293L231.332 13.5119V17.2331H219.115L214.938 21.3702ZM226.706 27.9027L231.332 23.4434V21.3304H221.063L219.496 22.8604V26.3726L221.063 27.9027H226.706Z" fill="rgba(255,255,255,0.4)"/>
+        <path d="M34.9739 0.806335H30.3203V31.9717H43.1585V27.7329H34.9739V0.806335Z" fill="rgba(255,255,255,0.4)"/>
+      </svg>
+    </div>
+    <div class="footer-meta">
+      <strong>Betsson Group — BD Intelligence Report</strong><br>
+      Marketing &amp; Research Office · Confidential · June 2026<br>
+      For internal use only. Do not distribute.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

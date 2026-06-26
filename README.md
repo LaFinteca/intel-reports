@@ -7,6 +7,7 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
 ### Reports
 
 - [Adult Cyberlocker Research](https://lafinteca.github.io/intel-reports/reports/adult-cyberlocker-research.html)
+- [Betsson Intel Brief](https://lafinteca.github.io/intel-reports/reports/betsson-intel-brief.html)
 - [Entertainment Investment Firms](https://lafinteca.github.io/intel-reports/reports/entertainment-investment-firms.html)
 - [MX iGaming Prospect Brief](https://lafinteca.github.io/intel-reports/reports/mx-igaming-prospect-brief.html)
 - [OKTO Brazil Intel Brief](https://lafinteca.github.io/intel-reports/reports/okto-brazil-intel-brief.html)
