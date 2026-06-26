@@ -18,7 +18,9 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
 ## How it works
 
 - Every `.html` file inside [`reports/`](reports/) is published at its own URL.
-- The [index page](index.html) **auto-discovers** reports via the GitHub API — no list to maintain.
+- The [index page](index.html) renders the list from [`reports.json`](reports.json) — a static manifest of every report (name, size, creation date), sorted newest-first. **No GitHub API calls**, so the list never breaks under API rate limits.
+- `reports.json` is regenerated automatically: the [Build reports manifest](.github/workflows/build-manifest.yml) Action runs [`scripts/build-manifest.mjs`](scripts/build-manifest.mjs) on every push that touches `reports/**`. To regenerate locally: `node scripts/build-manifest.mjs`.
+- Category tags and their colors live in `index.html` (`REPORT_TAGS` / `TAG_COLORS`) — add a line there when a report needs a tag.
 - The repo is public, so any report is viewable by anyone who has the URL.
 
 ## Add a report
