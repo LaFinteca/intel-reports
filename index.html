@@ -83,26 +83,9 @@
     .brand { display: flex; align-items: center; gap: 16px; }
     .brand svg { height: 21px; width: auto; display: block; }
     .brand .sep { width: 1px; height: 26px; background: var(--line-2); }
-    .unit {
-      font-family: var(--mono); font-weight: 600; font-size: 11px; letter-spacing: .22em;
-      color: var(--green);
-      border: 1px solid rgba(191,254,67,.32);
-      background: rgba(191,254,67,.06);
-      padding: 5px 9px 4px; border-radius: 5px;
-    }
-    .status {
-      font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
-      color: var(--gray-dim); text-transform: uppercase;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .dot {
-      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-      box-shadow: 0 0 0 0 rgba(191,254,67,.5); animation: pulse 2.4s infinite;
-    }
-    .status b { color: var(--gray); font-weight: 500; }
-    .caret {
-      display: inline-block; width: 7px; height: 13px; background: var(--green);
-      margin-left: 1px; animation: blink 1.1s steps(1) infinite; transform: translateY(2px);
+    .office {
+      font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gray);
     }
 
     /* ---- hero ---- */
@@ -220,15 +203,8 @@
     /* ---- keyframes ---- */
     @keyframes drop { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
     @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-    @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(191,254,67,.45); }
-      70% { box-shadow: 0 0 0 7px rgba(191,254,67,0); }
-      100% { box-shadow: 0 0 0 0 rgba(191,254,67,0); }
-    }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .001s !important; animation-delay: 0s !important; }
-      .caret, .dot { animation: none; }
     }
     @media (max-width: 560px) {
       .report a { grid-template-columns: 34px 1fr; }
@@ -260,22 +236,16 @@
           <path d="M71.4869 0H61.9131V63.9433H86.6686V55.2465H71.4869V0Z" fill="white"/>
         </svg>
         <span class="sep"></span>
-        <span class="unit">MRO</span>
-      </div>
-      <div class="status">
-        <span class="dot"></span>
-        <span>Intelligence Index</span> · <b id="count">— reports</b><span class="caret"></span>
+        <span class="office">Marketing &amp; Research Office</span>
       </div>
     </header>
 
     <!-- hero -->
     <section class="hero">
-      <div class="kicker">Merchant Risk Operations</div>
-      <h1>Intelligence<br>Reports<span class="accent">.</span></h1>
+      <div class="kicker">Marketing Intelligence Report Center</div>
+      <h1>Intelligence Reports<span class="accent">.</span></h1>
       <p class="lede">Market, merchant &amp; risk intelligence briefings — compiled by LaFinteca MRO. Each dossier below is a standalone report at its own address.</p>
       <div class="meta-row">
-        <span>Index <b id="count2">—</b></span>
-        <span>Format <b>HTML</b></span>
         <span>Updated <b id="updated">—</b></span>
       </div>
     </section>
@@ -331,8 +301,10 @@
     }
     function setCount(n) {
       const label = n + (n === 1 ? " report" : " reports");
-      document.getElementById("count").textContent = label;
-      document.getElementById("count2").textContent = String(n).padStart(2, "0");
+      const a = document.getElementById("count");
+      const b = document.getElementById("count2");
+      if (a) a.textContent = label;
+      if (b) b.textContent = String(n).padStart(2, "0");
     }
     function setState(html) { listEl.innerHTML = `<li class="state">${html}</li>`; }
 
