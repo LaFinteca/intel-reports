@@ -1,0 +1,44 @@
+name: Build reports manifest
+
+# Regenerates reports.json whenever a report is added/changed/removed, so the
+# site never has to call the GitHub API to list or date reports.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'reports/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-manifest
+  cancel-in-progress: false
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history → accurate creation dates
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Generate reports.json
+        run: node scripts/build-manifest.mjs
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- reports.json; then
+            echo "reports.json unchanged — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports.json
+          git commit -m "chore: regenerate reports.json [skip ci]"
+          git push

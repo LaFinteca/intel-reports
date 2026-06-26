@@ -277,7 +277,7 @@
   <script>
     const REPO = "LaFinteca/intel-reports";
     const DIR = "reports";
-    const API = `https://api.github.com/repos/${REPO}/contents/${DIR}`;
+    const MANIFEST = "reports.json";
 
     const listEl = document.getElementById("list");
 
@@ -338,15 +338,6 @@
       const d = new Date(iso);
       return isNaN(d) ? "" : d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
     }
-    // Creation date = the OLDEST commit that touched the file (one request per report).
-    function fetchCreated(name) {
-      const url = `https://api.github.com/repos/${REPO}/commits?path=${DIR}/${encodeURIComponent(name)}&per_page=100`;
-      return fetch(url, { headers: { Accept: "application/vnd.github.v3+json" } })
-        .then((r) => (r.ok ? r.json() : []))
-        .then((c) => (c.length ? c[c.length - 1].commit.committer.date : null))
-        .catch(() => null);
-    }
-
     function render(reports) {
       listEl.innerHTML = "";
       reports.forEach((r, i) => {
@@ -382,35 +373,28 @@
       if (newest) document.getElementById("updated").textContent = fmtDate(newest.created);
     }
 
-    fetch(API, { headers: { Accept: "application/vnd.github.v3+json" } })
-      .then((r) => { if (!r.ok) throw new Error(r.status === 404 ? "empty" : "err" + r.status); return r.json(); })
-      .then((items) => {
-        const reports = items.filter((i) => i.type === "file" && /\.html?$/i.test(i.name));
+    // Read the static manifest (regenerated on every report add). No GitHub API calls,
+    // so the list never breaks under rate limits. Cache-bust so a fresh deploy shows up.
+    fetch(`${MANIFEST}?v=${Date.now()}`, { headers: { Accept: "application/json" } })
+      .then((r) => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
+      .then((data) => {
+        const reports = (data || []).filter((r) => r && /\.html?$/i.test(r.name));
         setCount(reports.length);
         if (!reports.length) {
           setState("No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.");
           return;
         }
-        // Resolve each report's creation date, then sort newest-first (001 = most recent).
-        return Promise.all(
-          reports.map((r) => fetchCreated(r.name).then((created) => Object.assign({}, r, { created })))
-        ).then((withDates) => {
-          withDates.sort((a, b) => {
-            const tb = b.created ? Date.parse(b.created) : 0;
-            const ta = a.created ? Date.parse(a.created) : 0;
-            if (tb !== ta) return tb - ta;          // newest first
-            return a.name.localeCompare(b.name);    // stable tie-break for same-commit batches
-          });
-          render(withDates);
+        // Manifest is already newest-first; re-sort defensively in case it's hand-edited.
+        reports.sort((a, b) => {
+          const tb = b.created ? Date.parse(b.created) : 0;
+          const ta = a.created ? Date.parse(a.created) : 0;
+          if (tb !== ta) return tb - ta;          // newest first
+          return a.name.localeCompare(b.name);    // stable tie-break for same-commit batches
         });
+        render(reports);
       })
-      .catch((err) => {
-        if (String(err.message).includes("empty")) {
-          setCount(0);
-          setState("No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.");
-        } else {
-          setState(`Couldn't load the index. View the <a href="https://github.com/${REPO}/tree/main/reports">reports folder</a>.`);
-        }
+      .catch(() => {
+        setState(`Couldn't load the index. View the <a href="https://github.com/${REPO}/tree/main/reports">reports folder</a>.`);
       });
   </script>
 </body>
