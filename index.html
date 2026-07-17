@@ -387,6 +387,13 @@
     };
     function tagColor(t) { return TAG_COLORS[t] || "var(--purple)"; }
 
+    // Display-title overrides for the Digest panel (key = filename without extension).
+    // Every issue is named "…-digest-YYYY-MM-DD", which would otherwise all
+    // prettify to the same generic name — add a line per issue, e.g. its week number.
+    const DIGEST_TITLES = {
+      "friday-fintech-digest-2026-07-17": "Week 29",
+    };
+
     // "Updated" in the hero reflects whichever panel has the newest item.
     let latestUpdate = 0;
     function noteUpdate(iso) {
@@ -398,7 +405,7 @@
       }
     }
 
-    function renderList(items, listEl, dir, showTags) {
+    function renderList(items, listEl, dir, showTags, titleOverrides) {
       listEl.innerHTML = "";
       items.forEach((r, i) => {
         const li = document.createElement("li");
@@ -408,12 +415,14 @@
           ? tagsFor(r.name).map((t) => `<span class="tag" style="--c:${tagColor(t)}">${t}</span>`).join("")
           : "";
         const date = r.created ? fmtDate(r.created) : "—";
+        const overrideKey = r.name.replace(/\.html?$/i, "");
+        const title = (titleOverrides && titleOverrides[overrideKey]) || prettify(r.name);
         li.innerHTML = `
           <a href="${dir}/${r.name}">
             <span class="idx">${String(i + 1).padStart(3, "0")}</span>
             <span class="body">
               <span class="title-row">
-                <span class="name">${prettify(r.name)}</span>
+                <span class="name">${title}</span>
                 ${tags ? `<span class="tags">${tags}</span>` : ""}
               </span>
               <span class="path"><span class="slash">${dir}/</span>${r.name}</span>
@@ -432,7 +441,7 @@
 
     // Read a static manifest (regenerated on every add). No GitHub API calls,
     // so the list never breaks under rate limits. Cache-bust so a fresh deploy shows up.
-    function loadPanel({ manifest, dir, listId, countId, noun, showTags, emptyMsg }) {
+    function loadPanel({ manifest, dir, listId, countId, noun, showTags, emptyMsg, titleOverrides }) {
       const listEl = document.getElementById(listId);
       const countEl = document.getElementById(countId);
       fetch(`${manifest}?v=${Date.now()}`, { headers: { Accept: "application/json" } })
@@ -448,7 +457,7 @@
             if (tb !== ta) return tb - ta;          // newest first
             return a.name.localeCompare(b.name);    // stable tie-break for same-commit batches
           });
-          renderList(items, listEl, dir, showTags);
+          renderList(items, listEl, dir, showTags, titleOverrides);
           const newest = items.find((r) => r.created);
           if (newest) noteUpdate(newest.created);
         })
@@ -467,6 +476,7 @@
       manifest: "digests.json", dir: "digests",
       listId: "digestList", countId: "digCount", noun: "issue", showTags: false,
       emptyMsg: "No issues yet. Drop an <code>.html</code> file into <code>digests/</code> to begin.",
+      titleOverrides: DIGEST_TITLES,
     });
   </script>
 </body>
