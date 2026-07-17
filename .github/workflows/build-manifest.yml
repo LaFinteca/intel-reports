@@ -1,12 +1,14 @@
-name: Build reports manifest
+name: Build manifests
 
-# Regenerates reports.json whenever a report is added/changed/removed, so the
-# site never has to call the GitHub API to list or date reports.
+# Regenerates reports.json and digests.json whenever a report or digest issue
+# is added/changed/removed, so the site never has to call the GitHub API to
+# list or date them.
 on:
   push:
     branches: [main]
     paths:
       - 'reports/*.html'      # only report pages — not state files like praxis-state.json
+      - 'digests/*.html'
   workflow_dispatch:
 
 permissions:
@@ -28,17 +30,17 @@ jobs:
         with:
           node-version: 24
 
-      - name: Generate reports.json
+      - name: Generate manifests
         run: node scripts/build-manifest.mjs
 
       - name: Commit if changed
         run: |
-          if git diff --quiet -- reports.json; then
-            echo "reports.json unchanged — nothing to commit."
+          if git diff --quiet -- reports.json digests.json; then
+            echo "Manifests unchanged — nothing to commit."
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add reports.json
-          git commit -m "chore: regenerate reports.json [skip ci]"
+          git add reports.json digests.json
+          git commit -m "chore: regenerate manifests [skip ci]"
           git push

@@ -68,7 +68,7 @@
 
     .wrap {
       position: relative; z-index: 1;
-      max-width: 880px; margin: 0 auto;
+      max-width: 1180px; margin: 0 auto;
       padding: 0 28px 120px;
     }
 
@@ -109,6 +109,38 @@
       text-transform: uppercase;
     }
     .meta-row span b { color: var(--white); font-weight: 600; }
+
+    /* ---- two-column layout: Reports | Industry Digest ---- */
+    .columns {
+      display: grid; grid-template-columns: 1fr 1px 1fr;
+      gap: 40px; align-items: start; margin-top: 8px;
+    }
+    .col-divider { align-self: stretch; background: var(--line); min-height: 100%; }
+    .panel { min-width: 0; }
+    .panel-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 12px; padding: 0 4px 16px;
+    }
+    .panel-title {
+      font-family: var(--sans); font-weight: 700; font-size: 1.3rem;
+      letter-spacing: -0.02em; color: var(--white);
+      display: flex; align-items: center; gap: 9px;
+    }
+    .panel-title::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+    .panel-reports .panel-title::before { background: var(--green); }
+    .panel-digest .panel-title::before { background: var(--purple); }
+    .panel-count {
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--gray-dim); white-space: nowrap;
+    }
+
+    @media (max-width: 860px) {
+      .columns { grid-template-columns: 1fr; gap: 0; }
+      .col-divider { display: none; }
+      .panel:nth-of-type(2) { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+    }
 
     /* ---- report list ---- */
     .list-head {
@@ -246,26 +278,50 @@
     <section class="hero">
       <div class="kicker">Marketing Intelligence</div>
       <h1>Report Center<span class="accent">.</span></h1>
-      <p class="lede">Market, merchant &amp; risk intelligence briefings — compiled by LaFinteca MRO. Each dossier below is a standalone report at its own address.</p>
+      <p class="lede">Market, merchant &amp; risk intelligence briefings, and the weekly Industry Digest — compiled by LaFinteca MRO. Each item below is a standalone page at its own address.</p>
       <div class="meta-row">
         <span>Updated <b id="updated">—</b></span>
       </div>
     </section>
 
-    <!-- list -->
-    <div class="list-head">
-      <span>Dossier</span>
-      <span>Size</span>
+    <!-- two-column: Reports | Industry Digest -->
+    <div class="columns">
+      <section class="panel panel-reports" aria-labelledby="repTitle">
+        <div class="panel-head">
+          <h2 class="panel-title" id="repTitle">Reports</h2>
+          <span class="panel-count" id="repCount">— reports</span>
+        </div>
+        <div class="list-head">
+          <span>Dossier</span>
+          <span>Size</span>
+        </div>
+        <ul class="reports" id="list">
+          <li class="state" id="repState">Loading index…</li>
+        </ul>
+      </section>
+
+      <div class="col-divider" aria-hidden="true"></div>
+
+      <section class="panel panel-digest" aria-labelledby="digTitle">
+        <div class="panel-head">
+          <h2 class="panel-title" id="digTitle">Industry Digest</h2>
+          <span class="panel-count" id="digCount">— issues</span>
+        </div>
+        <div class="list-head">
+          <span>Issue</span>
+          <span>Date</span>
+        </div>
+        <ul class="reports" id="digestList">
+          <li class="state" id="digState">Loading digest…</li>
+        </ul>
+      </section>
     </div>
-    <ul class="reports" id="list">
-      <li class="state" id="state">Loading index…</li>
-    </ul>
 
     <!-- footer -->
     <footer>
       <div class="col-l">
         LaFinteca · Instituição de Pagamento<br>
-        Add a report → commit an <code>.html</code> into <code>reports/</code>
+        Add a report → commit an <code>.html</code> into <code>reports/</code> or <code>digests/</code>
       </div>
       <div class="col-r">
         <a href="https://github.com/LaFinteca/intel-reports" target="_blank" rel="noopener">source repository ↗</a><br>
@@ -276,10 +332,6 @@
 
   <script>
     const REPO = "LaFinteca/intel-reports";
-    const DIR = "reports";
-    const MANIFEST = "reports.json";
-
-    const listEl = document.getElementById("list");
 
     // Tokens that should keep specific casing instead of plain Title Case.
     const CASE_OVERRIDES = {
@@ -288,8 +340,10 @@
       ai: "AI", api: "API", mro: "MRO", q1: "Q1", q2: "Q2", q3: "Q3", q4: "Q4",
     };
     function prettify(name) {
-      return name
-        .replace(/\.html?$/i, "")
+      // Strip a trailing -YYYY-MM-DD (digest filenames carry one; the date
+      // already shows in its own column) before title-casing.
+      const base = name.replace(/\.html?$/i, "").replace(/-\d{4}-\d{2}-\d{2}$/, "");
+      return base
         .split(/[-_\s]+/)
         .filter(Boolean)
         .map((w) => CASE_OVERRIDES[w.toLowerCase()] || (w.charAt(0).toUpperCase() + w.slice(1)))
@@ -301,14 +355,11 @@
       if (bytes >= 1024) return Math.round(bytes / 1024) + " KB";
       return bytes + " B";
     }
-    function setCount(n) {
-      const label = n + (n === 1 ? " report" : " reports");
-      const a = document.getElementById("count");
-      const b = document.getElementById("count2");
-      if (a) a.textContent = label;
-      if (b) b.textContent = String(n).padStart(2, "0");
+    function fmtDate(iso) {
+      const d = new Date(iso);
+      return isNaN(d) ? "" : d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
     }
-    function setState(html) { listEl.innerHTML = `<li class="state">${html}</li>`; }
+    function setListState(listEl, html) { listEl.innerHTML = `<li class="state">${html}</li>`; }
 
     // Editorial category tags per report (key = filename without extension).
     // Add a line when you add a report; values are arrays, so a report can carry several.
@@ -336,29 +387,36 @@
     };
     function tagColor(t) { return TAG_COLORS[t] || "var(--purple)"; }
 
-    function fmtDate(iso) {
-      const d = new Date(iso);
-      return isNaN(d) ? "" : d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
+    // "Updated" in the hero reflects whichever panel has the newest item.
+    let latestUpdate = 0;
+    function noteUpdate(iso) {
+      const t = iso ? Date.parse(iso) : 0;
+      if (t && t > latestUpdate) {
+        latestUpdate = t;
+        const el = document.getElementById("updated");
+        if (el) el.textContent = fmtDate(iso);
+      }
     }
-    function render(reports) {
+
+    function renderList(items, listEl, dir, showTags) {
       listEl.innerHTML = "";
-      reports.forEach((r, i) => {
+      items.forEach((r, i) => {
         const li = document.createElement("li");
         li.className = "report";
         li.style.animationDelay = (0.12 + i * 0.06) + "s";
-        const tags = tagsFor(r.name)
-          .map((t) => `<span class="tag" style="--c:${tagColor(t)}">${t}</span>`)
-          .join("");
+        const tags = showTags
+          ? tagsFor(r.name).map((t) => `<span class="tag" style="--c:${tagColor(t)}">${t}</span>`).join("")
+          : "";
         const date = r.created ? fmtDate(r.created) : "—";
         li.innerHTML = `
-          <a href="${DIR}/${r.name}">
+          <a href="${dir}/${r.name}">
             <span class="idx">${String(i + 1).padStart(3, "0")}</span>
             <span class="body">
               <span class="title-row">
                 <span class="name">${prettify(r.name)}</span>
                 ${tags ? `<span class="tags">${tags}</span>` : ""}
               </span>
-              <span class="path"><span class="slash">${DIR}/</span>${r.name}</span>
+              <span class="path"><span class="slash">${dir}/</span>${r.name}</span>
             </span>
             <span class="aside">
               <span class="aside-meta">
@@ -370,34 +428,46 @@
           </a>`;
         listEl.appendChild(li);
       });
-      // "Updated" reflects the newest report (top of the list).
-      const newest = reports.find((r) => r.created);
-      if (newest) document.getElementById("updated").textContent = fmtDate(newest.created);
     }
 
-    // Read the static manifest (regenerated on every report add). No GitHub API calls,
+    // Read a static manifest (regenerated on every add). No GitHub API calls,
     // so the list never breaks under rate limits. Cache-bust so a fresh deploy shows up.
-    fetch(`${MANIFEST}?v=${Date.now()}`, { headers: { Accept: "application/json" } })
-      .then((r) => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
-      .then((data) => {
-        const reports = (data || []).filter((r) => r && /\.html?$/i.test(r.name));
-        setCount(reports.length);
-        if (!reports.length) {
-          setState("No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.");
-          return;
-        }
-        // Manifest is already newest-first; re-sort defensively in case it's hand-edited.
-        reports.sort((a, b) => {
-          const tb = b.created ? Date.parse(b.created) : 0;
-          const ta = a.created ? Date.parse(a.created) : 0;
-          if (tb !== ta) return tb - ta;          // newest first
-          return a.name.localeCompare(b.name);    // stable tie-break for same-commit batches
+    function loadPanel({ manifest, dir, listId, countId, noun, showTags, emptyMsg }) {
+      const listEl = document.getElementById(listId);
+      const countEl = document.getElementById(countId);
+      fetch(`${manifest}?v=${Date.now()}`, { headers: { Accept: "application/json" } })
+        .then((r) => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
+        .then((data) => {
+          const items = (data || []).filter((r) => r && /\.html?$/i.test(r.name));
+          if (countEl) countEl.textContent = items.length + (items.length === 1 ? ` ${noun}` : ` ${noun}s`);
+          if (!items.length) { setListState(listEl, emptyMsg); return; }
+          // Manifest is already newest-first; re-sort defensively in case it's hand-edited.
+          items.sort((a, b) => {
+            const tb = b.created ? Date.parse(b.created) : 0;
+            const ta = a.created ? Date.parse(a.created) : 0;
+            if (tb !== ta) return tb - ta;          // newest first
+            return a.name.localeCompare(b.name);    // stable tie-break for same-commit batches
+          });
+          renderList(items, listEl, dir, showTags);
+          const newest = items.find((r) => r.created);
+          if (newest) noteUpdate(newest.created);
+        })
+        .catch(() => {
+          setListState(listEl, `Couldn't load the index. View the <a href="https://github.com/${REPO}/tree/main/${dir}">${dir} folder</a>.`);
         });
-        render(reports);
-      })
-      .catch(() => {
-        setState(`Couldn't load the index. View the <a href="https://github.com/${REPO}/tree/main/reports">reports folder</a>.`);
-      });
+    }
+
+    loadPanel({
+      manifest: "reports.json", dir: "reports",
+      listId: "list", countId: "repCount", noun: "report", showTags: true,
+      emptyMsg: "No dossiers yet. Drop an <code>.html</code> file into <code>reports/</code> to begin.",
+    });
+
+    loadPanel({
+      manifest: "digests.json", dir: "digests",
+      listId: "digestList", countId: "digCount", noun: "issue", showTags: false,
+      emptyMsg: "No issues yet. Drop an <code>.html</code> file into <code>digests/</code> to begin.",
+    });
   </script>
 </body>
 </html>

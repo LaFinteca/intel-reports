@@ -1,6 +1,6 @@
 # Intelligence Reports
 
-Static HTML intelligence reports, each served at its own unique URL via GitHub Pages.
+Static HTML intelligence reports and the weekly Industry Digest, each served at its own unique URL via GitHub Pages. The live index lists both in a two-column layout — **Reports** on the left, **Industry Digest** on the right.
 
 **Live index:** https://lafinteca.github.io/intel-reports/
 
@@ -15,15 +15,19 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
 - [Praxis Tech Intelligence Brief](https://lafinteca.github.io/intel-reports/reports/praxis-tech-intelligence-brief.html)
 - [Prediction Markets Vertical Assessment](https://lafinteca.github.io/intel-reports/reports/prediction-markets-vertical.html)
 
-> This list is a manual mirror — the [live index](https://lafinteca.github.io/intel-reports/) auto-updates, so re-add a line here whenever you add a report (or skip it and rely on the live page).
+### Industry Digest
+
+- [Friday Fintech Digest — 17 Jul 2026](https://lafinteca.github.io/intel-reports/digests/friday-fintech-digest-2026-07-17.html)
+
+> These lists are a manual mirror — the [live index](https://lafinteca.github.io/intel-reports/) auto-updates, so re-add a line here whenever you add a report or issue (or skip it and rely on the live page).
 
 ## How it works
 
-- Every `.html` file inside [`reports/`](reports/) is published at its own URL.
-- The [index page](index.html) renders the list from [`reports.json`](reports.json) — a static manifest of every report (name, size, creation date), sorted newest-first. **No GitHub API calls**, so the list never breaks under API rate limits.
-- `reports.json` is regenerated automatically: the [Build reports manifest](.github/workflows/build-manifest.yml) Action runs [`scripts/build-manifest.mjs`](scripts/build-manifest.mjs) on every push that touches `reports/**`. To regenerate locally: `node scripts/build-manifest.mjs`.
-- Category tags and their colors live in `index.html` (`REPORT_TAGS` / `TAG_COLORS`) — add a line there when a report needs a tag.
-- The repo is public, so any report is viewable by anyone who has the URL.
+- Every `.html` file inside [`reports/`](reports/) or [`digests/`](digests/) is published at its own URL.
+- The [index page](index.html) renders both lists from static manifests — [`reports.json`](reports.json) and [`digests.json`](digests.json) — each a JSON array of `{ name, size, creation date }`, sorted newest-first. **No GitHub API calls**, so the lists never break under API rate limits.
+- Both manifests regenerate automatically: the [Build manifests](.github/workflows/build-manifest.yml) Action runs [`scripts/build-manifest.mjs`](scripts/build-manifest.mjs) on every push that touches `reports/*.html` or `digests/*.html`. To regenerate locally: `node scripts/build-manifest.mjs`.
+- Category tags and their colors (Reports panel only) live in `index.html` (`REPORT_TAGS` / `TAG_COLORS`) — add a line there when a report needs a tag.
+- The repo is public, so any report or digest issue is viewable by anyone who has the URL.
 
 ## Add a report
 
@@ -43,6 +47,14 @@ Static HTML intelligence reports, each served at its own unique URL via GitHub P
    ```
    and appears automatically on the index.
 
+## Add a digest issue
+
+Same flow, into `digests/` instead — name it with the issue date so it sorts and displays cleanly:
+```
+digests/friday-fintech-digest-2026-07-24.html
+```
+The index strips a trailing `-YYYY-MM-DD` from the display title (the date already shows in its own column), so the issue above appears as **"Friday Fintech Digest."** Commit, push, and it appears on the Industry Digest panel within ~1 minute.
+
 ## Naming → URL
 
 The filename becomes the URL and the display title on the index:
@@ -51,10 +63,11 @@ The filename becomes the URL and the display title on the index:
 |------|----------|-------------|
 | `pix-market-scan.html` | `/reports/pix-market-scan.html` | Pix Market Scan |
 | `bcb-regulatory-2026.html` | `/reports/bcb-regulatory-2026.html` | Bcb Regulatory 2026 |
+| `friday-fintech-digest-2026-07-17.html` | `/digests/friday-fintech-digest-2026-07-17.html` | Friday Fintech Digest |
 
 Use lowercase, hyphen-separated names. Avoid spaces and special characters.
 
 ## Notes
 
 - `.nojekyll` disables GitHub's Jekyll processing so files are served exactly as committed.
-- Reports are self-contained HTML (inline CSS/JS) — exactly what Claude artifacts produce — so they need no build step.
+- Reports and digest issues are self-contained HTML (inline CSS/JS) — exactly what Claude artifacts produce — so they need no build step.
