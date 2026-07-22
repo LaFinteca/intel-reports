@@ -372,6 +372,7 @@
       "polymarket-analysis":            ["Prediction Markets"],
       "adult-cyberlocker-research":     ["Adult"],
       "prediction-markets-vertical":    ["Prediction Markets"],
+      "compliance-workload-report":     ["Internal"],
     };
     function tagsFor(name) { return REPORT_TAGS[name.replace(/\.html?$/i, "")] || []; }
 
@@ -384,6 +385,7 @@
       "Investors":          "#5BB8FF",  // sky
       "Prediction Markets": "#C3ABFF",  // lilac
       "Forex":              "#4ED9D9",  // cyan
+      "Internal":           "#9A9A9A",  // neutral gray — flags internal-ops docs, not market intel
     };
     function tagColor(t) { return TAG_COLORS[t] || "var(--purple)"; }
 
