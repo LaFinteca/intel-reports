@@ -15,6 +15,8 @@ Static HTML intelligence reports and the weekly Industry Digest, each served at 
 - [Praxis Tech Intelligence Brief](https://lafinteca.github.io/intel-reports/reports/praxis-tech-intelligence-brief.html)
 - [Prediction Markets Vertical Assessment](https://lafinteca.github.io/intel-reports/reports/prediction-markets-vertical.html)
 - [Compliance Workload Report](https://lafinteca.github.io/intel-reports/reports/compliance-workload-report.html) — *Internal*
+- [Conduit Intelligence Update](https://lafinteca.github.io/intel-reports/reports/conduit-intelligence-update-2026-07.html)
+- [Easygo Group Intelligence Brief](https://lafinteca.github.io/intel-reports/reports/easygo-group-intelligence-brief.html)
 
 ### Industry Digest
 

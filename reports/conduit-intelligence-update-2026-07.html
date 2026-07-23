@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conduit — Intelligence Update | MRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0F13;
+    --panel:#12161C;
+    --panel-2:#171C23;
+    --line:#242B33;
+    --ink:#EAE7DF;
+    --ink-dim:#9BA3AC;
+    --ink-faint:#5D6670;
+    --signal:#4FBF9F;
+    --signal-dim:#33463F;
+    --risk:#E0663C;
+    --risk-dim:#3A2A22;
+    --gold:#D1A954;
+    --blue:#5E9BD6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.6;
+    font-size:15px;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 32px;}
+
+  /* ===== Cover ===== */
+  header.cover{
+    padding:72px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--signal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .kicker::before{content:"●"; font-size:8px;}
+  h1.title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:44px;
+    line-height:1.08;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    max-width:680px;
+  }
+  .subtitle{
+    font-size:16px;
+    color:var(--ink-dim);
+    margin-top:16px;
+    max-width:600px;
+  }
+  .meta-row{
+    display:flex;
+    gap:32px;
+    margin-top:32px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    flex-wrap:wrap;
+  }
+  .meta-row div span{display:block; color:var(--ink-dim); font-size:11px; margin-bottom:4px;}
+  .meta-row div b{color:var(--ink); font-weight:500; font-size:12px;}
+
+  /* ===== Sections ===== */
+  section{padding:56px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--signal);
+    border:1px solid var(--signal-dim);
+    padding:3px 8px;
+    border-radius:3px;
+  }
+  h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:24px;
+    font-weight:600;
+    letter-spacing:-.01em;
+  }
+  h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:16px;
+    font-weight:600;
+    margin:28px 0 12px;
+    color:var(--ink);
+  }
+  p{color:var(--ink-dim); margin-bottom:14px; max-width:720px;}
+  p.lead{color:var(--ink); font-size:16px;}
+  strong{color:var(--ink); font-weight:600;}
+  a{color:var(--blue);}
+
+  /* ===== Flag / callout boxes ===== */
+  .flag{
+    background:var(--risk-dim);
+    border:1px solid #4A3226;
+    border-left:3px solid var(--risk);
+    border-radius:4px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .flag .flag-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--risk);
+    margin-bottom:6px;
+    display:block;
+  }
+  .flag p{color:var(--ink); font-size:14px; margin-bottom:0;}
+
+  .note{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-left:3px solid var(--gold);
+    border-radius:4px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .note .note-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:6px;
+    display:block;
+  }
+  .note p{color:var(--ink); font-size:14px; margin-bottom:0;}
+
+  .confirm{
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-left:3px solid var(--signal);
+    border-radius:4px;
+    padding:16px 18px;
+    margin:18px 0;
+  }
+  .confirm .confirm-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--signal);
+    margin-bottom:6px;
+    display:block;
+  }
+  .confirm p{color:var(--ink); font-size:14px; margin-bottom:0;}
+
+  /* ===== Tables ===== */
+  table{width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:13.5px;}
+  th{
+    text-align:left;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    padding:0 12px 10px 0;
+    border-bottom:1px solid var(--line);
+    font-weight:500;
+  }
+  td{
+    padding:10px 12px 10px 0;
+    border-bottom:1px solid var(--line);
+    color:var(--ink-dim);
+    vertical-align:top;
+  }
+  td.name{color:var(--ink); font-weight:500;}
+  tr:last-child td{border-bottom:none;}
+  .tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    padding:2px 6px;
+    border-radius:3px;
+    letter-spacing:.04em;
+  }
+  .tag.confirmed{background:var(--signal-dim); color:var(--signal);}
+  .tag.partial{background:#3A3420; color:var(--gold);}
+  .tag.departed{background:var(--risk-dim); color:var(--risk);}
+  .tag.unverified{background:#252A31; color:var(--ink-faint);}
+
+  /* ===== Stat grid ===== */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+    margin:24px 0;
+  }
+  .stat{background:var(--panel); padding:20px 18px;}
+  .stat .stat-num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:26px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .stat .stat-num.down{color:var(--risk);}
+  .stat .stat-num.up{color:var(--signal);}
+  .stat .stat-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    margin-top:6px;
+  }
+
+  /* ===== Chart ===== */
+  .chart-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:24px 24px 16px;
+    margin:24px 0;
+  }
+  .chart-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    margin-bottom:4px;
+  }
+  .chart-sub{font-size:12px; color:var(--ink-faint); margin-bottom:18px;}
+  .axis-label{font-family:'JetBrains Mono', monospace; font-size:9px; fill:var(--ink-faint);}
+
+  /* ===== Bar list (geo) ===== */
+  .bar-row{display:grid; grid-template-columns:120px 1fr 60px; align-items:center; gap:12px; margin-bottom:10px;}
+  .bar-row .country{font-size:13px; color:var(--ink);}
+  .bar-track{height:8px; background:var(--panel-2); border-radius:4px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--blue); border-radius:4px;}
+  .bar-fill.hot{background:var(--gold);}
+  .bar-row .pct{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-dim); text-align:right;}
+
+  /* ===== Pillstack for tech ===== */
+  .pillstack{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px;}
+  .pill{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    padding:5px 10px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    color:var(--ink-dim);
+    background:var(--panel-2);
+  }
+  .pill.core{border-color:var(--signal-dim); color:var(--signal);}
+
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  @media(max-width:720px){.two-col{grid-template-columns:1fr;} .stat-grid{grid-template-columns:1fr 1fr;}}
+
+  ul.clean{list-style:none; margin:12px 0;}
+  ul.clean li{
+    padding-left:16px;
+    position:relative;
+    color:var(--ink-dim);
+    margin-bottom:8px;
+    font-size:14px;
+  }
+  ul.clean li::before{content:"—"; position:absolute; left:0; color:var(--ink-faint);}
+
+  .divergence-callout{
+    display:flex;
+    gap:24px;
+    align-items:center;
+    background:linear-gradient(135deg, var(--panel-2), var(--panel));
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:24px;
+    margin:28px 0;
+  }
+  .divergence-callout .arrow-up{color:var(--signal); font-size:22px;}
+  .divergence-callout .arrow-down{color:var(--risk); font-size:22px;}
+
+  footer{padding:40px 0 80px; color:var(--ink-faint); font-size:12px;}
+  footer p{color:var(--ink-faint); font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="cover">
+    <div class="kicker">MRO · Competitive Intelligence · Update</div>
+    <h1 class="title">Conduit — Leadership, Architecture &amp; Digital Signal Update</h1>
+    <p class="subtitle">A verification pass on the June 2026 Conduit brief: confirmed people via live browsing, full technology stack from primary sources, and twelve months of Similarweb traffic data revealing a momentum pattern the company's press cadence doesn't show.</p>
+    <div class="meta-row">
+      <div><span>Prepared for</span><b>Diego Ampuero · MRO</b></div>
+      <div><span>Subject</span><b>Conduit Technology Inc. (conduitpay.com)</b></div>
+      <div><span>Date</span><b>July 2, 2026</b></div>
+      <div><span>Sources</span><b>Live browsing + Similarweb Pro (Jun'25–May'26)</b></div>
+    </div>
+  </header>
+
+  <!-- 00 EXEC SUMMARY -->
+  <section>
+    <div class="section-head"><span class="section-num">00</span><h2>The headline finding</h2></div>
+    <p class="lead">Conduit's public narrative and its underlying digital signal are moving in opposite directions. Product announcements accelerated through H1 2026 — SOC 2 Type II, a new "Promptable Money Movement" push, the Yuno and Onafriq partnerships — while site engagement, organic search demand, and hiring activity all contracted over the same window. This is the single most useful thing in this update for how LaFinteca should read Conduit's actual momentum, separate from its press momentum.</p>
+
+    <div class="divergence-callout">
+      <div>
+        <div class="arrow-up">↑ PR cadence</div>
+        <div class="arrow-down">↓ Site &amp; hiring signal</div>
+      </div>
+      <p style="margin:0; color:var(--ink-dim); font-size:13.5px;">Monthly site visits fell <strong style="color:var(--risk)">49%</strong> from the January 2026 peak (40,414) to May 2026 (20,780). Their ATS integration (Lever) was pulled from the site in April 2026, and their careers page shows zero open roles as of today. Organic search traffic effectively collapsed after January — four of the last five months returned no measurable organic search estimate at all.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num down">-49%</div><div class="stat-label">Monthly visits, Jan→May 2026</div></div>
+      <div class="stat"><div class="stat-num">0</div><div class="stat-label">Open roles on careers page today</div></div>
+      <div class="stat"><div class="stat-num down">78%</div><div class="stat-label">of search traffic is branded, not category</div></div>
+    </div>
+  </section>
+
+  <!-- 01 LEADERSHIP -->
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>Leadership — verified</h2></div>
+    <p>Live-browsed against LinkedIn's People tab and Conduit's own <em>/about</em> page today. This corrects the prior brief on one material point.</p>
+
+    <div class="flag">
+      <span class="flag-label">Correction to prior brief</span>
+      <p><strong>Michael Gregson is no longer Conduit's CTO.</strong> His LinkedIn now lists him as Founder/CTO of Velix, a separate logistics-finance startup that raised a $2M pre-seed around March 2026. He refers to Conduit in the past tense and does not appear on Conduit's current LinkedIn roster. Treat any reference to "Gregson, CTO" in earlier materials as outdated.</p>
+    </div>
+
+    <h3>Confirmed current leadership</h3>
+    <table>
+      <tr><th>Name</th><th>Role</th><th>Status</th><th>Note</th></tr>
+      <tr><td class="name">Kirill Gertman</td><td>CEO &amp; Founder</td><td><span class="tag confirmed">Confirmed</span></td><td>Greater Boston. Founded Conduit 2021.</td></tr>
+      <tr><td class="name">Andre Masse</td><td>COO &amp; Co-Founder</td><td><span class="tag confirmed">Confirmed</span></td><td>Listed on both /about and LinkedIn.</td></tr>
+      <tr><td class="name">Jeremy Berger</td><td>Chief Banking Officer</td><td><span class="tag confirmed">Confirmed</span></td><td>Forbes 30 Under 30. Owns the bank-partner network.</td></tr>
+      <tr><td class="name">Mark Graves, Esq., CAMS, CRCP</td><td>Chief Legal &amp; Compliance Officer</td><td><span class="tag confirmed">Confirmed</span></td><td><strong>This is the compliance counterpart to track.</strong> Self-describes as building "bank-ready, regulation-first" payment networks — nearly identical framing to how LaFinteca positions its own licensing.</td></tr>
+      <tr><td class="name">Federico González Gamou</td><td>Head of Engineering</td><td><span class="tag confirmed">Confirmed</span></td><td>De facto engineering lead post-Gregson.</td></tr>
+      <tr><td class="name">Tien Nguyen</td><td>VP Finance</td><td><span class="tag partial">Senior-most found</span></td><td>MBA, CPA-CGA, ACCA. No CFO title exists on the roster.</td></tr>
+      <tr><td class="name">José Nuño</td><td>VP of Sales</td><td><span class="tag confirmed">Confirmed</span></td><td>Spanish-language name; LATAM remit unconfirmed.</td></tr>
+      <tr><td class="name">Jim Robinson</td><td>VP Sales, US</td><td><span class="tag confirmed">Confirmed</span></td><td>US-specific mandate.</td></tr>
+      <tr><td class="name">Rockland Pickard</td><td>Director of Marketing</td><td><span class="tag confirmed">Confirmed</span></td><td>Senior-most marketing title on the roster — no "Head of Growth" exists.</td></tr>
+      <tr><td class="name">Eric Wainaina</td><td>GM, Africa</td><td><span class="tag confirmed">Confirmed</span></td><td>Africa has a dedicated GM. LATAM does not have an equivalent titled role.</td></tr>
+      <tr><td class="name">Matthew Hewins</td><td>Head of Financial Crime</td><td><span class="tag confirmed">Confirmed</span></td><td>Reports into the Graves compliance function.</td></tr>
+      <tr><td class="name">Rob Hadick</td><td>Board Member (Dragonfly Capital)</td><td><span class="tag confirmed">Confirmed</span></td><td>General Partner at Dragonfly. Joined board as part of the Series A.</td></tr>
+    </table>
+
+    <h3>Gaps that matter for BD targeting</h3>
+    <ul class="clean">
+      <li><strong>No dedicated LATAM/Brazil/Mexico BD head.</strong> Sales leadership is US-anchored (Nuño, Robinson). LATAM-facing individuals exist as ICs — Roberta Peres (Relationship Manager, ex-BTG/BofA, Brazil) — but there is no titled regional lead to target for a partnership conversation. The Africa GM role (Wainaina) has no LATAM mirror, which is itself a signal about where Conduit is investing regional headcount.</li>
+      <li><strong>No titled Head of Product.</strong> Product ICs exist (Ryan Chavez, Mihai Ciorba) but nobody owns the function publicly.</li>
+      <li><strong>No confirmed CFO.</strong> Tien Nguyen (VP Finance) is the senior-most finance title found.</li>
+      <li>Two investor-linked names — Stephanie Choo (Portage) and Wale Ayeni — appear on Conduit's LinkedIn roster with language suggesting board or observer ties, but no source explicitly confirms a seat for either. Only Hadick's board seat is documented. Treat the other two as unverified.</li>
+    </ul>
+  </section>
+
+  <!-- 02 TECHNOLOGY -->
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>Technology &amp; product architecture</h2></div>
+    <p>Sourced from Conduit's trust center (trust.conduitpay.com), developer docs (docs.conduit.financial), and engineering LinkedIn profiles — the layers the marketing site doesn't show.</p>
+
+    <div class="two-col">
+      <div>
+        <h3>Custody &amp; settlement</h3>
+        <div class="pillstack">
+          <span class="pill core">Fireblocks (custody)</span>
+          <span class="pill">USDC — Ethereum, Base, Solana, Polygon</span>
+          <span class="pill">USDT — Ethereum, Tron</span>
+          <span class="pill">RLUSD — Ripple Ledger</span>
+        </div>
+        <p>Fireblocks is the core custody and transaction-execution layer — MPC key management, HSM-grade, policy-controlled. This is the single most important disclosed fact in the trust center: Conduit doesn't self-custody digital assets, it outsources that risk to a named institutional provider.</p>
+      </div>
+      <div>
+        <h3>Infrastructure subprocessors</h3>
+        <div class="pillstack">
+          <span class="pill core">AWS (cloud)</span>
+          <span class="pill">Modern Treasury (ledger)</span>
+          <span class="pill">Auth0 (authentication)</span>
+          <span class="pill">Google Workspace</span>
+        </div>
+        <p>Full subprocessor list is five vendors, all disclosed. Modern Treasury handling the ledger layer is notable — it means Conduit is not running money-movement reconciliation on custom-built infrastructure.</p>
+      </div>
+    </div>
+
+    <div class="flag">
+      <span class="flag-label">Compliance vendor gap</span>
+      <p>No dedicated KYC/AML vendor appears anywhere in the disclosed subprocessor list. Combined with docs-site language about an in-house KYB/KYC framework and job-profile signals ("building AI-native AML, KYC &amp; Fraud"), this points to a largely in-house compliance build rather than a licensed Sumsub/Persona/Chainalysis-style stack. One individual profile references TRM Labs for blockchain analytics, but that's a personal certification signal, not an official disclosure — flagged as unconfirmed.</p>
+    </div>
+
+    <h3>Payment rails &amp; fiat corridors</h3>
+    <div class="pillstack">
+      <span class="pill core">PIX (Brazil)</span>
+      <span class="pill core">SPEI (Mexico)</span>
+      <span class="pill core">TED (Brazil)</span>
+      <span class="pill">COP payout-only (Colombia)</span>
+      <span class="pill">Fedwire</span>
+      <span class="pill">FedNow</span>
+      <span class="pill">RTP</span>
+      <span class="pill">SWIFT</span>
+      <span class="pill">SEPA / SEPA Instant</span>
+      <span class="pill">RTGS (UK)</span>
+    </div>
+    <p>Fiat corridors confirmed on the docs site: USD, BRL, MXN, COP (payout-only), EUR, GBP. The COP payout-only distinction matters — Conduit can send to Colombia but the docs don't show the same bidirectional support they have for BRL and MXN. That's a real gap in their LATAM story worth knowing before it comes up in a competitive conversation.</p>
+
+    <h3>Banking network, count vs. names</h3>
+    <p>Conduit's May 2025 Series A announcement stated <strong>over 20 banks in nine countries</strong>, including the US, Mexico, Brazil, Nigeria, and Kenya. Their 2026 sales deck updates this to <strong>8 US banks and 22 international banks, 30 total</strong> (detail in Section 03). No individual partner bank is named anywhere across the trust center, docs, press materials, or sales deck. The count and geography grew and got more specific over the year; the policy of not naming any bank did not change.</p>
+
+    <h3>Security posture</h3>
+    <table>
+      <tr><th>Attestation</th><th>Status</th><th>Date</th></tr>
+      <tr><td class="name">SOC 2 Type I</td><td><span class="tag confirmed">Live</span></td><td>Q4 2025</td></tr>
+      <tr><td class="name">SOC 2 Type II</td><td><span class="tag confirmed">Live</span></td><td>Announced June 9, 2026</td></tr>
+      <tr><td class="name">Pen tests (web app, API)</td><td><span class="tag confirmed">Live</span></td><td>2025</td></tr>
+      <tr><td class="name">Internal network pen test</td><td><span class="tag confirmed">Live</span></td><td>2026</td></tr>
+      <tr><td class="name">Cyber insurance</td><td><span class="tag confirmed">Confirmed on trust center</span></td><td>—</td></tr>
+    </table>
+
+    <h3>Named commercial &amp; technical partnerships</h3>
+    <ul class="clean">
+      <li><strong>Braza Group</strong> — on-chain FX for Brazil (announced June 2025).</li>
+      <li><strong>Yuno</strong> — integration partner, featured on the current blog.</li>
+      <li><strong>Circle Payments Network</strong> — direct integration, ties Conduit closer to its own Circle Ventures investor.</li>
+      <li><strong>Onafriq</strong> — cross-border payments for Africa (February 2026).</li>
+      <li><strong>Tempo</strong> — named on the blog, technical detail not disclosed.</li>
+    </ul>
+
+    <h3>Developer platform</h3>
+    <p>API host is <code style="color:var(--ink); background:var(--panel-2); padding:1px 6px; border-radius:3px; font-family:'JetBrains Mono',monospace; font-size:12.5px;">api.conduit.financial</code>, docs are built on Mintlify. KYB onboarding supports two flows — <code style="color:var(--ink); background:var(--panel-2); padding:1px 6px; border-radius:3px; font-family:'JetBrains Mono',monospace; font-size:12.5px;">kyb_link</code> (delegated to a third party) and <code style="color:var(--ink); background:var(--panel-2); padding:1px 6px; border-radius:3px; font-family:'JetBrains Mono',monospace; font-size:12.5px;">direct</code> (API-managed) — giving integrators a choice on how much compliance burden they own. The newest blog feature is called <strong>"Promptable Money Movement"</strong> — this is almost certainly the technical substance behind the "built for agents and AI-first developers" homepage claim, though the docs don't yet show MCP-specific tooling or an agent SDK distinct from the standard REST API.</p>
+
+    <p style="font-size:13px; color:var(--ink-faint);">Engineering job-history signals (from individual profiles, since the careers page is currently empty): TypeScript/JavaScript and Python/Django/React appear across the visible engineering team, consistent with the AWS + Fireblocks stack disclosed above.</p>
+  </section>
+
+  <!-- 03 SALES DECK -->
+  <section>
+    <div class="section-head"><span class="section-num">03</span><h2>Self-reported positioning, from their own sales deck</h2></div>
+    <p class="lead">This is first-party sales collateral, dated 2026. Treat pricing, speed, and uptime claims as Conduit's marketing position, not independently verified fact. The competitive naming and the client and investor logos are the most useful things here.</p>
+
+    <h3>Banking network, updated</h3>
+    <p>The deck states <strong>8 US banks and 22 international banks</strong>, 30 total, with smart routing. That is a meaningfully larger network than the "over 20 banks in nine countries" language from the May 2025 Series A announcement. Bank identities are still not named anywhere. The network grew roughly 50% in about a year; the disclosure policy on names did not change.</p>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num up">30</div><div class="stat-label">Total banking partners claimed (8 US + 22 intl.)</div></div>
+      <div class="stat"><div class="stat-num">&lt;1 day</div><div class="stat-label">Claimed end customer onboarding</div></div>
+      <div class="stat"><div class="stat-num">&lt;7 days</div><div class="stat-label">Claimed time to go live</div></div>
+    </div>
+
+    <h3>Who they name as competitors</h3>
+    <p>Conduit's own deck splits the market into two groups and names names. <strong>"PSPs": Bridge and BVNK.</strong> <strong>"Direct Bank": Column, Cross River Bank, and Lead.</strong> This is the clearest competitive set we have seen from Conduit directly, and it is worth treating as their own view of the battlefield.</p>
+
+    <table>
+      <tr><th>Dimension</th><th>Conduit (claimed)</th><th>PSPs: Bridge, BVNK</th><th>Direct Bank: Column, CRB, Lead</th></tr>
+      <tr><td class="name">US banking partners</td><td>8 banks</td><td>1 bank</td><td>Single</td></tr>
+      <tr><td class="name">Yearly cost</td><td>$$</td><td>$$</td><td>$$$$</td></tr>
+      <tr><td class="name">End customer onboarding</td><td>&lt;1 day</td><td>3 to 4 days</td><td>7+ days</td></tr>
+      <tr><td class="name">Time to go live</td><td>&lt;7 days</td><td>30 to 90 days</td><td>12+ months</td></tr>
+      <tr><td class="name">Emerging market focus</td><td>Primary</td><td>Secondary</td><td>US only</td></tr>
+      <tr><td class="name">Stablecoin native</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+      <tr><td class="name">Global coverage</td><td>Strong</td><td>Limited</td><td>Limited</td></tr>
+    </table>
+
+    <div class="flag">
+      <span class="flag-label">Stale positioning, worth watching</span>
+      <p>Both Bridge and BVNK have already been acquired. Stripe closed Bridge in February 2025. Mastercard closed BVNK in March 2026, months before this deck's date. Conduit is still pitching against them as standalone PSPs in current sales collateral. Either the deck has not been refreshed since the acquisitions, or Conduit is deliberately still competing against Bridge and BVNK as embedded products inside Stripe and Mastercard. Worth a follow up check next time this deck is refreshed, and worth noting if it comes up in a prospect conversation: Conduit's own materials have not caught up with how consolidated this category already is.</p>
+    </div>
+
+    <h3>Product capabilities, in more detail</h3>
+    <p>The deck confirms the two-product structure already noted (Global USD API for developers, No-Code Treasury Dashboard for finance teams), and adds real detail on the API shape and the FX book.</p>
+    <div class="pillstack">
+      <span class="pill core">USD ↔ USDT/C</span>
+      <span class="pill core">USD ↔ BRL</span>
+      <span class="pill core">USD ↔ MXN</span>
+      <span class="pill">USD ↔ EUR</span>
+      <span class="pill">USD ↔ GBP</span>
+      <span class="pill">USD ↔ HKD</span>
+      <span class="pill">50+ additional currencies</span>
+    </div>
+    <p>Pay-in rails run wider than pay-out: FedNow, Fedwire, SWIFT, SPEI, PIX, SEPA and SEPA Instant, and FPS/CHAPS for GBP all appear on the pay-in side. On pay-out, SEPA Instant narrows to standard SEPA outbound, and FPS/CHAPS does not appear at all. That reads as a real asymmetry rather than an omission, since the deck is otherwise careful to list rails per direction. Worth confirming directly if a GBP payout use case ever comes up against them.</p>
+    <p>The sample API call shown is a plain <code style="color:var(--ink); background:var(--panel-2); padding:1px 6px; border-radius:3px; font-family:'JetBrains Mono',monospace; font-size:12.5px;">POST /v1/accounts</code> with currency, owner country, a rails array, and a stablecoin boolean, returning 201 in 412ms. Simple, REST, nothing unusual. "After-hours rates after 5pm EST" is called out specifically as a differentiator, implying most competitors' FX pricing goes stale outside US banking hours.</p>
+
+    <h3>Who they are actually selling to</h3>
+    <p>Three named ICPs: developers and platforms embedding financial services without becoming an FI, fintechs and PSPs needing USD access in emerging markets, and <strong>banks</strong>, pitched as "your modern correspondent banking alternative." The bank ICP is worth registering. Conduit is not only selling to fintechs anymore. It is pitching itself as infrastructure for licensed institutions too, which is the same customer profile LaFinteca itself sits in. Not a direct threat today, but a signal of where they intend to expand.</p>
+
+    <h3>Coverage claim</h3>
+    <p>"100+ countries," tiered into supported, supported with enhanced due diligence, and not supported. The map shows the Americas and most of Africa as supported, a band across the Middle East and parts of Eastern Europe as enhanced due diligence, and Russia and large parts of Central Asia as not supported. Consistent with a standard risk-based approach for a FinCEN and FINTRAC registered MSB, nothing surprising here.</p>
+
+    <h3>Compliance program structure</h3>
+    <p>The deck adds a formal five-pillar BSA/AML program: internal controls, a named BSA/AML officer function, training, independent testing, and ongoing due diligence, run as a continuous cycle. This is the structure of the compliance program, not the vendor stack. It does not resolve the compliance-vendor gap already flagged; it confirms the program is built to a standard MSB framework rather than an ad hoc process.</p>
+
+    <h3>Clients, expanded</h3>
+    <p>The deck names sixteen client logos, more than we had confirmed from public sources: <strong>Meow, Interswitch, PPRO, Rain, Mesh, Onafriq, Waza, Takenos, Fintoc, Travelex, Moniepoint, Fondeadora, Astropay, TapTap Send, Mercado Bitcoin, and Grey.</strong> Geography is stated directly as US, Mexico, Brazil, Kenya, Philippines, Argentina, Egypt, South Africa, and Indonesia, "and more." PPRO and Travelex are larger, more established names than the earlier startup-heavy client picture suggested. Treat this as a self-reported logo list rather than a confirmed integration depth. A logo on a sales deck can mean a live enterprise contract or an early pilot.</p>
+
+    <h3>Investors, expanded</h3>
+    <p>Beyond the Series A participant list already confirmed (Dragonfly, Altos, Sound Ventures, Commerce Ventures, Circle Ventures, Helios, Portage), the deck's investor wall adds <strong>Coinbase, Jump Crypto, Inovia, Fin Venture Capital, and Gradient Ventures</strong>, which is Google's AI-focused fund. The deck states over $50 million raised total, close to the $53 million figure already on file. Gradient Ventures' presence is worth noting alongside the "Promptable Money Movement" and AI-first developer positioning already flagged. It suggests the agent-payments angle has real strategic backing behind it, not just marketing language.</p>
+  </section>
+
+  <!-- 04 DIGITAL INTELLIGENCE -->
+  <section>
+    <div class="section-head"><span class="section-num">04</span><h2>Digital intelligence — Similarweb, Jun 2025–May 2026</h2></div>
+    <p>Twelve months of first-party traffic data on conduitpay.com. This is where the momentum-divergence finding comes from, and where a few of Conduit's own public claims don't fully hold up against their own site data.</p>
+
+    <div class="chart-panel">
+      <div class="chart-title">Monthly visits</div>
+      <div class="chart-sub">Jun 2025 – May 2026 · worldwide · all traffic</div>
+      <svg viewBox="0 0 680 210" width="100%" style="overflow:visible;">
+        <!-- gridlines -->
+        <line x1="20" y1="20" x2="660" y2="20" stroke="#242B33" stroke-width="1"/>
+        <line x1="20" y1="100" x2="660" y2="100" stroke="#242B33" stroke-width="1"/>
+        <line x1="20" y1="180" x2="660" y2="180" stroke="#242B33" stroke-width="1"/>
+        <text x="664" y="24" class="axis-label">41K</text>
+        <text x="664" y="104" class="axis-label">31K</text>
+        <text x="664" y="184" class="axis-label">21K</text>
+
+        <!-- trend line -->
+        <polyline points="20,82.1 78.2,20 136.4,58.2 194.5,59.0 252.7,72.5 310.9,110.0 369.1,60.6 427.3,23.2 485.5,89.3 543.6,142.6 601.8,180 660,179.2"
+          fill="none" stroke="#5E9BD6" stroke-width="2.5"/>
+
+        <!-- fill under decline zone (Jan -> May) -->
+        <polyline points="427.3,23.2 485.5,89.3 543.6,142.6 601.8,180 660,179.2 660,210 427.3,210"
+          fill="#E0663C" fill-opacity="0.08" stroke="none"/>
+
+        <!-- points -->
+        <circle cx="20" cy="82.1" r="3" fill="#5E9BD6"/>
+        <circle cx="78.2" cy="20" r="3" fill="#5E9BD6"/>
+        <circle cx="136.4" cy="58.2" r="3" fill="#5E9BD6"/>
+        <circle cx="194.5" cy="59.0" r="3" fill="#5E9BD6"/>
+        <circle cx="252.7" cy="72.5" r="3" fill="#5E9BD6"/>
+        <circle cx="310.9" cy="110.0" r="3" fill="#5E9BD6"/>
+        <circle cx="369.1" cy="60.6" r="3" fill="#5E9BD6"/>
+        <circle cx="427.3" cy="23.2" r="4" fill="#D1A954"/>
+        <circle cx="485.5" cy="89.3" r="3" fill="#E0663C"/>
+        <circle cx="543.6" cy="142.6" r="3" fill="#E0663C"/>
+        <circle cx="601.8" cy="180" r="4" fill="#E0663C"/>
+        <circle cx="660" cy="179.2" r="4" fill="#E0663C"/>
+
+        <!-- annotation -->
+        <text x="427.3" y="12" text-anchor="middle" class="axis-label" fill="#D1A954">Jan peak 40.4K</text>
+        <text x="601.8" y="196" text-anchor="middle" class="axis-label" fill="#E0663C">Lever removed (ATS)</text>
+
+        <!-- x labels -->
+        <text x="20" y="200" class="axis-label">Jun25</text>
+        <text x="136.4" y="200" class="axis-label">Aug25</text>
+        <text x="252.7" y="200" class="axis-label">Oct25</text>
+        <text x="369.1" y="200" class="axis-label">Dec25</text>
+        <text x="485.5" y="200" class="axis-label">Feb26</text>
+        <text x="601.8" y="200" class="axis-label">Apr26</text>
+      </svg>
+    </div>
+
+    <div class="note">
+      <span class="note-label">Reading the shape</span>
+      <p>Two peaks — July 2025 (post-Series A press cycle) and January 2026 (likely trailing the December virtual-accounts launch) — followed by five straight months of decline into May 2026. Search performance data shows the same pattern even more sharply: organic search traffic has no measurable estimate at all for four of the last five months in the dataset, versus 14,000–21,000 estimated monthly organic visits through the second half of 2025.</p>
+    </div>
+
+    <h3>Geography — the LATAM story is thinner than the rail list suggests</h3>
+    <div class="bar-row"><span class="country">United States</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><span class="pct">18.7%</span></div>
+    <div class="bar-row"><span class="country">Nigeria</span><div class="bar-track"><div class="bar-fill hot" style="width:83%"></div></div><span class="pct">15.6%</span></div>
+    <div class="bar-row"><span class="country">Brazil</span><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><span class="pct">11.2%</span></div>
+    <div class="bar-row"><span class="country">Canada</span><div class="bar-track"><div class="bar-fill" style="width:42%"></div></div><span class="pct">7.9%</span></div>
+    <div class="bar-row"><span class="country">India</span><div class="bar-track"><div class="bar-fill" style="width:26%"></div></div><span class="pct">4.8%</span></div>
+    <div class="bar-row"><span class="country">United Kingdom</span><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div><span class="pct">4.1%</span></div>
+    <div class="bar-row"><span class="country">Mexico</span><div class="bar-track"><div class="bar-fill" style="width:16%"></div></div><span class="pct">3.0%</span></div>
+    <div class="bar-row"><span class="country">Colombia</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="pct">2.7%</span></div>
+
+    <div class="flag">
+      <span class="flag-label">Worth knowing before a sales conversation</span>
+      <p><strong>Nigeria is Conduit's #2 traffic source, ahead of Brazil</strong> — and rising fastest of the top five (+20.7% Brazil, but Nigeria's absolute share still leads it). Mexico and Colombia combined don't reach 6% of total traffic. This doesn't mean Conduit's Brazil/Mexico business is weak — traffic isn't revenue for a relationship-sold B2B infra company — but it does mean their digital footprint skews African before it skews LATAM, which cuts against the "LATAM-focused" framing some trade press has used to describe them recently.</p>
+    </div>
+
+    <h3>Traffic channels &amp; the branded-traffic discrepancy</h3>
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-num">55%</div><div class="stat-label">Organic search</div></div>
+      <div class="stat"><div class="stat-num">34%</div><div class="stat-label">Direct</div></div>
+      <div class="stat"><div class="stat-num">7%</div><div class="stat-label">Referrals</div></div>
+    </div>
+    <p>Paid search and paid social both round to effectively zero across the twelve-month aggregate — this is not a demand-gen-led motion, it's relationship and content-led, consistent with an enterprise BD sales model. That said, keyword-level data shows at least one live Google Ads campaign targeting Spanish-language "cross border payments" queries out of Colombia, so there's a small, recent paid test running underneath an aggregate number that reads as zero.</p>
+
+    <div class="note">
+      <span class="note-label">Data reconciliation flag</span>
+      <p>Similarweb's page-level branded/non-branded split reports <strong>18% branded / 82% non-branded</strong>. But summing actual traffic share across Conduit's full keyword list tells a different story: <strong>78% of all keyword-attributed search traffic</strong> goes to terms that are the brand name itself or direct variants/misspellings of it ("conduit," "conduitpay," "conduit crypto," "conduit financial," "cnduit," "condoit," and so on). The single term "conduit" alone accounts for 33.6% of keyword-driven traffic on its own. These two numbers don't reconcile, and it's not our place to guess which methodology Similarweb weighted differently — we're flagging it rather than picking a side. What both cuts agree on: genuine category-intent traffic (things like "b2b stablecoin payments," "cross border payments api") is thin. The content that does rank for non-branded terms is almost entirely top-of-funnel educational content — their SWIFT guide, ACH guide, an M-Pesa explainer, a CNY-vs-CNH blog post — not commercial-intent pages.</p>
+    </div>
+
+    <h3>Referral sources</h3>
+    <p>Top referrers by share: <strong>soundventures.com</strong> (50.9%) and <strong>app.synaptic.com</strong> (41.6%) dominate, followed by businesswire.com (5.6%) and a Wise/TransferWise referral (1.8%, new in May 2026). Sound Ventures is a Series A participant — this is very likely their own portfolio page linking back to Conduit, not organic press pickup. 92.5% of all referral traffic comes from sites Similarweb categorizes as Investing, versus 7.5% from Finance-Other. In plain terms: almost nobody is linking to Conduit except their own investors and a wire service. That's thin for a company positioning itself as category-defining infrastructure.</p>
+
+    <h3>Hiring signal — corroborates the Chrome finding</h3>
+    <p>The outgoing-traffic data independently confirms what the live browsing pass found on BambooHR. <strong>jobs.lever.co</strong> was Conduit's dominant outbound link destination for most of the twelve-month window — as high as 97.5% of outbound clicks in January 2026 — then disappears from the data entirely after March 2026. Technographic detection shows the Lever integration itself was formally removed from the site on <strong>April 23, 2026</strong>. Combined with zero open roles on their current careers page, this is a well-triangulated signal that hiring has genuinely stalled since Q2 2026, not just that a job board link broke.</p>
+
+    <h3>Similar-sites competitive set (Similarweb's own clustering)</h3>
+    <p>Useful as a sanity check on who Similarweb's algorithm considers Conduit's peers, independent of our own analysis: <strong>Marqeta, Dwolla, Finix, Wise-Pay, Payset, Dsgpay, Uniteller, Veloremit, Inpay, Bottomline, Onbe</strong>, and several smaller remittance/exchange operators. Notably, neither Bridge nor BVNK appear — both were absorbed into Stripe and Mastercard respectively and no longer register as standalone entities in this kind of clustering, which is itself a reminder of where this category's winners end up.</p>
+
+    <h3>Technology stack changes on the marketing site (last 12 months)</h3>
+    <p>Two stack changes stand out from the technographic scan. First, a full consumer-payment-method integration set — Apple Pay, Google Pay, PayPal, Venmo, Boleto, dLocal, Mercado Pago, OXXO, iDEAL, UnionPay — was live from January to October 2025, then entirely removed on October 31, 2025. That's a lot of checkout infrastructure to install and then fully strip out; it reads like a demo/self-serve experiment that didn't survive. Second, the site's marketing-analytics stack was significantly cleaned up in May–June 2026 — Hotjar, Clearbit, Marketo, and several ad-tech tags (Beeswax, ClickCertain) were all removed within weeks of each other, consistent with the visible mid-rebrand state we flagged in the original brief (live Lorem ipsum placeholders on production pages).</p>
+  </section>
+
+  <!-- 05 SYNTHESIS -->
+  <section>
+    <div class="section-head"><span class="section-num">05</span><h2>What this changes for LaFinteca</h2></div>
+
+    <div class="confirm">
+      <span class="confirm-label">Read this way, not as weakness-hunting</span>
+      <p>None of this means Conduit is struggling. A relationship-sold infrastructure company can have declining top-of-funnel traffic and stalled marketing-site hiring while its actual transaction volume keeps growing — those aren't the same signal. What it does mean is that the press cadence (SOC 2, partnerships, "Promptable Money Movement") is not currently backed by growing public demand signal, and that's a genuinely useful thing to know before anyone on the team treats Conduit's announcements as evidence of unstoppable momentum in a competitive conversation.</p>
+    </div>
+
+    <ul class="clean">
+      <li><strong>Compliance-to-compliance framing just got a named counterpart.</strong> Mark Graves (CLO/CCO, CAMS, CRCP) uses almost identical language to LaFinteca's own positioning — "bank-ready, regulation-first." If Sergii or Rafa's team ever ends up in a shared RFP or partner conversation involving Conduit, Graves is the person whose public statements are worth tracking for how they'll defend the banking-partner-network story against a BCB-licensed argument.</li>
+      <li><strong>LATAM is not where Conduit's organization is currently weighted.</strong> No titled LATAM BD head, no LATAM GM equivalent to Wainaina's Africa role, and traffic geography confirms Africa outweighs Brazil in their own digital footprint. This is a gap, not a strength — worth testing directly in outbound messaging to Brazil/Mexico prospects who might otherwise assume Conduit has the same regional depth in LATAM that they claim to have in Africa.</li>
+      <li><strong>The COP payout-only limitation is a specific, checkable claim.</strong> If a Colombia prospect is evaluating Conduit, ask directly whether they support bidirectional COP flows — the docs currently suggest they don't.</li>
+      <li><strong>Named banking partners remain a closed door.</strong> Don't spend further research cycles trying to identify Conduit's eight US banks or thirty total partners. Multiple source types (trust center, docs, press, and now the sales deck) all disclose count and geography but withhold names. This appears to be a deliberate disclosure policy, not a research gap.</li>
+      <li><strong>Conduit's own competitive framing is out of date.</strong> Their sales deck still pitches against Bridge and BVNK as standalone PSPs, months after both were absorbed into Stripe and Mastercard. If Bridge or BVNK ever come up in a prospect conversation involving Conduit, that gap is worth pointing out. It suggests their competitive intelligence process is slower than the market it is tracking.</li>
+      <li><strong>Conduit is starting to pitch banks, not just fintechs.</strong> Their third named ICP is licensed institutions, framed as a correspondent banking replacement. That is the same customer profile LaFinteca sits in. Not an immediate overlap, but worth a check-in next quarter to see if that ICP expansion turns into actual bank-side client wins.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Sources: live browsing of linkedin.com/company/conduit-financial, conduitpay.com/about, trust.conduitpay.com, docs.conduit.financial, and conduitfinancial.bamboohr.com/careers (July 2, 2026) · Similarweb Pro exports for conduitpay.com, Jun 2025 to May 2026, provided by Diego · Conduit's own 2026 sales deck ("Global USD & Stablecoin API"), provided by Diego, self-reported claims flagged inline where used · prior web-sourced findings (Series A terms, investor roster, Bridge/BVNK acquisition comps) carried forward from the June 2026 brief and not re-verified in this update.</p>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LaFinteca · Easygo Group Intelligence Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #C3ABFF;
+    --purple-deep: #2A1F4D;
+    --purple-tint: #F4EEFF;
+    --lime: #BFFE43;
+    --lime-deep: #1F2810;
+    --black: #0A0A0A;
+    --ink: #1A1A1A;
+    --gray-900: #2A2A2A;
+    --gray-700: #555555;
+    --gray-500: #888888;
+    --gray-300: #D9D9D9;
+    --gray-200: #E8E8E8;
+    --gray-100: #F5F5F5;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--white); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 48px; }
+  .wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 48px; }
+
+  /* HERO */
+  .hero { background: var(--black); color: var(--white); padding: 96px 0 112px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; top: -20%; right: -10%; width: 700px; height: 700px;
+    background: radial-gradient(circle, var(--purple) 0%, transparent 60%);
+    opacity: 0.32; filter: blur(50px);
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -30%; left: -10%; width: 520px; height: 520px;
+    background: radial-gradient(circle, var(--lime) 0%, transparent 60%);
+    opacity: 0.14; filter: blur(60px);
+  }
+  .hero-inner { position: relative; z-index: 2; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple); font-weight: 500; margin-bottom: 28px; display: inline-flex; align-items: center; gap: 12px; }
+  .eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--purple); display: inline-block; }
+  h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 92px; line-height: 0.94; letter-spacing: -0.022em; margin-bottom: 32px; }
+  h1 .accent { color: var(--lime); font-style: italic; }
+  h1 .quiet { color: var(--purple); font-style: italic; }
+  .hero-sub { font-size: 20px; line-height: 1.55; max-width: 720px; color: rgba(255,255,255,0.78); font-weight: 300; }
+  .hero-meta { display: flex; gap: 48px; margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.12); flex-wrap: wrap; }
+  .hero-meta div { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+  .hero-meta div strong { display: block; color: var(--white); font-size: 15px; font-weight: 500; margin-top: 4px; letter-spacing: 0; }
+
+  /* SECTIONS */
+  section { padding: 96px 0; }
+  section.alt { background: var(--gray-100); }
+  section.dark { background: var(--black); color: var(--white); }
+  .section-head { margin-bottom: 56px; max-width: 760px; }
+  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 56px; line-height: 1.04; letter-spacing: -0.018em; margin-bottom: 18px; color: var(--black); }
+  section.dark h2 { color: var(--white); }
+  h2 .italic { font-style: italic; color: var(--purple-deep); }
+  section.dark h2 .italic { color: var(--purple); }
+  .section-sub { font-size: 17px; color: var(--gray-700); line-height: 1.6; font-weight: 300; }
+  section.dark .section-sub { color: rgba(255,255,255,0.7); }
+
+  h3 { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--black); margin-bottom: 14px; }
+  h4 { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-700); margin-bottom: 12px; }
+
+  p { font-size: 16px; line-height: 1.65; color: var(--gray-900); }
+  p + p { margin-top: 14px; }
+
+  /* TL;DR — three-card hero summary */
+  .tldr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .tldr-card { background: var(--white); border: 1px solid var(--gray-200); padding: 36px 32px; border-radius: 4px; position: relative; }
+  .tldr-card.dark { background: var(--black); color: var(--white); border-color: var(--black); }
+  .tldr-card.lime { background: var(--lime); color: var(--black); border-color: var(--lime); }
+  .tldr-card .num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 60px; line-height: 1; color: var(--purple); margin-bottom: 20px; }
+  .tldr-card.dark .num { color: var(--lime); }
+  .tldr-card.lime .num { color: var(--purple-deep); }
+  .tldr-card h3 { font-size: 18px; margin-bottom: 14px; color: inherit; }
+  .tldr-card.dark h3 { color: var(--white); }
+  .tldr-card p { font-size: 14px; line-height: 1.6; color: var(--gray-700); }
+  .tldr-card.dark p { color: rgba(255,255,255,0.78); }
+  .tldr-card.lime p { color: var(--lime-deep); }
+
+  /* HEADLINE STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+  .stat { background: var(--white); padding: 36px 28px; }
+  .stat .label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); font-weight: 500; margin-bottom: 12px; }
+  .stat .figure { font-family: 'Instrument Serif', serif; font-size: 52px; line-height: 1; color: var(--black); letter-spacing: -0.01em; margin-bottom: 8px; }
+  .stat .figure .unit { font-size: 22px; color: var(--purple-deep); font-style: italic; margin-left: 4px; }
+  .stat .desc { font-size: 13px; color: var(--gray-700); line-height: 1.45; }
+
+  /* OWNERSHIP DIAGRAM */
+  .ownership { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .own-diagram { background: var(--black); color: var(--white); padding: 48px 40px; border-radius: 4px; }
+  .own-diagram h4 { color: var(--purple); margin-bottom: 24px; }
+  .own-tier { padding: 18px 20px; border-radius: 4px; margin-bottom: 12px; position: relative; }
+  .own-tier.founder { background: var(--purple); color: var(--black); }
+  .own-tier.holding { background: rgba(255,255,255,0.08); border: 1px solid rgba(195,171,255,0.3); }
+  .own-tier.parent { background: var(--lime); color: var(--black); }
+  .own-tier .role { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 4px; font-weight: 500; }
+  .own-tier .name { font-family: 'Inter Tight'; font-weight: 600; font-size: 16px; }
+  .own-tier .pct { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 28px; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); }
+  .own-connector { width: 2px; height: 16px; background: rgba(195,171,255,0.4); margin: 0 auto; }
+  .own-split { display: flex; gap: 12px; align-items: stretch; }
+  .own-split > div { flex: 1; }
+  .own-text h4 { margin-bottom: 14px; }
+  .own-text p { font-size: 15px; margin-bottom: 14px; }
+  .own-text .pull { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 24px; line-height: 1.3; color: var(--purple-deep); padding: 20px 0; border-top: 1px solid var(--gray-300); border-bottom: 1px solid var(--gray-300); margin: 24px 0; }
+
+  /* PORTFOLIO GRID */
+  .portfolio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .port-card { background: var(--white); border: 1px solid var(--gray-200); padding: 28px 26px; border-radius: 4px; min-height: 200px; display: flex; flex-direction: column; }
+  .port-card.flag { background: var(--black); color: var(--white); border-color: var(--black); }
+  .port-card .ptag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; color: var(--purple-deep); margin-bottom: 10px; }
+  .port-card.flag .ptag { color: var(--lime); }
+  .port-card h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -0.01em; margin-bottom: 10px; color: inherit; }
+  .port-card .entity { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gray-500); margin-bottom: 14px; letter-spacing: -0.02em; }
+  .port-card.flag .entity { color: rgba(255,255,255,0.5); }
+  .port-card .desc { font-size: 13px; color: var(--gray-700); line-height: 1.55; flex: 1; }
+  .port-card.flag .desc { color: rgba(255,255,255,0.8); }
+  .port-card .metric { padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--gray-200); font-size: 12px; color: var(--gray-500); }
+  .port-card.flag .metric { border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); }
+  .port-card .metric strong { color: var(--black); display: block; font-weight: 600; margin-top: 2px; font-size: 14px; }
+  .port-card.flag .metric strong { color: var(--lime); }
+
+  /* LICENSING TABLE */
+  .license-table { width: 100%; border-collapse: collapse; margin-top: 16px; background: var(--white); }
+  .license-table th, .license-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--gray-200); font-size: 14px; vertical-align: top; }
+  .license-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); font-weight: 500; background: var(--gray-100); }
+  .license-table .flag { font-size: 16px; margin-right: 8px; }
+  .license-table .entity { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gray-700); display: block; margin-top: 4px; }
+  .license-table tr.priority { background: var(--purple-tint); }
+  .license-table tr.priority td:first-child { font-weight: 600; color: var(--purple-deep); }
+  .license-table .lic-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gray-900); }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .status-dot.active { background: var(--lime); }
+  .status-dot.exit { background: var(--gray-300); }
+  .status-dot.risk { background: #FF6B6B; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 32px; border-left: 1px solid var(--gray-300); }
+  .tl-item { position: relative; padding-bottom: 32px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -38px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--purple);
+  }
+  .tl-item.key::before { background: var(--purple); }
+  .tl-item.lime::before { border-color: var(--lime); background: var(--lime); }
+  .tl-item.risk::before { border-color: #FF6B6B; background: #FF6B6B; }
+  .tl-date { font-family: 'Inter Tight'; font-weight: 600; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--purple-deep); margin-bottom: 6px; }
+  .tl-item h3 { font-size: 17px; margin-bottom: 6px; }
+  .tl-item p { font-size: 14px; color: var(--gray-700); line-height: 1.55; }
+  .tl-tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 11px; letter-spacing: 0.05em; font-weight: 500; margin-left: 8px; vertical-align: middle; }
+  .tag-ma { background: var(--purple-tint); color: var(--purple-deep); }
+  .tag-license { background: var(--lime); color: var(--black); }
+  .tag-risk { background: #FFE0E0; color: #B22222; }
+  .tag-strat { background: var(--gray-200); color: var(--gray-900); }
+
+  /* FINANCIAL CHART */
+  .chart-wrap { background: var(--white); border: 1px solid var(--gray-200); padding: 40px; border-radius: 4px; margin-top: 16px; }
+  .chart-title { font-family: 'Inter Tight'; font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .chart-sub { font-size: 12px; color: var(--gray-500); margin-bottom: 32px; }
+  .bars-outer { position: relative; padding-bottom: 56px; border-bottom: 1px solid var(--gray-200); }
+  .bars { display: flex; align-items: flex-end; gap: 32px; height: 320px; position: relative; }
+  .bar-col { flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; }
+  .bar { width: 100%; max-width: 110px; background: var(--purple); border-radius: 3px 3px 0 0; position: relative; transition: all 0.3s; min-height: 4px; }
+  .bar.highlight { background: var(--lime); }
+  .bar.dark { background: var(--black); }
+  .bar-value { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); font-family: 'Instrument Serif', serif; font-size: 22px; font-style: italic; color: var(--black); white-space: nowrap; }
+  .bar-labels { display: flex; gap: 32px; margin-top: 16px; }
+  .bar-labels > div { flex: 1; text-align: center; }
+  .bar-label { font-size: 13px; color: var(--gray-700); font-weight: 600; }
+  .bar-note { font-size: 10px; color: var(--gray-500); margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* PAYMENTS GRID */
+  .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .pay-block { padding: 36px; border-radius: 4px; }
+  .pay-block.known { background: var(--white); border: 1px solid var(--gray-200); }
+  .pay-block.unknown { background: var(--black); color: var(--white); }
+  .pay-block h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 30px; margin-bottom: 8px; color: inherit; letter-spacing: -0.01em; }
+  .pay-block.unknown h3 { color: var(--lime); }
+  .pay-block .pintro { font-size: 14px; color: var(--gray-700); margin-bottom: 24px; }
+  .pay-block.unknown .pintro { color: rgba(255,255,255,0.7); }
+  .pay-list { list-style: none; }
+  .pay-list li { padding: 14px 0; border-bottom: 1px solid var(--gray-200); font-size: 14px; line-height: 1.5; display: grid; grid-template-columns: 130px 1fr; gap: 16px; }
+  .pay-block.unknown .pay-list li { border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+  .pay-list li:last-child { border: none; }
+  .pay-list .cat { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple-deep); font-weight: 500; }
+  .pay-block.unknown .pay-list .cat { color: var(--purple); }
+  .pay-list .val { color: var(--gray-900); }
+  .pay-block.unknown .pay-list .val { color: rgba(255,255,255,0.85); }
+
+  /* CALLOUT BLOCK */
+  .callout { background: var(--purple-tint); border-left: 3px solid var(--purple); padding: 36px 40px; margin-top: 32px; border-radius: 0 4px 4px 0; }
+  .callout .clabel { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-deep); font-weight: 500; margin-bottom: 12px; }
+  .callout p { font-family: 'Instrument Serif', serif; font-size: 24px; line-height: 1.35; font-style: italic; color: var(--purple-deep); }
+  .callout cite { display: block; margin-top: 16px; font-family: 'Inter Tight'; font-style: normal; font-size: 13px; color: var(--gray-700); letter-spacing: 0.03em; }
+
+  /* PEOPLE GRID */
+  .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .person { background: var(--white); border: 1px solid var(--gray-200); padding: 22px; border-radius: 4px; }
+  .person.priority { background: var(--lime); border-color: var(--lime); }
+  .person .role { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple-deep); font-weight: 500; margin-bottom: 8px; }
+  .person.priority .role { color: var(--lime-deep); }
+  .person h3 { font-size: 17px; margin-bottom: 6px; }
+  .person .note { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
+  .person.priority .note { color: var(--lime-deep); }
+
+  /* FUNDING EVIDENCE */
+  .funding-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; margin-bottom: 56px; }
+  .funding-verdict { background: var(--black); color: var(--white); padding: 40px 36px; border-radius: 4px; }
+  .funding-verdict .vlabel { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); font-weight: 500; margin-bottom: 16px; }
+  .funding-verdict h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 36px; line-height: 1.1; color: var(--white); margin-bottom: 18px; letter-spacing: -0.015em; }
+  .funding-verdict p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,0.78); }
+  .funding-confidence { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .conf-dots { display: flex; gap: 4px; }
+  .conf-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+  .conf-dot.on { background: var(--lime); }
+  .conf-label { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 500; }
+  .conf-label strong { color: var(--lime); }
+
+  .funding-text h4 { margin-bottom: 14px; }
+  .funding-text p { font-size: 15px; margin-bottom: 14px; line-height: 1.65; }
+  .funding-text p:last-child { margin-bottom: 0; }
+
+  .evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .ev-card { padding: 32px 30px; border-radius: 4px; position: relative; }
+  .ev-card.affirm { background: var(--white); border: 1px solid var(--gray-200); border-left: 3px solid var(--lime); }
+  .ev-card.counter { background: var(--white); border: 1px solid var(--gray-200); border-left: 3px solid var(--purple); }
+  .ev-card .etag { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; }
+  .ev-card.affirm .etag { color: var(--lime-deep); }
+  .ev-card.counter .etag { color: var(--purple-deep); }
+  .ev-card h3 { font-size: 17px; margin-bottom: 12px; line-height: 1.3; }
+  .ev-card p { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+  .ev-card .source { display: block; margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gray-500); letter-spacing: -0.02em; }
+
+  .funding-flow { background: var(--white); border: 1px solid var(--gray-200); padding: 48px 40px; border-radius: 4px; margin-top: 48px; }
+  .flow-title { font-family: 'Inter Tight'; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  .flow-sub { font-size: 12px; color: var(--gray-500); margin-bottom: 36px; }
+  .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr) auto 1fr; gap: 12px; align-items: stretch; }
+  .flow-step { background: var(--gray-100); padding: 20px 18px; border-radius: 4px; position: relative; }
+  .flow-step.engine { background: var(--purple-tint); border: 1px solid var(--purple); }
+  .flow-step.terminal { background: var(--lime); }
+  .flow-step .stepnum { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 28px; color: var(--purple); line-height: 1; margin-bottom: 10px; }
+  .flow-step.terminal .stepnum { color: var(--purple-deep); }
+  .flow-step h4 { font-size: 12px; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.04em; }
+  .flow-step p { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--gray-300); font-size: 20px; font-weight: 300; }
+
+  /* RISKS GRID */
+  .risks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .risk-card { padding: 28px 32px; border-radius: 4px; border-left: 3px solid var(--gray-300); background: var(--white); }
+  .risk-card.high { border-left-color: #FF6B6B; }
+  .risk-card.med { border-left-color: var(--purple); }
+  .risk-card .rtag { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; margin-bottom: 8px; color: var(--gray-500); }
+  .risk-card.high .rtag { color: #C53030; }
+  .risk-card.med .rtag { color: var(--purple-deep); }
+  .risk-card h3 { font-size: 18px; margin-bottom: 10px; }
+  .risk-card p { font-size: 14px; color: var(--gray-700); line-height: 1.55; }
+
+  /* RECOMMENDATIONS */
+  .recs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+  .rec { background: var(--white); padding: 32px 24px; }
+  .rec .rnum { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 48px; color: var(--purple); line-height: 1; margin-bottom: 18px; }
+  .rec h3 { font-size: 16px; margin-bottom: 10px; line-height: 1.3; }
+  .rec p { font-size: 13px; color: var(--gray-700); line-height: 1.55; }
+
+  /* IMPLICATIONS */
+  .implications { background: var(--lime); padding: 64px 56px; border-radius: 4px; }
+  .implications h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 36px; line-height: 1.1; letter-spacing: -0.015em; margin-bottom: 20px; color: var(--black); }
+  .implications p { font-size: 16px; line-height: 1.65; color: var(--lime-deep); max-width: 800px; }
+  .implications p + p { margin-top: 14px; }
+  .implications .punchline { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; line-height: 1.4; color: var(--black); margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.15); }
+
+  /* CAVEATS */
+  .caveats { background: var(--gray-100); padding: 40px 48px; border-radius: 4px; }
+  .caveats h3 { font-family: 'Inter Tight'; font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-700); margin-bottom: 20px; }
+  .caveats ul { list-style: none; }
+  .caveats li { padding: 10px 0; font-size: 13px; line-height: 1.6; color: var(--gray-700); padding-left: 18px; position: relative; }
+  .caveats li::before { content: "—"; position: absolute; left: 0; color: var(--purple-deep); }
+  .caveats li strong { color: var(--ink); font-weight: 600; }
+
+  /* DIVIDER */
+  .divider { display: flex; align-items: center; gap: 16px; margin: 56px 0 32px; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--gray-200); }
+  .divider span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-500); font-weight: 500; }
+
+  /* FOOTER */
+  footer { background: var(--black); color: var(--white); padding: 72px 0; }
+  .foot-grid { display: flex; justify-content: space-between; align-items: end; gap: 48px; flex-wrap: wrap; }
+  .foot-grid h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 38px; color: var(--white); letter-spacing: -0.01em; margin-bottom: 10px; }
+  .foot-grid p { color: rgba(255,255,255,0.6); font-size: 14px; max-width: 520px; }
+  .foot-sig { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    .wrap, .wrap-narrow { padding: 0 24px; }
+    h1 { font-size: 56px; }
+    h2 { font-size: 40px; }
+    .tldr-grid, .portfolio, .ownership, .pay-grid, .people, .risks, .stats-row, .recs { grid-template-columns: 1fr; }
+    .stats-row, .recs { display: flex; flex-direction: column; gap: 1px; }
+  }
+
+  /* ============================================ */
+  /* PRINT STYLESHEET — A4, paginated, ink-saving */
+  /* ============================================ */
+
+  /* ============================================ */
+  /* PRINT STYLESHEET — A4 LANDSCAPE, paginated   */
+  /* ============================================ */
+  @media print {
+    @page { size: A4 landscape; margin: 14mm 16mm; }
+    @page :first { margin: 0; }
+
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+
+    html, body { background: var(--white); font-size: 10pt; }
+    .wrap, .wrap-narrow { max-width: 100%; padding: 0; }
+
+    h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid; }
+    p, li { orphans: 3; widows: 3; }
+    .tldr-card, .obj-card, .port-card, .ev-card, .risk-card, .person, .rec, .stat, .pillar, .sb-card, .tl-item, .pay-block, .mech-block, .own-diagram, .funding-verdict, .chart-wrap, .funding-flow, .callout, .implications, .caveats, .content-card { page-break-inside: avoid; break-inside: avoid; }
+
+    /* COVER — full landscape A4 */
+    .hero {
+      padding: 0;
+      width: 297mm;
+      height: 210mm;
+      page-break-after: always;
+      break-after: page;
+      box-sizing: border-box;
+      background: var(--black) !important;
+      color: var(--white) !important;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .hero::before, .hero::after { display: none; }
+    .hero-inner { padding: 0 24mm; width: 100%; max-width: 220mm; }
+    h1 { font-size: 64pt; line-height: 0.95; margin-bottom: 14pt; letter-spacing: -0.025em; }
+    .hero-sub { font-size: 12pt; max-width: 160mm; line-height: 1.5; color: rgba(255,255,255,0.78); }
+    .hero-meta { margin-top: 22pt; gap: 22pt; padding-top: 12pt; }
+    .hero-meta div { font-size: 7.5pt; }
+    .hero-meta div strong { font-size: 9.5pt; }
+    .eyebrow { font-size: 8pt; margin-bottom: 16pt; }
+
+    /* SECTIONS — one per spread */
+    section { padding: 0; page-break-before: always; break-before: page; page-break-after: always; break-after: page; min-height: calc(210mm - 28mm); display: flex; flex-direction: column; justify-content: flex-start; }
+    section.alt, section.dark { background: var(--white) !important; color: var(--ink) !important; }
+    section.dark h2, section.dark h2 .italic { color: var(--black) !important; }
+    section.dark h2 .italic { color: var(--purple-deep) !important; }
+    section.dark .section-sub { color: var(--gray-700) !important; }
+
+    .section-head { margin-bottom: 8mm; max-width: 200mm; }
+    h2 { font-size: 30pt; line-height: 1.05; margin-bottom: 6pt; letter-spacing: -0.018em; }
+    .section-sub { font-size: 10pt; line-height: 1.5; }
+    h3 { font-size: 11pt; }
+    h4 { font-size: 8pt; }
+    p { font-size: 9.5pt; line-height: 1.5; }
+
+    /* TL;DR — three across, full breathe in landscape */
+    .tldr-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 6mm; }
+    .tldr-card { padding: 9mm 8mm; }
+    .tldr-card.dark { background: var(--black) !important; color: var(--white) !important; }
+    .tldr-card.lime { background: var(--lime) !important; }
+    .tldr-card .num { font-size: 44pt; margin-bottom: 10pt; }
+    .tldr-card h3 { font-size: 13pt; margin-bottom: 8pt; line-height: 1.25; }
+    .tldr-card p { font-size: 9.5pt; line-height: 1.55; }
+    .tldr-card.dark p { color: rgba(255,255,255,0.85) !important; }
+
+    /* Stats — 4 across, landscape gives them room */
+    .stats-row { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; border: 1px solid var(--gray-300); }
+    .stat { padding: 7mm 6mm; }
+    .stat .figure { font-size: 28pt; }
+    .stat .figure .unit { font-size: 13pt; }
+    .stat .label { font-size: 7.5pt; margin-bottom: 8pt; }
+    .stat .desc { font-size: 8.5pt; line-height: 1.4; }
+    .divider { margin: 14pt 0 10pt; }
+    .divider span { font-size: 7.5pt; }
+
+    /* Ownership — diagram left, narrative right */
+    .ownership { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10mm; }
+    .own-diagram { background: var(--black) !important; color: var(--white) !important; padding: 10mm 8mm; }
+    .own-tier.founder { background: var(--purple) !important; }
+    .own-tier.parent { background: var(--lime) !important; }
+    .own-tier.holding { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(195,171,255,0.3) !important; }
+    .own-tier .name { font-size: 10pt; }
+    .own-tier .pct { font-size: 22pt; }
+    .own-text .pull { font-size: 14pt; padding: 10pt 0; margin: 12pt 0; }
+    .own-text p { font-size: 9.5pt; }
+
+    /* Funding section — verdict + text on one row, then 3x2 evidence grid */
+    .funding-intro { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10mm; margin-bottom: 8mm; }
+    .funding-verdict { background: var(--black) !important; color: var(--white) !important; padding: 10mm 8mm; }
+    .funding-verdict h3 { font-size: 22pt; color: var(--white) !important; }
+    .funding-verdict p { color: rgba(255,255,255,0.85) !important; font-size: 9.5pt; }
+    .funding-confidence { padding-top: 10pt; gap: 12pt; }
+    .conf-dot { width: 8pt; height: 8pt; }
+    .conf-dot.on { background: var(--lime) !important; }
+    .conf-label { font-size: 8pt; }
+    .evidence-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 5mm; }
+    .ev-card { padding: 6mm 5mm; }
+    .ev-card.affirm { border-left: 3px solid var(--lime) !important; }
+    .ev-card.counter { border-left: 3px solid var(--purple) !important; }
+    .ev-card h3 { font-size: 10pt; margin-bottom: 6pt; line-height: 1.3; }
+    .ev-card p { font-size: 8.5pt; line-height: 1.5; }
+    .ev-card .source { font-size: 7pt; margin-top: 6pt; }
+    .ev-card .etag { font-size: 7pt; margin-bottom: 5pt; }
+
+    /* Capital flow — 5 steps + arrow + terminal in landscape row */
+    .funding-flow { padding: 8mm 7mm; margin-top: 6mm; }
+    .flow-title { font-size: 10pt; }
+    .flow-sub { font-size: 8.5pt; margin-bottom: 8mm; }
+    .flow-steps { display: grid !important; grid-template-columns: repeat(4, 1fr) auto 1.3fr !important; gap: 3mm; }
+    .flow-step { padding: 5mm 4mm; }
+    .flow-step.engine { background: var(--purple-tint) !important; border: 1px solid var(--purple) !important; }
+    .flow-step.terminal { background: var(--lime) !important; }
+    .flow-step .stepnum { font-size: 22pt; margin-bottom: 6pt; }
+    .flow-step h4 { font-size: 9pt; margin-bottom: 5pt; }
+    .flow-step p { font-size: 8pt; line-height: 1.45; }
+    .flow-arrow { font-size: 16pt; }
+
+    /* Portfolio — 3 across, generous in landscape */
+    .portfolio { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 5mm; }
+    .port-card { padding: 6mm 5mm; min-height: 52mm; }
+    .port-card.flag { background: var(--black) !important; color: var(--white) !important; }
+    .port-card.flag .desc { color: rgba(255,255,255,0.85) !important; }
+    .port-card h3 { font-size: 15pt; line-height: 1.15; }
+    .port-card .desc { font-size: 8.5pt; line-height: 1.5; }
+    .port-card .ptag { font-size: 7pt; }
+    .port-card .entity { font-size: 7pt; margin-bottom: 8pt; }
+    .port-card .metric { font-size: 7.5pt; padding-top: 6pt; margin-top: 6pt; }
+    .port-card .metric strong { font-size: 9pt; }
+
+    /* Licensing table — wide, comfortable */
+    .license-table { font-size: 9pt; }
+    .license-table th, .license-table td { padding: 7pt 11pt; }
+    .license-table tr { page-break-inside: avoid; }
+    .license-table tr.priority { background: var(--purple-tint) !important; }
+    .license-table .entity { font-size: 7.5pt; }
+    .license-table .lic-num { font-size: 8.5pt; }
+    .status-dot.active { background: var(--lime) !important; }
+    .status-dot.risk { background: #FF6B6B !important; }
+    .status-dot.exit { background: var(--gray-300) !important; }
+
+    /* GGR chart — landscape gives bars more room */
+    .chart-wrap { padding: 10mm 10mm; }
+    .bars { height: 75mm; gap: 14mm; }
+    .bar { background: var(--purple) !important; }
+    .bar.highlight { background: var(--lime) !important; }
+    .bar-value { font-size: 16pt; top: -24pt; }
+    .bar-label { font-size: 10pt; }
+    .bar-note { font-size: 7.5pt; }
+    .bar-labels { gap: 14mm; }
+
+    /* Callout — restrained on light bg */
+    .callout { background: var(--purple-tint) !important; border-left: 3px solid var(--purple) !important; padding: 8mm 10mm; margin-top: 8mm; }
+    .callout p { font-size: 14pt; line-height: 1.4; }
+    .callout cite { font-size: 9pt; margin-top: 8pt; }
+
+    /* Payments section dark callout → light for print */
+    section.dark .callout { background: var(--gray-100) !important; border-left-color: var(--purple) !important; }
+    section.dark .callout p { color: var(--black) !important; }
+    section.dark .callout cite { color: var(--gray-700) !important; }
+    section.dark .callout .clabel { color: var(--purple-deep) !important; }
+
+    /* Payments grid — two side-by-side with inverted dark */
+    .pay-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6mm; }
+    .pay-block { padding: 7mm 7mm; }
+    .pay-block.unknown { background: var(--white) !important; color: var(--ink) !important; border: 1px solid var(--gray-300) !important; border-left: 3px solid var(--purple) !important; }
+    .pay-block.known { border-left: 3px solid var(--lime) !important; }
+    .pay-block.unknown h3 { color: var(--purple-deep) !important; }
+    .pay-block.unknown .pintro { color: var(--gray-700) !important; }
+    .pay-block.unknown .pay-list li { border-color: var(--gray-200) !important; color: var(--gray-900) !important; }
+    .pay-block.unknown .pay-list .cat { color: var(--purple-deep) !important; }
+    .pay-block.unknown .pay-list .val { color: var(--gray-900) !important; }
+    .pay-list li { padding: 6pt 0; font-size: 8.5pt; grid-template-columns: 95pt 1fr; gap: 12pt; }
+    .pay-list .cat { font-size: 7.5pt; }
+    .pay-block h3 { font-size: 14pt; }
+    .pay-block .pintro { font-size: 9pt; margin-bottom: 12pt; }
+
+    /* Timeline — compact, landscape allows wider lines */
+    .timeline { padding-left: 18pt; }
+    .tl-item { padding-bottom: 10pt; }
+    .tl-item::before { left: -23pt; width: 7pt; height: 7pt; }
+    .tl-item h3 { font-size: 10pt; margin-bottom: 4pt; }
+    .tl-item p { font-size: 8.5pt; line-height: 1.45; }
+    .tl-date { font-size: 8pt; margin-bottom: 3pt; }
+    .tl-tag { font-size: 7pt; padding: 1pt 5pt; }
+
+    /* Implications block */
+    .implications { background: var(--lime) !important; padding: 14mm 16mm; }
+    .implications h3 { font-size: 26pt; line-height: 1.1; }
+    .implications p { font-size: 10.5pt; max-width: 180mm; }
+    .implications .punchline { font-size: 14pt; margin-top: 14pt; padding-top: 14pt; }
+
+    /* People — 3x3 fits in landscape */
+    .people { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 4mm; }
+    .person { padding: 5mm 5mm; }
+    .person.priority { background: var(--lime) !important; border-color: var(--lime) !important; }
+    .person h3 { font-size: 10.5pt; margin-bottom: 5pt; }
+    .person .note { font-size: 8.5pt; line-height: 1.45; }
+    .person .role { font-size: 7.5pt; }
+
+    /* Risks — 3x2 in landscape */
+    .risks { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 5mm; }
+    .risk-card { padding: 6mm 6mm; }
+    .risk-card.high { border-left: 3px solid #FF6B6B !important; }
+    .risk-card.med { border-left: 3px solid var(--purple) !important; }
+    .risk-card h3 { font-size: 11pt; margin-bottom: 6pt; line-height: 1.3; }
+    .risk-card p { font-size: 8.5pt; line-height: 1.5; }
+    .risk-card .rtag { font-size: 7.5pt; }
+
+    /* Recommendations — 5 across natural fit */
+    .recs { display: grid !important; grid-template-columns: repeat(5, 1fr) !important; border: 1px solid var(--gray-300); }
+    .rec { padding: 6mm 5mm; }
+    .rec .rnum { font-size: 32pt; margin-bottom: 10pt; }
+    .rec h3 { font-size: 10pt; line-height: 1.3; margin-bottom: 6pt; }
+    .rec p { font-size: 8.5pt; line-height: 1.45; }
+
+    /* Caveats */
+    .caveats { padding: 8mm 12mm; }
+    .caveats li { font-size: 9pt; padding: 5pt 0 5pt 14pt; line-height: 1.5; }
+
+    /* Footer */
+    footer { background: var(--white) !important; color: var(--gray-700) !important; padding: 8mm 0 0 0; page-break-before: avoid; border-top: 1px solid var(--gray-300); min-height: 0; }
+    .foot-grid h3, .foot-sig { color: var(--gray-700) !important; }
+    .foot-sig { font-size: 8pt; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">LaFinteca · Marketing &amp; Research Office · Intelligence Brief</div>
+    <h1>An iGaming<br>outlier <span class="quiet">worth</span><br><span class="accent">studying.</span></h1>
+    <p class="hero-sub">Easygo Group is one of the largest iGaming operators globally, and almost certainly the largest never to have raised external capital. For LaFinteca's investor mapping, it is the negative example that defines the category. For LaFinteca's business development, it is a US$4.7bn-GGR operator mid-migration from crypto to fiat with no incumbent global PSP publicly disclosed.</p>
+    <div class="hero-meta">
+      <div>Subject<strong>Easygo Entertainment Pty Ltd</strong></div>
+      <div>Scope<strong>Full group · ownership · M&amp;A · licensing · payments</strong></div>
+      <div>Date<strong>May 20, 2026</strong></div>
+      <div>For<strong>LaFinteca iGaming Investor Map</strong></div>
+    </div>
+  </div>
+</header>
+
+<!-- TL;DR -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The three things to <span class="italic">remember.</span></h2>
+      <p class="section-sub">If the deck only has space for three lines about Easygo, these are the three. Everything else in this document supports them.</p>
+    </div>
+    <div class="tldr-grid">
+      <div class="tldr-card dark">
+        <div class="num">01</div>
+        <h3>Fully founder-owned. No outside capital, ever.</h3>
+        <p>Bijan Tehrani owns ~66.7% of Easygo Entertainment Pty Ltd directly. Ed Craven owns ~33.3% via Ashwood Holdings. No external investors, no VC, no PE, no IPO filing, no employee equity plan disclosed. The December 2024 A$4.78bn internal restructuring was funded by issuing new shares to the same two founders.</p>
+      </div>
+      <div class="tldr-card">
+        <div class="num">02</div>
+        <h3>A US$4.7bn-GGR operator larger than MGM's Vegas casino business.</h3>
+        <p>Stake told Forbes it generated US$4.7bn in gaming revenue in 2024 — "more than MGM reported earning from casino games at all of its Las Vegas properties." Easygo Group Holdings' FY-Jun-2025 ASIC accounts: A$970m revenue, A$257m net profit, A$5.07bn net assets, 636 staff in scope.</p>
+      </div>
+      <div class="tldr-card lime">
+        <div class="num">03</div>
+        <h3>Mid-migration to fiat. No global PSP publicly named.</h3>
+        <p>Craven told The Australian in March 2025 that ~70% of Stake's transactions are now in fiat. The group operates regulated entities in Brazil, Colombia, Peru, Mexico, Italy and Denmark with no incumbent global PSP publicly disclosed. The procurement window is open. This is the LaFinteca-relevant headline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEADLINE STATS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The group, by the <span class="italic">numbers.</span></h2>
+      <p class="section-sub">Two sources of truth: Stake's self-reported figures via Forbes for the global GGR, and ASIC-lodged Easygo Group Holdings FY-Jun-2025 accounts (scooped by The Australian, recirculated by NEXT.io and iGaming Express in December 2025). The Australian filing covers only the Australian entity — Stake's revenue is largely booked in Curaçao via Medium Rare N.V. and is not consolidated.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="label">Stake GGR 2024</div>
+        <div class="figure">4.7<span class="unit">B USD</span></div>
+        <div class="desc">Per Stake's own statement to Forbes. ~80% growth from 2022.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Easygo Group revenue FY25</div>
+        <div class="figure">970<span class="unit">M AUD</span></div>
+        <div class="desc">ASIC filing, year to 30 Jun 2025. Australian entity only.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Net profit FY25</div>
+        <div class="figure">257<span class="unit">M AUD</span></div>
+        <div class="desc">After A$152m corporate tax. 26.5% net margin.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Net assets</div>
+        <div class="figure">5.07<span class="unit">B AUD</span></div>
+        <div class="desc">Post-Dec-2024 internal restructuring (1.728m new shares to founders at A$2.77).</div>
+      </div>
+    </div>
+
+    <div class="divider"><span>Wealth</span></div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="label">Craven · AFR Young Rich 2025</div>
+        <div class="figure">4.6<span class="unit">B AUD</span></div>
+        <div class="desc">Ranked #2. Born 1995, Melbourne.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Craven · Forbes Global 2025</div>
+        <div class="figure">2.8<span class="unit">B USD</span></div>
+        <div class="desc">#1305 globally. Top 2 youngest self-made billionaires.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Tehrani · combined fortune</div>
+        <div class="figure">5.6<span class="unit">B USD</span></div>
+        <div class="desc">Per Forbes Australia, Oct 2024. With Craven.</div>
+      </div>
+      <div class="stat">
+        <div class="label">Crypto on balance sheet</div>
+        <div class="figure">405<span class="unit">M AUD</span></div>
+        <div class="desc">FY24 Easygo Solutions only. No named custodian disclosed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNERSHIP -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The cap table fits<br>on <span class="italic">a napkin.</span></h2>
+      <p class="section-sub">There is no external equity. No venture round, no PE stake, no secondary, no IPO filing. The December 2024 A$4.78bn share issue was an internal reorganisation — shares were issued to Craven and Tehrani only. The structure is engineered for founder control.</p>
+    </div>
+    <div class="ownership">
+      <div class="own-diagram">
+        <h4>Easygo Entertainment Pty Ltd · Ownership</h4>
+        <div class="own-split">
+          <div>
+            <div class="own-tier founder">
+              <div class="role">Co-founder · Direct</div>
+              <div class="name">Bijan Tehrani</div>
+              <div class="pct">⅔</div>
+            </div>
+          </div>
+          <div>
+            <div class="own-tier holding">
+              <div class="role">Co-founder · via Ashwood Holdings</div>
+              <div class="name">Ed Craven</div>
+              <div class="pct">⅓</div>
+            </div>
+          </div>
+        </div>
+        <div class="own-connector"></div>
+        <div class="own-tier parent">
+          <div class="role">Parent operating entity</div>
+          <div class="name">Easygo Entertainment Pty Ltd · Melbourne</div>
+        </div>
+        <div class="own-connector"></div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.6); padding: 16px 4px; line-height: 1.5;">
+          → Stake.com (via Medium Rare N.V., Curaçao)<br>
+          → Stake.us (via Sweepsteaks Limited, Cyprus)<br>
+          → Kick (via Kick Streaming Pty Ltd, Australia)<br>
+          → Stake Brazil, Colombia, Peru, Mexico, Denmark<br>
+          → Baldo Line / Idealbet (Italy)<br>
+          → Twist Gaming, Massive Studios, Primedice
+        </div>
+      </div>
+
+      <div class="own-text">
+        <h4>What this means for the investor map</h4>
+        <p>Easygo will not appear in any iGaming funding-round database. No round to plot, no fund to credit, no exit multiple to model. In a deck about "external funds and firms that invested in iGaming companies," Easygo is the conspicuous absence.</p>
+        <p>That absence is itself the finding. It tells us crypto-margin reinvestment at scale can substitute for external capital in this category. Bet365 / Coates and Pinnacle are the closest analogues — both founder-controlled, both never publicly raised. Easygo joins that very short list at the top of the operator stack.</p>
+        <div class="pull">"The biggest movers in iGaming aren't always the ones taking outside money."</div>
+        <p>Position this as a sidebar in the deck: <strong>Tier-1 outliers — founder-funded operators at scale.</strong> One slide. Three names. The point lands in seven seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDING & CAPITAL STRUCTURE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Did anyone ever fund<br>this <span class="italic">company?</span></h2>
+      <p class="section-sub">This is the headline claim in the brief, and it deserves the work. The short answer is no — Easygo has never taken external equity, has no disclosed debt facility, and operates on reinvested operating cash. The longer answer requires walking through what would falsify that claim and showing it isn't there.</p>
+    </div>
+
+    <div class="funding-intro">
+      <div class="funding-verdict">
+        <div class="vlabel">Verdict</div>
+        <h3>No external capital. Founder-funded since day one.</h3>
+        <p>Built on Primedice's 2013 Bitcoin-dice cash flow. Stake launched 2017 from the same capital base. Every subsequent expansion — Kick, Twist Gaming, Idealbet, Stake Denmark, the Sauber sponsorship, Maincode — financed from operating profit and founder personal wealth.</p>
+        <div class="funding-confidence">
+          <div class="conf-dots">
+            <span class="conf-dot on"></span>
+            <span class="conf-dot on"></span>
+            <span class="conf-dot on"></span>
+            <span class="conf-dot on"></span>
+            <span class="conf-dot"></span>
+          </div>
+          <span class="conf-label">Confidence · <strong>High</strong></span>
+        </div>
+      </div>
+
+      <div class="funding-text">
+        <h4>Why we can say this with confidence</h4>
+        <p>Three categories of evidence converge: (1) no record of a funding round in any database that tracks them, (2) no disclosure consistent with external equity in Australian regulatory filings, and (3) cash-flow math that doesn't require external capital to explain.</p>
+        <p>What would falsify it: an ASIC filing showing a third-party shareholder, a Crunchbase/PitchBook funding record, a credit facility disclosed in a counterparty filing, or a public statement of capital raised. None exist as of May 2026.</p>
+        <p>The one ambiguity worth surfacing: Tehrani publicly stated in April 2026 that the founders "personally invested close to US$1bn in Kick." That is founder personal capital flowing into a subsidiary — not external capital flowing into the group. The distinction matters.</p>
+      </div>
+    </div>
+
+    <h4 style="margin-bottom: 18px; color: var(--gray-700);">— Evidence affirming the claim —</h4>
+    <div class="evidence-grid">
+
+      <div class="ev-card affirm">
+        <div class="etag">Database absence</div>
+        <h3>Zero funding records in tracker databases</h3>
+        <p>Crunchbase, PitchBook (public portions), ZoomInfo and LeadIQ profiles for Easygo Entertainment Pty Ltd show no funding rounds. No seed, no Series A through D, no PE, no debt round, no SAFE/convertible. For a company at this scale, that absence is itself the signal.</p>
+        <span class="source">Crunchbase / PitchBook / ZoomInfo · May 2026</span>
+      </div>
+
+      <div class="ev-card affirm">
+        <div class="etag">ASIC filing</div>
+        <h3>December 2024 restructuring went to founders only</h3>
+        <p>Easygo Group Holdings issued 1.728 million new shares at A$2.77 fair value — a A$4.78bn internal reorganisation. The entire allotment went to Craven and Tehrani. No third-party allottee, no employee tranche disclosed, no convertible-instrument conversion.</p>
+        <span class="source">Easygo Group Holdings FY-Jun-2025 accounts · ASIC · scooped by The Australian Dec 2025</span>
+      </div>
+
+      <div class="ev-card affirm">
+        <div class="etag">Cash on hand</div>
+        <h3>A$116m cash, A$5.07bn net assets — no debt headline</h3>
+        <p>FY25 accounts show A$116m in cash. Net assets at A$5.07bn. The reporting picked up by NEXT.io, iGaming Express and The Gaming Boardroom contains no mention of bank debt, bond issuance, or credit facility — items that would normally surface in trade-press coverage of accounts at this scale.</p>
+        <span class="source">NEXT.io · iGaming Express · Dec 2025</span>
+      </div>
+
+      <div class="ev-card affirm">
+        <div class="etag">Founder statements</div>
+        <h3>Tehrani: "personally invested close to US$1bn in Kick"</h3>
+        <p>Per Tehrani's posts on X (April 2026), Kick was funded by founder personal wealth — not by external capital and not by Easygo group treasury. This is the most explicit founder statement on capital structure on record, and it cuts exactly the way the verdict claims.</p>
+        <span class="source">Bijan Tehrani · X · April 2026</span>
+      </div>
+
+      <div class="ev-card affirm">
+        <div class="etag">Operator origin</div>
+        <h3>Bootstrapped from 2013 Primedice cash flow</h3>
+        <p>Primedice (Bitcoin dice, launched 2013 when Craven was 17) generated the seed capital. Easygo Entertainment incorporated 2016. Stake launched August 2017. The runway from Primedice to A$5bn net assets was thirteen years of compounding crypto-margin reinvestment — no external injection needed at any stage.</p>
+        <span class="source">Easygo.io company history · Wikipedia · cross-referenced</span>
+      </div>
+
+      <div class="ev-card affirm">
+        <div class="etag">Sole director signal</div>
+        <h3>Craven is sole listed director of Easygo Group Holdings</h3>
+        <p>Sole-director structures are uncommon in private companies with external investors — they're a hallmark of founder-controlled operations. Combined with Tehrani's direct ⅔ stake at the operating-entity level, the governance is built for two-person control. Investor protections (board seats, observer rights, veto rights) would normally appear in this layer if they existed.</p>
+        <span class="source">Easygo Group Holdings ASIC director listing · FY25</span>
+      </div>
+
+    </div>
+
+    <h4 style="margin-top: 48px; margin-bottom: 18px; color: var(--gray-700);">— What we considered as counter-evidence and ruled out —</h4>
+    <div class="evidence-grid">
+
+      <div class="ev-card counter">
+        <div class="etag">Considered · The Sauber deal</div>
+        <h3>Is Stake F1 sponsorship secretly an equity round?</h3>
+        <p>It is not. The Sauber arrangement is a title sponsorship — Stake pays Sauber for branding rights on the car and team. The money flows the wrong direction for an equity investment. Craven separately co-owns minority Sauber motorsport interests, but that's outbound personal investment, not inbound to Easygo.</p>
+      </div>
+
+      <div class="ev-card counter">
+        <div class="etag">Considered · PointsBet</div>
+        <h3>Did the PointsBet stake represent outside capital?</h3>
+        <p>No — direction reversed. Easygo Gaming held ~5% of PointsBet (outbound investment), then sold into MIXI's A$1.25/share takeover in August 2025 (cash exit, inbound to Easygo). This was Easygo deploying capital, not receiving it. The realised proceeds added to the group's cash position.</p>
+      </div>
+
+      <div class="ev-card counter">
+        <div class="etag">Considered · The hack</div>
+        <h3>Did Easygo raise capital to cover the Sept 2023 US$41m Lazarus loss?</h3>
+        <p>No evidence of any capital raise tied to the hack. The loss was absorbed from operating cash. Stake's GGR continued to grow (US$2.6bn 2023 → US$4.7bn 2024) and FY25 accounts show A$116m cash plus A$257m net profit — comfortably more than required to cover a one-time US$41m write-down without external help.</p>
+      </div>
+
+      <div class="ev-card counter">
+        <div class="etag">Considered · The Italy/Denmark deals</div>
+        <h3>Were the 2024 acquisitions debt-financed?</h3>
+        <p>The Idealbet acquisition (Aug 2024) and Stake Denmark deal (Jul 2024, A$7.1m) were small relative to group cash flow. The total of disclosed 2024 M&amp;A — including the unnamed A$45.1m July deal — is comfortably absorbable from operating cash. No bridge financing, no acquisition facility, no rights issue disclosed.</p>
+      </div>
+
+    </div>
+
+    <div class="funding-flow">
+      <div class="flow-title">How the capital actually flows</div>
+      <div class="flow-sub">Where every dollar of Easygo expansion has come from since 2013</div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="stepnum">01</div>
+          <h4>Primedice (2013)</h4>
+          <p>Bitcoin dice game. Founder bootstrap. Generated initial capital base.</p>
+        </div>
+        <div class="flow-step">
+          <div class="stepnum">02</div>
+          <h4>Stake launch (2017)</h4>
+          <p>Crypto casino built on Primedice cash flow. No external round at launch.</p>
+        </div>
+        <div class="flow-step engine">
+          <div class="stepnum">03</div>
+          <h4>Crypto-margin engine</h4>
+          <p>Stake operating profit compounds. GGR US$1.8B → 4.7B over four years.</p>
+        </div>
+        <div class="flow-step">
+          <div class="stepnum">04</div>
+          <h4>Reinvestment</h4>
+          <p>Kick, Twist, Idealbet, Denmark, Sauber sponsorship — all funded from cash flow.</p>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step terminal">
+          <div class="stepnum">05</div>
+          <h4>A$5.07bn net assets</h4>
+          <p>Today. Same two founders. No external shareholder in the chain.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="clabel">For the investor map</div>
+      <p>Easygo will not appear in any iGaming funding-round database — and that absence is the finding, not a research gap. The deck should make this explicit, because anyone fact-checking the slide will reach for Crunchbase first and conclude we missed something.</p>
+      <cite>The sidebar should read: "Easygo is not in any funding tracker because no funding round exists. Bootstrapped from Primedice 2013, compounded through Stake from 2017. Same two founders, same cap table, ⅔ Tehrani / ⅓ Craven, today."</cite>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND PORTFOLIO -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The portfolio behind <span class="italic">one office in Melbourne.</span></h2>
+      <p class="section-sub">Eight active brands, three studios, one F1 team. Run by a small senior team of ~636 (ASIC-disclosed) operating across Australia, Cyprus, Serbia, Italy, Brazil, Colombia, Peru, Mexico and Denmark. Stake.com is the engine. Everything else exists to feed it players or content.</p>
+    </div>
+    <div class="portfolio">
+
+      <div class="port-card flag">
+        <div class="ptag">Flagship · Real-money casino</div>
+        <h3>Stake.com</h3>
+        <div class="entity">Operator: Medium Rare N.V. · Curaçao OGL/2024/1451/0918</div>
+        <div class="desc">Crypto-and-fiat casino + sportsbook. Largest single revenue source. The brand the rest of the group revolves around.</div>
+        <div class="metric">2024 GGR<strong>US$4.7 billion</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">US sweepstakes</div>
+        <h3>Stake.us</h3>
+        <div class="entity">Operator: Sweepsteaks Limited · Cyprus HE436222</div>
+        <div class="desc">1,900+ social-casino games. Sweepstakes model — not gaming-licensed. Under active legal attack in CA, IL, AL, MA, SC, MN.</div>
+        <div class="metric">Litigation defendants<strong>Craven, Tehrani named personally</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">Livestreaming · Twitch challenger</div>
+        <h3>Kick</h3>
+        <div class="entity">Operator: Kick Streaming Pty Ltd · Australia</div>
+        <div class="desc">95/5 creator revenue split. 50M+ registered users. Strategic role: customer-acquisition engine for Stake casino streams ejected from Twitch in 2022.</div>
+        <div class="metric">Founder personal investment<strong>~US$1 billion (Tehrani, Apr 2026)</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">In-house game studio</div>
+        <h3>Twist Gaming</h3>
+        <div class="entity">B2B brand · distribution captive to Stake</div>
+        <div class="desc">Slot studio. Exclusive titles for Stake (Wallaby Wilds, Wild Savannah, Spin Reaper, Boom). Branded as B2B; in practice, Stake-only.</div>
+        <div class="metric">Real B2B push<strong>Massive Studios (FY25)</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">Platform · third-party</div>
+        <h3>Stake Engine</h3>
+        <div class="entity">Next-gen Remote Gaming Server</div>
+        <div class="desc">Announced platform for third-party developers to publish on Stake's stack. Signal that the group wants supplier-side leverage, not only operator-side.</div>
+        <div class="metric">Status<strong>Announced, no public traction yet</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">LATAM · regulated local</div>
+        <h3>Stake LATAM</h3>
+        <div class="entity">.br · .com.co · .pe · .mx (separate operating entities)</div>
+        <div class="desc">Locally-licensed real-money operations. The single most important strategic axis for LaFinteca. Brazil framed as "second largest market" at launch.</div>
+        <div class="metric">Latest entry<strong>Denmark · 1 Mar 2026</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">Equity stake · disposed</div>
+        <h3>PointsBet</h3>
+        <div class="entity">via Easygo Gaming · sold into MIXI offer Aug 2025</div>
+        <div class="desc">ASX-listed bookmaker. Easygo held ~5%, sold at A$1.25/share into MIXI's takeover. MIXI closed at 66.43%.</div>
+        <div class="metric">Exit<strong>Sep 2025</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">Sponsorship · multi-year</div>
+        <h3>Stake F1 Team</h3>
+        <div class="entity">Sauber Motorsport · 3-year title sponsorship</div>
+        <div class="desc">Not equity. Marketing spend. Reported values diverge wildly: US$50m to AU$140m / 3 years. No primary disclosure from either party.</div>
+        <div class="metric">Term<strong>2024–2025 + extension</strong></div>
+      </div>
+
+      <div class="port-card">
+        <div class="ptag">Outbound investment · founder</div>
+        <h3>Maincode / Matilda</h3>
+        <div class="entity">via MCECTech Pty Ltd · Craven sole shareholder</div>
+        <div class="desc">Craven's personal investment in Australia's first sovereign LLM. Outside Easygo perimeter. Signal of where founder attention is now going.</div>
+        <div class="metric">Status<strong>Active · Aug 2025</strong></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LICENSING -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Where the group is <span class="italic">licensed to operate.</span></h2>
+      <p class="section-sub">Eight active jurisdictions, one strategic exit (UK), one unlicensed model under attack (US sweepstakes). LATAM markets highlighted — these are the LaFinteca-overlap markets.</p>
+    </div>
+    <table class="license-table">
+      <thead>
+        <tr>
+          <th>Jurisdiction</th>
+          <th>Operating entity</th>
+          <th>Licence / authority</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="priority">
+          <td><span class="flag">🇧🇷</span>Brazil</td>
+          <td>Stake Brazil Ltda<span class="entity">CNPJ 56.525.936/0001-90</span></td>
+          <td><span class="lic-num">SPA/MF Ordinance Nº 263</span><br><span style="font-size:12px;color:var(--gray-500);">Issued Feb 2025</span></td>
+          <td><span class="status-dot active"></span>Active · São Paulo office</td>
+        </tr>
+        <tr class="priority">
+          <td><span class="flag">🇨🇴</span>Colombia</td>
+          <td>Stake Colombia SAS<span class="entity">NIT 901392284-4</span></td>
+          <td><span class="lic-num">Coljuegos C1751 · concession C2226 de 2025</span><br><span style="font-size:12px;color:var(--gray-500);">Valid to 29-Dec-2030</span></td>
+          <td><span class="status-dot active"></span>Active · acquired Betfair Colombia Nov 2023</td>
+        </tr>
+        <tr class="priority">
+          <td><span class="flag">🇵🇪</span>Peru</td>
+          <td>Stake Peru SAC<span class="entity">RUC 20612425184</span></td>
+          <td><span class="lic-num">Mincetur 4748-2024 + 4749-2024</span><br><span style="font-size:12px;color:var(--gray-500);">Sportsbook + casino</span></td>
+          <td><span class="status-dot active"></span>Active</td>
+        </tr>
+        <tr class="priority">
+          <td><span class="flag">🇲🇽</span>Mexico</td>
+          <td>Capali la Paz Operaciones / Producciones Móviles</td>
+          <td><span class="lic-num">DGAJS/SCEVF/P-06/2005-TER</span><br><span style="font-size:12px;color:var(--gray-500);">+ DGJS/DCRCA/2501/2021</span></td>
+          <td><span class="status-dot active"></span>Active · under reform watch</td>
+        </tr>
+        <tr>
+          <td><span class="flag">🌐</span>Global</td>
+          <td>Medium Rare N.V.<span class="entity">Curaçao</span></td>
+          <td><span class="lic-num">CGA OGL/2024/1451/0918</span><br><span style="font-size:12px;color:var(--gray-500);">Post-LOK reform, direct CGA oversight</span></td>
+          <td><span class="status-dot active"></span>Active · global backbone</td>
+        </tr>
+        <tr>
+          <td><span class="flag">🇮🇹</span>Italy</td>
+          <td>Baldo Line s.r.l.<span class="entity">Idealbet brand</span></td>
+          <td><span class="lic-num">ADM (Agenzia Dogane Monopoli)</span><br><span style="font-size:12px;color:var(--gray-500);">Pre-Stake licence, acquired Aug 2024</span></td>
+          <td><span class="status-dot active"></span>Active · EU foothold</td>
+        </tr>
+        <tr>
+          <td><span class="flag">🇩🇰</span>Denmark</td>
+          <td>Stake Denmark A/S<span class="entity">HQ Parken Stadium, Copenhagen</span></td>
+          <td><span class="lic-num">Spillemyndigheden · 5-year licence</span><br><span style="font-size:12px;color:var(--gray-500);">Issued Feb 2026 · launches 1 Mar 2026</span></td>
+          <td><span class="status-dot active"></span>Active · DKK only, no crypto</td>
+        </tr>
+        <tr>
+          <td><span class="flag">🇺🇸</span>United States</td>
+          <td>Sweepsteaks Limited<span class="entity">Cyprus HE436222 · Larnaka</span></td>
+          <td><span class="lic-num">Sweepstakes model · NOT gaming-licensed</span><br><span style="font-size:12px;color:var(--gray-500);">Stake.us — California state lawsuit live</span></td>
+          <td><span class="status-dot risk"></span>Litigation · 6+ state actions</td>
+        </tr>
+        <tr>
+          <td><span class="flag">🇬🇧</span>UK</td>
+          <td>(via TGP Europe white-label)</td>
+          <td><span class="lic-num">UKGC investigation triggered Mar 2025</span><br><span style="font-size:12px;color:var(--gray-500);">Bonnie Blue ad scandal · TGP fined £316k Apr 2023</span></td>
+          <td><span class="status-dot exit"></span>Exited 11 Mar 2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FINANCIAL TRAJECTORY -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Five years of <span class="italic">compounding.</span></h2>
+      <p class="section-sub">Stake's reported GGR trajectory. The numbers are self-reported via Forbes and FT, not audited. Treat as directional. The point is the slope — and the fact that this scale was built without taking a dollar from outside.</p>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-title">Stake.com — annual GGR, 2021–2024</div>
+      <div class="chart-sub">USD billions · self-reported via Forbes (2025 Youngest Billionaires), FT, industry estimates</div>
+      <div class="bars-outer">
+        <div class="bars">
+          <div class="bar-col">
+            <div class="bar" style="height: 38%;">
+              <div class="bar-value">$1.8B</div>
+            </div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height: 55%;">
+              <div class="bar-value">$2.6B</div>
+            </div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height: 55%;">
+              <div class="bar-value">$2.6B</div>
+            </div>
+          </div>
+          <div class="bar-col">
+            <div class="bar highlight" style="height: 100%;">
+              <div class="bar-value">$4.7B</div>
+            </div>
+          </div>
+        </div>
+        <div class="bar-labels">
+          <div>
+            <div class="bar-label">2021</div>
+            <div class="bar-note">BTCGOSU est.</div>
+          </div>
+          <div>
+            <div class="bar-label">2022</div>
+            <div class="bar-note">FT reporting</div>
+          </div>
+          <div>
+            <div class="bar-label">2023</div>
+            <div class="bar-note">Industry est.</div>
+          </div>
+          <div>
+            <div class="bar-label">2024</div>
+            <div class="bar-note">Forbes / LA complaint</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="clabel">Operator context · Forbes 2025</div>
+      <p>Stake's 2024 GGR was greater than MGM's combined casino-game earnings from all its Las Vegas properties.</p>
+      <cite>Forbes 2025 Youngest Billionaires list, April 2025, via VnExpress International</cite>
+    </div>
+  </div>
+</section>
+
+<!-- M&A TIMELINE -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>M&amp;A, licensing &amp; regulatory <span class="italic">timeline.</span></h2>
+      <p class="section-sub">Three years of compressed action. Purple dots = M&amp;A and corporate transactions. Lime dots = licensing wins. Red dots = regulatory or legal events.</p>
+    </div>
+
+    <h4 style="margin-top: 16px; margin-bottom: 20px;">— 2023–2024 · LATAM &amp; Europe entry —</h4>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Nov 2023</div>
+        <h3>Acquired Betfair Colombia <span class="tl-tag tag-ma">M&amp;A</span></h3>
+        <p>First LATAM entry. Folded into Stake Colombia SAS structure.</p>
+      </div>
+      <div class="tl-item risk">
+        <div class="tl-date">Sep 2023</div>
+        <h3>Lazarus Group hack · US$41m crypto stolen <span class="tl-tag tag-risk">Risk</span></h3>
+        <p>FBI attributed to DPRK APT38. Assets traced across 33 addresses on ETH, BSC, Polygon. No recovery publicly reported. Business unaffected at scale.</p>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">Feb 2024</div>
+        <h3>Sauber rebrand → "Stake F1 Team" <span class="tl-tag tag-strat">Strategic</span></h3>
+        <p>Three-year title sponsorship. Reported values diverge: US$50m to AU$140m per estimates. ESBK (Swiss Federal Gaming Board) opens routine review.</p>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">May 2024</div>
+        <h3>PointsBet stake raised above 5% <span class="tl-tag tag-ma">M&amp;A</span></h3>
+        <p>Via Easygo Gaming. ASX-listed exposure. Held for ~15 months before exiting into MIXI offer.</p>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">Jul 2024</div>
+        <h3>Acquired Stake Denmark operations · A$7.1m <span class="tl-tag tag-ma">M&amp;A</span></h3>
+        <p>Plus an unnamed A$45.1m acquisition the same month. The Denmark deal seeds the Feb 2026 licence application.</p>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">Aug 2024</div>
+        <h3>Acquired Baldo Line / Idealbet.it <span class="tl-tag tag-ma">M&amp;A</span></h3>
+        <p>From Octavian Group. First EU regulated foothold via Italian ADM licence.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Oct 2024</div>
+        <h3>Brazil SPA provisional whitelist <span class="tl-tag tag-license">Licence</span></h3>
+        <p>Approved to continue operations during Brazil's federal regulatory transition.</p>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">Dec 2024</div>
+        <h3>A$4.78bn internal restructuring <span class="tl-tag tag-ma">Corporate</span></h3>
+        <p>1.728m new shares issued to Craven and Tehrani at A$2.77 fair value. No external party involved. Reorganises the group around the new LATAM/EU footprint.</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 48px; margin-bottom: 20px;">— 2025 · LATAM regularisation &amp; US legal pressure —</h4>
+    <div class="timeline">
+      <div class="tl-item lime">
+        <div class="tl-date">Jan 2025</div>
+        <h3>Stake Brazil licence issued · SPA/MF Ordinance 263 <span class="tl-tag tag-license">Licence</span></h3>
+        <p>São Paulo office opens. Country manager Thomas Carvalhaes. Initial 10-person team. Brazil framed as "second largest market."</p>
+      </div>
+      <div class="tl-item risk">
+        <div class="tl-date">Mar 2025</div>
+        <h3>UK exit · Stake.uk.com shut down <span class="tl-tag tag-risk">Risk</span></h3>
+        <p>UKGC investigation triggered by Bonnie Blue viral ad. TGP Europe white-label terminated. Compliance director Bárbara Teles framed the exit as strategic.</p>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">Mar 2025</div>
+        <h3>Craven: ~70% of transactions now fiat <span class="tl-tag tag-strat">Strategic</span></h3>
+        <p>Disclosed to The Australian. Marks the formal shift from crypto-exclusive to hybrid fiat-and-crypto. The single most consequential data point in this file for a payments institution.</p>
+      </div>
+      <div class="tl-item risk">
+        <div class="tl-date">Apr 2025</div>
+        <h3>Boyle v. Sweepsteaks Ltd filed (California) <span class="tl-tag tag-risk">Risk</span></h3>
+        <p>Federal Court class-style claim alleging illegal social-casino operation. First in a wave of state-level US litigation.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Aug 2025</div>
+        <h3>Drake deletes Kick account · public falling-out <span class="tl-tag tag-strat">Marketing</span></h3>
+        <p>"F**k Eddie… they treat us like sh** still." Relationship strained, not formally terminated. Drake still placing Stake-branded bets as of Feb 2026.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Aug 2025</div>
+        <h3>MIXI bid for PointsBet · Easygo exits stake <span class="tl-tag tag-ma">M&amp;A</span></h3>
+        <p>A$1.25/share. MIXI closes at 66.43% on 12 Sep deadline. Easygo realises the position.</p>
+      </div>
+      <div class="tl-item risk">
+        <div class="tl-date">Sep 2025</div>
+        <h3>LA City Attorney sues Sweepsteaks et al. <span class="tl-tag tag-risk">Risk</span></h3>
+        <p>LASC 25STCV25304. Names Craven and Tehrani personally. Defendants include Medium Rare N.V., Kick Streaming, suppliers (Evolution, Pragmatic, Hacksaw, NoLimit, NetEnt, Red Tiger, Big Time, Veriff, Veridian and Tamaris Gibraltar). Veil-piercing theory is unusual and elevates personal-liability risk.</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 48px; margin-bottom: 20px;">— 2026 · European expansion —</h4>
+    <div class="timeline">
+      <div class="tl-item lime">
+        <div class="tl-date">Feb 2026</div>
+        <h3>Stake Denmark · 5-year licence <span class="tl-tag tag-license">Licence</span></h3>
+        <p>Spillemyndigheden. Launches 1 March 2026. HQ at Parken Stadium, Copenhagen. MD: Peter Eugen Clausen. DKK only, no crypto — confirms the fiat shift in a new market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENTS — THE KEY SECTION -->
+<section class="dark">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The payments stack —<br>what's visible, what's <span class="italic">conspicuously not.</span></h2>
+      <p class="section-sub">This is the section that matters for LaFinteca. A US$4.7bn-GGR operator with no incumbent global PSP publicly named is, mathematically, an unusually large addressable opportunity for a licensed LATAM EMI. The opacity is itself the strategic insight.</p>
+    </div>
+
+    <div class="pay-grid">
+
+      <div class="pay-block known">
+        <h3>What's publicly known</h3>
+        <p class="pintro">Disclosed in product, press, or Stake's own terms. Limited to consumer-facing methods — no PSP, acquirer, bank or custodian named anywhere.</p>
+        <ul class="pay-list">
+          <li><div class="cat">Crypto on-ramps</div><div class="val">MoonPay · Swapped.com · Mesh (CEX/wallet linking)</div></li>
+          <li><div class="cat">Cards</div><div class="val">Visa, Mastercard via MoonPay rail</div></li>
+          <li><div class="cat">LATAM e-wallets</div><div class="val">AstroPay (Argentina, Chile, Ecuador)</div></li>
+          <li><div class="cat">Brazil</div><div class="val">Pix · named PSP undisclosed</div></li>
+          <li><div class="cat">Colombia</div><div class="val">PSE, Nequi, Efecty · named PSP undisclosed</div></li>
+          <li><div class="cat">Mexico</div><div class="val">SPEI / cards · named PSP undisclosed</div></li>
+          <li><div class="cat">Africa</div><div class="val">Opay (Nigeria)</div></li>
+          <li><div class="cat">Canada</div><div class="val">Interac</div></li>
+          <li><div class="cat">India</div><div class="val">UPI</div></li>
+          <li><div class="cat">SE Asia</div><div class="val">MomoPay (Vietnam)</div></li>
+          <li><div class="cat">Denmark</div><div class="val">MobilePay · DKK only, no crypto</div></li>
+          <li><div class="cat">Native swaps</div><div class="val">Swap Connect + Swap Crypto · in-product, 20+ cryptocurrencies</div></li>
+        </ul>
+      </div>
+
+      <div class="pay-block unknown">
+        <h3>What's not publicly named</h3>
+        <p class="pintro">This is the procurement white space. None of the names below — incumbents in LATAM iGaming payments — appear in any Stake or Easygo disclosure surfaced in this research.</p>
+        <ul class="pay-list">
+          <li><div class="cat">Brazil PSP</div><div class="val">EBANX · dLocal · Nuvei · PagSeguro · Pay4Fun · none confirmed</div></li>
+          <li><div class="cat">LATAM acquirer</div><div class="val">No regional acquirer publicly disclosed for any market</div></li>
+          <li><div class="cat">Banking partner</div><div class="val">No primary banking relationship publicly named in any jurisdiction</div></li>
+          <li><div class="cat">EMI relationship</div><div class="val">No EMI partner disclosed for European or LATAM flows</div></li>
+          <li><div class="cat">Crypto custodian</div><div class="val">Fireblocks · BitGo · Copper · Anchorage — all absent from public disclosures, despite A$405m in on-balance-sheet crypto in FY24</div></li>
+          <li><div class="cat">Treasury / FX</div><div class="val">No public information on stablecoin holdings (USDT/USDC split), FX hedging, or cross-border reconciliation infrastructure</div></li>
+          <li><div class="cat">Settlement bank</div><div class="val">None named in any market</div></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="callout" style="background: rgba(195,171,255,0.1); border-left-color: var(--lime);">
+      <div class="clabel" style="color: var(--lime);">Ed Craven · March 2025</div>
+      <p style="color: var(--white);">"We're very confident that Stake doesn't have as much room to grow in crypto as it does in traditional payment methods."</p>
+      <cite style="color: rgba(255,255,255,0.6);">The Australian, March 2025, via VnExpress International, 15 April 2025. Disclosed alongside the ~70% fiat transaction figure.</cite>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS IS A LAFINTECA WINDOW -->
+<section>
+  <div class="wrap-narrow">
+    <div class="implications">
+      <h4 style="color: var(--lime-deep); margin-bottom: 12px;">Implication · for a licensed LATAM EMI</h4>
+      <h3>The procurement window is open, and it won't stay that way.</h3>
+      <p>Easygo demonstrates that a fully founder-funded crypto-native operator can scale to A$5bn+ in net assets without raising external capital — but in the process, it has built a payments stack that is highly opaque from the outside, almost certainly procured ad-hoc, and now in the middle of a forced migration from crypto-only rails to a hybrid fiat-and-crypto architecture as the group regularises in Brazil, Colombia, Peru, Mexico, Italy, and Denmark.</p>
+      <p>The 70%-fiat figure Craven gave The Australian is the single most consequential data point in this file. Stake is rebuilding its banking and PSP layer right now, in markets where LaFinteca already holds licensure and operates flow.</p>
+      <p>The competitive constraint is not pricing or feature set. It is institutional access: Easygo procurement runs out of a small Melbourne team and prefers private commercial relationships. The strategic risk is regulatory — California sweepstakes litigation and Curaçao reform.</p>
+      <p class="punchline">"Regulated LATAM EMI with single-contract Pix/SPEI/PSE coverage and provable AML/KYC for a group under active enforcement scrutiny in the U.S." — that framing matches both Easygo's current pain points and the LaFinteca stack.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KEY PEOPLE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Who actually <span class="italic">runs this.</span></h2>
+      <p class="section-sub">Lime-highlighted names are the LaFinteca-relevant decision surface for payments procurement: LATAM country managers, group strategy, and Brazil compliance.</p>
+    </div>
+    <div class="people">
+
+      <div class="person">
+        <div class="role">Co-founder · CEO Kick · sole director Easygo Group Holdings</div>
+        <h3>Ed Craven</h3>
+        <div class="note">Born 1995, Melbourne. A$4.6bn (AFR YRL #2 2025). A$250k Easygo salary. Personal AI investment via MCECTech / Maincode.</div>
+      </div>
+
+      <div class="person">
+        <div class="role">Co-founder · majority owner Easygo</div>
+        <h3>Bijan Tehrani</h3>
+        <div class="note">Lower public profile. US-born. Holds ~⅔ direct. Personally invested ~US$1bn in Kick (per X posts, Apr 2026).</div>
+      </div>
+
+      <div class="person priority">
+        <div class="role">Chief Strategy Officer · Easygo</div>
+        <h3>Brais Pena (Sanchez)</h3>
+        <div class="note">Among first 5 employees. Previously COO. Ex-Luckia, GLI Europe. Procurement-influential. LATAM strategy lead.</div>
+      </div>
+
+      <div class="person priority">
+        <div class="role">Stake Director · LATAM expansion</div>
+        <h3>Jarrod Febbraio</h3>
+        <div class="note">Mexico launch lead. Public-facing on LATAM market entries. Procurement decision-adjacent.</div>
+      </div>
+
+      <div class="person priority">
+        <div class="role">General Manager · LATAM</div>
+        <h3>Diana Otalora</h3>
+        <div class="note">Mexico expansion leadership. Regional GM-level decision authority on local commercial partners.</div>
+      </div>
+
+      <div class="person priority">
+        <div class="role">Country Manager · Stake Brazil</div>
+        <h3>Thomas Carvalhaes</h3>
+        <div class="note">Heads São Paulo office. 10-person initial team at launch. Local commercial owner for Brazil.</div>
+      </div>
+
+      <div class="person priority">
+        <div class="role">Compliance Director · Stake Brazil</div>
+        <h3>Bárbara Teles</h3>
+        <div class="note">Publicly spoke on UK exit rationale via Poder360 podcast. Compliance counterpart for any Brazilian PSP onboarding.</div>
+      </div>
+
+      <div class="person">
+        <div class="role">Managing Director · Stake Denmark</div>
+        <h3>Peter Eugen Clausen</h3>
+        <div class="note">Copenhagen HQ at Parken Stadium. New mandate Feb 2026. Out of LaFinteca scope.</div>
+      </div>
+
+      <div class="person">
+        <div class="role">Country manager · Canada</div>
+        <h3>Kris Abbott</h3>
+        <div class="note">Per user brief. Not independently verified in primary sources. Out of LaFinteca scope.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What could change the <span class="italic">recommendation.</span></h2>
+      <p class="section-sub">Five active risk vectors. The first two would materially raise the friction for any payments institution touching Stake flows — they are the kill-switches on the BD case. The remaining three are watch-items.</p>
+    </div>
+    <div class="risks">
+
+      <div class="risk-card high">
+        <div class="rtag">Kill-switch · US</div>
+        <h3>California AB 831 + LA City Attorney injunction</h3>
+        <p>The pending bill would prohibit financial institutions, payment processors, geolocation providers and platforms from supporting sweepstakes operators. If it passes — or if the LA City Attorney secures preliminary injunction in LASC 25STCV25304 — any direct PSP relationship with Sweepsteaks Limited becomes regulatorily prohibitive in the US. Decision: avoid Sweepsteaks entity entirely.</p>
+      </div>
+
+      <div class="risk-card high">
+        <div class="rtag">Kill-switch · Curaçao</div>
+        <h3>Curaçao reform impact on Medium Rare N.V.</h3>
+        <p>Stake has migrated from the legacy Antillephone master-licence regime to direct CGA oversight (OGL/2024/1451/0918). If the reform tightens further on AML or beneficial-ownership transparency, the global flow rebases. Watch the CGA's next round of operator audits.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="rtag">Watch · LATAM</div>
+        <h3>Argentina &amp; Chile entry</h3>
+        <p>Both markets are logical next moves given current Argentine GGR concentration. A formal local entity in either market expands the addressable PSP wallet. Track licensure filings with each national regulator.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="rtag">Watch · competition</div>
+        <h3>Single LATAM-wide PSP appointment</h3>
+        <p>If a Tier-1 source confirms Stake has appointed EBANX, dLocal, or any single regional PSP across multiple LATAM markets, the procurement window narrows materially. Retreat to a niche-method differentiation strategy: open-banking Pix recon, FX optimisation, settlement-speed SLAs.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="rtag">Watch · brand</div>
+        <h3>Reputational drift</h3>
+        <p>Drake fallout, Bonnie Blue UK exit, multi-state US litigation, the Lazarus hack — none individually impair business, but cumulatively they raise reputational diligence requirements for any partner bank assessing the relationship. LaFinteca's regulated EMI status is a feature here, not a liability.</p>
+      </div>
+
+      <div class="risk-card med">
+        <div class="rtag">Watch · talent</div>
+        <h3>Drake / sponsorship volatility</h3>
+        <p>Per CasinoBeats (Aug 2025), Drake publicly called Craven a "snake" and deleted his Kick account. By Feb 2026 he was still placing Stake-branded bets. The relationship is strained, not formally terminated — but the US$100m/yr reported value is unaudited and the deal status should be treated as "soft." Not a deal-breaker for payments BD.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Five things to <span class="italic">actually do.</span></h2>
+      <p class="section-sub">Two for the investor deck. Two for BD. One operational. Time-bounded, owner-assignable.</p>
+    </div>
+    <div class="recs">
+
+      <div class="rec">
+        <div class="rnum">01</div>
+        <h3>Add the "founder-funded outlier" sidebar to the iGaming deck</h3>
+        <p>One slide. Easygo + Bet365 + Pinnacle. The point: crypto-margin reinvestment substitutes for external capital at the top of the operator stack. Diego + Kyrylo. Pre-deck draft this week.</p>
+      </div>
+
+      <div class="rec">
+        <div class="rnum">02</div>
+        <h3>Frame the deck around what investors didn't fund</h3>
+        <p>If the brief is "external funds and firms that invested in iGaming companies," the deck's strongest section is the negative space. Use Easygo to size the absence. Sales narrative writes itself from there.</p>
+      </div>
+
+      <div class="rec">
+        <div class="rnum">03</div>
+        <h3>Target Pena → Carvalhaes → Teles for Brazil BD</h3>
+        <p>Brais Pena (CSO, Melbourne) sets strategy. Thomas Carvalhaes (BR Country Manager) and Bárbara Teles (BR Compliance Director) are the operational counterparts. Approach in that order. Lead with EMI licensure + Pix recon. Sales team to own.</p>
+      </div>
+
+      <div class="rec">
+        <div class="rnum">04</div>
+        <h3>Build a one-pager: Stake as hypothetical LF account</h3>
+        <p>Internal-only. Maps LF capabilities against the publicly-unknown layer of Stake's stack. Single-contract LATAM PSP coverage, reconciliation, multi-currency settlement, AML/KYC framework. Reference doc for any future BD conversation. Diego + Stas.</p>
+      </div>
+
+      <div class="rec">
+        <div class="rnum">05</div>
+        <h3>Commission paid primary-source pulls</h3>
+        <p>ASIC entity-history on all four Easygo entities + Ashwood Holdings for the definitive cap-table. The Australian Dec 2025 article on FY25 accounts (paywalled). Coljuegos + SPA filings for any disclosed local PSP. Budget &lt;€500. Research &amp; Lead Gen team.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CAVEATS -->
+<section>
+  <div class="wrap">
+    <div class="caveats">
+      <h3>What to flag when this gets cited</h3>
+      <ul>
+        <li><strong>Ownership split:</strong> the ⅔–⅓ Tehrani/Craven structure is consistently reported but ultimately reflects ASIC filings as interpreted by trade outlets. A minority of older sources cite 50/50. ASIC direct pull recommended before public use.</li>
+        <li><strong>Sauber/Stake F1 value:</strong> reported figures span US$50m (F1i.com) to AU$140m / 3 years (BlackBook Motorsport). No primary disclosure from Stake or Sauber. Treat as triangulated, not confirmed.</li>
+        <li><strong>Drake US$100m/year:</strong> widely repeated, never formally confirmed by Stake. The Aug 2025 fallout is well-documented but Drake continues betting on Stake in 2026 — deal status is "strained, partially fractured, not formally terminated."</li>
+        <li><strong>US$4.7bn 2024 GGR:</strong> Stake's own figure given to Forbes. Widely repeated but not audited. Easygo Group Holdings' A$970m FY25 revenue is ASIC-lodged but covers only the Australian entity — Stake revenue is largely booked at Medium Rare N.V. in Curaçao and is not consolidated into the Australian filing.</li>
+        <li><strong>Headcount:</strong> 636 (FY25 ASIC, Australian entity) vs 1,000+ (Brazil launch press) vs 400+ (Easygo careers page). Global headcount including Cyprus, Serbia, Italy, LATAM, Denmark is likely 1,000–1,500.</li>
+        <li><strong>LA complaint defendants:</strong> Veridian (Gibraltar) and Tamaris (Gibraltar) are named co-defendants without publicly-characterised group roles. Surface these in any KYB process.</li>
+        <li><strong>Crypto custody &amp; treasury:</strong> A$405m on-balance-sheet crypto in FY24 with no named custodian and no public split between USDT, USDC, BTC, ETH. The opacity is itself a strategic data point.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-sig">LaFinteca · Marketing &amp; Research Office<br>Easygo Group Intelligence Brief · v1 · May 2026</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
