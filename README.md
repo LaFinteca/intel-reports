@@ -22,6 +22,7 @@ Static HTML intelligence reports and the weekly Industry Digest, each served at 
 ### Industry Digest
 
 - [Friday Fintech Digest — 17 Jul 2026](https://lafinteca.github.io/intel-reports/digests/friday-fintech-digest-2026-07-17.html)
+- [Friday Fintech Digest — 24 Jul 2026](https://lafinteca.github.io/intel-reports/digests/friday-fintech-digest-2026-07-24.html)
 
 > These lists are a manual mirror — the [live index](https://lafinteca.github.io/intel-reports/) auto-updates, so re-add a line here whenever you add a report or issue (or skip it and rely on the live page).
 
