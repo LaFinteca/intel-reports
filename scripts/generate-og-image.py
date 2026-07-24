@@ -50,11 +50,10 @@ SCHEME = dict(
     scrim_color=(8, 7, 12),
     scrim_max_alpha=232,
     scrim_end=800,
-    kicker=(191, 254, 67),
+    label=(154, 148, 163),
     title1=(255, 255, 255),
     title2=(195, 171, 255),
     intro=(201, 201, 201),
-    footer=(122, 118, 130),
     logo_chevron=(195, 171, 255, 255),
     logo_word=(255, 255, 255, 255),
 )
@@ -161,7 +160,7 @@ def wrap_text(draw, text, fnt, max_width):
     return lines
 
 
-def compose(bg_path, week_label, intro_text, out_path, site_label="lafinteca.github.io/intel-reports"):
+def compose(bg_path, week_label, intro_text, out_path):
     bg = Image.open(bg_path).convert("RGB")
     canvas = cover_crop(bg, W, H).convert("RGBA")
 
@@ -177,17 +176,25 @@ def compose(bg_path, week_label, intro_text, out_path, site_label="lafinteca.git
     draw = ImageDraw.Draw(canvas)
     left = 64
 
-    logo = render_logo(30, {"chevron": SCHEME["logo_chevron"], "word": SCHEME["logo_word"]})
-    canvas.paste(logo, (left, 56), logo)
+    # Brand row: logo + divider + "Marketing & Research Office", mirroring
+    # the .lf-header-brand row used on the actual report/digest pages.
+    brand_top = 112
+    logo_h = 28
+    logo = render_logo(logo_h, {"chevron": SCHEME["logo_chevron"], "word": SCHEME["logo_word"]})
+    canvas.paste(logo, (left, brand_top), logo)
     draw = ImageDraw.Draw(canvas)
 
-    kicker_y = 156
-    kicker_font = font("JetBrainsMono-Medium.ttf", 18, weight=600)
-    draw_tracked_text(draw, (left, kicker_y), "MARKETING & RESEARCH OFFICE", kicker_font, SCHEME["kicker"], tracking=2.2)
+    mid_y = brand_top + logo_h / 2
+    divider_x = left + logo.width + 18
+    draw.line([(divider_x, mid_y - 10), (divider_x, mid_y + 10)], fill=SCHEME["label"], width=1)
+    label_font = font("JetBrainsMono-Medium.ttf", 16, weight=520)
+    draw_tracked_text(
+        draw, (divider_x + 16, mid_y - 8), "MARKETING & RESEARCH OFFICE", label_font, SCHEME["label"], tracking=2.0
+    )
 
     t1_font = font("InstrumentSerif-Regular.ttf", 86)
     t2_font = font("InstrumentSerif-Italic.ttf", 86)
-    title_y = 218
+    title_y = brand_top + 92
     draw.text((left, title_y), "Weekly Industry Digest", font=t1_font, fill=SCHEME["title1"])
     draw.text((left, title_y + 98), week_label, font=t2_font, fill=SCHEME["title2"])
 
@@ -196,11 +203,6 @@ def compose(bg_path, week_label, intro_text, out_path, site_label="lafinteca.git
     for line in wrap_text(draw, intro_text, intro_font, 700)[:2]:
         draw.text((left, ly), line, font=intro_font, fill=SCHEME["intro"])
         ly += 38
-
-    rule_y = ly + 26
-    draw.line([(left, rule_y), (left + 260, rule_y)], fill=SCHEME["footer"], width=1)
-    footer_font = font("JetBrainsMono-Medium.ttf", 15, weight=500)
-    draw.text((left, rule_y + 18), site_label, font=footer_font, fill=SCHEME["footer"])
 
     rgb = canvas.convert("RGB")
     if str(out_path).lower().endswith((".jpg", ".jpeg")):
