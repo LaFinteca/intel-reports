@@ -177,28 +177,30 @@ def compose(bg_path, week_label, intro_text, out_path, site_label="lafinteca.git
     draw = ImageDraw.Draw(canvas)
     left = 64
 
-    logo = render_logo(24, {"chevron": SCHEME["logo_chevron"], "word": SCHEME["logo_word"]})
-    canvas.paste(logo, (left, 54), logo)
+    logo = render_logo(30, {"chevron": SCHEME["logo_chevron"], "word": SCHEME["logo_word"]})
+    canvas.paste(logo, (left, 56), logo)
     draw = ImageDraw.Draw(canvas)
 
-    kicker_y = 132
-    kicker_font = font("JetBrainsMono-Medium.ttf", 15, weight=560)
-    draw_tracked_text(draw, (left, kicker_y), "MARKETING & RESEARCH OFFICE", kicker_font, SCHEME["kicker"], tracking=2.6)
+    kicker_y = 156
+    kicker_font = font("JetBrainsMono-Medium.ttf", 18, weight=600)
+    draw_tracked_text(draw, (left, kicker_y), "MARKETING & RESEARCH OFFICE", kicker_font, SCHEME["kicker"], tracking=2.2)
 
-    t1_font = font("InstrumentSerif-Regular.ttf", 66)
-    t2_font = font("InstrumentSerif-Italic.ttf", 66)
-    title_y = 188
+    t1_font = font("InstrumentSerif-Regular.ttf", 86)
+    t2_font = font("InstrumentSerif-Italic.ttf", 86)
+    title_y = 218
     draw.text((left, title_y), "Weekly Industry Digest", font=t1_font, fill=SCHEME["title1"])
-    draw.text((left, title_y + 74), week_label, font=t2_font, fill=SCHEME["title2"])
+    draw.text((left, title_y + 98), week_label, font=t2_font, fill=SCHEME["title2"])
 
-    intro_font = font("InterTight-Regular.ttf", 21, weight=340)
-    ly = title_y + 74 + 92
-    for line in wrap_text(draw, intro_text, intro_font, 640)[:2]:
+    intro_font = font("InterTight-Regular.ttf", 26, weight=440)
+    ly = title_y + 98 + 118
+    for line in wrap_text(draw, intro_text, intro_font, 700)[:2]:
         draw.text((left, ly), line, font=intro_font, fill=SCHEME["intro"])
-        ly += 30
+        ly += 38
 
-    footer_font = font("JetBrainsMono-Medium.ttf", 13, weight=460)
-    draw.text((left, H - 56), site_label, font=footer_font, fill=SCHEME["footer"])
+    rule_y = ly + 26
+    draw.line([(left, rule_y), (left + 260, rule_y)], fill=SCHEME["footer"], width=1)
+    footer_font = font("JetBrainsMono-Medium.ttf", 15, weight=500)
+    draw.text((left, rule_y + 18), site_label, font=footer_font, fill=SCHEME["footer"])
 
     rgb = canvas.convert("RGB")
     if str(out_path).lower().endswith((".jpg", ".jpeg")):
