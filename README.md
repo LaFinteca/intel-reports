@@ -62,13 +62,25 @@ The index strips a trailing `-YYYY-MM-DD` from the display title (the date alrea
 
 ## Link previews (Slack, etc.)
 
-Every page carries Open Graph / Twitter Card `<meta>` tags pointing at [`assets/og-image.png`](assets/og-image.png) — a static, branded image (a simplified rendition of the site header) so pasting any report/digest link into Slack shows a rich preview instead of a bare link.
+Digest issues only — the report center (`index.html`) and `reports/*.html` intentionally don't get this. Each digest carries Open Graph / Twitter Card `<meta>` tags pointing at a branded per-issue image (`assets/og-digest-week-NN.jpg`), so pasting a digest link into Slack shows a rich preview instead of a bare link.
 
-After adding a new report or digest, run:
-```bash
-node scripts/add-og-tags.mjs
-```
-It's idempotent — it only touches files that don't already have an `og:image` tag, so it's safe to run anytime. `og:title` comes from each file's own `<title>`; the description is a fixed, generic line (per-file descriptions would need per-template extraction across too many different report designs to be worth automating).
+After adding a new digest issue:
+
+1. Generate that issue's image (the week number is baked into the image, so each issue needs its own):
+   ```bash
+   pip install pillow numpy   # once
+   python3 scripts/generate-og-image.py \
+     --week "Week 31" \
+     --intro "Fintech, payments & LatAm intelligence. Curated weekly." \
+     --out assets/og-digest-week-31.jpg
+   ```
+2. Add a line for the new file to `DIGEST_META` in [`scripts/add-og-tags.mjs`](scripts/add-og-tags.mjs), then run:
+   ```bash
+   node scripts/add-og-tags.mjs
+   ```
+   It's idempotent — it only touches files that don't already have an `og:image` tag.
+
+The image design (background, fonts, logo) lives in `assets/og/` and is shared across issues; only the week number and intro line change.
 
 ## Naming → URL
 
