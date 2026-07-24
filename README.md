@@ -60,6 +60,16 @@ digests/friday-fintech-digest-2026-07-24.html
 ```
 The index strips a trailing `-YYYY-MM-DD` from the display title (the date already shows in its own column), so the issue above appears as **"Friday Fintech Digest."** Commit, push, and it appears on the Industry Digest panel within ~1 minute.
 
+## Link previews (Slack, etc.)
+
+Every page carries Open Graph / Twitter Card `<meta>` tags pointing at [`assets/og-image.png`](assets/og-image.png) — a static, branded image (a simplified rendition of the site header) so pasting any report/digest link into Slack shows a rich preview instead of a bare link.
+
+After adding a new report or digest, run:
+```bash
+node scripts/add-og-tags.mjs
+```
+It's idempotent — it only touches files that don't already have an `og:image` tag, so it's safe to run anytime. `og:title` comes from each file's own `<title>`; the description is a fixed, generic line (per-file descriptions would need per-template extraction across too many different report designs to be worth automating).
+
 ## Naming → URL
 
 The filename becomes the URL and the display title on the index:
