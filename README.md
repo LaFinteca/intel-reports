@@ -63,7 +63,7 @@ The index strips a trailing `-YYYY-MM-DD` from the display title (the date alrea
 
 ## Link previews (Slack, etc.)
 
-Digest issues only — the report center (`index.html`) and `reports/*.html` intentionally don't get this. Each digest carries Open Graph / Twitter Card `<meta>` tags pointing at a branded per-issue image (`assets/og-digest-week-NN.jpg`), so pasting a digest link into Slack shows a rich preview instead of a bare link.
+Digest issues by default — the report center (`index.html`) and `reports/*.html` intentionally don't get this, unless a specific report opts in on request (e.g. `reports/payretailers-competitive-intelligence.html`). Each opted-in page carries Open Graph / Twitter Card `<meta>` tags pointing at a branded image, so pasting the link into Slack shows a rich preview instead of a bare link.
 
 After adding a new digest issue:
 
@@ -71,7 +71,7 @@ After adding a new digest issue:
    ```bash
    pip install pillow numpy   # once
    python3 scripts/generate-og-image.py \
-     --week "Week 31" \
+     --title2 "Week 31" \
      --intro "Fintech, payments & LatAm intelligence. Curated weekly." \
      --out assets/og-digest-week-31.jpg
    ```
@@ -80,6 +80,14 @@ After adding a new digest issue:
    node scripts/add-og-tags.mjs
    ```
    It's idempotent — it only touches files that don't already have an `og:image` tag.
+
+To give a single report a preview image (the exception, not the default), generate its image directly — `--title1` overrides the default "Weekly Industry Digest" line — then hand-add the same 10-line `<meta>` block used elsewhere (see `reports/payretailers-competitive-intelligence.html`) before that report's `</head>`. `add-og-tags.mjs` doesn't touch `reports/*.html`, by design.
+   ```bash
+   python3 scripts/generate-og-image.py \
+     --title1 "PayRetailers" --title2 "Competitive Intelligence" \
+     --intro "Traffic, ad spend, hiring & reputation. A full competitor profile." \
+     --out assets/og-payretailers-competitive-intelligence.jpg
+   ```
 
 The image design (background, fonts, logo) lives in `assets/og/` and is shared across issues; only the week number and intro line change.
 

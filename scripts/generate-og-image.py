@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
-"""Generates the branded 1200x630 Open Graph image for one digest issue.
+"""Generates a branded 1200x630 Open Graph image (digest issue or one-off report).
 
 Requires: pip install pillow numpy
 
-Usage:
+Usage (digest issue -- title1 defaults to "Weekly Industry Digest"):
   python3 scripts/generate-og-image.py \
-    --week "Week 31" \
-    --intro "Fintech, payments & LatAm intelligence — curated weekly by LaFinteca MRO." \
-    --out assets/og-digest-week-31.png
+    --title2 "Week 31" \
+    --intro "Fintech, payments & LatAm intelligence. Curated weekly." \
+    --out assets/og-digest-week-31.jpg
+
+Usage (one-off report -- pass both title lines):
+  python3 scripts/generate-og-image.py \
+    --title1 "PayRetailers" --title2 "Competitive Intelligence" \
+    --intro "Traffic, ad spend, hiring & reputation -- a full competitor profile." \
+    --out assets/og-payretailers-competitive-intelligence.jpg
 
 Uses the shared background/scheme approved for the digest OG image
-(assets/og/backgrounds/lf-deckv2-digest-bg.png). Only --week, --intro and
---out change from issue to issue.
+(assets/og/backgrounds/lf-deckv2-digest-bg.jpg). Title font size auto-shrinks
+to fit long lines.
 """
 import argparse
 import re
@@ -145,6 +151,16 @@ def draw_tracked_text(draw, xy, text, fnt, fill, tracking=0):
         x += draw.textlength(ch, font=fnt) + tracking
 
 
+def fit_font_size(name, text, max_width, start=86, minimum=48, step=2):
+    size = start
+    while size > minimum:
+        f = font(name, size)
+        if f.getlength(text) <= max_width:
+            return size
+        size -= step
+    return minimum
+
+
 def wrap_text(draw, text, fnt, max_width):
     words = text.split()
     lines, cur = [], ""
@@ -160,7 +176,7 @@ def wrap_text(draw, text, fnt, max_width):
     return lines
 
 
-def compose(bg_path, week_label, intro_text, out_path):
+def compose(bg_path, title1_text, title2_text, intro_text, out_path):
     bg = Image.open(bg_path).convert("RGB")
     canvas = cover_crop(bg, W, H).convert("RGBA")
 
@@ -192,11 +208,14 @@ def compose(bg_path, week_label, intro_text, out_path):
         draw, (divider_x + 16, mid_y - 8), "MARKETING & RESEARCH OFFICE", label_font, SCHEME["label"], tracking=2.0
     )
 
-    t1_font = font("InstrumentSerif-Regular.ttf", 86)
-    t2_font = font("InstrumentSerif-Italic.ttf", 86)
+    max_title_w = W - left - 64
+    t1_size = fit_font_size("InstrumentSerif-Regular.ttf", title1_text, max_title_w, start=86, minimum=48)
+    t2_size = fit_font_size("InstrumentSerif-Italic.ttf", title2_text, max_title_w, start=86, minimum=48)
+    t1_font = font("InstrumentSerif-Regular.ttf", t1_size)
+    t2_font = font("InstrumentSerif-Italic.ttf", t2_size)
     title_y = brand_top + 92
-    draw.text((left, title_y), "Weekly Industry Digest", font=t1_font, fill=SCHEME["title1"])
-    draw.text((left, title_y + 98), week_label, font=t2_font, fill=SCHEME["title2"])
+    draw.text((left, title_y), title1_text, font=t1_font, fill=SCHEME["title1"])
+    draw.text((left, title_y + 98), title2_text, font=t2_font, fill=SCHEME["title2"])
 
     intro_font = font("InterTight-Regular.ttf", 26, weight=440)
     ly = title_y + 98 + 118
@@ -214,9 +233,10 @@ def compose(bg_path, week_label, intro_text, out_path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--week", required=True, help='e.g. "Week 31"')
+    ap.add_argument("--title1", default="Weekly Industry Digest", help='Line 1 (regular serif), e.g. "Weekly Industry Digest" or "PayRetailers"')
+    ap.add_argument("--title2", required=True, help='Line 2 (italic accent serif), e.g. "Week 31" or "Competitive Intelligence"')
     ap.add_argument("--intro", required=True, help="Short subtitle line under the title")
-    ap.add_argument("--out", required=True, help="Output PNG path")
-    ap.add_argument("--bg", default=str(BG_DEFAULT), help="Background image (defaults to the approved digest background)")
+    ap.add_argument("--out", required=True, help="Output image path (.jpg or .png)")
+    ap.add_argument("--bg", default=str(BG_DEFAULT), help="Background image (defaults to the approved shared background)")
     args = ap.parse_args()
-    compose(args.bg, args.week, args.intro, args.out)
+    compose(args.bg, args.title1, args.title2, args.intro, args.out)
