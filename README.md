@@ -18,6 +18,7 @@ Static HTML intelligence reports and the weekly Industry Digest, each served at 
 - [Conduit Intelligence Update](https://lafinteca.github.io/intel-reports/reports/conduit-intelligence-update-2026-07.html)
 - [Easygo Group Intelligence Brief](https://lafinteca.github.io/intel-reports/reports/easygo-group-intelligence-brief.html)
 - [Brazino777 Mexico Intel Report](https://lafinteca.github.io/intel-reports/reports/brazino777-mx-intel-report.html)
+- [PayRetailers Competitive Intelligence](https://lafinteca.github.io/intel-reports/reports/payretailers-competitive-intelligence.html)
 
 ### Industry Digest
 
