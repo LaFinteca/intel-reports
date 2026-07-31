@@ -27,6 +27,7 @@ const DESC = "Fintech, payments &amp; LatAm intelligence. Curated weekly.";
 const DIGEST_META = {
   "friday-fintech-digest-2026-07-17.html": { week: "Week 29", image: "og-digest-week-29.jpg" },
   "friday-fintech-digest-2026-07-24.html": { week: "Week 30", image: "og-digest-week-30.jpg" },
+  "friday-fintech-digest-2026-07-31.html": { week: "Week 31", image: "og-digest-week-31.jpg" },
 };
 
 function tagBlock(title, desc, image, url) {

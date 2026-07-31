@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friday Fintech Digest · Week 31 · LaFinteca MRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --purple: #C3ABFF;
+    --purple-deep: #2A1F4D;
+    --purple-pale: #F4EEFF;
+    --lime: #BFFE43;
+    --lime-deep: #1F2810;
+    --gray-100: #F5F5F5;
+    --gray-200: #E8E8E8;
+    --gray-400: #AAAAAA;
+    --gray-600: #888888;
+    --gray-800: #2A2A2A;
+    --header-line: #1F1F1F;
+    --red: #D63C37;
+    --red-tint: #FFF0F0;
+    --amber: #C97D00;
+    --amber-tint: #FFF8EC;
+    --teal: #0F7B6C;
+    --teal-tint: #E8F8F5;
+    --blue: #1A56A0;
+    --blue-tint: #EEF4FF;
+  }
+  * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter Tight', sans-serif;
+    background: var(--gray-100);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--purple-deep); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--purple); }
+
+  /* ── OPTIONAL STICKY TOC — only add the markup (see bottom of <body> comment) on reports with 7+ sections ── */
+  .lf-toc { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 44px; background: var(--white); border-bottom: 1px solid var(--gray-200); position: sticky; top: 0; z-index: 100; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .lf-toc-row { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .lf-toc a { font: 500 10px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .08em; padding: 6px 14px; border: 1px solid var(--gray-200); border-radius: 100px; color: var(--gray-600); text-decoration: none; white-space: nowrap; transition: all .15s; cursor: pointer; }
+  .lf-toc a:hover { border-color: var(--purple-deep); color: var(--purple-deep); }
+
+  /* ── PERSISTENT DARK HEADER BAR — identical on every report ── */
+  .lf-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 44px; background: var(--black); border-bottom: 1px solid var(--header-line); flex-wrap: wrap; gap: 10px;
+    max-width: 1100px; margin-left: auto; margin-right: auto;
+  }
+  .lf-header-brand { display: flex; align-items: center; gap: 14px; }
+  .lf-header-brand svg { display: block; }
+  .lf-header-divider { width: 1px; height: 18px; background: #2A2A2A; }
+  .lf-header-label { font: 500 10px 'JetBrains Mono', monospace; letter-spacing: .14em; color: #8A8A8A; text-transform: uppercase; }
+  .lf-header-docid { font: 10px 'JetBrains Mono', monospace; color: #555; letter-spacing: .06em; text-align: right; }
+
+  /* ── HERO — dark, with meta line under the title ── */
+  .lf-hero { background: var(--black); padding: 52px 44px 44px; position: relative; overflow: hidden; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .lf-hero::before {
+    content: ''; position: absolute; top: -15%; right: -8%; width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--purple) 0%, transparent 60%); opacity: .2; filter: blur(40px);
+  }
+  .lf-hero-inner { position: relative; }
+  .lf-eyebrow { font: 500 10px 'JetBrains Mono', monospace; letter-spacing: .16em; color: var(--lime); text-transform: uppercase; margin-bottom: 20px; }
+  .lf-hero h1 { font: 400 46px/1.05 'Instrument Serif', serif; letter-spacing: -.02em; color: var(--white); margin-bottom: 18px; }
+  .lf-hero h1 em, .lf-hero h1 span.accent { color: var(--purple); font-style: italic; }
+  .lf-hero-sub { font: 300 15px/1.55 'Inter Tight', sans-serif; color: #C9C9C9; max-width: 900px; margin-bottom: 28px; }
+  .lf-meta-line { display: flex; gap: 36px; padding-top: 22px; border-top: 1px solid var(--header-line); flex-wrap: wrap; }
+  .lf-meta-item { font: 12px 'Inter Tight', sans-serif; color: rgba(255,255,255,.55); }
+  .lf-meta-item strong { display: block; color: #F2F2F2; font-size: 14px; font-weight: 500; margin-top: 5px; }
+
+  /* ── BOXED CONTENT WELL — everything between hero and lime band lives inside this ── */
+  .lf-well { max-width: 1100px; margin: 32px auto; border: 1px solid var(--gray-200); border-radius: 8px; overflow: hidden; }
+  .lf-section { padding: 52px 44px; }
+  .lf-section.bg-gray { background: var(--gray-100); }
+  .lf-section.bg-white { background: var(--white); }
+  .lf-section h2 { font: 400 26px/1.1 'Instrument Serif', serif; letter-spacing: -.015em; color: var(--black); margin-bottom: 18px; }
+  .lf-section h2 em { font-style: italic; color: var(--purple-deep); }
+  .lf-section-sub { font: 300 14px/1.6 'Inter Tight', sans-serif; color: var(--gray-600); max-width: 1000px; margin-bottom: 24px; }
+  .lf-section h3 { font-weight: 600; font-size: 15px; color: var(--black); margin-bottom: 14px; }
+  /* narrative paragraphs inside a section — use for prose between components */
+  .lf-section p.lf-prose { font-size: 14.5px; line-height: 1.75; color: #3A3A3A; max-width: 1120px; margin-bottom: 16px; }
+  .lf-section.bg-gray p.lf-prose { color: #444; }
+  .lf-section p.lf-prose:last-child { margin-bottom: 0; }
+  .lf-section p.lf-prose strong { color: var(--black); font-weight: 600; }
+
+  /* ── STAT GRID ── */
+  .lf-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+  .lf-stat { background: var(--white); padding: 20px 18px; }
+  .lf-stat.accent { background: var(--lime); }
+  .lf-stat-label { font: 10px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-600); font-weight: 500; margin-bottom: 8px; }
+  .lf-stat.accent .lf-stat-label { color: var(--lime-deep); opacity: .7; }
+  .lf-stat-value { font: 400 30px/1 'Instrument Serif', serif; color: var(--black); }
+  .lf-stat.accent .lf-stat-value { color: var(--lime-deep); }
+  .lf-stat-value.purple { color: var(--purple-deep); }
+
+  /* ── SIGNAL / TL;DR CALLOUT — default is purple; add a color modifier class for semantic variants ── */
+  .lf-signal { border-left: 3px solid var(--purple-deep); background: var(--purple-pale); border-radius: 0 4px 4px 0; padding: 20px 24px; margin-bottom: 24px; }
+  .lf-signal-label { font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--purple-deep); margin-bottom: 8px; }
+  .lf-signal p { font: italic 400 16px/1.5 'Instrument Serif', serif; color: var(--purple-deep); }
+  .lf-signal.red { border-left-color: var(--red); background: var(--red-tint); }
+  .lf-signal.red .lf-signal-label, .lf-signal.red p { color: var(--red); }
+  .lf-signal.teal { border-left-color: var(--teal); background: var(--teal-tint); }
+  .lf-signal.teal .lf-signal-label, .lf-signal.teal p { color: var(--teal); }
+  .lf-signal.amber { border-left-color: var(--amber); background: var(--amber-tint); }
+  .lf-signal.amber .lf-signal-label, .lf-signal.amber p { color: var(--amber); }
+  .lf-signal.blue { border-left-color: var(--blue); background: var(--blue-tint); }
+  .lf-signal.blue .lf-signal-label, .lf-signal.blue p { color: var(--blue); }
+  /* use color variants sparingly — purple (default) for "don't miss this", red for risk flags, teal for positive/confirmed signals, amber for caution, blue only if truly neutral/factual */
+
+  /* ── DATA TABLE WITH BADGES ── */
+  .lf-table-wrap { border: 1px solid var(--gray-200); border-radius: 4px; overflow-x: auto; margin-bottom: 24px; }
+  table.lf-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .lf-table thead tr { background: var(--gray-100); }
+  .lf-table th { padding: 10px 14px; text-align: left; font: 10px 'JetBrains Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-600); }
+  .lf-table td { padding: 11px 14px; border-top: 1px solid var(--gray-200); color: #555; vertical-align: top; }
+  .lf-table tr:first-child td { border-top: none; }
+  .lf-table td strong, .lf-table td.name { font-weight: 600; color: #1A1A1A; }
+  .lf-badge { display: inline-block; font: 10px 'JetBrains Mono', monospace; padding: 2px 7px; border-radius: 100px; }
+  .lf-badge.confirmed { background: var(--teal-tint); color: var(--teal); }
+  .lf-badge.estimated { background: var(--amber-tint); color: var(--amber); }
+  .lf-badge.flag { background: var(--red-tint); color: var(--red); }
+  .lf-badge.neutral { background: var(--gray-200); color: var(--gray-600); }
+  .lf-table tr.hi { background: #FFFDE7; }
+  .lf-table tr.total td { background: var(--black); color: rgba(255,255,255,.7); border-top: none; }
+  .lf-table tr.total td strong { color: var(--lime); }
+
+  /* ── INLINE TAG PILLS — for use inside prose, cards, lists (not table status; use .lf-badge there) ── */
+  .lf-tag { display: inline-block; font: 500 10px 'JetBrains Mono', monospace; letter-spacing: .04em; padding: 2px 7px; border-radius: 3px; }
+  .lf-tag-lime { background: var(--lime); color: var(--lime-deep); }
+  .lf-tag-amber { background: var(--amber-tint); color: var(--amber); }
+  .lf-tag-red { background: var(--red-tint); color: var(--red); }
+  .lf-tag-purple { background: var(--purple-pale); color: var(--purple-deep); }
+  .lf-tag-teal { background: var(--teal-tint); color: var(--teal); }
+  .lf-tag-gray { background: var(--gray-200); color: var(--gray-600); }
+
+  /* ── CONTACT / PERSON CARDS ── */
+  .lf-cards-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .lf-contact { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 16px 18px; position: relative; }
+  .lf-contact.primary { border-color: var(--purple); }
+  .lf-contact.primary::before {
+    content: 'PRIMARY'; position: absolute; top: 12px; right: 12px;
+    font: 500 8px 'JetBrains Mono', monospace; letter-spacing: .1em; background: var(--purple); color: var(--black); padding: 2px 6px; border-radius: 2px;
+  }
+  .lf-contact-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .lf-contact-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font: 700 14px 'Inter Tight', sans-serif; background: var(--purple-pale); color: var(--purple-deep); border: 1px solid var(--purple); overflow: hidden; }
+  .lf-contact-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .lf-contact-avatar.muted { background: var(--gray-100); color: var(--gray-600); border-color: var(--gray-200); }
+  .lf-contact-id { flex: 1; min-width: 0; }
+  .lf-contact-logo { width: 20px; height: 20px; object-fit: contain; border-radius: 4px; border: 1px solid var(--gray-200); background: #fff; flex-shrink: 0; }
+  .lf-contact-name { font: 600 14px 'Inter Tight', sans-serif; color: var(--black); line-height: 1.2; }
+  .lf-contact-role { font: 11px 'Inter Tight', sans-serif; color: var(--gray-600); margin-top: 2px; }
+  .lf-contact-status { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .lf-contact-status .lf-badge { font-size: 9px; padding: 2px 6px; }
+  .lf-contact-why { font: 12.5px/1.55 'Inter Tight', sans-serif; color: #3A3A3A; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--gray-200); }
+  .lf-contact-why strong { color: var(--black); font-weight: 600; }
+  .lf-contact-links { display: flex; flex-direction: column; gap: 4px; }
+  .lf-contact-link { font: 11px 'JetBrains Mono', monospace; color: var(--purple-deep); text-decoration: none; }
+  .lf-contact-link:hover { text-decoration: underline; }
+  .lf-contact-friends { display: inline-flex; align-items: center; gap: 3px; font: 500 9px 'JetBrains Mono', monospace; background: var(--purple); color: var(--black); padding: 2px 7px; border-radius: 100px; letter-spacing: .03em; margin-left: 6px; vertical-align: middle; }
+
+  /* ── SIMILARWEB SOURCE MARK — inline indicator for SW-sourced data ── */
+  .lf-sw, .lf-sw-pill { display: inline-flex; align-items: center; gap: 4px; font: 500 9px 'JetBrains Mono', monospace; letter-spacing: .04em; text-transform: uppercase; color: var(--gray-600); background: var(--white); border: 1px solid var(--gray-200); border-radius: 100px; padding: 2px 8px 2px 6px; vertical-align: middle; }
+  .bg-gray .lf-sw, .bg-gray .lf-sw-pill { background: var(--white); }
+  .lf-sw::before, .lf-sw-pill::before { content: ''; width: 11px; height: 11px; border-radius: 2px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACrElEQVR4nFWSTWidVRCGn5lzzr03BUOoiI1NIhRRa1eiaRtButEoButf02URsYtqQYwgRQqXrARBKKQi/iO40SAK1Y0BsVgpoQiKtODCaikISjBNm8R773e+87rItcZnOYtn5p0ZYwMHyo337b9hS5XGLp/79DwYmtPzNDhGzTacnzE+4ndO2CwdCTejOLQdKGP3PrljIMeFRqpvA1id84docRIYAQLGLhKvcgtfa47bzShq4w6zGrvnieHiYcEs7tmZlr8DGLD6UZoUMj3AyIgOmSYTRL7SCcZsluKA6uBveGrsKCpX1kNoAoax3I9m0K9AZI2KAW4l8KbauI+MTz/s5o+XXje7+9Avq0PjgK51mx+wyhINEpD5FyOxTk2DRxhmykV52iwYqICT5TNt8KGZ3sWq4gBiiQYRUV+XCIiIwiE3Y6KoBrOkuioe4/3v737qNUM0XuB0by09SM15BgjXJYZTYcBeB0aQ+inNVedinl7avnv6dX1CaL5Y/bBW8QBdztAiIApgFEBst5HxAx2MJv9DtcVGUJW/HB268szZhYU/9c7gVvLVM0R2UlEAR2THdAlzgPKfwIKqKntKU5dXBj+fnJzcaoev/ZUVjvYngICAX13yb80dtJFj07Zjyd0qpNbEheXB45IsPXf8m9LjeyJOxIDTHuE91blgZv39biaUXBWMxw4e3NsSs/LATzQpdOkh3vVL5+bPivK2x6aD8sY5ESCEwITUgau1gUohsQUH3rKjLDrttpuHGeXeZx5byTw6mAFmZsFTCgbz8/MXeu3puxrAfpZYpPCK2rj1X1UAo3umj0g8C7oTSGBdmT68+6bOy6dOffF3fZJDITLFCoftGCvSRic2S9i3L46uD99RrL45m1/8Y/Hj3wDUJrKNXXaEHwEkzAz9A0ABJOLCUtgQAAAAAElFTkSuQmCC') center/contain no-repeat; flex-shrink: 0; }
+
+  /* ── ENTITY / OPERATOR CARD — for company/brand profiles (not people). Use instead of .lf-contact when the subject is an org. ── */
+  .lf-entity { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; margin-bottom: 14px; }
+  .lf-entity-head { background: var(--black); padding: 16px 20px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .lf-entity-name { font: 400 18px 'Instrument Serif', serif; color: var(--white); }
+  .lf-entity-domain { font: 10px 'JetBrains Mono', monospace; color: rgba(255,255,255,.4); margin-top: 2px; }
+  .lf-entity-tier { font: 500 9px 'JetBrains Mono', monospace; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; background: var(--lime); color: var(--lime-deep); }
+  .lf-entity-tier.secondary { background: var(--purple-pale); color: var(--purple-deep); }
+  .lf-entity-tier.flag { background: var(--red-tint); color: var(--red); }
+  .lf-entity-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .lf-entity-body.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .lf-entity-col { padding: 16px 20px; border-top: 1px solid var(--gray-200); }
+  .lf-entity-col + .lf-entity-col { border-left: 1px solid var(--gray-200); }
+  .lf-entity-col-label { font: 10px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--gray-600); margin-bottom: 10px; }
+  .lf-entity-col ul { list-style: none; }
+  .lf-entity-col li { font-size: 12.5px; color: #444; line-height: 1.6; padding: 4px 0; }
+
+  /* ── EVENT / TIMELINE STRIP ── */
+  .lf-timeline { background: var(--black); border-radius: 4px; padding: 20px 24px; position: relative; overflow: hidden; margin-bottom: 14px; }
+  .lf-timeline::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(to right, var(--lime), transparent 60%); }
+  .lf-timeline-date { font: 10px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 6px; }
+  .lf-timeline-event { font: 15px 'Inter Tight', sans-serif; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .lf-timeline-note { font: 12.5px/1.6 'Inter Tight', sans-serif; color: rgba(255,255,255,.55); }
+
+  /* ── GEO / MARKET BAR CHART ── */
+  .lf-geo { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 18px 20px; }
+  .lf-geo-title { font: 600 12.5px 'Inter Tight', sans-serif; color: var(--black); margin-bottom: 12px; }
+  .lf-geo-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-top: 1px solid var(--gray-200); }
+  .lf-geo-row:first-of-type { border-top: none; }
+  .lf-geo-label { font-size: 12.5px; color: #444; width: 110px; flex-shrink: 0; }
+  .lf-geo-bar-bg { flex: 1; height: 4px; background: var(--gray-200); border-radius: 2px; overflow: hidden; }
+  .lf-geo-bar { height: 100%; background: var(--purple); border-radius: 2px; }
+  .lf-geo-bar.lime { background: var(--lime); }
+  .lf-geo-pct { font: 11px 'JetBrains Mono', monospace; color: var(--black); width: 44px; text-align: right; flex-shrink: 0; }
+
+  /* ── FIGURE / IMAGE ── */
+  .lf-figure { border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; margin-bottom: 20px; }
+  /* Evidence screenshots (tall page captures) inside 2-col grids: compact display cap.
+     Apply by wrapping paired figures in .lf-cards-2col inside the analysis section. */
+  .lf-cards-2col.lf-evidence { align-items: start; }
+  .lf-cards-2col.lf-evidence .lf-figure { max-width: 430px; width: 100%; margin: 0 auto; }
+  .lf-figure img { display: block; width: 100%; height: auto; }
+  .lf-figure-caption { padding: 10px 14px; background: var(--gray-100); font: 10px 'JetBrains Mono', monospace; letter-spacing: .04em; color: var(--gray-600); border-top: 1px solid var(--gray-200); }
+
+  /* ── OPPORTUNITY / SCORE CARDS ── */
+  .lf-opp { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 18px; }
+  .lf-opp-value { font: 500 22px 'JetBrains Mono', monospace; color: var(--black); margin-bottom: 6px; }
+  .lf-opp-bar-bg { height: 4px; background: var(--gray-200); border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+  .lf-opp-bar { height: 100%; background: var(--lime); border-radius: 2px; }
+  .lf-opp-bar.purple { background: var(--purple); }
+  .lf-opp-title { font: 600 12.5px 'Inter Tight', sans-serif; color: var(--black); }
+  .lf-opp-desc { font: 11.5px/1.5 'Inter Tight', sans-serif; color: var(--gray-600); margin-top: 4px; }
+
+  /* ── PITCH BOX ── */
+  .lf-pitch { background: var(--black); color: var(--white); border-radius: 6px; padding: 16px 18px; }
+  .lf-pitch-label { font: 10px 'JetBrains Mono', monospace; color: var(--lime); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+  .lf-pitch-text { font: 12.5px/1.6 'Inter Tight', sans-serif; color: rgba(255,255,255,.85); }
+
+  /* ── QUOTE BLOCK ── */
+  .lf-quote-block { border: 1px solid var(--gray-200); border-radius: 6px; overflow: hidden; }
+  .lf-quote-row { display: grid; grid-template-columns: 150px 1fr; border-top: 1px solid var(--gray-200); }
+  .lf-quote-row:first-child { border-top: none; }
+  .lf-quote-meta { padding: 12px 14px; background: #FAFAF8; border-right: 1px solid var(--gray-200); font: 11px 'JetBrains Mono', monospace; color: var(--gray-600); }
+  .lf-quote-text { padding: 12px 16px; font: 13px/1.6 'Inter Tight', sans-serif; color: #2A2A2A; font-style: italic; }
+
+  /* ── VERDICT / IMPLICATION BAND — lime, full-bleed, OUTSIDE the boxed well ── */
+  .lf-verdict-band { background: var(--lime); padding: 44px 44px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .lf-verdict-band h3 { font: 400 30px/1.1 'Instrument Serif', serif; letter-spacing: -.015em; color: var(--black); margin-bottom: 12px; }
+  .lf-verdict-band p { font: 15px/1.6 'Inter Tight', sans-serif; color: var(--lime-deep); max-width: 1080px; }
+
+  /* ── CONFIDENCE & CAVEATS ── */
+  .lf-caveats { list-style: none; }
+  .lf-caveats li { font: 13px/1.65 'Inter Tight', sans-serif; color: #555; padding: 9px 0 9px 16px; border-bottom: 1px solid var(--gray-200); position: relative; }
+  .lf-caveats li:last-child { border-bottom: none; }
+  .lf-caveats li::before { content: '—'; position: absolute; left: 0; color: #D9D9D9; }
+  .lf-caveats li strong { color: var(--black); }
+
+  /* ── FOOTER — same dark bar language as header ── */
+  .lf-footer {
+    background: var(--black); padding: 22px 44px; color: rgba(255,255,255,.38);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    font: 12px/1.6 'Inter Tight', sans-serif;
+    max-width: 1100px; margin-left: auto; margin-right: auto;
+  }
+  .lf-footer-brand { display: flex; align-items: center; gap: 10px; }
+
+  @media (max-width: 860px) {
+    .lf-header, .lf-hero, .lf-footer, .lf-toc, .lf-verdict-band { padding-left: 20px; padding-right: 20px; }
+    .lf-well { margin: 24px 20px; }
+    .lf-section { padding: 32px 20px; }
+    .lf-hero h1 { font-size: 34px; }
+    .lf-meta-line { gap: 22px; }
+    .lf-cards-2col, .lf-entity-body, .lf-entity-body.cols-3 { grid-template-columns: 1fr 1fr; }
+    .lf-cards-2col.lf-evidence .lf-figure { max-width: 100%; }
+    .lf-stats { grid-template-columns: repeat(4, 1fr); }
+    .lf-stat { padding: 14px 10px; }
+    .lf-stat-value { font-size: 21px; }
+    .lf-entity-col + .lf-entity-col { border-left: none; border-top: 1px solid var(--gray-200); }
+    .lf-quote-row { grid-template-columns: 1fr; }
+    .lf-quote-meta { border-right: none; border-bottom: 1px solid var(--gray-200); }
+    .lf-verdict-band { padding-top: 32px; padding-bottom: 32px; }
+  }
+  @media (max-width: 540px) {
+    .lf-header { padding: 14px 16px; }
+    .lf-hero { padding: 40px 16px 32px; }
+    .lf-hero h1 { font-size: 28px; }
+    .lf-meta-line { flex-direction: column; gap: 14px; }
+    .lf-cards-2col, .lf-entity-body, .lf-entity-body.cols-3 { grid-template-columns: 1fr; }
+    .lf-stats { grid-template-columns: repeat(4, 1fr); }
+    .lf-stat-value { font-size: 16px; }
+    .lf-stat-label { font-size: 8px; }
+    .lf-well { margin-left: 16px; margin-right: 16px; }
+    .lf-footer, .lf-verdict-band, .lf-toc { padding-left: 16px; padding-right: 16px; }
+    .lf-section { padding: 28px 16px; }
+    .lf-geo-label { width: 88px; }
+  }
+
+  /* ── PRINT — preserve dark backgrounds, avoid breaks inside components ── */
+  @media print {
+    @page { margin: 1.5cm; }
+    *, *::before, *::after { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { background: var(--white); }
+    .lf-toc { display: none; }
+    .lf-hero { padding: 36px 32px 28px; }
+    .lf-hero::before { display: none; }
+    .lf-well { margin: 20px 0; border-color: var(--gray-400); }
+    .lf-section { padding: 28px 32px; }
+    .lf-signal, .lf-entity, .lf-timeline, .lf-opp, .lf-contact, .lf-pitch, .lf-quote-block, .lf-geo, .lf-figure,
+    .lf-table-wrap, .lf-stats, .lf-caveats, .lf-verdict-band { break-inside: avoid; }
+    .lf-verdict-band { break-before: auto; }
+    a { text-decoration: none; color: inherit; }
+    a[href]::after { content: none; }
+  }
+
+  /* ── DIGEST ADDITIONS (v2 digest layer) ── */
+  .digest-meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .digest-meta-line .digest-tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 0; }
+  .lf-tag { line-height: 1; }
+  .lf-tag-merchant { background: #2A1F4D; color: #C3ABFF; }
+  .digest-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; }
+  .digest-card h3 { margin-bottom: 8px; }
+  .digest-card .card-prose { font: 13px/1.65 'Inter Tight', sans-serif; color: #3A3A3A; margin-bottom: 12px; }
+  .digest-card .card-prose strong { color: var(--black); font-weight: 600; }
+  .digest-source { font: 11px 'JetBrains Mono', monospace; color: var(--gray-600); margin-top: auto; }
+  .digest-source a { color: var(--purple-deep); }
+  .lf-table td.name a { color: var(--purple-deep); text-decoration: underline; }
+  .lf-timeline-note a { color: var(--lime); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+</style>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="LaFinteca MRO">
+  <meta property="og:title" content="Weekly Industry Digest · Week 31 — LaFinteca MRO">
+  <meta property="og:description" content="Fintech, payments &amp; LatAm intelligence. Curated weekly.">
+  <meta property="og:image" content="https://lafinteca.github.io/intel-reports/assets/og-digest-week-31.jpg">
+  <meta property="og:url" content="https://lafinteca.github.io/intel-reports/digests/friday-fintech-digest-2026-07-31.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weekly Industry Digest · Week 31 — LaFinteca MRO">
+  <meta name="twitter:description" content="Fintech, payments &amp; LatAm intelligence. Curated weekly.">
+  <meta name="twitter:image" content="https://lafinteca.github.io/intel-reports/assets/og-digest-week-31.jpg">
+</head>
+<body>
+
+<header class="lf-header">
+  <div class="lf-header-brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="140" height="17" viewBox="0 0 545 64" fill="none"><path d="M0 35.3406V27.9089L35.483 13.241V21.7158L10.5666 31.4292V31.8203L35.483 42.0553V50.5301L0 35.3406Z" fill="#C3ABFF"/><path d="M545 28.6585L545 36.0902L509.517 50.7582L509.517 42.2834L534.433 32.5699L534.433 32.1788L509.517 21.9438L509.517 13.469L545 28.6585Z" fill="#C3ABFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M99.9159 42.1908V55.4107L108.51 64H126.468L133.837 56.9549V64H142.926V23.1124L133.363 13.5544H109.867L100.304 23.1124V30.6785H109.684V26.0672L113.876 21.9607H129.451L133.643 26.0672V33.7023H108.514L99.9159 42.1908ZM124.126 55.5938L133.643 46.4442V42.1086H112.518L109.296 45.2481V52.4542L112.518 55.5938H124.126Z" fill="white"/><path d="M201.268 0.056688H156.222V64H165.796V33.7782H196.616V24.9845H165.796V8.8504H201.268V0.056688Z" fill="white"/><path d="M208.246 3.60855V8.78473L211.8 12.3371H216.979L220.533 8.78473V3.60855L216.979 0.0562165H211.8L208.246 3.60855Z" fill="white"/><path d="M219.13 24.984H209.75V63.9995H219.13V24.984Z" fill="white"/><path d="M241.588 13.5544H232.402V38.7772V64H241.782V33.5192L253.153 22.1544H262.033L266.226 26.2609V64H275.606V23.1124L266.043 13.5544H250.3L241.588 22.2616V13.5544Z" fill="white"/><path d="M294.384 22.0575L288.71 54.1024L296.927 64H311.462L312.902 55.4969H301.941L298.621 51.4493L303.799 22.0575H318.828L320.268 13.5544H305.297L308.107 0.0692076H298.874L296.063 13.5544H287.112L285.672 22.0575H294.384Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M326.245 23.1119V54.4416L335.809 63.9995H361.049L370.613 54.4416V46.9723H361.233V51.293L357.04 55.3996H339.818L335.625 51.293V42.0112H370.709V23.1084L361.046 13.5539H335.809L326.245 23.1119ZM357.137 22.1539L361.329 26.2605V33.605H335.625V26.2604L339.818 22.1539H357.137Z" fill="white"/><path d="M383.656 23.1119V54.4416L393.219 63.9995H417.394L426.957 54.4416V46.9723H417.577V51.293L413.384 55.3996H397.228L393.036 51.293V26.2604L397.228 22.1539H413.384L417.577 26.2604V30.5812H426.957V23.1119L417.394 13.5539H393.219L383.656 23.1119Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M439.962 42.1903V55.4102L448.556 63.9995H466.514L473.883 56.9544V63.9995H482.972V23.1119L473.409 13.5539H449.913L440.35 23.1119V30.678H449.73V26.0667L453.922 21.9602H469.497L473.689 26.0667V33.7018H448.56L439.962 42.1903ZM464.172 55.5933L473.689 46.4437V42.1081H452.564L449.342 45.2476V52.4538L452.564 55.5933H464.172Z" fill="white"/><path d="M71.4869 0H61.9131V63.9433H86.6686V55.2465H71.4869V0Z" fill="white"/></svg>
+    <div class="lf-header-divider"></div>
+    <span class="lf-header-label">Marketing &amp; Research Office</span>
+  </div>
+  <div class="lf-header-docid">MRO-DIG-2026-W31 · <span style="background:var(--lime);color:var(--lime-deep);padding:1px 6px;border-radius:2px;font-weight:600;">v1.2</span> · 31 JUL 2026</div>
+</header>
+
+<section class="lf-hero">
+  <div class="lf-hero-inner">
+    <div class="lf-eyebrow">Weekly Industry Digest · Week 31</div>
+    <h1><span>Payments giants cut,</span> <span class="accent">LATAM keeps raising.</span></h1>
+    <p class="lf-hero-sub">Visa trades 2,600 roles for AI velocity and stablecoin bets, Circle buys IBM's blockchain patent vault, Nu turns bank in Mexico, and Brasília moves on both betting ads and online casino itself. Eight funding rounds and five deals on the board.</p>
+    <div class="lf-meta-line">
+      <div class="lf-meta-item">Period<strong>24 – 31 Jul 2026</strong></div>
+      <div class="lf-meta-item">Sources<strong>Connecting the Dots · Latam Fintech Hub · CNBC · SBC News · Lottery Daily · The Paypers · Pokerfuse · PR Newswire · Crypto Integrated · Bloomberg Línea</strong></div>
+      <div class="lf-meta-item">Edition<strong>Week 31 · v1.2</strong></div>
+    </div>
+  </div>
+</section>
+
+<nav class="lf-toc">
+  <div class="lf-toc-row">
+    <a onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'});return false;">01 Headline</a>
+    <a onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'});return false;">02 Global Fintech</a>
+    <a onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'});return false;">03 LATAM in Motion</a>
+  </div>
+  <div class="lf-toc-row">
+    <a onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'});return false;">04 Brazil Up Close</a>
+    <a onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'});return false;">05 Crypto &amp; Stablecoins</a>
+    <a onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'});return false;">06 Funding &amp; M&amp;A</a>
+  </div>
+</nav>
+
+<div class="lf-well">
+
+  <!-- s1 · HEADLINE -->
+  <div id="s1" class="lf-section bg-gray">
+    <h2>Visa restructures for <em>the AI era.</em></h2>
+    <p class="lf-section-sub">The biggest payments company in the world just told the market where the next dollar goes: fewer people, more AI, and a product roadmap centered on stablecoins and cross-border.</p>
+    <div class="digest-card" style="margin-bottom:24px;">
+      <div class="digest-meta-line">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABWElEQVR42u2WPU4DMRSEZ+zdTYAoIgIpgpobQEUFEleg5g509NQcgTvQI8EF9goUJFKaQAQh5GfjNxQ0KEFJhCylYKe0C3+25715QKlS/12cXdg5zvfdSBfBuW3AFOUU0RHWzcDbTn7U/bmVzBGNij05d+n95i40jXTNBAqD9mRsdwAWA8A5gziSjREPIEDQmNTci7p1e2DtAPNfIEdBKZn+5tE/ewAqUolcCjAxvicuPMo+mxBDHIIiAdQCNFhahjiXbzzlNZtk0b5H4YN+Iwu9/LAP0MruV2qhCSV43DdqqFo0E74NRPM+NM56fRK2GOChfjBFek2yCSBSGSoR2EpkVzx9bS/JgqwO4cRX2Yx1PBIiDPWMlFsrdEIIYIECCJEA/HcEFTCWYbRCGBkcHKqoED7SOIAUQEAFzpaHETJ1WPDGhrYNQ5yRbAIHYxeWvZSdr1SpWX0B2JWFZVAubZkAAAAASUVORK5CYII=" alt="Visa" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+        <div class="digest-tags">
+          <span class="lf-tag lf-tag-lime">EDITOR'S PICK</span>
+          <span class="lf-tag lf-tag-purple">GLOBAL</span>
+          <span class="lf-tag lf-tag-amber">RESTRUCTURING</span>
+        </div>
+      </div>
+      <h3>Visa cuts 2,600 jobs as AI reshapes its product engine</h3>
+      <p class="card-prose">Visa will eliminate roughly <strong>2,600 roles, about 7% of its workforce</strong>, in a restructuring announced 28 July and effective 15 August. CEO Ryan McInerney is reallocating capital toward <strong>stablecoin and cross-border products</strong>, the two lines where fintech challengers have moved fastest. The cuts land on technology and product teams even as McInerney credits AI with a <strong>65% boost in feature development velocity</strong>.</p>
+      <div class="digest-source">→ <a href="https://www.cnbc.com/2026/07/28/visa-is-cutting-7percent-of-employees-in-efficiency-push-as-ai-reshapes-work.html" target="_blank" rel="noopener">CNBC</a> · 28 Jul 2026</div>
+    </div>
+    <div class="lf-signal">
+      <div class="lf-signal-label">Signal</div>
+      <p>When the incumbent with 60% card share funds its stablecoin and cross-border roadmap by cutting product headcount, it confirms the thesis: settlement infrastructure is where the margin war moves next, and lean regional operators get a window.</p>
+    </div>
+    <div class="lf-stats">
+      <div class="lf-stat"><div class="lf-stat-label">Roles cut</div><div class="lf-stat-value">2,600</div></div>
+      <div class="lf-stat"><div class="lf-stat-label">Share of workforce</div><div class="lf-stat-value">7%</div></div>
+      <div class="lf-stat accent"><div class="lf-stat-label">Feature velocity gain</div><div class="lf-stat-value">+65%</div></div>
+      <div class="lf-stat"><div class="lf-stat-label">Effective</div><div class="lf-stat-value">15 Aug</div></div>
+    </div>
+  </div>
+
+  <!-- s2 · GLOBAL FINTECH -->
+  <div id="s2" class="lf-section bg-white">
+    <h2>Global fintech, <em>in four moves.</em></h2>
+    <p class="lf-section-sub">Patents, AI infrastructure, bank charters and B2B payments economics: the week's global stories all point at ownership of the underlying rails.</p>
+    <div class="lf-cards-2col">
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,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" alt="Circle" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADhUlEQVR42uWXTWhVRxTHf+/5NNgvQVNRKtWNNa4a/La2UEGwQmqiFhXRNiuREWxl0DrL0tZRYajdDHUZRIpiSzWtn0gxKIiCiQst3aVQi8QIfqGJfTFu/peOj5fmhfeCCwcu994z555z5n8+b25wcJAXufK84JWrhMmHOAtoBd4GbgGHnDVXS3jmAhuAKcBfQJuz5s+qDfAhLgQ6gHFAESgAT4EWZ027eJqBn4XoADAG6Ac+cNZcqdYF30r5FqAOaBF9b8KTPbeId6t4d9cCgR4g76ypT2idQCMwVofoBzqdNXMSnl6g6KyZUi0CfwMT5WN8iNOBmcBtZ03RWfMEuAO8oz18iPOAicDNWmTB90Kqw4d4FugCXgX2JzzfidYpng59s79qA5w1bcAXQB+wTLB/BexJ2PYAX8v/y4DHwDZnzcGapKFgLQD1wB1nzb9D8IwFJsk9AzWrA2UMaQU2AQ0i/wEcVO4Xa16IEuWTgV+B+SJlQfaW7peBj501PTUvxTp5pvw3oMFZM81ZM01InAAWAMfFW70BPsQvs9QS7Jny5rTM6nklcBJYCHyWpawPceeIDfAh5nyI+xTdmZs26W7LBZho2/W6MXHxXh+i9yHmKjLAhzgGOADsKNlqAG7+X4PR3j/A7JKtXcAPkv3cKpQoH6doXltGfh1Q70O8O4xbXwcelKFvBib4ED9V9XweAR/iK8AxKe8ELpYRMgDcHeYql/8XJXMd8It0/YeAD3GCgmsJcAFoAtrKCLrhrGkcJnC7gBkl5F4FZjuwAjjtQ2xy1tzL+xDrgDNSfgpY7qy5V+vJRzI/Urq+D5zxIdblddoFyvFmZ82j0Rq/JHsVcFQ6m/Lq6wCtaXCMohFPgM/12lhIAvFpCe+buj9MaO/6ECsZozMXZmhOGiL78nngRtZSsxLqQ1wDLAauO2t6kw/7gGvDXP3JaXskf4kPcXWS6t9kQV0AjgPdytNPfIj3FcXFBCrU4/sryIIefZutbQrun3yI3cBrauvdwLG8s+YB8J7SLgdMBc4DS5015xJB14DJGreGUj5PrutKUDgHLNWUNFUTcxuw2FnzcCQDyXrgR+CSjOsr2R8P/K5mtN5Zc7gSuYURBPBhdcTlwAUf4g6dCuBDYB8wR3AfGa2B5A3gkGoHSdnNmkw7sNFZc39UDEgMWSQkspLbDZx21lwa8b/hS/93/AxNVU73+7svHQAAAABJRU5ErkJggg==" alt="IBM" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-lime">EDITOR'S PICK</span>
+            <span class="lf-tag lf-tag-teal">M&amp;A</span>
+          </div>
+        </div>
+        <h3>Circle buys IBM's blockchain patent vault</h3>
+        <p class="card-prose">Circle acquired IBM's blockchain patent portfolio: <strong>more than 680 patent families and nearly 1,000 issued patents</strong>. The stablecoin issuer is arming itself for an IP phase of the infrastructure race, where owning the technology matters as much as shipping it.</p>
+        <div class="digest-source">→ <a href="https://www.connectingthedotsinfin.tech/the-next-fintech-arms-race-is-intellectual-property/" target="_blank" rel="noopener">Connecting the Dots</a> · 28 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACSUlEQVR42u2WQUtUURTHf+fcN8+o0UxNJyWIkByKajmfINBNLaK93yE/hn2H9hWBm6RFixbFtAgKQQ1chMWoTcbUlOC8e0+L52BRTjH63mw88LiLB+f/+5937jlPAG5XrGKOu5ifUdGiYWQRghAsNBH3RDz3HlWlKjcru5WC6H0XubIPBhmJ/4rhVPCJX8HCrEbi5pxzZR9CDuIAhg8B51wZcXOK2LS3PIR/D2+GiU2riBbzcf5nJUS0qL0R34eIjjyl7Z/egwhEHVSiQxogGFhIBY1UrBDD4BCUrwk73+HVc8NFRwDQdhcCBA/qoH8ATg/B2RKMjAkXp2DqKoyfh7hPePrYePGM7gBCSJ92m0QF6DsBpQkoXxcuTMLYeCo8OAwnT/09R6eIOrkt9sPoORgpQWlCmLwMl67AmWGhEB9NzxwI0GrBjVvCzB1hYBDiOJt7cHAFAoyOw8hothdRO/aAz34SKD2OY4BjgMwB1HU5Bw4bSQLfGlDfSjdi5gBJC742jLVlWF2CjQ9GfRM2PtJxbHcFsPMDGttQ3zI+1eD9Giy/MWrr6btWK90lsvcJVLsEUE0TtXahtm6sLsHaKnzeNLZq0PgCzQa0EnAOVIB//ID8N0AUweuXsPzWeLdkbNdTkCRJnYmAaHoeZlEdCOAiqD43zFJ37UYqFHLahu0q5DAHpIdjSFCz0OwNhGAWmorJopP8AZwImCxqYn7ee7/iVMmnEoJTxXu/kpif14VqXMXcbBLCQ7PQlAwhZK/sSeAB5mYXqnH1J/605IkA36EwAAAAAElFTkSuQmCC" alt="Stripe" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADrElEQVR42sWX3U8cVRjGn/ecmZ1hdaGw9CNgpX402XBRYa3RWy9qo6nx0hAs3tmEpN41Wqv/gjHG9EajqRETraSxrZFCtFTbUm2lgLAQSzXxQimwRISF3e7OebzA3bLLftHS5UnO1Zw5zy8z8z7vvIKM6qqVG39dwHZAHgNgY2N1m+QoIMdNYukTAAYABADgOI8q6C4RPINKiOzyEsuHAMQ0UFujLPO1CJ5GpSSyR2mrkV7qtFauOiKCg6i0RFrE0hOiXf9vAHZjE0TiqmjXnwRgYXOUtMoxN8aAySRAb73PGdAWtF2woGyrpPHtBLbUb0W4tRWhUAg11dWASFn20WgUlwcGMDoyArEsKKXWbtKun/kWlMVAbZBHj73DG5M3ebdajMX4/gfH+UD1FortrPXJay6au0PNHLjyU+Ygz8s+OJUyZS1jVvaf+LSL2naonKriALBsPtT0CCORiYxRWtPTs5yc/J0zM9F1gaThn3/xJUJUYQDlVFHbPp7sPpVlPjT8K19ua2fDziYGaoNsfHgX2w92cHRsvGwIkvzwo48JSGEAiOaz+/bT8+5Qf/d9P4PbthMAYTsUn0tYPgLg9oZGXrw0UBYESfac6yO0nQWQ/VnSoL2tDUoJRIDZ6BwOdXYiOjMD7fqhtYZSCtqyoF0/bv31N17r7MQ/8/9CqdKVMTc3B5jsUlZ3UolwHgzgqb17/09K4OzZbzA5EYF23LwHatdFZHgI53r7yqrMnt5egMwPYIxBIBBAfTCYufjL9evlBCoGBweL7tBacPHSALq7u6F8Tn6Aje81Aq1X1oUffsQrHR2IxWKQnDDKJKFSCgsLC5iNRtHQsAMA8GRruKy4DYfDOebA/Pw8vvzqJM73X8DpM2ewvLSUN5LVauLE4gKuXruW7lQ4cOAFPB5qhpeI57X24nE0P9GC/c/ty321qKpyERkfxxeff4bleLxwPyhZhuf7Wb9tx0oZWuWXofFIY8g3jh4joNYk4N0HUV06iF7lWKR4EKVjuBhEwSgeKxTFN9cXxaUgijajyxvQjFZDHHnzLSrLVxogux2/fU/teLWmpqZZE9xK8bkZH9Gun/frhyS3NIeHR/BtT09WFhQFuPdfslwKDe04a4IoWWoKUkoBOTdukFKKxBA2T38oiHl3s9wJnNBMpSJKW7sg0lLhoeRnk3AOawCkl+pT2mqCyJ4KmV8x8NrgLU7p9IRCL3VKtP0nwJ0iUncfpqUkwBuEvGcS7mF4i7cA4D9tWUQE5KZwZQAAAABJRU5ErkJggg==" alt="OpenRouter" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-amber">TALKS</span>
+            <span class="lf-tag lf-tag-purple">AI</span>
+          </div>
+        </div>
+        <h3>Stripe reportedly in talks to acquire OpenRouter</h3>
+        <p class="card-prose">Stripe is reportedly negotiating to buy <strong>OpenRouter, an AI model marketplace</strong> that routes requests across hundreds of models. After a decade building money-movement infrastructure, Stripe is positioning to own AI-usage billing infrastructure too.</p>
+        <div class="digest-source">→ <a href="https://www.connectingthedotsinfin.tech/fintechs-next-battleground-is-ai/" target="_blank" rel="noopener">Connecting the Dots</a> · 27 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" style="border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);"><rect width="32" height="32" rx="6" fill="#1A1A1A"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700" font-size="18">I</text></svg>
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-teal">M&amp;A</span>
+            <span class="lf-tag lf-tag-gray">BANKING</span>
+          </div>
+        </div>
+        <h3>Stripe's first employee buys a bank</h3>
+        <p class="card-prose">Darragh Buckley, founder of banking-as-a-service platform Increase, has <strong>acquired and rebranded a US bank</strong> to own his infrastructure outright. The new fintech playbook skips the sponsor-bank layer entirely and goes straight for the charter.</p>
+        <div class="digest-source">→ <a href="https://www.connectingthedotsinfin.tech/the-new-fintech-playbook-own-the-bank/" target="_blank" rel="noopener">Connecting the Dots</a> · 30 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,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" alt="Sokin" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-purple">B2B PAYMENTS</span>
+          </div>
+        </div>
+        <h3>Sokin hits $90M RR net revenue on $12M raised</h3>
+        <p class="card-prose">B2B payments company Sokin closed H1 2026 at <strong>$90M RR net revenue, up more than 100% year over year</strong>, and is tracking to $120M+. The striking part is efficiency: the growth sits on roughly <strong>$12M of primary capital</strong>, a counterexample to the burn-heavy cross-border cohort.</p>
+        <div class="digest-source">→ <a href="https://www.connectingthedotsinfin.tech/the-12m-behind-sokins-90m-rr-net-revenue/" target="_blank" rel="noopener">Connecting the Dots</a> · 31 Jul 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- s3 · LATAM IN MOTION -->
+  <div id="s3" class="lf-section bg-gray">
+    <h2>LATAM <em>in motion.</em></h2>
+    <p class="lf-section-sub">Mexico carries the week: Nu becomes a full bank, and Stake plants its poker flag ahead of the World Cup. Payments infrastructure keeps spreading south of it.</p>
+    <div class="lf-cards-2col">
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,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" alt="Nubank" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-lime">EDITOR'S PICK</span>
+            <span class="lf-tag lf-tag-purple">MEXICO</span>
+            <span class="lf-tag lf-tag-teal">LICENSING</span>
+          </div>
+        </div>
+        <h3>Nu México goes full bank on 6 August</h3>
+        <p class="card-prose">After a near three-year CNBV review, Nu México completes its SOFIPO conversion and <strong>begins operating as a bank on 6 August</strong>. David Vélez frames Mexico as a core bet with a <strong>projected $4.2B investment through 2030</strong>. Deposit ceilings and product limits fall away, and every PSP serving Mexican merchants inherits a stronger bank-grade competitor.</p>
+        <div class="digest-source">→ <a href="https://thepaypers.com/fintech/news/nu-mexico-to-begin-operating-as-a-bank-from-6-august" target="_blank" rel="noopener">The Paypers</a> · 30 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,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" alt="Stake" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-merchant">KEY ACCT</span>
+            <span class="lf-tag lf-tag-purple">MEXICO</span>
+          </div>
+        </div>
+        <h3>Stake pushes deeper into Mexico with poker launch</h3>
+        <p class="card-prose">Stake launched <strong>Stake Poker in Mexico</strong>, its first locally licensed market for the product, as its LATAM expansion accelerates ahead of the <strong>2026 World Cup</strong>. Mexico is becoming Stake's regulated-market lab, which raises the stakes on local payment rails and payout speed.</p>
+        <div class="digest-source">→ <a href="https://pokerfuse.com/latest-news/2026/7/stake-poker-enters-latin-america-mexico-launch/" target="_blank" rel="noopener">Pokerfuse</a> · Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAIwUlEQVR42l2XbawdV3WGn3ftOR/XdmI7jn1D/HFd25A6iYNsEkIStbWJIAjUAAIpVYmoSgSUotJUJXxUqpo/kVr1BwhEQfwAJBK1RU0DIVAgikn4EHEim6S2iUJs39hOQu51HDuOr+/Hmdlvf+w55146ozN7zp6ZvdZ611rvWlssPSS2bd71jvmF+fc1dXNLznmjpC6ADUIgIwILNJoHYwMyBgMYSRgc6HjqxPe7VfXA0RNP/7Q8b0UOb2645oZ1L52Z+cfZC3N31HU9lnOmLAMhgVVUkJCkxU/tJVeV+4zbUy5SUiQixdn+WP/bl69ee8++Q3unRgpcf/Xbx184PXXf3OzczU3TLAFECCEFIlwkR0Gi6LYEh9Z6XBSwMQ22y5PW6pQS/bH+IxvWjH9o36G9U0kSqbPiny9cmPuzJcItRERISgSVpUQoKcpoRZKUhsqhiKLcSGkhNPIDixc1Td6y4MHYnX/3Vz/S1q1v2X3uzGsPDAb1KknYRgqHUrtgIiRay41CIswoCkaeksk2Wc7ZtrEsu8HOZMooCWfT7XdnV66++Na0YtmaT8/PL/yxC1YqwkNBckSlUGqVSKSolBuo66yIihSBkQcLjYRIKREKRaRRnEggqUSmwQVcbHckzVT1oHl3G3ASOIgh5AoSIggFEF6Yr7VxYj1vu2EnV+54EytXrmBmZlbPHD7CE48/xfHnX+Suz3+MzVs26NUzr/HVL3+LyWPHiZQkQKqLCjY5Z5q6eWdlPNHabkUoqFqLg1BYSgKRotLtH/0Af3HHB9l+1Tb+/3HsyAnu/87/6F3v2cMV27fw+rnz/Od9DzJ59ASh1LosKduYXAI1542V2iwLSUECtVGvylJICje19ZnPf4xP/f1f/p7Q+fkFer0uAFu2beKuf/g4s7PzzM7Ocfr0GZpBdqiSFBK2sERqkyJLUrdyyR0NU60EXomCULgeWLtvvoFP/u2HR4IPPPkbf/sb32X65TNaN34Jt99xK2+57ioAxsZ6fP0r/8737n+YkydeVqfTBbIhgMAyUpYoyVEV3wciLRUMJLBISb7tQ7cqVQmAp/Y/w6c+eo9OTP6Oqqow5uc/PcAXvvZZ/mjPtQBsv/qN3PNP/4bJRKrIuWYkg5JlOKDNqeJ/ZGlEOoSknNHExAZdveONAORs7vvm93nx5Ckuvugili1bxvJly3n1lfN86+sPMje3AMC11+9g/YY3EMOzuFJCbjlCZQ6i5HIU5iBaciwkYsPqS1Z55aqLARgMag49fYx+bwypIqgIddzr9njp5CmmXz4NQBWJ8csuxSNCKvCXdQMcHlaCqi0xaOmpEgeSnRurbhlSgl63VxCKasR0cuNet6dev7tI4R6Sl0G5yJCG5mILSmR4KZu5uKAwXIrE1NRpTk+fAaDT6XDTn+wk10ZODlUKJ9xIb971h6wbXwPAuddneOHktCNiScWT1aJQKgYu0YeKaSX/tKiPnFJi6qVX/MTjB0cIfOQT72PPLW8tCBEGseeWt/LJu24rywA/f+RJXjvzuiJiuHarQamWw5oKoDeMX+mFudpJlSI6hCpCFZUqR1RyDtaNr/W99/+rtr1pEwB13fDELw5z/NjLrFm7kht3X8OKi8YAeOXUGT5++90c2H+IVEGmcc61Gg/IuXZ2TXatJtd0+xXp4uVr727qBikphpVNMcwGSeFet6fz52bZdd2V9Md6RAQbN4+zY+dWtl6xgW6vA8CpqVf53N98wft+9b/qdAKcbWeZPPLw8L+dSVVQmcUo8KLDPLybnZ3TF7/617z9lhsZ6/d48eQ0Z8++ztZtG+j1u8zNLTD9u9P88mdPc983H+LZZyaVqsDUGMuj1mTYIzCaAVMNNSth0b5IqyXZ2Zlur6vlywvEv/zZU3zpX+5l4g/Wu9vt0DSZU1OvavLoC5jsqiOcszJ5JKQtQDZ5KMfD7qmyS3WybSsXLnB20T2rwLjYxL33A7tZv/5SfvLDX+np/c/y7G+eZ2bmAv2xrhVQIG4MWR66oBytnLwUGVe0kEAWVkFAgZ2VkU3WwvxC26iIXr/LTbt3cdPuXZw7e57DB4/w5L7DPPrw4xz97XHNXJgFZWVnshdHs9gnDhXBKK1YcendTV2XhqZtONsDJFVVxZP7DvrwweeUs+l0Oqy+pDBjr99l48RlXH/jNbz/tnfone++ibn5OX69/7AjoWJtg91Acenov8lUnYq0Yvmld9d13TYvLR8UjmoTNTwzc4HDB5/Tjx56jEf37vOBJw7r/PkZ1o2vod/vE1G6oTVrVyPMd/7jB6o6gZ2daVTGrJybMrqxndXtdKmABeNuG4AyDUbK1EAi2lJddRM4c/S55/Xcs5M89L29rFp1ETuvu4o9N7+Na6/fwRXbt4Ig55rshGlkN20/2JT13RSXl8Y66/LLth+ZOT+7VcLFAYmIiijlmSBZEYjCE8NCJUk5m7pp3NSNJjZf7u1Xb1Ov1+HBBx4mdQK7cXZTYqC9N7WGQb1sbGyyCqWfpIhPlECxcSMbMrZIpTbZCLduCbKQXCg8VSJViZMvvMixyeNUVZA6QfYAvNgV23WbIUV4RJA66Ycx1u//d9WpZkcFADvnprzsTEudZNfKrmk8cM51+XlQ5nNNJNTtBQoXys2NGw+ptyG33KK2YKQUZ7v93n/Fn3/4PXt7y/rfSKliiRJkGjLtx24owhcVGfJ5zgOyaze5fU5D41qZhuxG2Q12PdqY2G53R2P3Hjt24NH02GOPedOmq/bXg7mduclbFkmn5OuQIbGXzpXOngzFMpnGQ9TsxnazGHDt1g1QSol+v//IqjXr7pyenpxJANPTkzMTm3f8ODeDnrOvAPpD5iqq5LLP8XAxKztrlDluXUZu4W5ksrGHrYUigk6nM7d8xbKvXX7J8jt/fegXU7+3Ox52Dls3vXnPQl2/vxnkPzWe8JAYvPiOtLSPYcnmFGS3LD/ctnohIk6mKv241+1998jzBx5mCbX/H3/MK4r+UYuuAAAAAElFTkSuQmCC" alt="Geopagos" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-teal">PRODUCT</span>
+            <span class="lf-tag lf-tag-purple">REGIONAL</span>
+          </div>
+        </div>
+        <h3>Geopagos brings Tap to Pay on iPhone to LATAM</h3>
+        <p class="card-prose">Acceptance-infrastructure provider Geopagos launched <strong>Tap to Pay on iPhone across Latin America</strong>, letting acquirers and fintechs turn iPhones into terminals with no extra hardware. Another step in the region's leapfrog past legacy POS fleets.</p>
+        <div class="digest-source">→ <a href="https://www.latamfintech.co/articles/geopagos-lanza-tap-to-pay-en-iphone-en-america-latina" target="_blank" rel="noopener">Latam Fintech Hub</a> · 23 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADhElEQVR42sWXX2hbdRTHP/f+bm6bpcoWoQ1RAl1Yx+pqRRlSKCqMYgQz2IMoamXqm+BmEPGhvqkvagn44MAHJ8oKYw8ieQm0fSmFIsXB/lCwWx0Wm6WDFalJL7nm9vrQk5ib3iW31ZHvS3J/99zfOb/f+fc92gvvv0Q75LM5BSSAUWAEeAaIudAHoME6UAR+BhaAeWA1lUk77fbWWhkgigeB14HTLiQ1UK02dMHRYAX4EbgILLUyRG+hvBc4B+SBj4CBdsrlNhQwIN/kgXOyV3AD8tncEDDlwudAnP0jDkwCU/ls7ulABojgd8DJICcOiJPAhXw2N9rSADn5N8BT/P8YAr5uvol6EIqfpsRaDwq2zdyGw42yVV8Lhyo7G4RKHtluw+ZY+CGGzRhx0/QzZBZ4M5VJFwCMhmh/w4XntaaIvlS01Ld/2PxeKe1SGJL/ytja+Q3tGGgYWyS7IowfOkqqJ+E0ulJ0nM1ncxOpTNqpuWAQ+KDZ55eKlvp4ucRvW/ae73ulUuaLu9fIl1aVT5aMA08CaK7rKuAzSRvPtZ+5ZnGztI3Sqyhl7+kGAHRVod+I8mXfc37uOA+8Z0iFO938dm7D4WZp27P2cizM8Uh0Z/PQJnBw18lv2ZvMWL9S3q7iuorb1Q2u2kXiZsIvMwYNYFQqnAfXN7Vdyj9JRhv8Gb5PJexzynf+UjPl1frakn2XF0k0V8ykBmM6MBIk349HwgSthI8YXQSsmCd0aSydwuM6EOugAYf1WkvtECI6HYYuZKJTKOvCZDqFNV1oVKdwRQcWXGjL3W6ULYLIueDcq1YIIgcsGsC8cLgBT/N+2IXCv8+XixawoWptuF5QGnpDt2Fzr1pRC1bBIzNo9voVonVg2gBWhUB6mtGzUcWRHt3TDy4XrYDNqFqX6TeiDJu+peYnYEkXxnoRz3khbpq8/ZiJ0qv7dvABuhk/dNSvExaAqUY+sARMNvv41ViYTwd6OHzA3LPyZFeED3ufINWTcHx8/4PMDx5KFge+b0XJVuw/sf7uojEO/isl8wwmQhgvCIF8EFgGXktl0r/4smJ58S5w/QEpf6dRue9ckMqk54G3gNkgeR8w32fl5PNCgNvPhhITZ4VA7nc6KkjAfVXzeeDZUD6YAE4JgVwOWglF8XngFWDifsrbTsc+U/IYcEImp0eBSK2rAWvAFWARmG43FdfwD7wQStY/yfgnAAAAAElFTkSuQmCC" alt="DRUO" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-amber">EXPANSION</span>
+            <span class="lf-tag lf-tag-purple">COLOMBIA</span>
+          </div>
+        </div>
+        <h3>DRUO preps Chile and Brazil after $160M processed</h3>
+        <p class="card-prose">Colombian paytech DRUO is preparing entry into <strong>Chile and Brazil</strong> after processing <strong>$160M in payments in 2026</strong>. Direct bank-rail debits across markets is exactly the multi-country treasury pattern LATAM merchants keep asking for.</p>
+        <div class="digest-source">→ <a href="https://www.latamfintech.co/articles/fintech-colombiana-druo-prepara-su-expansion-a-chile-y-brasil-tras-procesar-us-160-millones-en-pagos-en-2026" target="_blank" rel="noopener">Latam Fintech Hub</a> · 23 Jul 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- s4 · BRAZIL UP CLOSE -->
+  <div id="s4" class="lf-section bg-white">
+    <h2>Brazil <em>up close.</em></h2>
+    <p class="lf-section-sub">Brasília had the pen out all week: the President backs stripping online casino from the Bets Law while the new advertising regime starts to bite. XP, meanwhile, keeps building its SMB ecosystem.</p>
+    <div class="lf-cards-2col">
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGAycHRxcmUSYGDIzSspCnJ3UoiIjFJgP8/AxsDMAAaJycUFjgEBPiB2Xn5eKgMG+HaNgRFEX9YFmYUpjxdwJRcUlQDpP0BslJJanMzAwGgAZGeXlxQAxRnnANkiSdlg9gYQuygkyBnIPgJk86VD2FdA7CQI+wmIXQT0BJD9BaQ+Hcxm4gCbA2HLgNglqRUgexmc8wsqizLTM0oUDC0tLRUcU/KTUhWCK4tLUnOLFTzzkvOLCvKLEktSU4BqIe4DA0GIQlCIaQA1WmiS6G+CABQPENbnQHD4MoqdQYghQHJpURmUychkTJiPMGOOBAOD/1IGBpY/CDGTXgaGBToMDPxTEWJqhgwMAvoMDPvmAADAxk/9GlU2EAAABSJJREFUeNq9l2lsVGUUhp/z3TvTlu6UpbVAZQlFLNWCaAHFqjEhBNLENYrG8EOM/vAPGA0mxhhRUtQQFZeQYIwLoAKBIInBGiIKCEKhBMoObdnaQFs6SzvLvccfvSOFTEsp1S+ZzL0z95t5cs533vMeIckK1JYBCDAVqAeaADJLaxjoZXr5ToHngO+BBwDjgf1vAAA28DCwDngbGB6oLWMgQW4EoN77UOBNYD0wG/ANFERfARLPTvdSsgwoGohoJAWwjYOrBiOuuipEHT+RuB/HtTDiZhtxXxV0I/AUkHIrINL95tFF+xKXflUprRi7Y6mj5pHWcA6KkOEPMSrnHCX5Rxg/9BSDfB0hV81aoAo42p9KkSR/PglYCMxxVfJUDYiXCRVElDRfBxOHH6Ny4i+UFtQh6DFFqoA1QOhmQARg0vydHDzcJjPLh1baliyzjIyzLUEEXBfijuKqIoAxggKuGrJTAzw5aTOzJ1Rjm3hEkU3A+8B+QPsCIY+/dYCCIakEQvE5g7N8K8cVpuWPzk9jcJaNbRmiMZdL7TFOX+igrj5EQ1MnkZjbBaKC344xr2wdcydupQuNBmA58BXQdqNoSCAcx7ZkSlNr9Lu8LF9xRpqVvBwU2sNxDp4KsuWvy9QcDxB3FBAyU4IsnPklZYUHcdUAxIFfgXeBnYDbE4SoagbwreNqZVswTksgRrjTRQTSUy0GZ9pkpdtY5up5DUccqve1srr6Is1tURSLKYUHee3Bzxjk60CvHq0m4HPv1ZwsGrK77sqMCy3RjTXHA3mnL3bQHooTi3cdOr9PyM3wMbYwjfI7spk8PpPsdPvfzbUng3y8oZEzFzpJ9UV546EVTCmsxdFrqtsFdnjRqAbi3SFk7uL9L0Vi7qdxR20RQQCRq2FXQFXx24bxIwbx2MxhTL8zG5/d9dChMyGq1tTT2BzjidItvHDPD6hKsmi3eudiOdCYiIZVdN+CF4F7jXSdeum2N3FvRFCFptYoe460E+xwKB6ZTorPMCzHT26mzZ6jQVKsINOL9mLETQaQBpQDFcBl4NTilwscA+T3VTQsI3RGXdZvb+aLTWcJhB0A7i/JoeLuHNo704k5NtJ72U8GvgZWAOOMl6O+K5f361v3trC6+iJxR7EtYc60IeRl2de1jx5XKjAKyDbA2f5ouCps3nWJnYevADCmIJWKEsWS2I0QGoHXgaeBvQbYDURuuokIhDodNmxvJhB28NtQXhzFZzk9bYkAPwKVwEdAa2ZpDQb4AzjRnyhYRjjSEGb/iQAAPvcckjyjR4FXgPlATXeZNsAZr4n0a0ViLrvqAjid9cQD268tIwgCK4G5wCoglFlac40YJVRlFTALmNEfS9F44SxXGtaSEjmTsBgK7APeA34GIj1JcUKyzgOLEj29r6urIwaZNeYb/JFtCQlu8RxTpWfhIr02o+u8wDTgQ08wpOcKEFyEwqwm5pWtY8btewAc4HdgCbANcPrUjpMYkkJgAfAMMNpVY3eXVss45Ka1MXXkAWZPqKYo9yyqch74xMv35Zs2JElsmYRjaSOen/zTUuDZlnAurgpZKUFG5Z6jeOhJbsu6iG3iUVfNFi/Xf/fVhPQKABA5VILjWiC6RFUWu2pQwIhixO1KgZoTwAeeSw70d3Kyk30YdXwJU67dSVUFR62QJyhVQN2tjmz2TcwFChzwPN8moHMg5sW+ArR16+UNAzmo3gjAAf4E3gF+u97NDMSSXsZzgLuAS8C5/2o8/wdB9RibQrDj+wAAAABJRU5ErkJggg==" alt="Gov.br" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-lime">EDITOR'S PICK</span>
+            <span class="lf-tag lf-tag-merchant">KEY ACCT</span>
+            <span class="lf-tag lf-tag-red">REGULATION</span>
+          </div>
+        </div>
+        <h3>Lula throws weight behind online casino ban</h3>
+        <p class="card-prose">President Lula is backing <strong>PL 2,258/2026</strong>, the PT bill that would <strong>remove online casino games from the Bets Law</strong> while preserving regulated fixed-odds sports betting. With 78 licensed operators running 138 brands, a casino carve-out would hit the highest-margin vertical of nearly every key account in the market.</p>
+        <div class="digest-source">→ <a href="https://sbcnews.co.uk/featurednews/2026/07/30/lula-brazil-pt-government" target="_blank" rel="noopener">SBC News</a> · 30 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" style="border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);"><rect width="32" height="32" rx="6" fill="#0B7A3B"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700" font-size="18">A</text></svg>
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-merchant">KEY ACCT</span>
+            <span class="lf-tag lf-tag-amber">ADVERTISING</span>
+          </div>
+        </div>
+        <h3>Betting ad rules bite, and the industry splits on them</h3>
+        <p class="card-prose">Since <strong>17 July</strong> every gambling ad in Brazil must carry a standardized Ministry of Finance addiction warning. Trade body <strong>ANJL backs the rules</strong> but demands matching enforcement against unlicensed platforms, while the lotteries association attacks the <strong>federal-municipal fragmentation</strong> of overlapping ad regimes.</p>
+        <div class="digest-source">→ <a href="https://lotterydaily.com/2026/07/28/highlighted/brazil-lotteries-betting-laws/" target="_blank" rel="noopener">Lottery Daily</a> · 28 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABt0lEQVR42u1Wu3EbMRDdhT1DIHuHyKHcgVyB6QqsDjyqwFToyGQHYgWSI6XsQFQFpiswKliuo7sI60A4zc1Z/AxFWQruzVyyB2AfFm8/RAMGvDC4bwBwwsxXzDw+piMzW5rZuaqmrt39w+gZnJdzx8x8tTMCMUZ7zpCLCG+NwP/GQGAgMBB4cQJv91ynRLQoJRXMfNYpsYmZl1tKMIgIm6rrvgRARElEZqVaTonou5klM/u0Xq9T6SNQVX30gPsec9u3v+kbQgjTDSTGIQSq6/quruvlaDT6Q0TfVDUBQAjhhojumqZRAPDev/Pew3tPzT3Ue/+raZr01F4wbSPR3to5d0tEpznn96qa2gh19lyKyMVRRGhmEwDomM6I6HTHnvFRsqB9c1XVloSqXhPRrLsu55xK/1+a2cLMZns7iTHaY19VVb8BnLRhjzH+BPCl8xST9v9GJQNfD50HNOf8oRVcGVraVLwQkcueI5TMeTA55z4X/fBWAlVVrZkZB45dCzM7d85NeiJ8uIiIVLtGsvkT5r75pjpQ8GNnIRKRKYDknPt4AIdVEeHKOXfdE+ZKVec0YMBrw18zgtPqgw/4VwAAAABJRU5ErkJggg==" alt="XP" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-teal">PRODUCT</span>
+            <span class="lf-tag lf-tag-purple">SMB</span>
+          </div>
+        </div>
+        <h3>XP launches payments terminal and card for SMBs</h3>
+        <p class="card-prose">XP rolled out a <strong>payments terminal and business card for Brazilian SMBs</strong>, extending its corporate ecosystem beyond investments. Brazil's wealth platforms keep converging on payments, compressing acquiring margins for everyone already there.</p>
+        <div class="digest-source">→ <a href="https://www.latamfintech.co/articles/xp-lanza-terminal-de-pagos-y-tarjeta-para-pymes-y-amplia-su-ecosistema-empresarial-en-brasil" target="_blank" rel="noopener">Latam Fintech Hub</a> · 22 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" style="border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);"><rect width="32" height="32" rx="6" fill="#3D2E7C"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="700" font-size="18">N</text></svg>
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-teal">M&amp;A</span>
+            <span class="lf-tag lf-tag-red">ANTIFRAUD</span>
+          </div>
+        </div>
+        <h3>Núclea buys antifraud platform Data Rudder</h3>
+        <p class="card-prose">Clearing giant Núclea, which processes most of Brazil's card and boleto clearing, acquired <strong>antifraud platform Data Rudder</strong> to fold real-time fraud scoring into its infrastructure. Fraud tooling is consolidating into the rails themselves, a trend worth tracking for every PSP compliance stack.</p>
+        <div class="digest-source">→ <a href="https://www.latamfintech.co/articles/fintech-brasilena-nuclea-adquiere-la-plataforma-antifraude-data-rudder-para-reforzar-su-oferta-de-seguridad-financiera" target="_blank" rel="noopener">Latam Fintech Hub</a> · 22 Jul 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- s5 · CRYPTO & STABLECOINS -->
+  <div id="s5" class="lf-section bg-gray">
+    <h2>Crypto &amp; <em>stablecoins.</em></h2>
+    <p class="lf-section-sub">Institutional money enters through the front door at Crypto.com while $2B in USDT walks out of Revolut's. Stablecoin operations keep going mainstream on the B2B side.</p>
+    <div class="lf-cards-2col">
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,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" alt="Crypto.com" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-lime">EDITOR'S PICK</span>
+            <span class="lf-tag lf-tag-teal">FUNDING</span>
+          </div>
+        </div>
+        <h3>Citadel Securities puts $400M into Crypto.com at $20B</h3>
+        <p class="card-prose">Crypto.com landed its first institutional round in a decade of operating: <strong>$400M from Citadel Securities at a $20B valuation</strong> for a 2% stake. Market-making giants buying into retail crypto platforms says the institutional-retail wall is coming down.</p>
+        <div class="digest-source">→ <a href="https://www.connectingthedotsinfin.tech/crypto-com-hits-20b-valuation-with-citadels-backing/" target="_blank" rel="noopener">Connecting the Dots</a> · 20 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADwUlEQVR42sWXO0hrWRSGv3PIQw1q0Ci5CD5AhCBEfHQWipVCuJgUKgw2ohbCFIIgDD5RFGUEndFCyK1EYbjVtRVkQCu9FhfBQhuDL1QM+IgxIWbdJlc8mpgYnfGHU5y11977Z+21/r2XwiOIiBGoBZqBKuATYAIMgAooJAYBwkAQ8AEnwHfgH+BfRVECz2eIWEXkLxHxyn8Hb2QPa7TNv8n/h2+/SOhExAD8AXx+TCoUCnF6ekooFEoo5oqikJqaitlsRq/Xx3P/DHhEpEcRkXpgEch67HF0dERTUxMHBweoqpoQCZPJhM1mw+Vy4XA4yMjIeMndC/yGiHyJFqP9/X0pKCiQSEK96jMYDOJyuWRvby/eUXxBRH68N4FfX11dnRweHr5E4IcuUmrPYDQasdvtWCyWhI7A5/Ph8Xjw+XwPttXVVWZmZpiYmEBRolbwJ0VEboHUKGWJ3+8nHA5rbI//HydgIBBgfX2dvr4+dnZ2Hsby8/NZWVmhpKQkGgG/LiIyzxAKhTg+PiYYDKIoCiJCbm4uFoslZhScTidGo5GWlhaur68BODw8ZGtrKxYBAyISjnY4BwcHUl5eLtnZ2ZKTkyNZWVkyMzMTX2m8XqmsrNTkwvj4eCz3sC6WvN7f3+P1erm4uHiw3d7extdgEUREY3shhxSVd8ba2hq7u7sP/zqdjqKiopj+umQ28fv9XF1daZIwGAyyvr7O0NAQNzc3D2OFhYVUVVW9L4GlpSUmJyc1oQ0EApycnHB3d6ch1tra+v4RODs704Q5FhobG+nq6nrRJ6kciCEqmjuhvb2d2dnZF8s26QgYDIaoNrvdTkVFBU6nk9raWlJSUuKulVQEGhoasNlsz6LS0dHB/Pw89fX1CW2eNAGbzcbg4CDp6emaJJyammJ7e/tVayWtAy6Xi87OTk0+7O7uMjg4yOXl5asISDIE9Ho9PT091NTUaOzLy8vMzc09U8NYwqlGXq9JwWq1Mjo6Sl5enkbCp6enWVlZSWSJsBp5OieN6upqent7NZVxfn5Of38/Ho8n3vSgCty8Vf/b2tpobm7W2DY2NhgbG9MoYxTcqJGm4U0wmUwMDAxQVlamsS8sLLC4uPjS1BM10rG8GcXFxQwPD2M2mzWX1sjICJubm7GmfdcBX4HGp89ynU5HXl4e4XAYVVW5v7+P98zG4XDQ3d2N2+1+uKhCoRBut5vS0lLS0tKePsu/KpHG5E/g93iNidlsJjMzM+5VfX5+rilDVVWxWq1PG5a/gZ4Pb80+vDlVPro9/wkopwWnqHUmuwAAAABJRU5ErkJggg==" alt="Revolut" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-red">OUTFLOW</span>
+            <span class="lf-tag lf-tag-purple">STABLECOINS</span>
+          </div>
+        </div>
+        <h3>USDT exodus at Revolut ahead of 31 August delisting</h3>
+        <p class="card-prose">Users moved <strong>$855M of USDT off Revolut in one week and $2B over the month</strong> as the platform's 31 August delisting approaches. A live case study in how sticky stablecoin balances really are when a platform forces the choice.</p>
+        <div class="digest-source">→ <a href="https://www.cryptointegrat.com/p/crypto-news-july-30-2026" target="_blank" rel="noopener">Crypto Integrated</a> · 30 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEUklEQVR42r2XW2xUVRSGv7XPGQq0nbbIpaW0FAqtVIGmBA1qo6ZGiRBAQ+KbQvqCog+KMSb4UG4mkhDCA4kaMDHwICoajTGoaETReANSkMtApxYLnbZYoPRCO3POXj60XFqnnbZDXcl5ONmX/1/r7P8/awtDCFWk7lLBlJTxboW1VKA6H2G6iGb2jreiUodItSrfed3ewYJJdU0iaKK9JRFwc0fxXA/vZbW6HMhMtEZArXJNRD7DN9tzM89VD0ZkwM3qW0smGNNdpVYrEcYzsrguIrtsWkpVnpy6PGQCF67MLsW1e1C9lzsQipw0jjybm1pzNCGBhmtF5Sr+x6o6mTsYItIs6qycGjz744AEGjoKF/g+BwSdyKiEXBJHnshNrTn2HwIN14omKv4Pis5hVENOQ6B8WvBMC4C5cdqt+JuSBW9sUMJnEylP56Cxzao9yRuASGfxAtBVyeZWW2N5ZU0Xx4/ZwScafS7SWVgGYKoUYz3vVZSxyRI4ddzSFLG8traLv8I6mCzGqWVdlWJM5fWiHBF9Mllw34fD33sAXL2idLRrIntdUnm9KMfgxRYrpCdLoPqIpSbUU/q0dCFnqiTwBoJE7WJjRB5NOnsP3n83itdTAGYVG7LuksR6MPYRo8rcZAl886XH77/4N98fW+xizFAUyTyjMD0Z8HNnLDu2RrG9+Nk5wuNL3aFZtCXfCARHCn6xXnljXTdXWrTXbmH182MIZgzVnskwIP6IDt1Ry0uruzhfe0vzD1e4LHnKHY4r+i5oCzBlqEva2+DDvTH27o7R2XFLaiVzHV7fOAZ3OPhoi6sqYRGdkkjjTRHl2wMen+7ziFy06G0yL13gsGlbCplZMsw6Sq1rDEdUeSDe8Ok/LZ984FETstTWWLq7+ppLIADLVgaofCHAwQM+ba23xhcucphXZhKdgT9ctfoVwovxeoPC2QZVOHPS75NxIABl9zmsXjOG/BnC1g1RDh30+szZt0fYsj2FhYucgb1Q9WsJX56ZkRKQE6jmxZsV7YZtW6L89rNHXoGhtMyhvMJh5izD6ROWHW9F+bsu/s8nPShs2JrCPfPjVUIujotJiQBcaC3cjOj6QZpTVHtkJrfVyVr6ZD1AmQcwJXlzWjC83gB4rrcTiCTaRPp9JGPAcQZ/BnDEJuu4O2/2AwWp5yMIGwHL6IdF2JCfGmq4SQCgMZS1G9j/PxDY35iWtStuU1rfWjJBpOtz4MFR6QaRnwRnxdTg2X8GbMsb2wonx1Q/MkL5jb4t+ZYctSqHAsIz2enh5j7nqP/k7PRw89j0wFK18g5I7A5cSmJqebuj213WHzwuAYBJEmrbtT281kefBqp7GpiRYMtRVFfkBmvX3j0p1Dbsy2mPBxSMbWh3lqOsUtWHEFIHWacC7YocdkTe60rzvpghdV0jvh33MyNT31mc7fre/b5KqYjmi5DRC3sVseetynF13F/zxocaRYYm6X8B7ufLXsJIekoAAAAASUVORK5CYII=" alt="Ramp" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-teal">PRODUCT</span>
+            <span class="lf-tag lf-tag-purple">B2B</span>
+          </div>
+        </div>
+        <h3>Ramp takes stablecoin accounts to general availability</h3>
+        <p class="card-prose">Ramp made <strong>stablecoin accounts and payments generally available to all customers</strong>, one platform to hold, move and account for fiat and stablecoins together. Corporate finance teams now get stablecoin rails without leaving their spend platform.</p>
+        <div class="digest-source">→ <a href="https://www.prnewswire.com/news-releases/ramp-brings-stablecoin-accounts-and-payments-to-all-customers-302830447.html" target="_blank" rel="noopener">PR Newswire</a> · 21 Jul 2026</div>
+      </div>
+      <div class="digest-card">
+        <div class="digest-meta-line">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAE1ElEQVR42u2Xb2jVZRTHP+d5nuu2bGvqqknZNDOz9sIiEpUQCuqFZBkERpn/wjnd3aZmghQrCHqhxdShxRRD6UUZ9cYwKSLK/iyyN4rgv8xQicSWK928v9/znF787r27d3PptldRBx649z7n9zvnfM/3/LnwXxcZ8GbjxhKiqJySEh2WhYoK6OmJqau7cO0ObN48BtiAai3ghxeiCHAZ1ddpbNx7dQdaWgxVVS/h3KuIgOrwcbYWenoOoPoETU2nC69MP+Wqqmmo1qEKUQRxDCEM7cRxcjIZsPZeYPE/I7B+/UhKS9/DudnEce7XAHShGiNybRGrgohB9QZEbBKqAe9/JY5ns2rVjzlVV/Rgael8RB7FZ9OePHSBEFZj7cH8y64uHpFbUN2IMTV5RJyrBprZsWMpixb1FDvQ2loLrMIYl3cgkQwiHaTThweV9w0bfqak5GIRaqpgzJN0de0B3u9NQUuLY/TodlKphUXGExJ2ofomqsexNuFMCILq1zQ1nQCgra0a7x9GxGKMAoEQbkJkDcaMJYRiQsbxt4g8Rjp93mWJNxeReUWKOY+hAmNeQSRxyJgETu8XAieyendhzE5SKYNqcm8M+c+FktxNJ4QlwHpHW1sN3r/AiBGlBcTrRUAEQriI6nFUjyFyEtVzQEeB5lFgNZlMNTAOmITIZIypQLW4lFUTFFSXsmXLpw5Yh7UP9Ml7Ti4TwnaMeQeRU0TRCKwtx/tynPs9rxXHl3BuP8Z0A39hTDeq1YTwFNCESHmRE96DMRPxvsWhOhPn6Bd9AvUJQvgAmIXqg4jcRghjEBmJ98uA3QCkUpNR/QjwqP5BHJ9GpAORfajOwJiH+gWYkPN+B7xMHL+BtRP6Kan2YO10QlgATKKkRPLdMZOZQ2vrdVgLMBXnxuIchHArUVSL6pQs/FG/bpoQ8RSwVrKD5xGM2Yq1t+edSHJ/Bnga584QRXcgcici41GtAsYAZVndHkQ68f488AvGHAWOoloGvIu19+TJmBg/i0gd6fSe3iLdtGkm8BapVG0+HUm0p4G9iHxFCD8B5zGmG+87gctJp8g4oArnSjFmFCI1iMwAZiMyMY+AteD9cUJI09T0Sf9W3NY2jRB2kEpNyTthTHKS711AJ6oXsfZFVqz4ODs97wO2IVJJCJVAJamU5DsgkOXZEUSW0tDw5ZWHUUNDByLPEccHcK63buM41wMqcK4G5+7G+xsLuFKJ6lSsnYC1ozBG8kMsZzyKDiKyoND4ladhOv0D3i8kir7LEqy3fpMGRJYnoYBUHpEM3ic6haSzFqLoEPA8DQ0dfc2ZK/bx5uZDiCwgjr8ocqJPTysoqTDgHuD9fqx9hsbG7we3kiUDahLWtuPcLLzvu5x8RgiHs4bGEcKcommZwP4N3i9m5cojg98Jc7J163iiqBXnHi+C1xjyk66w5+fmhfef49wy6uuPDW0pLa6OakLYgnNz++W4b3dLKmYfUE9j48mhb8V9pb39Zrq7W7F2Xr8BUxz5bqCZdPrs8NbygbflVkSeLRjXhcY/xNp6li//bfj/CwaSXbsq6Ox8DWtXoJqrIgV2Ula2hiVLzg3mdWbQDsyf34Ux6/D+7YLxuo0oah6s8aEh0EvM6wlhMSKGS5e2s3btn/wv/0b5GxfgPQKA8EqDAAAAAElFTkSuQmCC" alt="Tether" style="width:18px;height:18px;border-radius:3px;vertical-align:middle;border:1px solid var(--gray-200);">
+          <div class="digest-tags">
+            <span class="lf-tag lf-tag-purple">STABLECOINS</span>
+            <span class="lf-tag lf-tag-gray">INFRA</span>
+          </div>
+        </div>
+        <h3>USA₮ goes live on Celo with day-one gas support</h3>
+        <p class="card-prose">USA₮, the <strong>Anchorage-issued, Tether-supported</strong> US dollar stablecoin, launched on Celo with <strong>mint, burn and gas-currency support from day one</strong>. Celo's positioning as the payments-first stablecoin network keeps compounding, including across LATAM corridors.</p>
+        <div class="digest-source">→ <a href="https://www.cryptointegrat.com/p/crypto-news-july-30-2026" target="_blank" rel="noopener">Crypto Integrated</a> · 30 Jul 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- s6 · FUNDING & M&A -->
+  <div id="s6" class="lf-section bg-white">
+    <h2>Funding &amp; <em>M&amp;A.</em></h2>
+    <p class="lf-section-sub">Eight rounds worth tracking, led by Ant International's $1.2B comeback. LATAM puts three rounds on the board, all credit and SMB infrastructure.</p>
+    <h3>Funding rounds</h3>
+    <div class="lf-table-wrap">
+      <table class="lf-table">
+        <thead><tr><th>Company</th><th>Amount</th><th>Round</th><th>Market</th><th>Investors / Notes</th><th>Date</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><a href="https://www.connectingthedotsinfin.tech/where-fintech-investors-are-placing-their-bets/" target="_blank" rel="noopener">Ant International</a></td><td><strong>$1.2B</strong></td><td>Series A</td><td>Global</td><td>$10B+ valuation, Ant Group spin-off returns</td><td>22 Jul</td></tr>
+          <tr><td class="name"><a href="https://www.connectingthedotsinfin.tech/crypto-com-hits-20b-valuation-with-citadels-backing/" target="_blank" rel="noopener">Crypto.com</a></td><td><strong>$400M</strong></td><td>Strategic</td><td>Global</td><td>Citadel Securities, $20B valuation, 2% stake</td><td>20 Jul</td></tr>
+          <tr><td class="name"><a href="https://parsers.substack.com/p/funding-rounds-report-weekly-of-july-ea4" target="_blank" rel="noopener">Augustus</a></td><td><strong>$180M</strong></td><td>Series B</td><td>US</td><td>Clearing bank; Variant, Tiger Global, QED; $1B valuation</td><td>28 Jul</td></tr>
+          <tr class="hi"><td class="name"><a href="https://www.latamfintech.co/articles/fintech-colombiana-siigo-asegura-us-103-5-millones-para-fortalecer-su-crecimiento-regional" target="_blank" rel="noopener">Siigo</a></td><td><strong>$103.5M</strong></td><td>Debt</td><td>Colombia</td><td>SMB software and e-invoicing, regional growth</td><td>24 Jul</td></tr>
+          <tr class="hi"><td class="name"><a href="https://www.latamfintech.co/articles/fintech-de-bnpl-cashea-recauda-us-100-millones-en-una-serie-b-para-ampliar-el-acceso-al-credito-en-venezuela" target="_blank" rel="noopener">Cashea</a></td><td><strong>$100M</strong></td><td>Series B</td><td>Venezuela</td><td>BNPL, credit access expansion</td><td>22 Jul</td></tr>
+          <tr><td class="name"><a href="https://parsers.substack.com/p/funding-rounds-report-weekly-of-july-ea4" target="_blank" rel="noopener">Flex</a></td><td><strong>$70M</strong></td><td>Growth</td><td>US</td><td>Private banking for business owners; Portage, Wellington</td><td>28 Jul</td></tr>
+          <tr class="hi"><td class="name"><a href="https://www.latamfintech.co/articles/fintech-salvadorena-abaco-levanta-us-53-millones-para-impulsar-el-financiamiento-de-las-pymes-en-la-region" target="_blank" rel="noopener">Ábaco</a></td><td><strong>$53M</strong></td><td>Seed</td><td>El Salvador</td><td>SME financing across Central America</td><td>23 Jul</td></tr>
+          <tr><td class="name"><a href="https://parsers.substack.com/p/funding-rounds-report-weekly-of-july-ea4" target="_blank" rel="noopener">Genius AI</a></td><td><strong>$44M</strong></td><td>Series D</td><td>US</td><td>AI automation; Bessemer, Lux Capital</td><td>28 Jul</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>M&amp;A and strategic deals</h3>
+    <div class="lf-table-wrap">
+      <table class="lf-table">
+        <thead><tr><th>Acquirer</th><th>Target</th><th>Value</th><th>Market</th><th>Status</th><th>Date</th></tr></thead>
+        <tbody>
+          <tr><td class="name"><a href="https://www.connectingthedotsinfin.tech/the-new-fintech-playbook-own-the-bank/" target="_blank" rel="noopener">Darragh Buckley (Increase)</a></td><td>US community bank (rebranded)</td><td>Undisclosed</td><td>US</td><td><span class="lf-badge confirmed">Closed</span></td><td>30 Jul</td></tr>
+          <tr><td class="name"><a href="https://www.connectingthedotsinfin.tech/the-next-fintech-arms-race-is-intellectual-property/" target="_blank" rel="noopener">Circle</a></td><td>IBM blockchain patent portfolio</td><td>Undisclosed</td><td>Global</td><td><span class="lf-badge confirmed">Announced</span></td><td>28 Jul</td></tr>
+          <tr><td class="name"><a href="https://www.connectingthedotsinfin.tech/fintechs-next-battleground-is-ai/" target="_blank" rel="noopener">Stripe</a></td><td>OpenRouter (AI model marketplace)</td><td>Undisclosed</td><td>US</td><td><span class="lf-badge estimated">In talks</span></td><td>27 Jul</td></tr>
+          <tr class="hi"><td class="name"><a href="https://www.latamfintech.co/articles/fintech-brasilena-nuclea-adquiere-la-plataforma-antifraude-data-rudder-para-reforzar-su-oferta-de-seguridad-financiera" target="_blank" rel="noopener">Núclea</a></td><td>Data Rudder (antifraud)</td><td>Undisclosed</td><td>Brazil</td><td><span class="lf-badge confirmed">Announced</span></td><td>22 Jul</td></tr>
+          <tr class="hi"><td class="name"><a href="https://www.latamfintech.co/articles/fintech-gopass-compra-el-negocio-de-control-de-flotas-de-pluxee-en-colombia-para-fortalecer-su-ecosistema-de-pagos-para-la-movilidad" target="_blank" rel="noopener">GoPass</a></td><td>Pluxee fleet-control unit (Colombia)</td><td>Undisclosed</td><td>Colombia</td><td><span class="lf-badge confirmed">Announced</span></td><td>21 Jul</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /lf-well -->
+
+<div class="lf-verdict-band">
+  <h3>The rails are being repriced.</h3>
+  <p>Visa is funding stablecoins and cross-border with headcount, Circle is buying the patents underneath them, and LATAM keeps raising for credit and SMB infrastructure while Brasília rewrites the rules for betting operators. Weeks like this compress the window between incumbent restructuring and challenger opportunity; the operators who own local rails and compliance depth in Brazil and Mexico are the ones positioned to collect.</p>
+</div>
+
+<footer class="lf-footer">
+  <div class="lf-footer-brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="96" height="11" viewBox="0 0 545 64" fill="none"><path d="M0 35.3406V27.9089L35.483 13.241V21.7158L10.5666 31.4292V31.8203L35.483 42.0553V50.5301L0 35.3406Z" fill="#C3ABFF"/><path d="M545 28.6585L545 36.0902L509.517 50.7582L509.517 42.2834L534.433 32.5699L534.433 32.1788L509.517 21.9438L509.517 13.469L545 28.6585Z" fill="#C3ABFF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M99.9159 42.1908V55.4107L108.51 64H126.468L133.837 56.9549V64H142.926V23.1124L133.363 13.5544H109.867L100.304 23.1124V30.6785H109.684V26.0672L113.876 21.9607H129.451L133.643 26.0672V33.7023H108.514L99.9159 42.1908ZM124.126 55.5938L133.643 46.4442V42.1086H112.518L109.296 45.2481V52.4542L112.518 55.5938H124.126Z" fill="white"/><path d="M201.268 0.056688H156.222V64H165.796V33.7782H196.616V24.9845H165.796V8.8504H201.268V0.056688Z" fill="white"/><path d="M208.246 3.60855V8.78473L211.8 12.3371H216.979L220.533 8.78473V3.60855L216.979 0.0562165H211.8L208.246 3.60855Z" fill="white"/><path d="M219.13 24.984H209.75V63.9995H219.13V24.984Z" fill="white"/><path d="M241.588 13.5544H232.402V38.7772V64H241.782V33.5192L253.153 22.1544H262.033L266.226 26.2609V64H275.606V23.1124L266.043 13.5544H250.3L241.588 22.2616V13.5544Z" fill="white"/><path d="M294.384 22.0575L288.71 54.1024L296.927 64H311.462L312.902 55.4969H301.941L298.621 51.4493L303.799 22.0575H318.828L320.268 13.5544H305.297L308.107 0.0692076H298.874L296.063 13.5544H287.112L285.672 22.0575H294.384Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M326.245 23.1119V54.4416L335.809 63.9995H361.049L370.613 54.4416V46.9723H361.233V51.293L357.04 55.3996H339.818L335.625 51.293V42.0112H370.709V23.1084L361.046 13.5539H335.809L326.245 23.1119ZM357.137 22.1539L361.329 26.2605V33.605H335.625V26.2604L339.818 22.1539H357.137Z" fill="white"/><path d="M383.656 23.1119V54.4416L393.219 63.9995H417.394L426.957 54.4416V46.9723H417.577V51.293L413.384 55.3996H397.228L393.036 51.293V26.2604L397.228 22.1539H413.384L417.577 26.2604V30.5812H426.957V23.1119L417.394 13.5539H393.219L383.656 23.1119Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M439.962 42.1903V55.4102L448.556 63.9995H466.514L473.883 56.9544V63.9995H482.972V23.1119L473.409 13.5539H449.913L440.35 23.1119V30.678H449.73V26.0667L453.922 21.9602H469.497L473.689 26.0667V33.7018H448.56L439.962 42.1903ZM464.172 55.5933L473.689 46.4437V42.1081H452.564L449.342 45.2476V52.4538L452.564 55.5933H464.172Z" fill="white"/><path d="M71.4869 0H61.9131V63.9433H86.6686V55.2465H71.4869V0Z" fill="white"/></svg>
+    <span>Marketing &amp; Research Office</span>
+  </div>
+  <span>Confidential · Friday Fintech Digest · 31 July 2026</span>
+</footer>
+
+</body>
+</html>
