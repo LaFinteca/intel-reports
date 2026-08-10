@@ -20,6 +20,7 @@ Static HTML intelligence reports and the weekly Industry Digest, each served at 
 - [Brazino777 Mexico Intel Report](https://lafinteca.github.io/intel-reports/reports/brazino777-mx-intel-report.html)
 - [PayRetailers Competitive Intelligence](https://lafinteca.github.io/intel-reports/reports/payretailers-competitive-intelligence.html)
 - [Campeones LATAM Traffic Analysis](https://lafinteca.github.io/intel-reports/reports/campeones-latam-traffic-analysis.html)
+- [Casino Operator Geo Analysis](https://lafinteca.github.io/intel-reports/reports/casino-operator-geo-analysis.html)
 
 ### Industry Digest
 
