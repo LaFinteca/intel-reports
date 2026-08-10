@@ -19,6 +19,7 @@ Static HTML intelligence reports and the weekly Industry Digest, each served at 
 - [Easygo Group Intelligence Brief](https://lafinteca.github.io/intel-reports/reports/easygo-group-intelligence-brief.html)
 - [Brazino777 Mexico Intel Report](https://lafinteca.github.io/intel-reports/reports/brazino777-mx-intel-report.html)
 - [PayRetailers Competitive Intelligence](https://lafinteca.github.io/intel-reports/reports/payretailers-competitive-intelligence.html)
+- [Campeones LATAM Traffic Analysis](https://lafinteca.github.io/intel-reports/reports/campeones-latam-traffic-analysis.html)
 
 ### Industry Digest
 
