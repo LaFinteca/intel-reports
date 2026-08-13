@@ -21,6 +21,7 @@ Static HTML intelligence reports and the weekly Industry Digest, each served at 
 - [PayRetailers Competitive Intelligence](https://lafinteca.github.io/intel-reports/reports/payretailers-competitive-intelligence.html)
 - [Campeones LATAM Traffic Analysis](https://lafinteca.github.io/intel-reports/reports/campeones-latam-traffic-analysis.html)
 - [Casino Operator Geo Analysis](https://lafinteca.github.io/intel-reports/reports/casino-operator-geo-analysis.html)
+- [BC.Game Domain Network Geography](https://lafinteca.github.io/intel-reports/reports/bcgame-domain-network-geography.html)
 
 ### Industry Digest
 
