@@ -29,6 +29,7 @@ const DIGEST_META = {
   "friday-fintech-digest-2026-07-24.html": { week: "Week 30", image: "og-digest-week-30.jpg" },
   "friday-fintech-digest-2026-07-31.html": { week: "Week 31", image: "og-digest-week-31.jpg" },
   "friday-fintech-digest-2026-08-14.html": { week: "Week 33", image: "og-digest-week-33.jpg" },
+  "friday-fintech-digest-2026-08-21.html": { week: "Week 34", image: "og-digest-week-34.jpg" },
 };
 
 function tagBlock(title, desc, image, url) {
